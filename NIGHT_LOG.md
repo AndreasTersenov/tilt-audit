@@ -76,3 +76,8 @@
 - 23:49 [JOB] t3_seed4 finished OK (2m)
 - 23:50 [JOB] t3_seed5 (tier T3, GPU 1) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 5 --tag confirmatory-densify --out res
 - 23:50 [FAIL] B2 seed 1 (stream B) rc!=0 — one retry
+- 23:50 [FAIL] B2 seed 1 (stream B) failed twice — moving on
+- 23:52 [JOB] t3_seed5 finished OK (2m)
+- 23:52 [JOB] t2_pathway_ctrl (tier T2, GPU 1) started: .venv/bin/python scripts/run_t2.py --ckpt analytic --label pathway:analytic --tag exploratory --out results/t2_pathway_c
+- 23:56 [FAIL] Driver v3 had its own race: B2 seed-2's 300s free-memory wait would have timed out against the still-running seed 0, then phase B's server swap would have killed the R1 server mid-run. Driver killed at 23:56 BEFORE the swap; B2 seed 0 unharmed (running, 4 rows).
+- 23:57 [STEER] Measured B2 pace ~10 problems/h/stream (R1 traces are 10x Qwen) — sequential-server plans cannot fit both E-entries. DUAL-SERVER reallocation: R1 stays on GPU 2 :8000 (B2 seed 0, PRM on GPU 2); second Qwen server on GPU 1 :8001 with B1's PRM co-resident (14+18=32 GB) running the 5 remaining seed-0 alphas (~40 min each); GPU-1 chain then flips to B2 seed 1 against :8000 for the rest of the night. Track A consolidates on GPU 0 (trainings now; T2/T3/T4 after). GPU-1 queue worker suspended. Expected yield: E-a full alpha sweep at seed 0 (+0.05 at 3 seeds), E-b seed 0 complete + seed 1 partial.
