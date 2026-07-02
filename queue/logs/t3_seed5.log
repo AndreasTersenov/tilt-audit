@@ -1,0 +1,2 @@
+E0702 23:50:21.599269  746685 cuda_executor.cc:1182] [0] Failed to allocate device memory of 27.65GiB (29685186560 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0702 23:50:21.599557  746685 cuda_executor.cc:1182] [0] Failed to allocate device memory of 24.88GiB (26716667904 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory

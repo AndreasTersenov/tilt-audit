@@ -14,3 +14,4 @@
 {"id": "t1_eg_T256", "tier": "T1x", "gpu": "any", "est_min": 8, "cmd": ".venv/bin/python scripts/run_t1.py --dims 64 --T 256 --samplers oracle,exact_guidance,dps --tag exploratory --out results/t1_tsens.jsonl"}
 {"id": "t2_pathway_ctrl", "tier": "T2", "gpu": "1", "est_min": 25, "cmd": ".venv/bin/python scripts/run_t2.py --ckpt analytic --label pathway:analytic --tag exploratory --out results/t2_pathway_ctrl.jsonl"}
 {"id": "t3_seed4", "tier": "T3", "gpu": "any", "est_min": 15, "cmd": "/mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 4 --tag confirmatory-densify --out results/t3_seeds.jsonl"}
+{"id": "t3_seed5", "tier": "T3", "gpu": "any", "est_min": 15, "cmd": "/mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 5 --tag confirmatory-densify --out results/t3_seeds.jsonl"}

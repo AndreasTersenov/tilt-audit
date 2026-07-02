@@ -88,7 +88,19 @@ def run_learned(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
         m = A * z + B * z0h
 
         if name == "dps":
-            m = m - 2.0 * dt * dps_grad(z, t)
+            # Euler guidance blows up once b makes the term stiff (observed
+            # W2 ~ 1e106 in the pathway control). Damp with the ANALYTIC
+            # linearization as preconditioner: per mode the guidance is
+            # ~ lam_g z with lam_g = -2 a^2 c0^2 / b, so use the exponential-
+            # integrator step factor (e^{lam dt}-1)/lam instead of dt. Exact
+            # same small-dt limit; bounded displacement for any b.
+            tm = 0.5 * (t + t_next)
+            c0m = diffusion.x0hat_coef(tm, Pz)
+            lam_g = -2.0 * az**2 * c0m**2 / b
+            g1 = (jnp.exp(lam_g * dt) - 1.0) / jnp.where(
+                jnp.abs(lam_g) > 1e-12, lam_g, 1.0)
+            g1 = jnp.where(jnp.abs(lam_g) > 1e-12, g1, dt)
+            m = m + g1 * 2.0 * (-dps_grad(z, t))
             z = m + jnp.sqrt(kv) * jax.random.normal(k_noise, z.shape)
 
         elif name in ("terminal_is", "sap"):

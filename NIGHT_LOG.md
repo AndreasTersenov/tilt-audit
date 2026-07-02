@@ -72,3 +72,7 @@
 - 23:47 [FAIL] t2_pathway_ctrl failed twice — marked FAILED, continuing (log: queue/logs/t2_pathway_ctrl.log)
 - 23:47 [JOB] t3_seed4 (tier T3, GPU 1) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 4 --tag confirmatory-densify --out res
 - 23:48 [FAIL] Track B v2 phase-1/2 "done" lines above (23:43–23:44) were INSTANT FAILURES, not completions — disregard them. Root cause chain: killing the v1 wrapper left its in-process PRM EngineCore orphaned holding 20.4 GB on GPU 2; new PRM streams then failed their free-memory check (3.96 GB free < 17.8 GB needed) on both GPUs (GPU 1 was blocked by a stale preallocated job); and the v2 driver's run_alpha/run_b2 did not check return codes, so 6 failed runs "completed" in 2 minutes and the driver marched through the phases. Real B1 data so far: alpha=0.05 seeds 0 + partial 1 only. Cleanup done (orphan killed, duplicate pathway-control jobs killed, bogus markers removed). v3 driver: B2-first (R1 server already up and healthy), every run rc-checked, PRM starts gated on measured free GPU memory.
+- 23:48 [JOB] Track B v3 starting: B2 seeds 0,1 parallel (PRM on GPU 2 + GPU 1), then seed 2
+- 23:49 [JOB] t3_seed4 finished OK (2m)
+- 23:50 [JOB] t3_seed5 (tier T3, GPU 1) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 5 --tag confirmatory-densify --out res
+- 23:50 [FAIL] B2 seed 1 (stream B) rc!=0 — one retry
