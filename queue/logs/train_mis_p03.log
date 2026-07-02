@@ -5,3 +5,5 @@ E0702 23:43:23.636420  714657 cuda_executor.cc:1182] [0] Failed to allocate devi
 step 0 loss 4.48827 (23s)
 step 500 loss 0.12953 (241s)
 step 1000 loss 0.12041 (460s)
+step 1500 loss 0.10223 (679s)
+step 2000 loss 0.07985 (898s)
