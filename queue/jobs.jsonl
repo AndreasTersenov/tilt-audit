@@ -1,0 +1,8 @@
+{"id": "t1_core", "tier": "T1", "gpu": "any", "est_min": 30, "cmd": ".venv/bin/python scripts/run_t1.py --samplers oracle,dps,sap,twisted,terminal_is --tag confirmatory --out results/t1_core.jsonl"}
+{"id": "t1_controls", "tier": "T1x", "gpu": "any", "est_min": 20, "cmd": ".venv/bin/python scripts/run_t1.py --samplers exact_guidance,twisted_potential --tag exploratory --out results/t1_controls.jsonl"}
+{"id": "t1_misspec_p03", "tier": "T1x", "gpu": "any", "est_min": 10, "cmd": ".venv/bin/python scripts/run_t1.py --dims 64 --score misspec:0.3 --samplers dps,twisted,sap --tag exploratory --out results/t1_misspec.jsonl"}
+{"id": "t1_misspec_m03", "tier": "T1x", "gpu": "any", "est_min": 10, "cmd": ".venv/bin/python scripts/run_t1.py --dims 64 --score misspec:-0.3 --samplers dps,twisted,sap --tag exploratory --out results/t1_misspec.jsonl"}
+{"id": "t1_misspec_p01", "tier": "T1x", "gpu": "any", "est_min": 10, "cmd": ".venv/bin/python scripts/run_t1.py --dims 64 --score misspec:0.1 --samplers dps,twisted,sap --tag exploratory --out results/t1_misspec.jsonl"}
+{"id": "t1_misspec_m01", "tier": "T1x", "gpu": "any", "est_min": 10, "cmd": ".venv/bin/python scripts/run_t1.py --dims 64 --score misspec:-0.1 --samplers dps,twisted,sap --tag exploratory --out results/t1_misspec.jsonl"}
+{"id": "t1_tsens_T32", "tier": "T1x", "gpu": "any", "est_min": 5, "cmd": ".venv/bin/python scripts/run_t1.py --dims 16,32 --T 32 --samplers dps,sap,twisted --tag exploratory --out results/t1_tsens.jsonl"}
+{"id": "t1_tsens_T256", "tier": "T1x", "gpu": "any", "est_min": 8, "cmd": ".venv/bin/python scripts/run_t1.py --dims 16,32 --T 256 --samplers dps,sap,twisted --tag exploratory --out results/t1_tsens.jsonl"}

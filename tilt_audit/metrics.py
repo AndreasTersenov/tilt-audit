@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import jax
 import jax.numpy as jnp
+import numpy as np
 
 from . import tilt
 
@@ -17,7 +18,9 @@ def weighted_moments(z, logw):
     w = jax.nn.softmax(logw)
     m = jnp.einsum("n,nd->d", w, z)
     v = jnp.einsum("n,nd->d", w, (z - m) ** 2)
-    return m, v
+    # a fully collapsed population has v = 0 exactly; floor it so KL and the
+    # gamma* fit stay finite (the collapse still shows up as huge KL / gamma*)
+    return m, jnp.maximum(v, 1e-12)
 
 
 def gaussian_w2sq(m, v, mu, Sig):
@@ -103,9 +106,13 @@ def evaluate(key, out, Pz, az, y, b, basis, band_mask_list):
     n = basis.n
     # mean-field functional: pixel mean = z_DC / n; DC is the first self-conj coord
     c_mean = jnp.zeros(d).at[0].set(1.0 / n)
+    def finite(x):  # keep JSONL strictly parseable
+        x = float(x)
+        return x if np.isfinite(x) else 1e30
+
     row = {
-        "w2": float(jnp.sqrt(gaussian_w2sq(m, v, mu, Sig))),
-        "kl": float(gaussian_kl(m, v, mu, Sig)),
+        "w2": finite(jnp.sqrt(gaussian_w2sq(m, v, mu, Sig))),
+        "kl": finite(gaussian_kl(m, v, mu, Sig)),
         "cov_mean_68": float(functional_coverage(m, v, mu, Sig, c_mean, 0.68)),
         "cov_mean_95": float(functional_coverage(m, v, mu, Sig, c_mean, 0.95)),
         "ess_final": float(ess(out["logw"])),
@@ -113,6 +120,18 @@ def evaluate(key, out, Pz, az, y, b, basis, band_mask_list):
     gs, gs_kl = gamma_star(m, v, Pz, az, y, b)
     row["gamma_star"] = float(gs)
     row["gamma_star_kl"] = float(gs_kl)
+    # split diagnostics: the scalar gamma* conflates mean tracking with
+    # variance size (SAP collapses variance WITHOUT moving the mean — the
+    # single scalar sits in between and misleads)
+    gammas = jnp.logspace(-2.0, 3.0, 501)
+
+    def mean_only_obj(g):
+        Sig_g = 1.0 / (1.0 / Pz + g * az**2 / b)
+        mu_g = Sig_g * g * az * y / b
+        return jnp.sum((m - mu_g) ** 2 / Sig_g)
+
+    row["gamma_mean"] = float(gammas[jnp.argmin(jax.vmap(mean_only_obj)(gammas))])
+    row["var_ratio_logmed"] = float(jnp.median(jnp.log(v / Sig)))
     for j, mask in enumerate(band_mask_list):
         key, sub = jax.random.split(key)
         row[f"cov_band{j}_68"] = float(

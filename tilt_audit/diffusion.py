@@ -32,3 +32,20 @@ def x0hat_coef(t, Pz):
 def var0_t(t, Pz):
     """Var[x0|xt] per mode."""
     return Pz * sig2_t(t) / marginal_var(t, Pz)
+
+
+def time_grid(T, tf, c=0.05):
+    """T+1 reverse-time points from tf to 0, log-uniform in (t + c).
+
+    Guidance information concentrates near t=0 (Var[x0|xt] -> 0 there); a
+    uniform grid at T=64 leaves even the exact-guidance control visibly
+    off-target, so all samplers share this schedule. Exact-kernel arms are
+    grid-invariant by construction; only the guided/potential arms feel it.
+    """
+    import numpy as np
+    tf = float(tf)  # numpy-only: tf must be a concrete (static) value
+    u = np.linspace(0.0, 1.0, T + 1)
+    ts = c * ((1.0 + tf / c) ** (1.0 - u) - 1.0)
+    ts[0] = tf
+    ts[-1] = 0.0
+    return ts

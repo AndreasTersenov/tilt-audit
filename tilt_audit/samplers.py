@@ -83,25 +83,37 @@ def oracle(key, Pz, az, y, b, N, T, tf):
 
 def _run_pointwise(key, Pz, az, y, b, N, T, tf, mode):
     """Shared Euler loop for dps / exact_guidance / unguided prior dynamics."""
-    dt = tf / T
+    ts_full = jnp.asarray(diffusion.time_grid(T, tf))
+    ts, dts = ts_full[:-1], ts_full[:-1] - ts_full[1:]
     k_init, k_steps = jax.random.split(key)
     z0 = jnp.sqrt(diffusion.marginal_var(tf, Pz)) * jax.random.normal(
         k_init, (N, Pz.shape[0]))
 
     def step(z, inp):
-        t, k = inp
-        coef, kvar = backward_kernel(t, dt, Pz)
-        shift = 0.0
-        if mode == "dps":
-            shift = 2.0 * _guidance(t, z, Pz, az, y, b, inflate=False) * dt
-        elif mode == "exact_guidance":
-            shift = 2.0 * _guidance(t, z, Pz, az, y, b, inflate=True) * dt
+        t, dt, k = inp
         noise = jax.random.normal(k, z.shape)
-        return coef * z + shift + jnp.sqrt(kvar) * noise, None
+        if mode == "unguided":
+            coef, kvar = backward_kernel(t, dt, Pz)
+            return coef * z + jnp.sqrt(kvar) * noise, None
+        # Guided arms: the reverse drift is linear per mode,
+        # dz/dtau = Lam z + u + sqrt(2) dW, so each step integrates EXACTLY
+        # with coefficients frozen at the step midpoint (exponential
+        # integrator). Unconditionally stable — forward Euler blows up at
+        # T=64 once the calibrated b makes the guidance stiff.
+        tm = t - 0.5 * dt
+        V = diffusion.marginal_var(tm, Pz)
+        c0 = diffusion.x0hat_coef(tm, Pz)
+        denom = b if mode == "dps" else b + az**2 * diffusion.var0_t(tm, Pz)
+        lam = 1.0 - 2.0 / V - 2.0 * az**2 * c0**2 / denom
+        u = 2.0 * az * c0 * y / denom
+        phi = jnp.exp(lam * dt)
+        # (phi - 1)/lam and (phi^2 - 1)/lam, safe as lam -> 0
+        g1 = jnp.where(jnp.abs(lam) > 1e-12, (phi - 1.0) / lam, dt)
+        g2 = jnp.where(jnp.abs(lam) > 1e-12, (phi**2 - 1.0) / lam, 2.0 * dt)
+        return phi * z + g1 * u + jnp.sqrt(g2) * noise, None
 
-    ts = tf - dt * jnp.arange(T)  # coefficients evaluated at the step's start time
     keys = jax.random.split(k_steps, T)
-    z, _ = jax.lax.scan(step, z0, (ts, keys))
+    z, _ = jax.lax.scan(step, z0, (ts, dts, keys))
     return z
 
 
@@ -129,13 +141,14 @@ def sap(key, Pz, az, y, b, N, T, tf):
     resampling, so the effective tilt grows with depth T. That pathology is
     the thing being audited, not a bug.
     """
-    dt = tf / T
+    ts_full = jnp.asarray(diffusion.time_grid(T, tf))
+    ts, dts = ts_full[:-1], ts_full[:-1] - ts_full[1:]
     k_init, k_steps = jax.random.split(key)
     z0 = jnp.sqrt(diffusion.marginal_var(tf, Pz)) * jax.random.normal(
         k_init, (N, Pz.shape[0]))
 
     def step(z, inp):
-        t, k = inp
+        t, dt, k = inp
         k_noise, k_res = jax.random.split(k)
         coef, kvar = backward_kernel(t, dt, Pz)
         z = coef * z + jnp.sqrt(kvar) * jax.random.normal(k_noise, z.shape)
@@ -146,9 +159,8 @@ def sap(key, Pz, az, y, b, N, T, tf):
         idx = systematic_resample(k_res, pot, N)
         return z[idx], ess
 
-    ts = tf - dt * jnp.arange(T)
     keys = jax.random.split(k_steps, T)
-    z, ess_traj = jax.lax.scan(step, z0, (ts, keys))
+    z, ess_traj = jax.lax.scan(step, z0, (ts, dts, keys))
     return {"z": z, "logw": jnp.zeros(N), "ess_traj": ess_traj}
 
 
@@ -169,7 +181,8 @@ def twisted(key, Pz, az, y, b, N, T, tf, ess_frac=0.5, proposal="conjugate"):
     Valid & unbiased, but weight-degenerates as d grows — the display of WHY
     twisted proposals matter; its ESS trajectory feeds the certificate story.
     """
-    dt = tf / T
+    ts_full = jnp.asarray(diffusion.time_grid(T, tf))
+    ts, dts = ts_full[:-1], ts_full[:-1] - ts_full[1:]
     k_init, k_steps = jax.random.split(key)
     z = jnp.sqrt(diffusion.marginal_var(tf, Pz)) * jax.random.normal(
         k_init, (N, Pz.shape[0]))
@@ -177,7 +190,7 @@ def twisted(key, Pz, az, y, b, N, T, tf, ess_frac=0.5, proposal="conjugate"):
 
     def step(carry, inp):
         z, logw, log_z_acc, max_incr = carry
-        t, k = inp
+        t, dt, k = inp
         k_noise, k_res = jax.random.split(k)
         t_next = t - dt
         coef, kvar = backward_kernel(t, dt, Pz)
@@ -213,10 +226,9 @@ def twisted(key, Pz, az, y, b, N, T, tf, ess_frac=0.5, proposal="conjugate"):
             ess < ess_frac * N, do_resample, lambda a: a, (z_new, logw, log_z_acc))
         return (z_out, logw_out, log_z_out, max_incr), ess
 
-    ts = tf - dt * jnp.arange(T)
     keys = jax.random.split(k_steps, T)
     (z, logw, log_z_acc, max_incr), ess_traj = jax.lax.scan(
-        step, (z, logw, 0.0, 0.0), (ts, keys))
+        step, (z, logw, 0.0, 0.0), (ts, dts, keys))
     log_z_est = log_z_acc + jax.nn.logsumexp(logw) - jnp.log(N)
     return {"z": z, "logw": logw, "log_z_est": log_z_est, "ess_traj": ess_traj,
             "ess_final": _ess(logw), "max_abs_incr": max_incr}
@@ -235,5 +247,5 @@ SAMPLERS = {
 def run_sampler(name, key, Pz, az, y, b, N, T, tf, **kw):
     fn = SAMPLERS[name]
     jitted = jax.jit(functools.partial(fn, **kw) if kw else fn,
-                     static_argnames=("N", "T"))
+                     static_argnames=("N", "T", "tf"))
     return jitted(key, Pz, az, y, b, N=N, T=T, tf=tf)
