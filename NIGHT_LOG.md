@@ -24,3 +24,25 @@
 - 23:29 [JOB] Queue workers up on GPUs 0,1 (atomic-claim, retry-once, T3/T4 self-refill); util logger every 15 min. T1 core (frozen grid) + exploratory controls/misspec/T-sensitivity enqueued.
 - 23:33 [NOTE] Smoke tests caught and fixed two numerical traps before any confirmatory row: (1) forward-Euler guidance shift unstable at T=64 for calibrated tilts (fix: per-mode exponential integrator, midpoint coefficients — DPS bias is scheme, not blowup); (2) uniform time grid under-resolves t→0 where guidance concentrates — even the exact-guidance control was off-target (fix: log-spaced grid, c=0.05). Post-fix 16² sanity: oracle floor W2≈0.19 γ*=1.01; exact-guidance control ≈ floor γ*≈1; DPS 7×→26× floor from 1σ→4σ with γ*>1 (over-concentrated); twisted = floor, γ*=1; terminal-IS degenerate (ESS→1). SAP: variance collapse WITHOUT mean tracking — scalar γ* misleading (added gamma_mean + var_ratio_logmed split diagnostics to every row).
 - 23:36 [JOB] T2 score-net trainings enqueued on GPU 0 (S-clean, S-mis ±0.3; 1.44M-param UNet, 60k steps, fresh GRF batches, EMA, 30-min checkpoints).
+- 23:32 [JOB] t1_misspec_p03 finished OK (1m)
+- 23:32 [JOB] t1_misspec_m03 (tier T1x, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 64 --score misspec:-0.3 --samplers dps,twisted,sap --tag exploratory --out res
+- 23:33 [JOB] t1_controls finished OK (4m)
+- 23:33 [JOB] t1_misspec_p01 (tier T1x, GPU 1) started: .venv/bin/python scripts/run_t1.py --dims 64 --score misspec:0.1 --samplers dps,twisted,sap --tag exploratory --out resu
+- 23:33 [JOB] t1_misspec_m03 finished OK (1m)
+- 23:33 [JOB] t1_misspec_m01 (tier T1x, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 64 --score misspec:-0.1 --samplers dps,twisted,sap --tag exploratory --out res
+- 23:34 [JOB] t1_misspec_p01 finished OK (1m)
+- 23:34 [JOB] t1_tsens_T32 (tier T1x, GPU 1) started: .venv/bin/python scripts/run_t1.py --dims 16,32 --T 32 --samplers dps,sap,twisted --tag exploratory --out results/t1_tse
+- 23:34 [JOB] t1_misspec_m01 finished OK (1m)
+- 23:34 [JOB] t1_tsens_T256 (tier T1x, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 16,32 --T 256 --samplers dps,sap,twisted --tag exploratory --out results/t1_ts
+- 23:35 [JOB] t1_tsens_T32 finished OK (1m)
+- 23:35 [JOB] t1_tsens_T256 finished OK (1m)
+- 23:35 [JOB] train_clean (tier T2, GPU 0) started: .venv/bin/python scripts/train_score.py --eps 0.0 --out checkpoints/s_clean.pkl
+- 23:36 [JOB] t3_seed3 (tier T3, GPU 1) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 3 --tag confirmatory-densify --out res
+- 23:50 [RESULT] T1 CONFIRMATORY CORE COMPLETE (540 rows: frozen grid + oracle; controls + analytic-misspec + T-sensitivity exploratory done too). Headline numbers (median over seeds, W2/oracle-floor):
+  * DPS: 1.4×→28× floor, growing with BOTH tilt strength (0.5σ→4σ) and N (floor drops, bias constant); γ* = 1.33–1.43 everywhere (over-concentrated). P-20260702d-shaped.
+  * twisted (conjugate): 0.96–1.06× floor at ALL 36 (d,β,N) cells, γ*=1.00, log Ẑ = log Z (machine-exact weights). P-20260702f-shaped.
+  * SAP: 4×–143× floor. NUANCE for P-20260702e: γ*>1 (runs cold, 1.35–1.73) ONLY in the weak-tilt/low-d corner (16², 0.5σ, N≥64); at stronger tilt/higher d it transitions to variance collapse WITHOUT mean tracking (γ_mean→0, var_ratio_logmed ≈ −20): a MORE severe pathology than the discrete substrate's, but not the literal γ*>1 signature globally.
+  * terminal-IS: 15×–250× floor, ESS→1, γ*→0 (stays at prior): best-of-N dies in high d as expected.
+  * exact_guidance control: ≈1.0× floor at N≤64; drifts to 1.6–4.2× at N=256/64² — residual time-discretization at T=64 becoming visible as the floor drops. T=256 verification queued.
+- 23:50 [RESULT] KILL CRITERION: NOT triggered — max frozen-scheme ratio 251× (terminal-IS), DPS alone 27.7× ≥ 3× at 64²/4σ/N=256, and ≥3× already at 0.5σ for N=256 at all dims. GO-side signal at every (β,d) except the very weakest cells at N=16.
+- 23:52 [STEER] Checkpoint read #1 (early — core done at H1 instead of H3): P1/P2-shaped branch per §9 ⇒ business as usual + promote T4.1 (adjoint-matching) one slot earlier. Added exploratory: (a) weak-tilt arm (0.125σ, 0.25σ) to locate the 3×-floor crossing β* (sharpens P-h evidence); (b) T=256 exact-guidance control at 64² (pin the discretization residual); (c) T2 pathway control (analytic score in the learned ancestral pathway) to separate kernel-choice from score error in the decomposition.
