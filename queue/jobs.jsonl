@@ -6,3 +6,6 @@
 {"id": "t1_misspec_m01", "tier": "T1x", "gpu": "any", "est_min": 10, "cmd": ".venv/bin/python scripts/run_t1.py --dims 64 --score misspec:-0.1 --samplers dps,twisted,sap --tag exploratory --out results/t1_misspec.jsonl"}
 {"id": "t1_tsens_T32", "tier": "T1x", "gpu": "any", "est_min": 5, "cmd": ".venv/bin/python scripts/run_t1.py --dims 16,32 --T 32 --samplers dps,sap,twisted --tag exploratory --out results/t1_tsens.jsonl"}
 {"id": "t1_tsens_T256", "tier": "T1x", "gpu": "any", "est_min": 8, "cmd": ".venv/bin/python scripts/run_t1.py --dims 16,32 --T 256 --samplers dps,sap,twisted --tag exploratory --out results/t1_tsens.jsonl"}
+{"id": "train_clean", "tier": "T2", "gpu": "0", "est_min": 40, "cmd": ".venv/bin/python scripts/train_score.py --eps 0.0 --out checkpoints/s_clean.pkl"}
+{"id": "train_mis_p03", "tier": "T2", "gpu": "0", "est_min": 40, "cmd": ".venv/bin/python scripts/train_score.py --eps 0.3 --out checkpoints/s_mis_p03.pkl"}
+{"id": "train_mis_m03", "tier": "T2", "gpu": "0", "est_min": 40, "cmd": ".venv/bin/python scripts/train_score.py --eps -0.3 --out checkpoints/s_mis_m03.pkl"}
