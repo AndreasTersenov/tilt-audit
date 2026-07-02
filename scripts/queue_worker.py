@@ -59,7 +59,10 @@ def run_job(job, gpu):
     logf = QUEUE / "logs" / f"{job_id}.log"
     env = dict(os.environ,
                CUDA_VISIBLE_DEVICES=str(gpu),
-               XLA_PYTHON_CLIENT_MEM_FRACTION="0.70")
+               # no-prealloc: Track A jobs are small and share GPU 1 with the
+               # second B1 stream's PRM (18 GB); cap keeps us honest anyway
+               XLA_PYTHON_CLIENT_PREALLOCATE="false",
+               XLA_PYTHON_CLIENT_MEM_FRACTION="0.40")
     night_log(f"[JOB] {job_id} (tier {job.get('tier','?')}, GPU {gpu}) started: "
               f"{job['cmd'][:120]}")
     for attempt in (1, 2):

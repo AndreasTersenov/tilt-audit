@@ -1,2 +1,6 @@
 UNet params: 1.44M, eps=0.0
 step 0 loss 4.81335 (10s)
+step 500 loss 0.11921 (106s)
+step 1000 loss 0.10870 (202s)
+step 1500 loss 0.09205 (298s)
+step 2000 loss 0.07117 (395s)

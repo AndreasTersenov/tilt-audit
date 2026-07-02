@@ -46,3 +46,17 @@
   * exact_guidance control: ≈1.0× floor at N≤64; drifts to 1.6–4.2× at N=256/64² — residual time-discretization at T=64 becoming visible as the floor drops. T=256 verification queued.
 - 23:35 [RESULT] KILL CRITERION: NOT triggered — max frozen-scheme ratio 251× (terminal-IS), DPS alone 27.7× ≥ 3× at 64²/4σ/N=256, and ≥3× already at 0.5σ for N=256 at all dims. GO-side signal at every (β,d) except the very weakest cells at N=16.
 - 23:37 [STEER] Checkpoint read #1 (early — core done at H1 instead of H3): P1/P2-shaped branch per §9 ⇒ business as usual + promote T4.1 (adjoint-matching) one slot earlier. Added exploratory: (a) weak-tilt arm (0.125σ, 0.25σ) to locate the 3×-floor crossing β* (sharpens P-h evidence); (b) T=256 exact-guidance control at 64² (pin the discretization residual); (c) T2 pathway control (analytic score in the learned ancestral pathway) to separate kernel-choice from score error in the decomposition.
+- 23:38 [JOB] t3_seed3 finished OK (2m)
+- 23:38 [JOB] t1_weak_tilts (tier T1x, GPU 1) started: .venv/bin/python scripts/run_t1.py --shifts 0.125,0.25 --tag exploratory --out results/t1_weak.jsonl
+- 23:40 [JOB] t1_weak_tilts finished OK (2m)
+- 23:40 [JOB] t1_eg_T256 (tier T1x, GPU 1) started: .venv/bin/python scripts/run_t1.py --dims 64 --T 256 --samplers oracle,exact_guidance,dps --tag exploratory --out result
+- 23:41 [JOB] t1_eg_T256 finished OK (1m)
+- 23:41 [JOB] t2_pathway_ctrl (tier T2, GPU 1) started: .venv/bin/python scripts/run_t2.py --ckpt analytic --label pathway:analytic --tag exploratory --out results/t2_pathway_c
+- 23:42 [FAIL] t2_pathway_ctrl rc=-15 (1m) — retrying once
+- 23:42 [STEER] Track B restructured (pace 200 rows/h, ~3x plan estimate): two parallel PRM streams (GPU 2 + GPU 1), priority = full alpha sweep at seed 0, then complete B2 twin, then B1 seeds 1,2 as filler. Anchors dropped (prior-night sap/iid measurements exist). E-entry expectations unchanged.
+- 23:42 [NOTE] queue worker up on GPU 1
+- 23:42 [JOB] t2_pathway_ctrl (tier T2, GPU 1) started: .venv/bin/python scripts/run_t2.py --ckpt analytic --label pathway:analytic --tag exploratory --out results/t2_pathway_c
+- 23:42 [NOTE] queue worker up on GPU 0
+- 23:42 [JOB] train_mis_p03 (tier T2, GPU 0) started: .venv/bin/python scripts/train_score.py --eps 0.3 --out checkpoints/s_mis_p03.pkl
+- 23:42 [JOB] B1 alpha=0.10 seed 0 done (stream A)
+- 23:42 [JOB] B1 alpha=0.15 seed 0 done (stream B)
