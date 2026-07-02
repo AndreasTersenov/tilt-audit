@@ -1,1 +1,6 @@
 UNet params: 1.44M, eps=0.3
+E0702 23:43:23.631014  714657 cuda_executor.cc:1182] [0] Failed to allocate device memory of 8.00GiB (8589934592 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0702 23:43:23.633004  714657 cuda_executor.cc:1182] [0] Failed to allocate device memory of 7.20GiB (7730940928 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0702 23:43:23.636420  714657 cuda_executor.cc:1182] [0] Failed to allocate device memory of 6.48GiB (6957846528 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+step 0 loss 4.48827 (23s)
+step 500 loss 0.12953 (241s)
