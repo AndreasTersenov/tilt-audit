@@ -40,6 +40,33 @@ class ConvBlock(nn.Module):
         return x + h
 
 
+class UNetCond(nn.Module):
+    """Conditional variant for the amortized arm (A3): the observation map is
+    stacked as a second input channel; otherwise identical to UNet. Kept as a
+    separate class so existing UNet checkpoints keep their param tree."""
+    chs: tuple = (32, 64, 128)
+
+    @nn.compact
+    def __call__(self, x, y_map, t):
+        # x, y_map: (B, n, n) -> (B, n, n, 2)
+        h = jnp.stack([x, y_map], axis=-1)
+        temb = nn.Dense(128)(time_embedding(t))
+        h = nn.Conv(self.chs[0], (3, 3))(h)
+        skips = []
+        for ch in self.chs:
+            h = ConvBlock(ch)(h, temb)
+            skips.append(h)
+            h = nn.avg_pool(h, (2, 2), strides=(2, 2))
+        h = ConvBlock(self.chs[-1])(h, temb)
+        for ch, skip in zip(reversed(self.chs), reversed(skips)):
+            B, H, W, C = h.shape
+            h = jax.image.resize(h, (B, H * 2, W * 2, C), "nearest")
+            h = jnp.concatenate([h, skip], axis=-1)
+            h = ConvBlock(ch)(h, temb)
+        eps = nn.Conv(1, (3, 3))(h)
+        return eps[..., 0]  # (B, n, n) noise prediction
+
+
 class UNet(nn.Module):
     chs: tuple = (32, 64, 128)
 

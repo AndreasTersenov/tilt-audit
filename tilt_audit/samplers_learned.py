@@ -117,7 +117,7 @@ def run_learned(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
             m = m + disp
             z = m + jnp.sqrt(kv) * jax.random.normal(k_noise, z.shape)
 
-        elif name in ("terminal_is", "sap"):
+        elif name in ("terminal_is", "sap", "ancestral"):
             z = m + jnp.sqrt(kv) * jax.random.normal(k_noise, z.shape)
             if name == "sap":
                 z0h_new = x0hat_fn(z, t_next) if t_next > 0 else z

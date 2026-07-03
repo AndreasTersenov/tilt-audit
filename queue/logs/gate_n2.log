@@ -1,0 +1,13 @@
+Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+Traceback (most recent call last):
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax/_src/xla_bridge.py", line 508, in discover_pjrt_plugins
+    plugin_module.initialize()
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax_plugins/xla_cuda12/__init__.py", line 370, in initialize
+    _check_cuda_versions(raise_on_first_error = True)
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax_plugins/xla_cuda12/__init__.py", line 274, in _check_cuda_versions
+    for d in range(cuda_versions.cuda_device_count())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: jaxlib/cuda/versions_helpers.cc:135: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+T-N2 floor=0.2022; exact-inflation K=100: W2=0.2028 (1.00x floor, need <1.5x) -> PASS
+T-N2 sigma2-inflation W2(K) medians over seeds {1: 5.95, 2: 3.4479, 5: 1.3893, 10: 0.6522, 30: 0.2372, 100: 0.2075} monotone: PASS

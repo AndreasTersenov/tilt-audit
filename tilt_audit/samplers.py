@@ -234,6 +234,66 @@ def twisted(key, Pz, az, y, b, N, T, tf, ess_frac=0.5, proposal="conjugate"):
             "ess_final": _ess(logw), "max_abs_incr": max_incr}
 
 
+def remy(key, Pz, az, y, b, N, T, tf, K=10, eps0=0.1, inflation="sigma2"):
+    """sigma_t^2-inflated annealed Langevin (the Remy et al. 2023 SCHEME).
+
+    Per noise level t_i on the shared log grid, K Langevin steps targeting
+        pi_i(z) ~ p_{t_i}(z) * N(y; a z, b + sigma_{t_i}^2 a^2),
+    i.e. prior score -z/V_t plus the likelihood score with the noise variance
+    inflated by the DIFFUSION noise level sigma_t^2 = 1 - e^{-2t} (their
+    choice: sample_hmc.py in CosmoStat/jax-lensing adds sigma^2 to the shear
+    noise variance), then cool to the next level. The t=0 level's target is
+    the true posterior, so K -> inf converges to it from the conservative
+    side. inflation='exact' replaces the sigma_t^2 term by the exact
+    a^2 Var[x0|xt] likelihood (through x0hat): each level then targets
+    exactly p(x_t | y) — the T-N2 reduction anchor.
+
+    Design decisions inside the frozen scheme (step size was left unpinned by
+    the pre-registration; logged in NIGHT_LOG_2026-07-04.md before data):
+    - Per-mode preconditioned ULA, step eps_k = eps0 * vtil_k with vtil the
+      level target's own closed-form per-mode variance. A single global step
+      would be stability-capped by the UV modes (P(k_max) ~ 1e-7 at 64^2), so
+      every frozen K would measure conditioning, not the scheme; the
+      preconditioner makes the per-step contraction uniform (eps0/2), so K is
+      the only compute knob — what the frozen K-sweep is designed to measure.
+      (Remy's own code copes with conditioning via MH-adjusted HMC instead;
+      fidelity caveats in scripts/run_a4.py's header.)
+    - Unadjusted Langevin: known stationary variance excess v/(1 - eps0/4)
+      (+2.6% at eps0=0.1) — small vs the audited effects; an eps0/2 control
+      column runs as exploratory filler.
+    """
+    ts_full = jnp.asarray(diffusion.time_grid(T, tf))
+    levels = ts_full[1:]  # anneal over T levels ending exactly at t=0
+    k_init, k_steps = jax.random.split(key)
+    z = jnp.sqrt(diffusion.marginal_var(tf, Pz)) * jax.random.normal(
+        k_init, (N, Pz.shape[0]))
+
+    def level_step(z, inp):
+        t, k_level = inp
+        keys_level = jax.random.split(k_level, K)
+        V = diffusion.marginal_var(t, Pz)
+        if inflation == "sigma2":
+            aeff = az                       # likelihood sees a*z directly
+            denom = b + diffusion.sig2_t(t) * az**2
+        else:  # 'exact'
+            aeff = az * diffusion.x0hat_coef(t, Pz)
+            denom = b + az**2 * diffusion.var0_t(t, Pz)
+        vtil = 1.0 / (1.0 / V + aeff**2 / denom)
+
+        def langevin(z, k):
+            score = -z / V - (aeff * z - y) * aeff / denom
+            z = (z + 0.5 * eps0 * vtil * score
+                 + jnp.sqrt(eps0 * vtil) * jax.random.normal(k, z.shape))
+            return z, None
+
+        z, _ = jax.lax.scan(langevin, z, keys_level)
+        return z, None
+
+    keys = jax.random.split(k_steps, T)
+    z, _ = jax.lax.scan(level_step, z, (levels, keys))
+    return {"z": z, "logw": jnp.zeros(N)}
+
+
 SAMPLERS = {
     "oracle": oracle,
     "dps": dps,
@@ -241,6 +301,7 @@ SAMPLERS = {
     "sap": sap,
     "twisted": twisted,
     "terminal_is": terminal_is,
+    "remy": remy,
 }
 
 

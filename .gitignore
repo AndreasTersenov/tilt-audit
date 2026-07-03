@@ -6,3 +6,4 @@ results/*.jsonl.tmp
 queue/locks/
 *.egg-info/
 .pytest_cache/
+results/archives/

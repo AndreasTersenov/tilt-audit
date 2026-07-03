@@ -36,6 +36,10 @@ def main():
     p.add_argument("--samplers",
                    default="oracle,dps,sap,twisted,terminal_is,exact_guidance")
     p.add_argument("--T", type=int, default=64)
+    p.add_argument("--y-seeds", default="",
+                   help="comma list of observation seeds (A1 multi-y arm): draw y "
+                        "per seed, recalibrate b per y, record y_seed per row. "
+                        "Empty = the pinned Y_KEY observation.")
     p.add_argument("--score", default="exact",
                    help="'exact' or 'misspec:<eps>' (analytic contaminated prior)")
     p.add_argument("--tag", default="confirmatory")
@@ -46,6 +50,8 @@ def main():
     shifts = [float(v) for v in args.shifts.split(",")]
     Ns = [int(v) for v in args.Ns.split(",")]
     seeds = [int(v) for v in args.seeds.split(",")]
+    y_seeds = ([int(v) for v in args.y_seeds.split(",")] if args.y_seeds
+               else [Y_KEY])
     sampler_names = args.samplers.split(",")
     eps = float(args.score.split(":")[1]) if args.score.startswith("misspec") else 0.0
 
@@ -60,40 +66,48 @@ def main():
                   if eps != 0.0 else Pz)
         az = jnp.asarray(smoothing_operator(basis))
         masks = band_masks(basis)
-        y, _ = tilt.make_observation(jax.random.PRNGKey(Y_KEY), Pz, az, S_OBS)
-        for shift in shifts:
-            b = float(tilt.calibrate_b(Pz, az, y, target_shift=shift))
-            for N in Ns:
-                for seed in seeds:
-                    for name in sampler_names:
-                        cfg_id = hash((n, shift, N, seed, name)) & 0x7FFFFFFF
-                        key = jax.random.fold_in(jax.random.PRNGKey(seed), cfg_id)
-                        kw = {}
-                        run_name = name
-                        if name == "twisted_potential":
-                            run_name, kw = "twisted", {"proposal": "prior"}
-                        t0 = time.time()
-                        # samplers draw with the (possibly contaminated) prior
-                        # Pz_run; metrics always score against the TRUE target
-                        res = samplers.run_sampler(
-                            run_name, key, Pz_run, az, y, b, N=N, T=args.T,
-                            tf=TF, **kw)
-                        res = {k: jax.device_get(v) for k, v in res.items()}
-                        wall = time.time() - t0
-                        mkey = jax.random.fold_in(key, 1)
-                        row = metrics.evaluate(mkey, res, Pz, az, y, b, basis,
-                                               masks)
-                        row.update(dim=n, d=n * n, shift=shift, b=b,
-                                   beta=b / S_OBS**2, s=S_OBS, N=N, T=args.T,
-                                   seed=seed, sampler=name, score=args.score,
-                                   eps=eps, tag=args.tag, wall=round(wall, 3),
-                                   ts=time.strftime("%H:%M:%S"))
-                        with out.open("a") as f:
-                            f.write(json.dumps(row) + "\n")
-                        print(f"[t1] {n}x{n} shift={shift} N={N} seed={seed} "
-                              f"{name}: W2={row['w2']:.4g} KL={row['kl']:.4g} "
-                              f"g*={row['gamma_star']:.3g} ({wall:.1f}s)",
-                              flush=True)
+        for yseed in y_seeds:
+            y, _ = tilt.make_observation(jax.random.PRNGKey(yseed), Pz, az, S_OBS)
+            for shift in shifts:
+                b = float(tilt.calibrate_b(Pz, az, y, target_shift=shift))
+                for N in Ns:
+                    for seed in seeds:
+                        for name in sampler_names:
+                            # pinned-y runs keep last night's key derivation
+                            cfg = ((n, shift, N, seed, name) if not args.y_seeds
+                                   else (n, shift, N, seed, name, yseed))
+                            cfg_id = hash(cfg) & 0x7FFFFFFF
+                            key = jax.random.fold_in(jax.random.PRNGKey(seed),
+                                                     cfg_id)
+                            kw = {}
+                            run_name = name
+                            if name == "twisted_potential":
+                                run_name, kw = "twisted", {"proposal": "prior"}
+                            t0 = time.time()
+                            # samplers draw with the (possibly contaminated)
+                            # prior Pz_run; metrics always score against the
+                            # TRUE target
+                            res = samplers.run_sampler(
+                                run_name, key, Pz_run, az, y, b, N=N, T=args.T,
+                                tf=TF, **kw)
+                            res = {k: jax.device_get(v) for k, v in res.items()}
+                            wall = time.time() - t0
+                            mkey = jax.random.fold_in(key, 1)
+                            row = metrics.evaluate(mkey, res, Pz, az, y, b,
+                                                   basis, masks)
+                            row.update(dim=n, d=n * n, shift=shift, b=b,
+                                       beta=b / S_OBS**2, s=S_OBS, N=N,
+                                       T=args.T, seed=seed, sampler=name,
+                                       score=args.score, eps=eps, tag=args.tag,
+                                       y_seed=yseed, wall=round(wall, 3),
+                                       ts=time.strftime("%H:%M:%S"))
+                            with out.open("a") as f:
+                                f.write(json.dumps(row) + "\n")
+                            print(f"[t1] {n}x{n} shift={shift} N={N} "
+                                  f"seed={seed} y{yseed} {name}: "
+                                  f"W2={row['w2']:.4g} KL={row['kl']:.4g} "
+                                  f"g*={row['gamma_star']:.3g} ({wall:.1f}s)",
+                                  flush=True)
 
 
 if __name__ == "__main__":
