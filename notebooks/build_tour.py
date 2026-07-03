@@ -57,6 +57,84 @@ This matters twice over for us:
    transfers to continuous, high-dimensional space.
 """)
 
+md(r"""---
+
+## TL;DR — the whole night in plain language
+
+*(No equations, no jargon; everything here is unpacked properly in the sections below.)*
+
+**The motivation.** Modern AI image generators ("diffusion models") work by learning
+to turn pure noise into realistic pictures. Scientists now use the same machinery for
+inference: train such a model on simulated maps of the universe, and it becomes a
+sophisticated prior — a statement of what plausible maps look like. To actually
+answer questions, though, you must *steer* the generator: "give me plausible maps,
+but only ones consistent with my telescope's data." Several popular steering recipes
+exist, and nearly all of them are mathematical shortcuts. The worry: the shortcuts
+might systematically distort the answers — and on real problems nobody can tell,
+because nobody knows the exact right answer to compare against.
+
+**The idea.** So we built a rigged arena: a simplified universe (a Gaussian random
+field — think "cosmic texture with known statistics") where the exactly correct
+answer to the steering problem IS known, in closed form, thanks to sixty-year-old
+Wiener filter theory. Then we made the popular steering recipes compete on it,
+overnight, on three GPUs — and measured precisely how far each one lands from the
+truth. Before running anything, we wrote down our predictions and the "this whole
+idea is dead if..." criterion, and froze them (pre-registration — the same discipline
+clinical trials use, to keep ourselves honest).
+
+**The contestants, as characters:**
+- *The workhorse (DPS)* — the most popular recipe. Takes a clever shortcut: when
+  weighing the data, it pretends its current best guess of the clean map is certain.
+- *The tournament (reward-resampling)* — runs many candidate maps in parallel and
+  repeatedly culls the ones that fit the data worst, cloning the ones that fit best.
+- *The bookkeeper (proper twisted SMC)* — the mathematically correct method, which
+  carefully tracks and corrects for every approximation it makes. Expensive-looking,
+  rarely used in practice.
+- *The lazy one (best-of-N)* — generate lots of maps ignoring the data, keep the
+  ones that happen to fit. Fine in principle, hopeless in practice.
+- Plus a *referee* (samples from the exact answer, defining the best possible score
+  at a given budget) and a *control* (isolates numerical sloppiness from genuine
+  method error).
+
+**What we found.**
+1. *The workhorse is confidently wrong everywhere.* Its shortcut makes it trust the
+   data too much, so it produces answer-distributions that are too narrow and pushed
+   too far — overconfidence, in the precise statistical sense (its "68% error bars"
+   contain the truth far less than 68% of the time). The distortion grows the harder
+   you steer, never disappears even for very gentle steering, and gets *worse*, not
+   better, on bigger maps. We double-checked the measured distortion against pen-and-
+   paper theory: agreement to about one percent.
+2. *The tournament over-sharpens, and the damage compounds with every round* — the
+   more selection rounds you run, the more overconfident the result. (The same law
+   was measured before in AI language-model "test-time search"; it transfers.)
+3. *The bookkeeper is exactly right, everywhere we looked* — and it's the only
+   method that also reports an honest self-check number (an evidence estimate we
+   could verify against the exact value). That self-check is the seed of a bigger
+   idea: runtime "certificates" that could flag broken sampling in real analyses,
+   where no ground truth exists.
+4. *The nastiest finding:* if the learned prior is slightly wrong (in cosmology:
+   trained on simulations with the wrong astrophysics), the errors can *cancel* the
+   workhorse's overconfidence and make a doubly-broken pipeline look calibrated on
+   simple diagnostics. Two wrongs faking a right — exactly the failure mode you'd
+   never catch without an exact test bed.
+5. *A side quest on language models:* the same night, a companion experiment measured
+   how "test-time search" (generating many solution attempts and letting a reward
+   model steer them) destroys a model's ability to know when it's right — and how
+   reserving a slice of untouched attempts ("insurance") buys that ability back
+   cheaply. A second experiment initially returned an absurd result (the model's
+   confidence *anti*-predicted correctness) which a morning autopsy traced to a
+   measurement bug — the model's long reasoning was being cut off mid-thought and
+   miscounted — a neat live demonstration of why this whole reliability agenda
+   matters: silent measurement failures look exactly like discoveries.
+
+**The verdict.** The pre-registered kill criterion ("if no method is meaningfully
+distorted at realistic settings, drop this research direction") was decisively NOT
+met — the distortions are large, structured, and measurable. Four of five frozen
+predictions scored as hits, one (deliberately betting against the project) as a miss.
+Decision: **GO** — this becomes the seed of a research program on auditing and
+certifying steered generative samplers, with the night's code as its foundation.
+""")
+
 md(r"""## 2. The testbed: a problem where the answer is exactly known
 
 The trick that makes the whole night possible: pick a problem where the "tilted
