@@ -468,6 +468,64 @@ print("work on fields — and why the sequential machinery exists at all.")'''
 
 )
 
+md(r"""## 4c. Where mass mapping — and the Remy method — fit
+
+The testbed is not an analogy for mass mapping; it IS mass mapping, Gaussianized:
+$x$ is the convergence field, $y = Ax + n$ is shear-like linear data, and the tilted
+target is the Wiener posterior — exactly what mass mapping reduces to under a
+Gaussian prior. Every sampler in the zoo is a candidate mass-mapping algorithm the
+moment you swap the analytic score for one trained on simulations. The classical
+methods slot right in: Kaiser–Squires is "invert $A$, ignore the prior"; sparsity
+methods (GLIMPSE/MCALens) are maximum-a-posteriori point estimates under a wavelet
+prior. The reason diffusion entered this field at all is the thing those don't give
+you: **posterior samples**, i.e. uncertainty on the map.
+
+**The Remy et al. (2023) method** — score-based prior trained on kappa-TNG maps, plus
+annealed sampling of $p(\kappa|\gamma)$ — is the field's flagship of that idea, and it
+occupies a precise (and rather sane) spot in this notebook's taxonomy. Recall from
+the Jensen-gap derivation that the exact data-pull term needs the denoiser's
+uncertainty in the likelihood covariance:
+$$\mathcal{N}\big(\gamma;\; A\hat{\kappa}_0,\;\; \Sigma_n + A\,\mathrm{Var}[\kappa_0|\kappa_t]\,A^\top\big).$$
+The three guidance schemes differ only in what they put in that variance slot:
+
+| scheme | variance slot | character |
+|---|---|---|
+| DPS | nothing (deleted) | over-trusts data → over-concentrated ("cold") |
+| **Remy et al.** | $\sigma_t^2 I$ — the diffusion noise level | an UPPER BOUND on the truth → conservative at intermediate levels ("warm") |
+| exact guidance (control) | true $\mathrm{Var}[\kappa_0|\kappa_t]$ | exact — but computable only for a Gaussian prior |
+
+For a learned prior the exact slot is fundamentally unavailable — that's why
+everyone approximates, and why you need an oracle testbed to price the
+approximation.
+
+**One structural difference matters as much as the formula.** Remy's sampler is not
+a single-pass reverse diffusion: it's *annealed Langevin* — many MCMC steps at each
+noise level, ideally equilibrating before cooling. That relocates where correctness
+comes from. In the single-pass samplers of our grid, path bias accumulates and is
+frozen into the endpoint. In annealed MCMC, slightly-wrong intermediate targets are
+forgiven IF you equilibrate at the final level (the $\sigma_t \to 0$ target is the
+true posterior; earlier levels are scaffolding). The price: correctness now rests on
+*mixing*, which nobody can verify at $d \sim 10^5$, and in the compute-limited
+regime — few Langevin steps per level, the practical reality — you inherit a path
+bias of the conservative flavor.
+
+So the audit question for the field's flagship isn't "is the formula biased" (it is,
+knowably, on the safe side at intermediate levels) but: **how much equilibration
+buys how much correctness, and which way does the residual bias point?** Over-broad
+posteriors under-claim peak significances — "safe" for detections, still wrong for
+constraints. And the misspecification axis of section 8 lands directly on it: the
+kappa-TNG prior is a simulation choice, so "trained on the wrong baryonic feedback"
+is exactly our $\varepsilon$ knob — where, for a *conservative* scheme, the
+accidental-compensation trap could operate in reverse (contamination masking
+under-confidence instead of overconfidence).
+
+All of which makes a seventh sampler arm — $\sigma_t^2$-inflated guidance plus $K$
+Langevin steps per level, swept over $K$ — the program's most natural next
+experiment: a one-day run that would tell the mass-mapping community, with exact
+numbers, what their workhorse's error budget looks like. (Queued in next steps, not
+yet run.)
+""")
+
 md(r"""## 5. How we keep score
 
 All metrics are exact-or-honest, computed against $(\mu^*, \Sigma^*)$:
@@ -892,6 +950,14 @@ families still carries a search-depth confound to be handled in the rerun design
 **Running as of this notebook's creation:** the truncation-clean B2 rerun
 (E-20260703a, 100 problems × 3 seeds × 3 methods at 12k budgets) — pre-registered
 gate and expectations already in the ledger.
+
+**Next experiment in the queue (designed, not yet launched):** the **Remy-method
+arm** — implement the field's flagship mass-mapping sampler exactly (diffusion-noise-
+inflated guidance + $K$ Langevin equilibration steps per noise level) and measure
+its $W_2$/coverage against the oracle as a function of $K$, plus its response to the
+misspecification knob. One day of compute; the deliverable is the error budget of
+the community's workhorse, with exact numbers — the program's first outward-facing
+result.
 
 ---
 

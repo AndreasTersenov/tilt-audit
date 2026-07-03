@@ -129,6 +129,18 @@
 
 ## 7. Next-session actions
 
+- **Remy-method arm (designed 2026-07-03, owner-approved as next experiment; not yet
+  launched).** Implement Remy et al. (2023) mass-mapping sampling exactly in the
+  harness: guidance with the likelihood covariance inflated by the diffusion noise
+  level (sigma_t^2 — an upper bound on Var[x0|xt], i.e. the CONSERVATIVE side of the
+  guidance spectrum, vs DPS's deletion on the aggressive side) + K Langevin
+  equilibration steps per noise level. Sweep K; measure W2/coverage vs the oracle and
+  response to the misspecification knob (kappa-TNG prior <-> eps contamination; note
+  the accidental-compensation trap may operate in REVERSE for a conservative scheme).
+  Expected yield (per the expected-information gate): the exact error budget of the
+  community's flagship mass-mapping method as a function of its compute budget —
+  the program's first outward-facing result and the natural bridge artifact to
+  CosmoStat. ~1 day of compute when green-lit.
 - Score P-d–h WITH Andreas (this table is a proposal).
 - T2 decomposition figure + P-g verdict if trainings landed late.
 - B2: rerun twin with a daytime budget or trimmed config; investigate R1
