@@ -16,3 +16,4 @@
 {"id": "t3_seed4", "tier": "T3", "gpu": "any", "est_min": 15, "cmd": "/mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 4 --tag confirmatory-densify --out results/t3_seeds.jsonl"}
 {"id": "t3_seed5", "tier": "T3", "gpu": "any", "est_min": 15, "cmd": "/mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 5 --tag confirmatory-densify --out results/t3_seeds.jsonl"}
 {"id": "t3_seed6", "tier": "T3", "gpu": "any", "est_min": 15, "cmd": "/mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 6 --tag confirmatory-densify --out results/t3_seeds.jsonl"}
+{"id": "t3_seed7", "tier": "T3", "gpu": "any", "est_min": 15, "cmd": "/mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 7 --tag confirmatory-densify --out results/t3_seeds.jsonl"}

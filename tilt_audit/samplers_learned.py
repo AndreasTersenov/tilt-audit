@@ -41,7 +41,10 @@ def make_score_x0hat(model, params, basis, Pz_analytic=None):
 
     def x0hat_fn(z, t):
         x = unpack(z, basis)
-        eps = model.apply(params, x, jnp.full(x.shape[0], t))
+        # net is trained/stored in fp32 (TILT_AUDIT_X64=0); sampler runs fp64
+        eps = model.apply(params, x.astype(jnp.float32),
+                          jnp.full(x.shape[0], t, dtype=jnp.float32))
+        eps = eps.astype(z.dtype)
         sig = jnp.sqrt(diffusion.sig2_t(t))
         alpha = diffusion.alpha_t(t)
         x0h = (x - sig * eps) / alpha
