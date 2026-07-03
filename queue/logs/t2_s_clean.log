@@ -1,0 +1,3 @@
+[t2:learned:clean] shift=0.5 N=16 seed=0 dps: W2=1e+30 KL=1e+30 g*=0.0101 (22.2s)
+[t2:learned:clean] shift=0.5 N=16 seed=0 sap: W2=18.22 KL=4.679e+04 g*=0.18 (27.9s)
+[t2:learned:clean] shift=0.5 N=16 seed=0 twisted: W2=7.611 KL=1764 g*=0.967 (15.6s)

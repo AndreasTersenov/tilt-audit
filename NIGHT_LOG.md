@@ -116,3 +116,6 @@
 - 01:42 [JOB] t3_sap_depth1024 finished OK (0m)
 - 01:58 [JOB] B1 alpha=0.25 seed 0 done
 - 02:02 [RESULT] 02:05 read. B1: AUROC 0.500/0.673/0.645/0.729 for α=0.05/0.10/0.15/0.25 → E-20260702a threshold (≥0.65 by α=0.25) HIT at 0.729; sel-accuracy flat 0.67–0.73 through α=0.25; the 0.10≈0.15 tie is the predicted n_iid quantization (both =2/16). d128 arm: DPS KL 29→200→1738→16372 nats for d=256→16k (254× the oracle floor at d=16384; floor = d/N nats exactly — clean internal check); W2/floor grows 6.5×→8.2× — extensivity claim extended, no high-d rescue. Zoom (7 seeds): DPS N=16 dip confirmed real but tight (std≤0.07) — finite-N floor effect, oracle-floor comparison at dawn. Trainings done (93 min, loss 0.079); T2 launcher fired, first grid JIT-compiling.
+- 02:30 [JOB] B1 alpha=0.35 seed 0 done
+- 02:44 [FAIL→fixed] T2 launcher deadlocked on its own pgrep pattern (the heredoc that created the script left 'train_score.py.*s_clean' in the parent shell's cmdline — the gate matched itself forever; ~55 min of GPU-0 T2 time lost to fillers, which at least kept the GPU busy). Killed; direct sequential T2 chain launched. Second self-matching process-pattern incident tonight — lesson recorded for the handoff.
+- 02:44 [JOB] T2 grid starting for learned:clean (GPU 0)
