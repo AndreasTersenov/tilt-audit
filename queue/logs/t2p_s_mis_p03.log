@@ -68,3 +68,4 @@ Constant folding an instruction is taking > 1s:
 This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
 
 If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[t2:learned:mis+0.3] shift=0.5 N=256 seed=0 dps: W2=5.37 KL=642.9 g*=1.83 (80.7s)

@@ -138,3 +138,6 @@
 - 04:21 [JOB] endgame exact T=256 reference done rc=0
 - 04:22 [JOB] endgame eps-ladder (±0.05, ±0.2) done rc=0
 - 05:24 [JOB] T2 learned:clean grid done rc=0
+- 05:26 [NOTE] DAWN ASSEMBLY: all figures regenerated (money N=64/256, decomposition, certificate, B1 α-panel, B2 twin), utilization report compiled (GPU 2: 96% busy-share; GPUs 0/1: 76% — losses itemized in HANDOFF §3), HANDOFF_DAWN.md finalized (verdict table: P-d HIT, P-e depth-qualified HIT, P-f HIT, P-g HIT/mechanism-corrected, P-h MISS ⇒ GO recommendation), E-20260702a/b/c Result+Updated-belief written into particle-reasoners/RESEARCH_LOG.md (frozen predictions untouched; particle-reasoners left uncommitted — Andreas's repo, his commit call).
+- 05:26 [NOTE] Data-handling incident recorded: run_reliability --out uses open("w") — α=0.05 seed-2 invocation overwrote raw seed-0/1 rows (metrics preserved in this log at 00:13/02:02). Upstream fix needed before multi-invocation sweeps.
+- 05:26 [NOTE] Still appending until ~06:30: B2 seeds 1,2 (GPU 1/2) and the T2 N=16 tail (GPU 0). Servers come down cleanly at ~06:30; final counts amended below.
