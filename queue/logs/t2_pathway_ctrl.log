@@ -142,3 +142,7 @@
 [t2:pathway:analytic] shift=4.0 N=256 seed=2 sap: W2=32.23 KL=1.851e+05 g*=0.00877 (1.9s)
 [t2:pathway:analytic] shift=4.0 N=256 seed=2 twisted: W2=7.367 KL=1.128e+04 g*=0.555 (3.1s)
 [t2:pathway:analytic] shift=4.0 N=256 seed=2 terminal_is: W2=64.97 KL=1.327e+06 g*=0.00384 (1.0s)
+[t2:pathway:analytic] shift=0.5 N=16 seed=0 dps: W2=4.591 KL=872.8 g*=1.43 (37.2s)
+[t2:pathway:analytic] shift=0.5 N=16 seed=0 sap: W2=18.09 KL=4.663e+04 g*=0.192 (38.9s)
+[t2:pathway:analytic] shift=0.5 N=16 seed=0 twisted: W2=4.555 KL=1160 g*=0.921 (58.7s)
+[t2:pathway:analytic] shift=0.5 N=16 seed=0 terminal_is: W2=64.98 KL=3.63e+04 g*=0.00418 (17.0s)
