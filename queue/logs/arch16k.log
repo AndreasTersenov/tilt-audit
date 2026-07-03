@@ -1,0 +1,4 @@
+[a2-arch] oracle_null: (16384, 4096) in 1s (b=0.01914)
+[a2-arch] oracle_ref: (16384, 4096) in 1s (b=0.01914)
+[a2-arch] dps_em03: (16384, 4096) in 2s (b=0.01914)
+[a2-arch] twisted_em03: (16384, 4096) in 4s (b=0.01914)
