@@ -55,15 +55,25 @@ def pqmass_null():
 
 
 def tarp_null():
+    """tarp is wrapped (see run_diagnostics.tarp_wrap): its norm=True
+    truth-based min-max is asymmetric and d-extensively miscalibrates the
+    null at q=4096 (max dev 0.20 on the exact posterior — itself an A2
+    finding, logged 2026-07-04). Median over 5 reference seeds < 0.10."""
     from tarp import get_tarp_coverage
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from run_diagnostics import tarp_wrap
     d = np.load(ARCH / "cond_oracle.npz")
-    samples = d["samples"].transpose(1, 0, 2)  # (S, L, q)
-    ecp, alpha = get_tarp_coverage(samples, d["truths"], norm=True,
-                                   seed=20260704)
-    dev = float(np.max(np.abs(ecp - alpha)))
+    samples = d["samples"].transpose(1, 0, 2).astype(np.float64)
+    sn, tn = tarp_wrap(samples, d["truths"].astype(np.float64))
+    devs = []
+    for seed in range(5):
+        ecp, alpha = get_tarp_coverage(sn, tn, norm=False, seed=seed)
+        devs.append(float(np.max(np.abs(ecp - alpha))))
+    dev = float(np.median(devs))
     ok = dev < 0.10
-    print(f"T-N3 TARP null: max|ecp-alpha|={dev:.4f} on oracle-vs-oracle "
-          f"(need <0.10) -> {'PASS' if ok else 'FAIL'}")
+    print(f"T-N3 TARP null (wrapped): median max|ecp-alpha|={dev:.4f} over 5 "
+          f"seeds {[round(v, 3) for v in devs]} (need <0.10) -> "
+          f"{'PASS' if ok else 'FAIL'}")
     return ok
 
 

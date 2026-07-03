@@ -1,0 +1,99 @@
+[a2-power] 1200 cells, 40 workers
+[a2-power] 200/1200 (5s)
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+[a2-power] 400/1200 (10s)
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+[a2-power] 600/1200 (14s)
+[a2-power] 800/1200 (35s)
+[a2-power] 1000/1200 (90s)
+[a2-power] 1200/1200 (207s)
+[a2-power] done in 3.4 min

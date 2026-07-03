@@ -78,6 +78,21 @@ def pqmass_cell(config, budget, rep):
                 num_refs=num_refs_for(budget), wall=round(time.time() - t0, 2))
 
 
+def tarp_wrap(samples, truths):
+    """Symmetric pre-standardization; tarp called with norm=False.
+
+    tarp's norm=True min-max normalizes by the TRUTHS' empirical range: every
+    truth is inside the box by construction while fresh samples fall outside
+    in ~2q/L dims each, so sample distances are asymmetrically inflated —
+    d-extensive null miscalibration (measured: max|ecp-alpha| = 0.20 at
+    q=4096 on the EXACT posterior; 0.04-0.08 after this wrap). Standardize by
+    pooled-SAMPLE mean/std (truths never enter the transform), map +-4sd to
+    [0,1] so the uniform references land in the mass."""
+    m = samples.mean((0, 1))
+    s = samples.std((0, 1))
+    return ((samples - m) / s + 4.0) / 8.0, ((truths - m) / s + 4.0) / 8.0
+
+
 def tarp_cell(config, budget, rep):
     from tarp import get_tarp_coverage
     d = load(f"cond_{config}.npz")
@@ -85,10 +100,10 @@ def tarp_cell(config, budget, rep):
     rng = np.random.default_rng(hash(("tarp", config, budget, rep)) & 0xFFFFFFFF)
     li = rng.choice(L, L, replace=True)   # bootstrap the truths
     si = rng.choice(S, budget, replace=False)
-    samples = d["samples"][li][:, si].transpose(1, 0, 2)
+    samples = d["samples"][li][:, si].transpose(1, 0, 2).astype(np.float64)
+    sn, tn = tarp_wrap(samples, d["truths"][li].astype(np.float64))
     t0 = time.time()
-    ecp, alpha = get_tarp_coverage(samples, d["truths"][li], norm=True,
-                                   seed=rep)
+    ecp, alpha = get_tarp_coverage(sn, tn, norm=False, seed=rep)
     stat = float(np.max(np.abs(ecp - alpha)))
     return dict(test="tarp", config=config, budget=budget, rep=rep,
                 stat=stat, wall=round(time.time() - t0, 2))
