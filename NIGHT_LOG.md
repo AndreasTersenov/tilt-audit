@@ -103,3 +103,16 @@
 - 00:40 [JOB] B1 alpha=0.10 seed 0 done
 - 01:19 [JOB] B1 alpha=0.15 seed 0 done
 - 01:20 [STEER] 01:20 read: trainings 46k/60k (done ~01:45, losses 0.08–0.10 plateaued). B1 3rd alpha nearly done (~25 min/alpha, sweep done ~02:40). B2 seed 0 at 45 problems (~26/h → complete ~03:30). Pathway control 106/144 rows — DPS fix VERIFIED in the learned pathway (sane W2, γ*=1.34, no blowups). Zoom/d128/depth fillers queued behind it (single worker). Watch item: T2 learned rows are ~35s each under 3-way GPU sharing; if still >20s/row solo after trainings, trim mis-net grids to seeds 0,1 (log as steer, note in handoff).
+- 01:39 [JOB] t2_pathway_ctrl finished OK (89m)
+- 01:39 [JOB] t3_zoom_dpsdip (tier T3, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 32,64 --shifts 0.5,1 --Ns 16 --seeds 10,11,12,13 --samplers oracle,dps,exact_g
+- 01:40 [JOB] t3_zoom_dpsdip finished OK (1m)
+- 01:40 [JOB] t42_d128 (tier T4, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 128 --samplers oracle,dps,sap,twisted,terminal_is,exact_guidance --tag explora
+- 01:41 [JOB] t42_d128 finished OK (1m)
+- 01:41 [JOB] t3_sap_depth (tier T3, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 32 --shifts 0.5,1 --Ns 256 --seeds 0,1,2 --T 128 --samplers sap,oracle --tag e
+- 01:42 [JOB] t3_sap_depth finished OK (0m)
+- 01:42 [JOB] t3_sap_depth512 (tier T3, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 32 --shifts 0.5,1 --Ns 256 --seeds 0,1,2 --T 512 --samplers sap,oracle --tag e
+- 01:42 [JOB] t3_sap_depth512 finished OK (0m)
+- 01:42 [JOB] t3_sap_depth1024 (tier T3, GPU 0) started: .venv/bin/python scripts/run_t1.py --dims 32 --shifts 0.5,1 --Ns 256 --seeds 0,1,2 --T 1024 --samplers sap,oracle --tag 
+- 01:42 [JOB] t3_sap_depth1024 finished OK (0m)
+- 01:58 [JOB] B1 alpha=0.25 seed 0 done
+- 02:02 [RESULT] 02:05 read. B1: AUROC 0.500/0.673/0.645/0.729 for α=0.05/0.10/0.15/0.25 → E-20260702a threshold (≥0.65 by α=0.25) HIT at 0.729; sel-accuracy flat 0.67–0.73 through α=0.25; the 0.10≈0.15 tie is the predicted n_iid quantization (both =2/16). d128 arm: DPS KL 29→200→1738→16372 nats for d=256→16k (254× the oracle floor at d=16384; floor = d/N nats exactly — clean internal check); W2/floor grows 6.5×→8.2× — extensivity claim extended, no high-d rescue. Zoom (7 seeds): DPS N=16 dip confirmed real but tight (std≤0.07) — finite-N floor effect, oracle-floor comparison at dawn. Trainings done (93 min, loss 0.079); T2 launcher fired, first grid JIT-compiling.
