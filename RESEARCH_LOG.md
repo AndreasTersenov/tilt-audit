@@ -57,3 +57,33 @@
 - **Expectation:** encoded in P-20260702d–h (frozen).
 - **Result:** (pending)
 - **Updated belief:** (pending)
+
+## Predictions — arms night (2026-07-03 → 04; frozen with owner sign-off before the run; PUBLIC push precedes first GPU job)
+
+### P-20260703b · multi-y: ratio structure is y-generic · conf 85% · resolve-by 2026-07-06 · OPEN
+- **Claim:** T1's qualitative structure (scheme-to-floor orderings; DPS monotone growth in β) holds across ≥12 observation realizations, with relative spread of W2/floor ratios ≲10% at N=256.
+- **Made:** 2026-07-03 · **Context:** referee-proofing the single-y caveat (docs/OVERNIGHT_2026-07-03_ARMS_NIGHT.md, arm A1).
+- **Resolution criterion:** medians/IQR of ratios across y-draws, 64² focus.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+### P-20260703c · diagnostics blind spot: compensation config fools the field's tests · conf 70% · resolve-by 2026-07-06 · OPEN
+- **Claim:** MIRA and TARP detect plain-DPS over-concentration (64², 1σ, N=256) at budgets ≤4096 samples; NO standard sample-based diagnostic (PQMass, MIRA, TARP) flags the ε=−0.3 + DPS accidental-compensation configuration at those budgets (W2 still ~6× floor).
+- **Made:** 2026-07-03 · **Context:** arm A2 ("certify the certifiers").
+- **Resolution criterion:** power curves vs sample budget + same-vs-same null calibration of each test.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+### P-20260703d · amortized-conditional: summaries pass, geometry fails · conf 60% · resolve-by 2026-07-06 · OPEN
+- **Claim:** a conditional score model trained to convergence on (field, observation) pairs passes summary checks (posterior mean, marginals, band powers within a few %) while geometry metrics (W2 to exact posterior; variance-spectrum ratio) sit ≥3× the oracle floor — the Doeser & Jasche phenomenology reproduced against a closed-form reference.
+- **Made:** 2026-07-03 · **Context:** arm A3 (Legin+/D&J class).
+- **Resolution criterion:** amortized-arm metrics vs (μ*,Σ*) at matched N.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+### P-20260703e · Rémy scheme: conservative, K-converging, misspec sign-flipped · conf 55% · resolve-by 2026-07-06 · OPEN
+- **Claim:** σ_t²-inflated annealed-Langevin (Rémy-style) runs WARM (γ*<1) at small K (few Langevin steps/level), approaches the target monotonically as K grows; its misspecification interaction is sign-flipped vs DPS (ε<0 aggravates rather than cancels).
+- **Made:** 2026-07-03 · **Context:** arm A4 (field's flagship mass-mapper).
+- **Resolution criterion:** K-sweep W2/γ* + ε=±0.3 pair at fixed K.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
