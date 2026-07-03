@@ -141,6 +141,16 @@
   community's flagship mass-mapping method as a function of its compute budget —
   the program's first outward-facing result and the natural bridge artifact to
   CosmoStat. ~1 day of compute when green-lit.
+- **Amortized-conditional arm (designed 2026-07-03, owner-approved for next steps; not
+  launched).** Audit the amortized-posterior-sampler class (Legin+ 2304.03788 / SimBIG-style,
+  and the class Doeser & Jasche 2606.10023 audited with HMC references): train a small
+  CONDITIONAL score model on (field, observation) pairs from the Gaussian testbed and compare
+  its samples to the exact Wiener posterior — amortization + score error measured with an
+  exact reference at any d, zero steering confound (it is the amortized analog of the T2 arm;
+  one new training script on the existing harness). Expected yield (gate): quantifies whether
+  D&J's "summary checks pass, geometry wrong" failure reproduces against a closed-form
+  reference, and prices the amortized class against the steered class on ONE substrate —
+  the comparison neither literature currently has. ~half a day of compute when green-lit.
 - Score P-d–h WITH Andreas (this table is a proposal).
 - T2 decomposition figure + P-g verdict if trainings landed late.
 - B2: rerun twin with a daytime budget or trimmed config; investigate R1

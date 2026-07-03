@@ -969,8 +969,18 @@ sampler — one reliability program.
 (E-20260703a, 100 problems × 3 seeds × 3 methods at 12k budgets) — pre-registered
 gate and expectations already in the ledger.
 
-**Next experiment in the queue (designed, not yet launched):** the **Remy-method
-arm** — implement the field's flagship mass-mapping sampler exactly (diffusion-noise-
+**Next experiments in the queue (designed, not yet launched):**
+
+The **amortized-conditional arm** — the other major way the field uses diffusion for
+inference is to skip steering entirely and train a *conditional* score model to be
+the posterior directly (Legin et al. 2023 for cosmic initial conditions; the class
+Doeser & Jasche audited). Our testbed audits it with one new training script: learn
+the conditional score on (field, observation) pairs, sample, compare to the exact
+Wiener posterior. Measures amortization + score error with an exact reference at any
+dimension and no steering confound — and prices the amortized class against the
+steered class on one substrate, a comparison neither literature has.
+
+The **Remy-method arm** — implement the field's flagship mass-mapping sampler exactly (diffusion-noise-
 inflated guidance + $K$ Langevin equilibration steps per noise level) and measure
 its $W_2$/coverage against the oracle as a function of $K$, plus its response to the
 misspecification knob. One day of compute; the deliverable is the error budget of
