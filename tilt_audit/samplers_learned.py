@@ -74,6 +74,7 @@ def run_learned(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
     log_z_acc = 0.0
     ess_traj = []
 
+    clip_events = []
     if name == "dps":
         def dps_loss(z_flat, t):
             z0h = x0hat_fn(z_flat, t)
@@ -103,7 +104,17 @@ def run_learned(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
             g1 = (jnp.exp(lam_g * dt) - 1.0) / jnp.where(
                 jnp.abs(lam_g) > 1e-12, lam_g, 1.0)
             g1 = jnp.where(jnp.abs(lam_g) > 1e-12, g1, dt)
-            m = m + g1 * 2.0 * (-dps_grad(z, t))
+            disp = g1 * 2.0 * (-dps_grad(z, t))
+            # the analytic preconditioner can't bound the NET's Jacobian
+            # error (amplified by 1/b) — clip each particle's displacement
+            # at 3x the step's noise scale and RECORD how often it fires,
+            # so score-error conclusions can be conditioned on it
+            cap = 3.0 * jnp.sqrt(jnp.maximum(kv, 1e-6) * z.shape[-1])
+            norms = jnp.linalg.norm(disp, axis=-1, keepdims=True)
+            disp = disp * jnp.minimum(1.0, cap / jnp.maximum(norms, 1e-30))
+            clip_frac_step = float(jnp.mean(norms[:, 0] > cap))
+            clip_events.append(clip_frac_step)
+            m = m + disp
             z = m + jnp.sqrt(kv) * jax.random.normal(k_noise, z.shape)
 
         elif name in ("terminal_is", "sap"):
@@ -149,4 +160,6 @@ def run_learned(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
         out["ess_final"] = float(_ess(logw))
     if ess_traj:
         out["ess_traj"] = jnp.asarray(ess_traj)
+    if clip_events:
+        out["clip_frac"] = float(sum(clip_events) / len(clip_events))
     return out

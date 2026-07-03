@@ -119,3 +119,8 @@
 - 02:30 [JOB] B1 alpha=0.35 seed 0 done
 - 02:44 [FAIL→fixed] T2 launcher deadlocked on its own pgrep pattern (the heredoc that created the script left 'train_score.py.*s_clean' in the parent shell's cmdline — the gate matched itself forever; ~55 min of GPU-0 T2 time lost to fillers, which at least kept the GPU busy). Killed; direct sequential T2 chain launched. Second self-matching process-pattern incident tonight — lesson recorded for the handoff.
 - 02:44 [JOB] T2 grid starting for learned:clean (GPU 0)
+- 02:46 [FAIL] T2 grid for learned:clean rc!=0 (log: queue/logs/t2_s_clean.log) — continuing
+- 02:46 [JOB] T2 grid starting for learned:mis+0.3 (GPU 0)
+- 02:47 [FAIL→fixed] Learned-arm DPS blew up again with the REAL net (analytic preconditioner cannot bound the UNet Jacobian error, amplified by 1/b). Added per-particle displacement clip at 3× step noise scale with clip-activation fraction recorded per row (clip_frac) — scheme intact where stable, guard visible where not. T2 chain restarted clean.
+- 02:47 [JOB] T2 grid starting for learned:clean (GPU 0)
+- 02:49 [STEER] T2 restructured for the clock: measured row cost scales with N (N=256 rows ≈2–4 min each; serial chain would need ~9.6 h). Now running the three nets' grids IN PARALLEL on GPU 0 with N-order 256→64→16, so the decomposition-critical (64², N=256) rows for all three nets land first (~03:40) and truncation only costs the small-N tail. Duplicate N=16 rows from the aborted serial chain will be deduped at analysis (keep-last).

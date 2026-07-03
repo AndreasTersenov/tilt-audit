@@ -77,6 +77,8 @@ def main():
                     wall = time.time() - t0
                     row = metrics.evaluate(jax.random.fold_in(key, 1), res,
                                            Pz, az, y, b, basis, masks)
+                    if "clip_frac" in res:
+                        row["clip_frac"] = res["clip_frac"]
                     row.update(dim=n, d=n * n, shift=shift, b=b,
                                beta=b / S_OBS**2, s=S_OBS, N=N, T=args.T,
                                seed=seed, sampler=name, score=args.label,
