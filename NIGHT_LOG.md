@@ -142,3 +142,52 @@
 - 05:26 [NOTE] Data-handling incident recorded: run_reliability --out uses open("w") — α=0.05 seed-2 invocation overwrote raw seed-0/1 rows (metrics preserved in this log at 00:13/02:02). Upstream fix needed before multi-invocation sweeps.
 - 05:26 [NOTE] Still appending until ~06:30: B2 seeds 1,2 (GPU 1/2) and the T2 N=16 tail (GPU 0). Servers come down cleanly at ~06:30; final counts amended below.
 - 06:13 [STEER] Owner extended the window by 1h (awake, on the record): shutdown moved 06:22 → ~06:55. B2 seeds 1/2 keep accumulating (+~13 problems each); queue worker resumed with generator so GPU 0 runs densification seeds after the T2 tail completes. All else unchanged.
+- 06:13 [NOTE] queue worker up on GPU 0
+- 06:13 [JOB] t3_seed8 (tier T3, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 8 --tag confirmatory-densify --out res
+- 06:16 [JOB] t3_seed8 finished OK (3m)
+- 06:16 [JOB] t3_seed9 (tier T3, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 9 --tag confirmatory-densify --out res
+- 06:19 [JOB] t3_seed9 finished OK (3m)
+- 06:20 [JOB] t3_n512 (tier T3, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --Ns 512 --seeds 0,1,2 --tag exploratory --out
+- 06:22 [JOB] t3_n512 finished OK (2m)
+- 06:22 [JOB] t4_seed11 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 11 --tag exploratory --out results/t4_
+- 06:25 [JOB] t4_seed11 finished OK (3m)
+- 06:25 [JOB] t4_seed12 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 12 --tag exploratory --out results/t4_
+- 06:28 [JOB] t4_seed12 finished OK (3m)
+- 06:29 [JOB] t4_seed13 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 13 --tag exploratory --out results/t4_
+- 06:32 [JOB] t4_seed13 finished OK (3m)
+- 06:32 [JOB] t4_seed14 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 14 --tag exploratory --out results/t4_
+- 06:35 [JOB] t4_seed14 finished OK (3m)
+- 06:36 [JOB] t4_seed15 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 15 --tag exploratory --out results/t4_
+- 06:39 [JOB] t4_seed15 finished OK (3m)
+- 06:39 [JOB] t4_seed16 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 16 --tag exploratory --out results/t4_
+- 06:42 [JOB] t4_seed16 finished OK (3m)
+- 06:42 [JOB] t4_seed17 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 17 --tag exploratory --out results/t4_
+- 06:44 [JOB] T2 learned:mis+0.3 grid done rc=0
+- 06:45 [JOB] t4_seed17 finished OK (2m)
+- 06:45 [JOB] t4_seed18 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 18 --tag exploratory --out results/t4_
+- 06:47 [JOB] t4_seed18 finished OK (2m)
+- 06:47 [JOB] t4_seed19 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 19 --tag exploratory --out results/t4_
+- 06:49 [JOB] t4_seed19 finished OK (2m)
+- 06:50 [JOB] t4_seed20 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 20 --tag exploratory --out results/t4_
+- 06:52 [JOB] t4_seed20 finished OK (2m)
+- 06:52 [JOB] t4_seed21 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 21 --tag exploratory --out results/t4_
+- 06:54 [JOB] t4_seed21 finished OK (2m)
+- 06:54 [JOB] t4_seed22 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 22 --tag exploratory --out results/t4_
+- 06:57 [JOB] t4_seed22 finished OK (2m)
+- 06:57 [JOB] t4_seed23 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 23 --tag exploratory --out results/t4_
+- 06:59 [JOB] t4_seed23 finished OK (2m)
+- 06:59 [JOB] t4_seed24 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 24 --tag exploratory --out results/t4_
+- 07:01 [JOB] t4_seed24 finished OK (2m)
+- 07:02 [JOB] t4_seed25 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 25 --tag exploratory --out results/t4_
+- 07:04 [JOB] t4_seed25 finished OK (2m)
+- 07:04 [JOB] t4_seed26 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 26 --tag exploratory --out results/t4_
+- 07:06 [JOB] t4_seed26 finished OK (2m)
+- 07:06 [JOB] t4_seed27 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 27 --tag exploratory --out results/t4_
+- 07:08 [JOB] t4_seed27 finished OK (2m)
+- 07:09 [JOB] t4_seed28 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 28 --tag exploratory --out results/t4_
+- 07:11 [JOB] t4_seed28 finished OK (2m)
+- 07:11 [JOB] t4_seed29 (tier T4, GPU 0) started: /mnt/home/tersenov/software/tilt-audit/.venv/bin/python scripts/run_t1.py --seeds 29 --tag exploratory --out results/t4_
+- 07:12 [FAIL] B2 seed 2 (stream A) rc!=0 — one retry
+- 07:15 [FAIL] Shutdown uncovered a survivor: driver v3's actual script process (739546 — my 23:56 kill hit only its nohup parent) had been quietly managing B2 seed 2 all along; when the shutdown killed that run it fired its retry, whose fresh run_reliability invocation TRUNCATED reliability_r1_twin_s2.jsonl (open-"w" bug, second bite): 320 rows/80 problems of raw seed-2 data reduced to a 19-row remnant. Metrics survive in the 05:30 snapshot (n=51: defensive 0.255 acc/0.449 AUROC; iid-majority 0.392/0.159; iid-weighted 0.392/0.225; sap 0.216/0.423). Remnant tree killed by PID; no further writers exist.
+- 07:15 [NOTE] SHUTDOWN COMPLETE. Final counts: B2 s0=100 problems (full), s1=78 (near-full), s2=5-problem remnant + n=51 snapshot; t2_learned 437 rows (all three nets complete; N=16 dupes from the aborted serial chain, dedupe keep-last); densification bank: seeds 3–28 on the confirmatory grid (t3_seeds + t4_densify). All our GPU processes stopped by PID; GPUs 0,1,2 at 0% / ≤555 MiB (residual = other users' processes, untouched all night). Window ran 22:48–07:20 with the owner's +1h extension.
+- 07:15 [NOTE] Night closed. Verdict proposals in HANDOFF_DAWN.md §1; scoring session with Andreas is the next step. This log is the chronological record; 30 local commits; nothing public.

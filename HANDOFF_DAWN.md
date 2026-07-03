@@ -60,9 +60,12 @@
   effective α = round(16α)/16). Accuracy drop at α=0.50 (−0.05) is
   direction-consistent but ~1σ at one seed. *The operative variable is
   n_iid, not α — future sweeps should be designed in n_iid units.*
-- **B2 (R1 twin) — E-b surprising, needs autopsy before scoring.** 189
-  problem-units (seed 0 complete at 100; seeds 1/2 partial at 38/51 and still
-  appending). Accuracy ordering is clean and expectation-consistent: SAP
+- **B2 (R1 twin) — E-b surprising, needs autopsy before scoring.** Final:
+  seed 0 complete (100 problems), seed 1 near-complete (78), seed 2 LOST to a
+  second bite of the open-"w" truncation bug at shutdown (a zombie driver-v3
+  retry rewrote the file; a 19-row remnant plus the 05:30 metrics snapshot at
+  n=51 survive — numbers below include the pooled data as of the last good
+  read). Accuracy ordering is clean and expectation-consistent: SAP
   0.17–0.26 < defensive 0.26–0.32 < iid 0.39–0.47 — search damages R1
   accuracy even harder than Qwen's. But calibration INVERTED for every
   method: AUROC iid-majority 0.17, iid-weighted 0.21, defensive 0.36, SAP
@@ -115,8 +118,12 @@
   run_reliability opens --out in "w" mode — each invocation TRUNCATES the
   file. The α=0.05 seed-2 run overwrote the raw rows of seeds 0,1 (their
   AUROC/acc numbers survive in NIGHT_LOG snapshots: 0.500/0.710 at n=124).
-  All other α files are single-invocation. Fix upstream before reusing the
-  harness for multi-invocation sweeps.
+  All other α files are single-invocation. The same bug bit HARDER at
+  shutdown: a surviving driver-v3 subshell auto-retried the killed B2 seed-2
+  run and its fresh invocation truncated that file (80 problems of raw rows →
+  19-row remnant; n=51 metrics snapshot preserved). Fix run_reliability to
+  append-or-unique-name BEFORE any future use, and never leave retry wrappers
+  running past their driver.
 - fp64→fp32 training restart cost ~35 min of GPU-0 time; three concurrent
   T2 grids OOM'd (VJP+metric peaks) → serialized to two lanes.
 
