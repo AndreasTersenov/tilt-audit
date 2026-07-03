@@ -980,6 +980,15 @@ Wiener posterior. Measures amortization + score error with an exact reference at
 dimension and no steering confound — and prices the amortized class against the
 steered class on one substrate, a comparison neither literature has.
 
+The **diagnostic-power arm** ("certify the certifiers") — the community validates
+generative posteriors with sample-based scores (PQMass, MIRA, TARP); a June-2026
+diffusion-lensing paper already reports a MIRA deficit it cannot interpret. Because
+our testbed produces failures of exactly known size, it can measure each
+diagnostic's power curve — what real posterior damage produces what score change,
+at what sample budget — and each test's blind spots (does the
+accidental-compensation configuration fool them?). Cheapest arm; runs on already-
+generated samples.
+
 The **Remy-method arm** — implement the field's flagship mass-mapping sampler exactly (diffusion-noise-
 inflated guidance + $K$ Langevin equilibration steps per noise level) and measure
 its $W_2$/coverage against the oracle as a function of $K$, plus its response to the

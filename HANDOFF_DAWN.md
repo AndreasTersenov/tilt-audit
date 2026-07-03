@@ -151,6 +151,16 @@
   D&J's "summary checks pass, geometry wrong" failure reproduces against a closed-form
   reference, and prices the amortized class against the steered class on ONE substrate —
   the comparison neither literature currently has. ~half a day of compute when green-lit.
+- **Diagnostic-power arm (designed 2026-07-03; "certify the certifiers"; not launched).**
+  Run the field's sample-based diagnostics — PQMass (2402.04355), MIRA (2605.02014), TARP,
+  and D&J's variance-spectrum test — on oracle-generated failures of exactly known size
+  (DPS over-concentration per beta, SAP collapse, misspec pass-through, the
+  accidental-compensation configuration) to produce power curves: diagnostic signal vs true
+  posterior damage vs sample budget, plus each test's blind spots. Expected yield (gate):
+  converts community-reported scores (e.g. 2606.31988's MIRA 0.635 vs 0.667 on diffusion-WL)
+  into damage interpretations; tests the Alokda average-case critique empirically per
+  diagnostic; cheapest arm of the four (reuses existing sample archives, CPU-heavy);
+  strongest collaboration hook (Ciela/CCA orbit, Zeghal on MIRA). ~half a day when green-lit.
 - Score P-d–h WITH Andreas (this table is a proposal).
 - T2 decomposition figure + P-g verdict if trainings landed late.
 - B2: rerun twin with a daytime budget or trimmed config; investigate R1
