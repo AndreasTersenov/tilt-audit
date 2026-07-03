@@ -6,45 +6,45 @@
 
 ## Predictions
 
-### P-20260702d · plug-in guidance measurably off-target, gap grows with β · conf 75% · resolve-by 2026-07-05 · OPEN
+### P-20260702d · plug-in guidance measurably off-target, gap grows with β · conf 75% · resolve-by 2026-07-05 · SCORED 2026-07-03: HIT
 - **Claim:** [GRF pilot P1] DPS-style plug-in guidance is off-target — over-concentrated,
   under-covering — with the gap growing with guidance strength.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run (docs/OVERNIGHT_2026-07-02_GRF_PILOT.md)
 - **Resolution criterion:** T1 grid exact W₂/KL + functional coverage vs β.
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT. DPS bias measured (1.4-28x oracle floor, monotone in beta, absolute W2 also monotone) AND analytically confirmed: independent stiff-ODE (Radau) per-mode prediction matches the measured grid to 0.7-2.8%. gamma*=1.33-1.43; 68% CI coverage -> 0 at strong tilt; d-extensive to d=16384.
+- **Lesson:** The analytic cross-check (predict the grid from closed forms with a second, independent implementation) is cheap and should be standard for every oracle-substrate claim. Caveat carried: all numbers conditional on one synthetic y (structure is y-generic per the analytics; multi-y ensemble is a cheap daytime add).
 
-### P-20260702e · reward-as-potential SMC runs cold (γ* > 1) · conf 70% · resolve-by 2026-07-05 · OPEN
+### P-20260702e · reward-as-potential SMC runs cold (γ* > 1) · conf 70% · resolve-by 2026-07-05 · SCORED 2026-07-03: HIT (depth-qualified)
 - **Claim:** [GRF pilot P2] the SAP analog reproduces the discrete substrate's over-tilt
   signature in ℝ^d.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run
 - **Resolution criterion:** γ* fits on T1 output.
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT, depth-qualified. gamma*(T) rises monotonically with step count (0.21/0.52/1.72 at T=32/64/256, 32^2/0.5sigma/N=256) — the discrete substrate's depth law transfers to R^d and SAP is cold (gamma*>1) at practitioner depths. At strong tilt/high d the pathology saturates into variance collapse without mean tracking before coldness can express.
+- **Lesson:** Two: (1) scalar gamma* misleads under population collapse — always report the mean-tracking and variance-ratio split alongside; (2) the step count T was left unpinned by the plan and materially affects the signature — pre-register T (or a T-ladder) explicitly next time.
 
-### P-20260702f · proper twisted SMC on-target with valid Ẑ · conf 85% · resolve-by 2026-07-05 · OPEN
+### P-20260702f · proper twisted SMC on-target with valid Ẑ · conf 85% · resolve-by 2026-07-05 · SCORED 2026-07-03: HIT
 - **Claim:** [GRF pilot P3] proper twisted SMC is on-target within finite-N error, Ẑ bracketing
   the analytic Z.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run
 - **Resolution criterion:** T1 grid + T-G3 gate outputs.
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT (conjugate-proposal arm, designated pre-data at 23:18 — the variant that satisfies frozen gate T-G3). On-target at 0.96-1.06x floor in all 36 cells, gamma*=1.00, log Zhat = log Z with machine-zero incremental weights; unbiasedness verified separately with real weight variance (d=1, prior proposals).
+- **Lesson:** 'Proper twisted SMC' must mean twisted PROPOSALS, not just psi-ratio potentials: the potential-only variant is formally unbiased yet collapses at d>=256 (single-run log Zhat ~400 log-units low) — itself a certificate-relevant demonstration. Ambiguous sampler specs get resolved and logged BEFORE data; that discipline is what made this scoreable.
 
-### P-20260702g · misspecification propagates differently per scheme · conf 55% · resolve-by 2026-07-05 · OPEN
+### P-20260702g · misspecification propagates differently per scheme · conf 55% · resolve-by 2026-07-05 · SCORED 2026-07-03: HIT (mechanism corrected)
 - **Claim:** [GRF pilot P4] a contaminated score is amplified by plug-in guidance and partially
   absorbed into weights by proper SMC — the decomposition is non-trivial.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run (T2 tier)
 - **Resolution criterion:** three-way decomposition at 64².
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT on the headline (propagation differs per scheme; decomposition non-trivial; smooth eps-ladder, tight seeds), with BOTH named mechanisms corrected: proper SMC does NOT absorb misspecification — conjugate w.r.t. the wrong model, it exactly samples the wrong tilt (pass-through 1:1, W2 0.50->2.57 across eps); DPS interacts sign-dependently (eps=+0.3 amplifies 3.77->5.97; eps=-0.3 cancels to 2.92 with gamma*=0.98). SAP's collapse masks eps entirely.
+- **Lesson:** The accidental-compensation trap is real: at eps=-0.3 the temperature diagnostic alone would pass a doubly-broken pipeline (W2 still 6x floor catches it) — audits need multiple, mechanistically-different metrics. The wrongness of the absorption intuition is worth more than the prediction: weights built from the wrong model cannot know it is wrong.
 
-### P-20260702h · KILL BRANCH: bias negligible at realistic settings · conf 25% · resolve-by 2026-07-05 · OPEN
+### P-20260702h · KILL BRANCH: bias negligible at realistic settings · conf 25% · resolve-by 2026-07-05 · SCORED 2026-07-03: MISS (kill branch did not fire — GO)
 - **Claim:** [GRF pilot P5, REVISED from 40% after deep-read of 2502.07849 — owner's number]
   at realistic β and reward SNR, plug-in bias is negligible in absolute terms at d=4096.
 - **Made:** 2026-07-02 · **Context:** the pre-registered NO-GO branch; plan §3 kill criterion.
 - **Resolution criterion:** no scheme W₂ > 3× oracle finite-N floor at any (β,d) in the T1 box.
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** SCORED WITH OWNER 2026-07-03: MISS, the good direction. Kill criterion (no scheme >3x floor anywhere) decisively not triggered: DPS alone >=3x from 0.5sigma at N=256 at all d, never below ~3.3x even at 0.125sigma; max frozen-scheme ratio 251x. GO condition of plan par.3 met on both conjuncts.
+- **Lesson:** The deep-read-driven revision (40%->25% against) was directionally right and the mechanism-level reasoning (CFG blessing non-transferable, bias d-extensive) held quantitatively. Reading the threat paper closely before the experiment was the highest-value hour of the prep.
 
 ## Experiments
 

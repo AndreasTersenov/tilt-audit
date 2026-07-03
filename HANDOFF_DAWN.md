@@ -4,7 +4,7 @@
 > Chronology in NIGHT_LOG.md. All confirmatory results final; T2 N=16 tail
 > and B2 seeds 1/2 were still appending at assembly (counts below are as-of).
 
-## 1. Verdict table — P-20260702d–h (PROPOSED scores; final scoring with Andreas)
+## 1. Verdict table — P-20260702d–h (SCORED with Andreas, 2026-07-03 morning: d HIT · e HIT depth-qualified · f HIT · g HIT mechanism-corrected · h MISS ⇒ GO)
 
 | Prediction | Proposed | One-line evidence |
 |---|---|---|
