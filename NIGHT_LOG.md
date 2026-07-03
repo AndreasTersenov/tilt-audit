@@ -212,3 +212,4 @@
 - 21:57 [JOB] E-20260703a seed 2 done rc=143
 - 21:57 [JOB] E-20260703a Phase 2 COMPLETE — all 3 seeds
 - 21:58 [NOTE] E-20260703a seed 2 stopped gently by owner call at 79/100 problems (rows are complete per-problem records; seeds 0+1 complete carry the verdict — per-seed spread ±0.01 means seed 2 was error-bar tightening only). All Track-B processes stopped by PID, children swept; GPUs 0,1,2 clear for tonight's arms night.
+- 22:04 [RESULT] E-20260703a FINAL + SCORED with owner: gate PASS; iid AUROC(parsed) 0.540 [0.55/0.54/0.52 per seed] → ≥0.65 expectation MISS via confidence saturation (right: 0.94 conf, 67% unanimous; wrong: 0.92, 61%); SAP-vs-iid UNRESOLVED (75% gated, gap 0.049); accuracy ordering HIT (0.649>0.581>0.197); PRM blind (0.513). Seed-2 refinement: defensive calibration = iid level (0.550) — insurance can't fix a saturated source signal. Ledger + tour notebook updated.

@@ -884,11 +884,19 @@ Morning autopsy, in three steps worthy of a detective story:
 
 Three harness bugs were fixed as a result (output-file truncation on rerun, the
 process-reward-model crashing on long traces, and the `"<none>"` vote-pooling), a
-validity gate (`none_frac < 0.10` per row) was pre-registered, a 15-problem pilot
-passed it (AUROC back to 0.75), and the full 3-seed rerun is running as this notebook
-is being written. *The meta-lesson is the same one the GRF side teaches: reliability
-failures in inference pipelines are usually silent, and the fix starts with
-instrumentation that makes the failure visible.*
+validity gate was pre-registered, and the full rerun (2.8 seeds' worth) delivered a
+clean, three-seed-tight verdict — **and a genuinely new finding**: with the artifact
+gone, R1's consistency-confidence is not restored, it is *saturated* — sample
+populations are near-unanimous whether right (mean confidence 0.94, 67% fully
+unanimous) or wrong (0.92, 61%), so consistency carries almost no ranking signal
+(AUROC ≈ 0.54) on this long-chain-of-thought model family. The insurance design
+cannot fix it, because its signal source is i.i.d. samples of the same saturated
+sampler. "Search destroys calibration" turns out to be ill-posed on a family with no
+baseline calibration to destroy — a scope boundary the original experiment could
+never have revealed without the bug-hunt that preceded it. *The meta-lesson is the
+same one the GRF side teaches: reliability failures in inference pipelines are
+usually silent, and the fix starts with instrumentation that makes the failure
+visible.*
 """)
 
 code(r'''try:
