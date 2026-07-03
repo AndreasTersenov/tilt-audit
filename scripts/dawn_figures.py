@@ -94,6 +94,7 @@ def fig_decomposition():
     if not mis.empty:
         frames.append(mis.assign(arm="exact-mis" + mis.eps.astype(str)))
     allr = pd.concat(frames, ignore_index=True)
+    allr = allr[allr.w2 < 1e29]  # drop clipped-blowup sentinel rows
     sel = allr[(allr.dim == 64) & (allr.N == 256) & (allr["shift"].isin([1.0, 4.0]))]
     samplers = ["dps", "sap", "twisted", "terminal_is"]
     arms = [a for a in ["exact", "pathway:analytic", "learned:clean",

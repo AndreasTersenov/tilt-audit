@@ -53,3 +53,18 @@ Traceback (most recent call last):
     npy_value, did_copy = self._single_device_array_to_np_array_did_copy()
                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 jax.errors.JaxRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 5.80GiB. [executable_name='jit__mean'] [tf-allocator-allocation-error='']
+E0703 05:24:12.945862 1808714 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0703 05:24:13.153968 1808270 slow_operation_alarm.cc:140] The operation took 1.208213567s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
