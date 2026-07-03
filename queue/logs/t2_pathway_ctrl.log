@@ -148,3 +148,5 @@
 [t2:pathway:analytic] shift=0.5 N=16 seed=0 terminal_is: W2=64.98 KL=3.63e+04 g*=0.00418 (17.0s)
 [t2:pathway:analytic] shift=0.5 N=16 seed=1 dps: W2=4.497 KL=858.6 g*=1.43 (35.4s)
 [t2:pathway:analytic] shift=0.5 N=16 seed=1 sap: W2=17.64 KL=1.315e+04 g*=0.197 (37.4s)
+[t2:pathway:analytic] shift=0.5 N=16 seed=1 twisted: W2=5.383 KL=1139 g*=0.904 (58.0s)
+[t2:pathway:analytic] shift=0.5 N=16 seed=1 terminal_is: W2=64.91 KL=7.012e+04 g*=0.00419 (16.9s)

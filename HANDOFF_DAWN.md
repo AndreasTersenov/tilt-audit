@@ -1,6 +1,6 @@
 # HANDOFF_DAWN — 2026-07-03 · GRF pilot overnight
 
-> Status at last update: 00:30 UTC (H1.7). LIVE DOCUMENT during the night;
+> Status at last update: 00:15 UTC (H1.5). LIVE DOCUMENT during the night;
 > final version at dawn. Chronology in NIGHT_LOG.md; per-event detail there.
 
 ## 1. Verdict table — P-20260702d–h (PROPOSED scores; final scoring with Andreas)
@@ -8,7 +8,7 @@
 | Prediction | Proposed | One-line evidence |
 |---|---|---|
 | **P-d** (75%) DPS off-target, gap grows with β | **HIT** | Exact-score T1: W2/floor 1.4×→28× rising monotonically in β at every d and N (N=256, 64²: 5.0×@0.5σ → 27.7×@4σ); γ*=1.33–1.43 (over-concentrated); mean-CI coverage under-covers (cov68 → 0 at strong tilt). Discretization control (exact_guidance) ≈ floor. |
-| **P-e** (70%) SAP runs cold, γ*>1 | **PARTIAL HIT (propose: HIT with revision note)** | γ*>1 (1.35–1.73, cold) exactly where selection can track — weak tilt/low d (16², 0.5σ, N≥64). Elsewhere the pathology is WORSE but different: per-step full-reward resampling collapses variance without moving the mean (γ_mean→0, var_ratio_logmed≈−20, W2 4–143× floor). The discrete substrate's scalar-γ* signature does not transfer globally; the over-concentration mechanism does. |
+| **P-e** (70%) SAP runs cold, γ*>1 | **HIT (depth-qualified)** | γ*(T) rises monotonically with step count — 32²/0.5σ/N=256: γ* = 0.21 / 0.52 / **1.72** at T = 32 / 64 / 256 — i.e. SAP runs cold at practitioner-typical depths, and the γ*(T) depth law transfers from the discrete substrate to ℝ^d. At strong tilts the pathology saturates into variance collapse without mean tracking (γ_mean→0, var_ratio_logmed≈−20, W2 4–143× floor) — over-concentration in an even more damaging form. T1's frozen grid (T=64) alone would have read as a partial miss; the T-sensitivity arm (exploratory) resolves it. |
 | **P-f** (85%) twisted SMC on-target, valid Ẑ | **HIT** | Conjugate twisted SMC = 0.96–1.06× oracle floor in ALL 36 (d,β,N) cells, γ*=1.00; incremental weights machine-zero (<1e-9; tower-property self-test) so log Ẑ = log Z exactly; T-G3 prior-proposal variant: Ẑ unbiased (mean ratio 1±5se, d=1, real weight variance). |
 | **P-g** (55%) misspec propagates differently per scheme | *(pending — T2 learned nets ~02:05; analytic-contamination arm already in)* | Analytic ε-contaminated exact-score runs done (t1_misspec.jsonl); learned S-mis pending. |
 | **P-h** (25%) KILL: bias negligible at realistic settings | **MISS (= good for the program)** | Kill criterion decisively NOT triggered: DPS alone ≥3× floor from 0.5σ upward at N=256 (all d); max frozen-scheme ratio 251× (terminal-IS). Bias is d-extensive as the deep-read predicted (KL/mode ~O(1)). |
