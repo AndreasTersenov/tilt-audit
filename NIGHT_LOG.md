@@ -206,3 +206,6 @@
 - 09:49 [JOB] E-20260703a seed 1 done rc=1
 - 09:50 [JOB] E-20260703a Phase 2 RELAUNCH (v2): staggered PRM inits — seed 1 starts only after seed 0 PRM is fully up (simultaneous 0.45+0.45 profiling on GPU 2 collided)
 - 09:51 [JOB] E-20260703a seed 1 done rc=1
+- 17:04 [JOB] E-20260703a seed 1 done rc=0 (v3: PRM on GPU 1 @0.40)
+- 17:18 [JOB] E-20260703a seed 0 done rc=0
+- 17:49 [RESULT] E-20260703a seeds 0+1 complete (100 problems each). Validity gate PASS (median none_frac 0.062 on iid; inversion gone everywhere). Against pre-registration: iid-majority AUROC(parsed,gated) = 0.550 (per-seed 0.55/0.54) → expectation ≥0.65 MISSED, and NOT for measurement reasons: sensitivity analysis shows AUROC flat (~0.55) across gate choices, and the mechanism is CONFIDENCE SATURATION — R1's 16-sample populations are near-unanimous whether right or wrong (correct rows: mean conf 0.95, 64% at exactly 1.0; wrong rows: 0.91, 59% at 1.0). Self-consistency carries almost no ranking information on this long-CoT distill; harder (level-5) problems are worse (AUROC 0.50). Accuracy ordering iid(0.65) > defensive(0.57) > sap(0.20) HIT. SAP remains 73%-excluded (its own step-path truncation) → no calibration verdict, per pre-noted caveat. iid-weighted 0.518 → the Qwen-Math PRM is confirmed ~blind on R1 traces. Seed 2 running (tightens, won't flip: per-seed spread is 0.01).
