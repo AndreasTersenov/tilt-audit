@@ -947,6 +947,24 @@ the step count of the frozen grid was left unpinned by the plan (fixed by the
 $T$-sweep, pre-registered next time); and the SAP-on-LLM comparison across model
 families still carries a search-depth confound to be handled in the rerun design.
 
+### Where this sits in the literature (one paragraph)
+
+Three 2025–26 works audit the *other* links of the same pipeline, and together they
+frame this program. **Doeser & Jasche (2606.10023)** audit the learned posterior
+approximator: in a controlled HMC-referenced testbed, generative posteriors pass
+mean/marginal/cross-correlation checks at percent level while getting posterior
+geometry wrong by 30% — "cheap diagnostics certify nothing," one level up from our
+accidental-compensation result, but requiring an exact reference to see it (theirs
+caps at 32³; ours is free at any d, Gaussian-only). **Diao, Dai & Seljak
+(2505.00632)** audit forward-model support: field-level generative density as an
+out-of-distribution detector — structurally blind to in-support bias, which is
+exactly the contamination our misspecification axis shows the sampler can amplify
+or invisibly mask. **This pilot audits the third link neither touches: the
+inference-time steering scheme itself** — independently large (5–28× floor with an
+*exact* score), exactly decomposable, and monitorable at runtime without a
+reference via the Ẑ/ESS certificates. Three audits — approximator, support,
+sampler — one reliability program.
+
 **Running as of this notebook's creation:** the truncation-clean B2 rerun
 (E-20260703a, 100 problems × 3 seeds × 3 methods at 12k budgets) — pre-registered
 gate and expectations already in the ledger.
