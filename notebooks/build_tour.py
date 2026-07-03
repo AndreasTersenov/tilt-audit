@@ -145,13 +145,78 @@ print("This is just Wiener filtering — the point is that the FULL posterior "
       "(mean AND covariance, mode by mode) is known exactly.")''')
 
 # ══════════════════════════════════════════════════════════ diffusion 101
-md(r"""## 3. Diffusion sampling in five minutes
+md(r"""## 3a. Background: what a diffusion model actually is
 
-A diffusion model generates samples by *learning to undo noise*. Two ingredients:
+Forget neural networks for a moment. The problem diffusion models solve is ancient:
+**you have samples from a complicated distribution $p(x)$ and want a machine that
+generates more of them.** Direct density modeling is hard. The diffusion trick is to
+convert this one hard problem into a *sequence of easy ones*:
 
-**The forward (noising) process.** Take a sample $x_0$ from the target distribution
-and gradually drown it in Gaussian noise via an Ornstein–Uhlenbeck process. In our
-convention, at time $t$:
+1. Take your data and progressively drown it in Gaussian noise. After enough noise,
+   the distribution is just $\mathcal{N}(0, I)$ — trivial to sample.
+2. Learn to undo **one small noising step at a time**. Each undo step is a tiny,
+   nearly-Gaussian inference problem — much easier than modeling $p$ wholesale.
+3. To generate: start from pure noise and run the undo steps backwards.
+
+The undoing turns out to require exactly one object at each noise level $t$: the
+**score** of the noisy distribution,
+$$s_t(x) \;=\; \nabla_x \log p_t(x),$$
+the vector field that points "uphill in probability". Intuition: if I hand you a
+noisy field and you know which direction makes it *more typical*, you can walk it
+back toward the data manifold. Anderson's classic result (1982) makes this exact:
+the noising process run in reverse is again a diffusion, with the score as its extra
+drift term (equation below).
+
+Why is the score *learnable*? Because of a beautiful identity (denoising score
+matching): the score of the noisy marginal is equivalent to the conditional
+expectation of the clean signal — so you can train a network by the utterly mundane
+task of **predicting the noise you just added**. That's the entire training loop of
+every diffusion model: add noise, predict it, repeat. No partition functions, no
+adversarial games.
+
+The cosmology connection you already own: a score model trained on N-body-derived
+convergence maps is a *simulation prior* — it plays the exact role $\mathcal{N}(0,C)$
+plays in Wiener filtering, but for the full non-Gaussian field. Tonight's testbed
+deliberately uses the Gaussian case so that everything the samplers do can be checked
+against Wiener-posterior closed forms.
+""")
+
+code(r'''# Visual: the forward (noising) process on a real GRF — the "film strip"
+ts_show = [0.0, 0.3, 1.0, 2.5, 9.0]
+fig, axes = plt.subplots(1, len(ts_show), figsize=(15, 3))
+for ax, t in zip(axes, ts_show):
+    alpha_t, sig_t = np.exp(-t), np.sqrt(1 - np.exp(-2 * t))
+    xt = alpha_t * x_truth + sig_t * rng.normal(size=(n, n))
+    ax.imshow(xt, cmap="RdBu_r"); ax.set_xticks([]); ax.set_yticks([])
+    ax.set_title(f"$t = {t}$" + ("  (data)" if t == 0 else
+                                 "  (pure noise)" if t == 9 else ""), fontsize=10)
+plt.suptitle("The forward process: structure dissolves into noise. Generation = "
+             "learning to run this film backwards.", y=1.03)
+plt.tight_layout(); plt.show()''')
+
+code(r'''# Visual: what "the score" means, in 1-D where you can see it
+from scipy.stats import norm as gauss
+xs = np.linspace(-4, 5, 400)
+p_mix = 0.5 * gauss.pdf(xs, -1.2, 0.55) + 0.5 * gauss.pdf(xs, 2.0, 0.8)
+logp = np.log(p_mix); score = np.gradient(logp, xs)
+fig, axes = plt.subplots(2, 1, figsize=(8, 4.6), sharex=True,
+                         gridspec_kw={"height_ratios": [2, 1]})
+axes[0].plot(xs, p_mix, "C0"); axes[0].set_ylabel("$p(x)$")
+axes[0].set_title("The score $\\nabla_x \\log p$ is the 'which way is more probable' field")
+for x0 in np.linspace(-3.5, 4.5, 26):
+    s = np.interp(x0, xs, score)
+    axes[1].annotate("", xy=(x0 + 0.11 * np.clip(s, -6, 6), 0), xytext=(x0, 0),
+                     arrowprops=dict(arrowstyle="->", color="C3", lw=1.1))
+axes[1].axhline(0, color="gray", lw=.5); axes[1].set_yticks([])
+axes[1].set_xlabel("x"); axes[1].set_ylabel("score\n(arrows)")
+plt.tight_layout(); plt.show()
+print("Following the arrows (plus the right amount of noise) IS sampling. "
+      "That's the reverse diffusion.")''')
+
+md(r"""## 3b. The reverse process, Tweedie, and our closed-form playground
+
+Now the machinery, concretely. **Forward (noising) process** — an
+Ornstein–Uhlenbeck SDE; in our convention, at time $t$:
 $$x_t = e^{-t} x_0 + \sqrt{1 - e^{-2t}}\;\varepsilon, \qquad \varepsilon \sim \mathcal{N}(0, I),$$
 so at $t=0$ you have data and by $t_f = 9$ you have essentially pure white noise.
 
@@ -262,6 +327,69 @@ plt.tight_layout(); plt.show()
 print("These six numbers were pre-registered in the plan as gate T-G2: the")
 print("implemented sampler had to reproduce them to ~2% before any GPU run.")''')
 
+md(r"""## 4b. Background: importance sampling, particle filters, and twists
+
+The other half of the sampler zoo is Monte-Carlo-with-weights, so here is the
+thirty-second refresher plus the one concept that may be new (the *twist*).
+
+**Importance sampling (IS).** Want averages under $\sigma$, can only sample from
+$q$: draw $x^{(i)} \sim q$, weight $w^{(i)} = \sigma(x^{(i)})/q(x^{(i)})$, done.
+Unbiased, consistent... and famously fragile: if $q$ misses where $\sigma$ lives,
+one sample hogs all the weight. The standard health meter is the **effective sample
+size**, $\mathrm{ESS} = 1/\sum_i \bar w_i^2 \in [1, N]$: how many of your $N$
+particles are actually contributing. The killer fact — worth seeing once (demo
+below) — is that for product-form targets the weight variance grows exponentially
+with dimension. One-shot IS is dead on arrival at $d = 4096$; that's precisely the
+terminal-IS / best-of-$N$ arm's failure.
+
+**Sequential Monte Carlo (SMC / particle filters).** The fix: don't pay the whole
+importance-weight bill at once. Move a *population* of particles through a sequence
+of gently-changing distributions; at each stage, reweight a little and — when ESS
+drops below a threshold — **resample** (clone the heavy, cull the light) so the
+population keeps living where the probability is. Resampling is the double-edged
+sword: it prevents weight collapse, but every resampling event throws away diversity;
+done wrong or too often, the population inbreeds (that's SAP's disease).
+
+**Twists.** In a diffusion, the natural sequence of distributions is "the posterior,
+seen at each noise level". The ideal reweighting function at level $t$ is the
+lookahead from the derivation above,
+$\psi_t(x_t) = \mathbb{E}[L(x_0)\,|\,x_t]$ — called the **optimal twist**. It scores
+each *noisy* particle by how much likelihood it will eventually be able to reach.
+Real applications must approximate $\psi_t$ (that's an active literature); in our
+testbed it's available in closed form, which is exactly what makes the pilot an
+*oracle* test: we can run the correct algorithm correctly and see what everything
+else loses.
+
+One subtlety that produced the night's most instructive negative result: it is not
+enough to *weight* by the right twist — you should also *propose* with it (move
+particles with the twist-aware dynamics). Weight-only twisting is formally unbiased
+but its weights still have exploding variance in high $d$; it collapsed just like
+naive IS. Proper SMC = right weights **and** right proposals.
+""")
+
+code(r'''# Demo: why one-shot importance sampling dies with dimension.
+# Target: N(0.5,1)^d. Proposal: N(0,1)^d. Watch ESS/N crater as d grows.
+Ns = 4096
+dims = [1, 4, 16, 64, 256, 1024, 4096]
+ess_frac = []
+for d in dims:
+    z = rng.normal(size=(Ns, d))
+    logw = (0.5 * z - 0.125).sum(axis=1)          # log N(z;0.5,1)/N(z;0,1) per dim
+    w = np.exp(logw - logw.max()); w /= w.sum()
+    ess_frac.append(1.0 / (w**2).sum() / Ns)
+fig, ax = plt.subplots(figsize=(6.5, 3.6))
+ax.plot(dims, ess_frac, "o-")
+ax.set(xscale="log", yscale="log", xlabel="dimension d",
+       ylabel="ESS / N   (fraction of useful particles)",
+       title="One-shot importance sampling vs dimension:\n"
+             "a HALF-sigma shift per dimension, and by d~100 one particle owns everything")
+ax.grid(alpha=.3, which="both")
+plt.tight_layout(); plt.show()
+print("This is why 'generate N samples and reweight at the end' (best-of-N) cannot")
+print("work on fields — and why the sequential machinery exists at all.")'''
+
+)
+
 md(r"""## 5. How we keep score
 
 All metrics are exact-or-honest, computed against $(\mu^*, \Sigma^*)$:
@@ -289,6 +417,24 @@ believed probability, the "this is all negligible" branch. Four test gates (anal
 tables, unbiasedness checks, exact identities) had to pass before any big run. All
 scoring happened the morning after, jointly.
 """)
+
+code(r'''# Visual: the "effective temperature" family in 1-D. gamma tempers the tilt:
+# sigma_gamma ∝ p * exp(gamma * r / beta). gamma=1 is the true posterior.
+P_, a_, y_, b_ = 1.0, 1.0, 2.0, 0.5
+xs = np.linspace(-2, 3.5, 400)
+fig, ax = plt.subplots(figsize=(7, 3.6))
+for g_, c_ in [(0.3, "C2"), (1.0, "k"), (3.0, "C3")]:
+    Sg = 1 / (1 / P_ + g_ * a_**2 / b_); mg = Sg * g_ * a_ * y_ / b_
+    lbl = {0.3: "$\\gamma=0.3$ (WARM: under-tilted)", 1.0: "$\\gamma=1$ (the true posterior)",
+           3.0: "$\\gamma=3$ (COLD: over-tilted)"}[g_]
+    ax.plot(xs, gauss.pdf(xs, mg, np.sqrt(Sg)), color=c_, lw=2.2 if g_ == 1 else 1.4,
+            label=lbl)
+ax.plot(xs, gauss.pdf(xs, 0, 1), "C0:", label="prior")
+ax.axvline(2, color="gray", ls="--", lw=.8)
+ax.legend(fontsize=8); ax.set_xlabel("x"); ax.set_yticks([])
+ax.set_title("What $\\gamma^*$ measures: which member of this tempered family "
+             "the sampler ACTUALLY produced")
+plt.tight_layout(); plt.show()''')
 
 # ══════════════════════════════════════════════════════════════ results T1
 md(r"""## 6. Headline result: the confirmatory grid
@@ -513,9 +659,27 @@ plt.tight_layout(); plt.show()''')
 # ═══════════════════════════════════════════════════════════ track B
 md(r"""## 10. The parallel track: the same disease in LLM test-time search
 
-While the GPUs churned on fields, a third GPU ran the LLM side (the
-particle-reasoners harness on MATH problems, a small Qwen math model + a process
-reward model). Two experiments:
+While the GPUs churned on fields, a third GPU ran the LLM side. Background for
+this track, since it uses its own vocabulary:
+
+**Test-time search.** To boost an LLM's math accuracy without retraining, generate
+*many* candidate solutions and use a **process reward model (PRM)** — a second
+network that scores partial solutions step by step — to steer the generation:
+periodically rank the partial solutions, kill the low-scoring ones, duplicate the
+high-scoring ones. If that sounds *exactly* like the reward-resampling particle
+filter from the field side — it is. Same algorithm, discrete substrate. The
+particle-reasoners project showed this search buys accuracy but quietly **destroys
+calibration**: after resampling, "16 of 16 samples agree" no longer means the answer
+is probably right, because the agreement was manufactured by selection, not evidence.
+
+**The metrics.** For each problem, the method outputs a population of final answers
+with weights. *Confidence* = weight share of the most popular answer; *accuracy* =
+is that answer right; **AUROC** = across many problems, can the confidence *rank*
+correct answers above wrong ones (1.0 = perfect ranking, 0.5 = coin flip, below 0.5 =
+actively inverted). A confidence signal you can't rank with is a confidence signal
+you can't act on.
+
+Two experiments ran overnight:
 
 **B1 — the "insurance" sweep.** Prior work showed that test-time search destroys the
 answer-distribution's calibration signal. The proposed fix: reserve a fraction
@@ -652,6 +816,33 @@ families still carries a search-depth confound to be handled in the rerun design
 gate and expectations already in the ledger.
 
 ---
+
+## Appendix: glossary / symbol table
+
+| Term / symbol | Meaning |
+|---|---|
+| score $\nabla_x \log p_t$ | "uphill in probability" vector field of the noised distribution at level $t$; the only thing a diffusion model actually learns |
+| $\hat{x}_0 = \mathbb{E}[x_0\|x_t]$ | Tweedie denoiser: best guess of the clean field from the noisy one |
+| tilt / tilted target $\sigma \propto p\,e^{r/\beta}$ | prior reweighted by a reward; with our quadratic $r$ it IS the Wiener posterior |
+| $\beta$, "tilt strength" | steering strength; we quote it as how many prior $\sigma$'s the posterior mean moves (0.5–4) |
+| $(\mu^*_k, \Sigma^*_k)$ | exact per-Fourier-mode posterior mean/variance — the ground truth everything is scored against |
+| DPS / plug-in guidance | steer with the likelihood gradient at the point estimate $\hat x_0$; ignores denoiser uncertainty (Jensen gap) |
+| SAP / reward-resampling | resample the particle population on $e^{r(\hat x_0)/\beta}$ at every step; selection compounds with depth |
+| twist $\psi_t = \mathbb{E}[e^{r/\beta}\|x_t]$ | the optimal lookahead reweighting function for SMC; closed-form here, approximated in the wild |
+| proper twisted SMC | SMC with the right weights AND twist-aware proposals — the correct algorithm; our on-floor sampler |
+| terminal IS / best-of-$N$ | sample the prior, reweight at the end; dies of weight degeneracy in high $d$ |
+| oracle floor | error of $N$ PERFECT samples; the ruler. Kill rule: methods must exceed $3\times$ it to matter |
+| $W_2$, KL | distance of sampler output to truth (Gaussian closed forms per mode, summed) |
+| $\gamma^*$ | effective temperature: which tempered posterior the sampler actually produced (1 = correct, >1 cold, <1 warm) |
+| ESS | effective sample size $1/\sum \bar w_i^2$: how many particles actually contribute |
+| $\hat{Z}$, $\log Z$ | estimated vs analytic evidence (normalizing constant); the honesty meter for SMC — seed of the "certificate" idea |
+| $\varepsilon$ (misspec knob) | spectral-slope contamination of the score the sampler believes — the baryonic-feedback analog |
+| $T$ (depth) | number of reverse-diffusion steps; SAP's over-tilt grows with it (the depth law) |
+| PRM | process reward model: step-wise scorer used to steer LLM test-time search |
+| AUROC | probability a confidence signal ranks a random correct answer above a random wrong one |
+| none_frac | fraction of an LLM answer-population whose answers failed to parse — the truncation-artifact validity gate |
+| pre-registration | predictions + kill criteria frozen and committed BEFORE the experiment runs; scored jointly after |
+
 *Repo: `~/software/tilt-audit` (local only). Every claim above traces to a JSONL in
 `results/`, a NIGHT_LOG entry, and a git commit made as it happened.*
 """)
