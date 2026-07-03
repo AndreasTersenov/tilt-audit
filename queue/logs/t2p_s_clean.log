@@ -54,3 +54,58 @@ Traceback (most recent call last):
     npy_value, did_copy = self._single_device_array_to_np_array_did_copy()
                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 jax.errors.JaxRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 5.80GiB. [executable_name='jit__mean'] [tf-allocator-allocation-error='']
+E0703 03:35:12.767144 1464849 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0703 03:35:12.972185 1464388 slow_operation_alarm.cc:140] The operation took 1.205171947s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[t2:learned:clean] shift=0.5 N=256 seed=0 dps: W2=4.376 KL=662.4 g*=1.47 (155.6s)
+[t2:learned:clean] shift=0.5 N=256 seed=0 sap: W2=13.53 KL=7320 g*=0.566 (124.1s)
+[t2:learned:clean] shift=0.5 N=256 seed=0 twisted: W2=6.794 KL=1139 g*=0.958 (75.0s)
+[t2:learned:clean] shift=0.5 N=256 seed=0 terminal_is: W2=56.27 KL=6.421e+04 g*=0.00441 (63.2s)
+[t2:learned:clean] shift=0.5 N=256 seed=1 dps: W2=4.361 KL=667.2 g*=1.48 (140.1s)
+[t2:learned:clean] shift=0.5 N=256 seed=1 sap: W2=13.45 KL=6227 g*=0.544 (117.1s)
+[t2:learned:clean] shift=0.5 N=256 seed=1 twisted: W2=3.394 KL=569.1 g*=0.941 (62.1s)
+[t2:learned:clean] shift=0.5 N=256 seed=1 terminal_is: W2=52.04 KL=6.159e+04 g*=0.0046 (54.6s)
+[t2:learned:clean] shift=0.5 N=256 seed=2 dps: W2=4.353 KL=653 g*=1.48 (134.3s)
+[t2:learned:clean] shift=0.5 N=256 seed=2 sap: W2=14.31 KL=4.616e+04 g*=0.567 (109.6s)
+[t2:learned:clean] shift=0.5 N=256 seed=2 twisted: W2=5.422 KL=853.4 g*=0.935 (65.3s)
+[t2:learned:clean] shift=0.5 N=256 seed=2 terminal_is: W2=58.92 KL=6.601e+04 g*=0.00433 (52.7s)
+[t2:learned:clean] shift=0.5 N=64 seed=0 dps: W2=4.509 KL=724.2 g*=1.47 (58.8s)
+[t2:learned:clean] shift=0.5 N=64 seed=0 sap: W2=15.45 KL=1.166e+04 g*=0.358 (61.7s)
+[t2:learned:clean] shift=0.5 N=64 seed=0 twisted: W2=6.082 KL=1178 g*=0.972 (33.1s)
+[t2:learned:clean] shift=0.5 N=64 seed=0 terminal_is: W2=63.45 KL=6.962e+04 g*=0.00422 (28.7s)
+[t2:learned:clean] shift=0.5 N=64 seed=1 dps: W2=4.467 KL=704.2 g*=1.47 (51.4s)
+[t2:learned:clean] shift=0.5 N=64 seed=1 sap: W2=15.29 KL=1.208e+04 g*=0.373 (58.2s)
+[t2:learned:clean] shift=0.5 N=64 seed=1 twisted: W2=5.862 KL=1003 g*=0.908 (36.2s)
+[t2:learned:clean] shift=0.5 N=64 seed=1 terminal_is: W2=60.36 KL=6.71e+04 g*=0.00429 (28.1s)
+[t2:learned:clean] shift=0.5 N=64 seed=2 dps: W2=4.541 KL=719 g*=1.47 (54.2s)
+[t2:learned:clean] shift=0.5 N=64 seed=2 sap: W2=15.37 KL=1.02e+04 g*=0.36 (59.0s)
+[t2:learned:clean] shift=0.5 N=64 seed=2 twisted: W2=8.937 KL=1987 g*=1.04 (40.2s)
+[t2:learned:clean] shift=0.5 N=64 seed=2 terminal_is: W2=59.93 KL=6.694e+04 g*=0.0043 (33.9s)
+[t2:learned:clean] shift=0.5 N=16 seed=0 dps: W2=5.107 KL=923.6 g*=1.49 (51.6s)
+[t2:learned:clean] shift=0.5 N=16 seed=0 sap: W2=17.92 KL=4.694e+04 g*=0.202 (58.5s)
+[t2:learned:clean] shift=0.5 N=16 seed=0 twisted: W2=7.089 KL=1437 g*=0.943 (38.5s)
+[t2:learned:clean] shift=0.5 N=16 seed=0 terminal_is: W2=61.57 KL=6.793e+04 g*=0.00426 (25.9s)
+[t2:learned:clean] shift=0.5 N=16 seed=1 dps: W2=5.108 KL=895.8 g*=1.48 (40.1s)
+[t2:learned:clean] shift=0.5 N=16 seed=1 sap: W2=17.57 KL=9207 g*=0.206 (53.5s)
+[t2:learned:clean] shift=0.5 N=16 seed=1 twisted: W2=8.327 KL=1996 g*=0.947 (37.7s)
+[t2:learned:clean] shift=0.5 N=16 seed=1 terminal_is: W2=63.77 KL=7.004e+04 g*=0.00421 (27.0s)
+[t2:learned:clean] shift=0.5 N=16 seed=2 dps: W2=5.039 KL=910.9 g*=1.46 (42.1s)
+[t2:learned:clean] shift=0.5 N=16 seed=2 sap: W2=18.15 KL=4.697e+04 g*=0.194 (56.8s)
+[t2:learned:clean] shift=0.5 N=16 seed=2 twisted: W2=9.088 KL=2251 g*=0.913 (38.4s)
+[t2:learned:clean] shift=0.5 N=16 seed=2 terminal_is: W2=69.38 KL=7.454e+04 g*=0.00411 (26.6s)
+[t2:learned:clean] shift=1.0 N=256 seed=0 dps: W2=5.174 KL=1406 g*=1.44 (137.5s)
+[t2:learned:clean] shift=1.0 N=256 seed=0 sap: W2=16.29 KL=1.889e+04 g*=0.133 (128.7s)
+[t2:learned:clean] shift=1.0 N=256 seed=0 twisted: W2=5.208 KL=1611 g*=0.854 (72.9s)
+[t2:learned:clean] shift=1.0 N=256 seed=0 terminal_is: W2=58.82 KL=1.281e+05 g*=0.00404 (63.3s)
