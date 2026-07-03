@@ -1,0 +1,55 @@
+E0703 02:49:54.511858 1322359 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0703 02:49:54.711196 1320609 slow_operation_alarm.cc:140] The operation took 1.199498688s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0703 02:50:03.649101 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 8.00GiB (8589934592 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:03.649290 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 7.20GiB (7730940928 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:03.649465 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 6.48GiB (6957846528 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:03.649649 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 5.83GiB (6262061568 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:03.649820 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 8.00GiB (8589934592 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:03.649973 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 7.20GiB (7730940928 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:03.650125 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 6.48GiB (6957846528 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:03.650273 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 5.83GiB (6262061568 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.808073 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 8.00GiB (8589934592 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.808543 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 7.20GiB (7730940928 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.809552 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 6.48GiB (6957846528 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.809763 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 5.83GiB (6262061568 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.810909 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 8.00GiB (8589934592 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.811062 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 7.20GiB (7730940928 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.811513 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 6.48GiB (6957846528 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+E0703 02:50:13.811746 1320609 cuda_executor.cc:1182] [0] Failed to allocate device memory of 5.83GiB (6262061568 bytes): RESOURCE_EXHAUSTED: : CUDA_ERROR_OUT_OF_MEMORY: out of memory
+W0703 02:50:13.811760 1320609 bfc_allocator.cc:514] Allocator (GPU_0_bfc) ran out of memory trying to allocate 5.80GiB (rounded to 6228100096)requested by op 
+If the cause is memory fragmentation maybe the environment variable 'TF_GPU_ALLOCATOR=cuda_malloc_async' will improve the situation. 
+Current allocation summary follows.
+Current allocation summary follows.
+W0703 02:50:13.811982 1320609 bfc_allocator.cc:525] *__________________________________________________________________________________________________*
+Traceback (most recent call last):
+  File "/mnt/home/tersenov/software/tilt-audit/scripts/run_t2.py", line 96, in <module>
+    main()
+  File "/mnt/home/tersenov/software/tilt-audit/scripts/run_t2.py", line 74, in main
+    res = samplers_learned.run_learned(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/tersenov/software/tilt-audit/tilt_audit/samplers_learned.py", line 115, in run_learned
+    clip_frac_step = float(jnp.mean(norms[:, 0] > cap))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax/_src/array.py", line 300, in __float__
+    return self._value.__float__()
+           ^^^^^^^^^^^
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax/_src/profiler.py", line 420, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax/_src/array.py", line 623, in _value
+    npy_value, did_copy = self._single_device_array_to_np_array_did_copy()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jax.errors.JaxRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 5.80GiB. [executable_name='jit__mean'] [tf-allocator-allocation-error='']
