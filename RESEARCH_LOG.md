@@ -243,3 +243,41 @@
   any new framing. The negative results are the motivation section, not a failure to
   report: "runtime certificates for guided diffusion are harder than they look; here is
   what survives, measured against an exact oracle."
+
+### P-20260704g · relative certificate validation (analysis of existing rows; predictions made pre-analysis, owner go-ahead in-session) · OPEN
+- (a, 85%) sampled ΔE[log w] between samplers (same reference) recovers exact Δpath-KL
+  within 2 s.e. across the exact-score grid; (b, 70%) path-KL ordering = endpoint-KL
+  ordering in ≥90% of comparable pairs; (c, 60%) on learned nets, relative-certificate
+  ranking (dps vs unguided, same net) matches empirical endpoint-W2 ranking at all
+  shifts/nets. Resolution: scripts/cert_relative_digest.py on cert_killtest.jsonl +
+  cert_learned.jsonl. No new compute.
+
+### P-20260704g SCORED 2026-07-04 — (a) HIT, (b) HIT, (c) MISS ⇒ the deployable-instrument claim dies at endpoint-relevance
+- (a) 40/40 pairs within 2 s.e. (median 0.69): ΔE[log w] is an exact, degeneracy-immune
+  estimator of Δpath-KL — the estimator was never the problem.
+- (b) 100% path/endpoint order agreement on the EXACT grid.
+- (c) MISS 11/12: on every learned net the ranking flips — guided-DPS travels ~2e6 nats
+  farther (true, exactly measured) while ENDING closer to the truth. Path divergence is
+  not endpoint-relevant on real nets. The analytic-pathway control agrees 4/4, isolating
+  the mechanism: learned-net path violence, the same quantity that killed Stage 2.
+
+### E-20260704c · certificate line: full-arc close-out (three disposable rounds, one day)
+- **Result of the arc:** every deployable variant of the runtime certificate is now dead
+  by its own pre-registered test, with exact diagnoses: absolute certificates (loose
+  ~100x for bad samplers; Ẑ side degenerate at any feasible N); importance repair (path
+  >> endpoint, dead even at 16²); block-wise on real nets (per-mode ESS 3; net violence
+  dominates); relative mean-side (exact estimator, but path order ≠ endpoint order on
+  learned nets). What stands: bench-side absolute pricing (tight-when-green/loud-when-red
+  vs exact references — a method-development tool, not a deployment monitor) and the
+  per-step rate profile as an unvalidated engineering diagnostic.
+- **Updated belief:** the pain point (no runtime correctness signal for guided diffusion)
+  is real but not solvable by path-space importance machinery on trained nets — the
+  path/endpoint gap is the fundamental obstruction, measured at 8–125x and
+  order-breaking. Candidate next framings, NOT yet chosen: (1) write the negative arc as
+  the paper — "runtime certificates for guided diffusion: exact-oracle post-mortem of the
+  obvious constructions" (forecloses the paths anyone would try first; strongest material:
+  the exact bound-anatomy and the three pre-registered kill rounds); (2) endpoint-space
+  instruments instead of path-space (e.g. learned-twist consistency checks, sample-based
+  self-diagnostics calibrated on the bench — overlaps direction B); (3) return to parked
+  directions B (adversarial blind-spot minimax) / C (bias→parameter transfer) / D
+  (mixture oracle), which the arena supports today. Decision with owner.
