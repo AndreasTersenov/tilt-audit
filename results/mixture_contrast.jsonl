@@ -1,0 +1,31 @@
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 0, "stat": 0.44805397079158144, "pvalue": 0.44805397079158144, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 1, "stat": 0.2759139032614541, "pvalue": 0.2759139032614541, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 2, "stat": 0.62895216461288, "pvalue": 0.62895216461288, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 3, "stat": 0.7122247224925446, "pvalue": 0.7122247224925446, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 4, "stat": 0.14479348759482333, "pvalue": 0.14479348759482333, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 5, "stat": 0.06307296088493862, "pvalue": 0.06307296088493862, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 6, "stat": 0.20731717744385078, "pvalue": 0.20731717744385078, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 7, "stat": 0.9854794030531235, "pvalue": 0.9854794030531235, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 8, "stat": 0.81216003404883, "pvalue": 0.81216003404883, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 9, "stat": 0.8700479782492563, "pvalue": 0.8700479782492563, "detected": false, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 0, "stat": 2.2101704516322537e-27, "pvalue": 2.2101704516322537e-27, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 1, "stat": 3.8701034954421617e-31, "pvalue": 3.8701034954421617e-31, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 2, "stat": 1.9705930419348418e-26, "pvalue": 1.9705930419348418e-26, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 3, "stat": 4.601766750277688e-22, "pvalue": 4.601766750277688e-22, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 4, "stat": 6.089350359016772e-23, "pvalue": 6.089350359016772e-23, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 5, "stat": 1.7587192535066592e-21, "pvalue": 1.7587192535066592e-21, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 6, "stat": 6.600896109648763e-23, "pvalue": 6.600896109648763e-23, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 7, "stat": 2.2628338503285656e-23, "pvalue": 2.2628338503285656e-23, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 8, "stat": 8.02703659887366e-23, "pvalue": 8.02703659887366e-23, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "pqmass", "w": 0.5, "config": "mix_plus", "budget": 256, "rep": 9, "stat": 1.1125643048900108e-27, "pvalue": 1.1125643048900108e-27, "detected": true, "tag": "exploratory_ckpt1", "wall": 0.04}
+{"test": "ksd_imq_paper", "w": 0.5, "config": "mix_plus", "budget": 16384, "rep": 0, "stat": 0.21713958536090575, "tag": "exploratory_ckpt1_16k", "wall": 14.7}
+{"test": "ksd_imq_paper", "w": 0.5, "config": "mix_both", "budget": 16384, "rep": 0, "stat": 0.2171205363761583, "tag": "exploratory_ckpt1_16k", "wall": 1.1}
+{"test": "ksd_imq_paper", "w": 0.5, "config": "mix_plus", "budget": 16384, "rep": 1, "stat": 0.21718560653084368, "tag": "exploratory_ckpt1_16k", "wall": 1.1}
+{"test": "ksd_imq_paper", "w": 0.5, "config": "mix_both", "budget": 16384, "rep": 1, "stat": 0.21703928437960707, "tag": "exploratory_ckpt1_16k", "wall": 1.1}
+{"test": "ksd_imq_paper", "w": 0.5, "config": "mix_plus", "budget": 16384, "rep": 2, "stat": 0.2170769602836512, "tag": "exploratory_ckpt1_16k", "wall": 1.1}
+{"test": "ksd_imq_paper", "w": 0.5, "config": "mix_both", "budget": 16384, "rep": 2, "stat": 0.21697808173816827, "tag": "exploratory_ckpt1_16k", "wall": 1.1}
+{"test": "tarp", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 0, "stat": 0.04199218750000011, "null_q95": 0.07745768229166668, "detected": false, "tag": "exploratory_ckpt1", "wall": 5.19}
+{"test": "tarp", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 1, "stat": 0.10221354166666674, "null_q95": 0.07745768229166668, "detected": true, "tag": "exploratory_ckpt1", "wall": 4.79}
+{"test": "tarp", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 2, "stat": 0.0732421875, "null_q95": 0.07745768229166668, "detected": false, "tag": "exploratory_ckpt1", "wall": 4.58}
+{"test": "tarp", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 3, "stat": 0.087890625, "null_q95": 0.07745768229166668, "detected": true, "tag": "exploratory_ckpt1", "wall": 4.4}
+{"test": "tarp", "w": 0.5, "config": "mix_both", "budget": 256, "rep": 4, "stat": 0.0859375, "null_q95": 0.07745768229166668, "detected": true, "tag": "exploratory_ckpt1", "wall": 4.75}
