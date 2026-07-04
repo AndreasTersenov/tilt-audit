@@ -18,8 +18,11 @@ samplers on problems where the right answer is known exactly.* **Part I** walks
 through what we built, why, and what came out — assuming familiarity with Bayesian
 inference and Wiener filtering, but **not** with diffusion samplers. **Part II**
 covers the follow-up night (2026-07-03 → 04): four confirmatory arms, publicly
-pre-registered, including an audit of the community's own validation tools. Every
-figure is regenerated live from the nights' result files in `../results/`.
+pre-registered, including an audit of the community's own validation tools.
+**Part III** covers the program's honest pivot and its first new instrument: a
+runtime error meter ("steering certificate") for guided samplers, and the
+pre-registered kill test it survived. Every figure is regenerated live from the
+result files in `../results/`.
 
 **The one-sentence summary of the outcome:** the popular approximate ways of steering
 a diffusion model toward data or a reward are *measurably, substantially* biased at
@@ -1290,6 +1293,110 @@ preprocessing are the failure surface.*
 
 ---
 
+# Part III — The certificate kill test (2026-07-04, daytime)
+
+**The honest pivot.** Reading Part II's results cold, we judged them solid but thin:
+diligence inside a toy, not news for the field. A structured brainstorm asked what
+*would* matter, and converged on the real pain point: **on real data, nobody can tell
+whether their steered sampler is lying** — there is no runtime correctness signal for
+guided diffusion, anywhere. The idea: every guided sampler knows exactly what
+modification it applied to its own dynamics, so one can accumulate, along the sampler's
+own trajectories, the exact price of those modifications relative to the target it
+*claims* to sample — and get a per-run, per-observation error meter, with no ground
+truth needed. The arena's new job (and, retroactively, its best justification): it is
+the **calibration facility** where such an instrument can be tested against exact truth
+before anyone points it at the sky.
+
+Before building anything ambitious we ran the pre-registered *kill test*: does the
+meter's signal survive high dimension, or do the importance weights it is built on
+degenerate into noise? Three predictions were stamped and frozen; gates were green
+before the grid; ~630 runs later, verdicts:
+
+1. **The meter survives — HIT, stronger than predicted.** Its reading rises
+   monotonically with true damage at every dimension up to 128², and it ranks the
+   good sampler below the biased one in every single configuration. This despite its
+   raw weights being maximally degenerate (effective sample size ≈ 1 of 65,536).
+2. **Repair is dead — a predicted-against MISS we're glad to have on the books.**
+   We bet reweighting could *fix* a biased sampler's output at small dimension. It
+   can't, anywhere: the exact math shows a guided sampler's *path* deviates ~100×
+   more than its endpoint, so the weights are hopeless even when the answer is close.
+   The product is certify-and-**rank**, not certify-and-repair.
+3. **The meter tracks truth — HIT** (rank correlation 0.95 with the exact error over
+   the whole grid), degrading gracefully within a fixed dimension at scale.
+
+Two bonuses beyond the frozen questions. First, the bound has a beautiful anatomy:
+for a *good* sampler the certificate is **tight** — it prices the actual error to
+within 1–5% at every dimension — while for a bad one it is loose but loud. You can
+certify quality precisely; you can only *flag* garbage (which is what you need).
+Second, computing the certificate **mode by mode** instead of jointly turns it from
+a degenerate instrument into a nearly exact one (per-mode effective sample sizes of
+110–253 out of 256, and the summed reading reproduces the exact answer to four
+significant figures for the good sampler). In the real world "mode by mode" becomes
+"wavelet band by wavelet band" — a direct bridge to the sparsity lineage this whole
+program grew out of.
+
+Scope, measured rather than asserted: with a deliberately contaminated model the
+certificate prices only the steering step — it is blind to model error in both
+directions (the misspecification column shows it under- and over-reading exactly as
+theory says). Certifying the model itself is the other two audits' job; this
+instrument makes the division of labor explicit.
+""")
+
+code(r'''# Part III: the kill test in one row of panels, from the run's JSONL
+ct = load("cert_killtest.jsonl").drop_duplicates(
+    ["dim", "y_seed", "shift", "mode", "N", "seed", "eps"], keep="last")
+core = ct[(ct.eps == 0) & (ct.y_seed == 999)]
+fig, axes = plt.subplots(1, 3, figsize=(13.5, 3.8))
+dims = sorted(core.dim.unique())
+cmap = dict(zip(dims, plt.cm.viridis(np.linspace(.1, .85, len(dims)))))
+ax = axes[0]
+for d_ in dims:
+    sub = core[(core.dim == d_) & (core["mode"] != "unguided") & (core.N == 256)]
+    ax.loglog(sub.kl_end_exact, sub.kl_path_hat, "o", ms=3, alpha=.5,
+              color=cmap[d_], label=f"{d_}²")
+lims = [5e-1, 1e5]; ax.loglog(lims, lims, "k:", lw=.8)
+ax.set(xlabel="true error (exact, closed form)", ylabel="certificate reading",
+       title="the meter tracks truth (ρ=0.95)"); ax.legend(fontsize=7)
+ax = axes[1]
+for mode, col, lbl in (("dps", "#d62728", "biased sampler (DPS)"),
+                       ("exact_guidance", "#2ca02c", "good sampler")):
+    pts = (core[(core["mode"] == mode) & (core.N == 256) & (core["shift"] == 1.0)]
+           .groupby("d").first())
+    ax.loglog(pts.index, pts.kl_path_exact / pts.kl_end_exact, "o-", color=col,
+              label=lbl)
+ax.axhline(1, color="k", ls=":", lw=.8)
+ax.set(xlabel="dimension", ylabel="bound / true error",
+       title="tight when green, loud when red"); ax.legend(fontsize=8)
+ax = axes[2]
+mw = core[(core.dim == 64) & (core.N == 256) & core.kl_modes_sum.notna()]
+for mode, col, lbl in (("dps", "#d62728", "biased (DPS)"),
+                       ("exact_guidance", "#2ca02c", "good")):
+    g = mw[mw["mode"] == mode].groupby("shift")
+    ax.semilogy(g.kl_modes_sum.median().index, g.kl_modes_sum.median().values,
+                "o-", color=col, label=f"{lbl}: per-mode meter")
+    ax.semilogy(g.kl_end_exact.median().index, g.kl_end_exact.median().values,
+                "--", color=col, alpha=.5, lw=1)
+ax.set(xlabel="steering strength", ylabel="reading (nats)",
+       title="mode-by-mode: joint ESS≈1 becomes ESS≈250/256\n(dashed: exact truth)")
+ax.legend(fontsize=7)
+plt.tight_layout()
+print("per-mode ESS (median over modes), 64²/1σ:",
+      f"good sampler {mw[mw['mode']=='exact_guidance'].ess_modes_med.median():.0f}/256,",
+      f"DPS {mw[mw['mode']=='dps'].ess_modes_med.median():.0f}/256,",
+      "joint ESS for both: 1.0")
+''')
+
+md(r"""**Where this leaves the program.** The kill test was the cheapest experiment that
+could have ended the flagship, and it didn't — it reshaped it. Next, in order: (1) the
+same certificate computed block-wise on a *trained* score network (does the per-mode
+exactification survive real, non-diagonal correlations?); (2) the false-certification
+table on exactly-solvable multimodal targets (when the sampler misses a mode entirely,
+does the meter confess?); (3) the pip-installable wrapper demoed on a public pretrained
+model. The Gaussian arena keeps its new job throughout: the place where the instrument's
+operating characteristics are measured against truth before anyone trusts it in the wild.
+
+---
+
 ## Appendix: glossary / symbol table
 
 | Term / symbol | Meaning |
@@ -1321,6 +1428,10 @@ preprocessing are the failure surface.*
 | amortized inference | train the network to take the observation as input, so sampling IS posterior sampling — no steering step |
 | $K$ (Remy scheme) | Langevin correction steps per noise level; the compute knob (network passes = $T\cdot K$) |
 | $\varepsilon^*$ | the contamination at which DPS's bias exactly cancels in temperature (γ*=1) while geometry stays ~6× floor |
+| steering certificate | per-run residual path-weights of a guided sampler vs its intended target: runtime error meter, no ground truth needed |
+| path KL vs endpoint KL | error of the whole trajectory distribution vs error of the final samples; the certificate bounds the latter by the former (tight for good samplers, ~100× loose for bad ones) |
+| k̂ (Pareto tail index) | "are these importance weights lying" diagnostic (PSIS); >1 means unusable for reweighting |
+| per-mode (Rao-Blackwell) certificate | the certificate computed coordinate-wise: exact here, near-exact readings where the joint version degenerates; "wavelet-band-wise" in the wild |
 
 *Repo: **[github.com/AndreasTersenov/tilt-audit](https://github.com/AndreasTersenov/tilt-audit)**
 (public since 2026-07-03, before the arms-night results existed). Every claim above

@@ -116,3 +116,84 @@
 - **Resolution criterion:** K-sweep W2/γ* + ε=±0.3 pair at fixed K.
 - **Outcome:** (pending)
 - **Lesson:** (pending)
+
+## Brainstorm exit — 2026-07-04 · post-arms-night redirect ("what would actually matter")
+
+- **Context:** owner's verdict on the arms night: internally solid, externally thin —
+  the arena is too easy for the questions that matter; confirmatory diligence, not field
+  news. Session ran choose→expand→stress on "what is the interesting program".
+- **Decision:** PURSUE direction A — **runtime steering certificates for guided diffusion**
+  (per-run, per-observation, reference-free error meter: residual path-space weights of the
+  sampler against its own intended target; Ẑ + ESS + Jensen-gap KL bound + k-hat; optional
+  reweight/repair). Audience: diffusion-methods ML community first (owner's call), evals
+  world second. The Gaussian arena is reframed as the CALIBRATION BENCH for the instrument
+  (measuring tightness, false-certification rate, informativeness region) — the toy is the
+  NIST lab, not the product. Directions B (adversarial least-detectable failures), C
+  (sampler-bias→parameter-bias transfer), D (Gaussian-mixture multimodal oracle) parked:
+  B+C as one later field-facing paper; D folds in as the missed-mode case generator for
+  the certificate's false-certification table.
+- **Positioning risks named:** adjacency to twisted-SMC / importance-corrected guidance
+  (Wu+ TDS) — claim is the VALIDATED INSTRUMENT with measured operating characteristics,
+  not "reweighting exists"; "IS diagnostics lie" (missed modes, PSIS/k-hat literature) —
+  import, don't reinvent, and measure the lying rate against the oracle; scope honestly as
+  certifying the steering link only (model link = Doeser–Jasche; support link = Diao–Seljak).
+- **Disconfirming evidence (Darwin lines):** (1) owner judges the arms-night results
+  uninteresting to the field — logged as evidence about problem choice, not execution;
+  (2) amortized arm's P-d MISS is partially an artifact of the substrate's easiness
+  (linear posterior map) — weakens any "amortization is fine" claim beyond the toy;
+  (3) known failure mode of the proposed instrument: high-ESS lies under missed modes.
+- **Predictions (STAMPED BY OWNER 2026-07-04, adopted as proposed; FROZEN):**
+  - P-20260704a · conf 60% · SCORED 2026-07-04 (owner authorized in-chat): **HIT,
+    stronger than predicted** — residual ESS ≡ 1.0 (not merely <10) at every dim and
+    N up to 65536, yet KLhat is strictly monotone in true damage at EVERY dim
+    including 128², and exact_guidance certifies below dps at all shifts/dims. The
+    meter is directional-and-honest all the way to d=16384.
+  - P-20260704b · conf 65% · SCORED 2026-07-04: **MISS (instructive)** — repair by
+    residual reweighting HURTS even at 16² (W2 1.36→3.57): exact chain-law shows dps
+    path-KL = 2701 nats at 16²/1σ vs endpoint 28.5 — the path deviates ~95× more
+    than the endpoint, so no feasible N buys a usable population. Lesson: the
+    certify-or-repair framing dies; certify-and-rank survives.
+  - P-20260704c · conf 75% · SCORED 2026-07-04: **HIT by the frozen criterion**
+    (pooled Spearman 0.950 ≥ 0.9, n=256 rows) with the honest caveat that
+    within-dim rho degrades with scale (0.95/0.87/0.81/0.74 at 16/32/64/128²).
+- **Kill criterion:** directional signal lost at d≥1024 (certificate non-monotone in true
+  damage) AND not recovered by per-mode Rao-Blackwellization ⇒ drop the flagship framing;
+  fall back to "certificates and their limits" short paper; revisit B/C.
+- **Cheapest next experiment (~half a day, this repo):** accumulate closed-form residual
+  log-weights along DPS/sap/remy trajectories (both kernels known Gaussians per mode);
+  emit per-run Ẑ vs analytic Z, ESS, k-hat, Jensen-gap KL estimate; compare against the
+  true KL/W2 already in the grid; repair-by-resampling column. Gate: existing suite stays
+  green; certificate validated first on twisted (must read ~exact) and terminal_is (its
+  weights ARE the K=∞ case).
+- **Idea ledger:** BORN: steering certificates (A); adversarial blind-spot minimax (B,
+  parked); bias→parameter transfer (C, parked); mixture oracle (D, parked/absorbed into A's
+  false-certification table). KILLED: none. The arms-night arms are COMPLETE, not dead —
+  they become the bench's documentation.
+
+### E-20260704a · certificate kill test (weight degeneracy at scale)
+- **Hypothesis:** P-20260704a–c (stamped pre-run; plan docs/PLAN_CERT_KILLTEST.md, incl.
+  §7 amendments logged before the grid ran).
+- **Setup:** tilt_audit/certificate.py (exact chain-law + sampled instruments), gates
+  G-C1..3 green pre-grid; 626 rows on GPUs 1–2 → results/cert_killtest*.jsonl; digest
+  scripts/cert_digest.py; figure figures/cert_killtest.png.
+- **Expectation:** encoded in P-20260704a–c.
+- **Result:** kill criterion NOT triggered — the flagship survives, reshaped. Verdicts
+  above (a HIT+, b MISS, c HIT-with-caveat). Beyond the frozen questions, four findings:
+  (1) exact bound anatomy: the path-KL certificate is TIGHT for good samplers (ratio
+  1.01–1.05 at every d incl. 128²) and loud-but-loose for bad ones (13–95×, because the
+  guided path deviates far more than its endpoint) — "tight when green, loud when red";
+  (2) per-mode Rao-Blackwellization is not just a rescue but near-exactification: per-mode
+  ESS 110–253/256 where joint ESS ≡ 1, and the per-mode summed certificate reproduces the
+  exact path-KL to 4 significant figures for exact_guidance; ordered and O(true) for dps;
+  (3) attribution scope measured both ways: with a contaminated score the certificate
+  prices steering only (blind to model error in BOTH directions: under-reads at ε=+0.3,
+  over-reads at −0.3) — the composability demo the skeptic asks for; (4) Ẑ recovery and
+  importance repair are dead at scale for any feasible N (ESS ≡ 1.0 at N=65536), incl.
+  the AIS variant for the Remy scheme (log Ẑ gap −10⁵ nats).
+- **Updated belief:** the runtime-certificate flagship is alive with a sharper product
+  shape: certify-and-rank (detection, comparison, exact pricing of good samplers), with
+  per-mode/blockwise decomposition as the tightening arc (in the wild: wavelet/scale
+  blocks — the Starck-lineage connection), explicitly NOT repair. Next experiments in
+  order: (i) block-wise certificates on a LEARNED score at 64² (does near-exactification
+  survive off-diagonal correlations?), (ii) the false-certification table on Gaussian
+  mixtures (missed modes), (iii) the wrapper demo on a public pretrained net.
