@@ -209,6 +209,125 @@ def endpoint_errors(law, Pz_true, az, y, b):
                                                                  Sig)))}
 
 
+def run_learned_cert(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
+                     clip=True):
+    """Certificate-instrumented learned-pathway sampler (Stage 2).
+
+    Mirrors samplers_learned.run_learned's 'dps' and ancestral-unguided
+    branches (kept in sync by eye; gates G-L1/2 break loudly on drift). The
+    guided and reference kernels share the per-step variance kv and differ
+    only by the guidance displacement (clip included), so the per-step
+    per-mode log-RN is  -(disp^2 + 2 disp sqrt(kv) eps) / (2 kv)  — free to
+    accumulate; no extra net evaluations. Certificate target: the LEARNED
+    prior chain tilted by e^{r/beta} (steering error given the net).
+    """
+    from . import samplers_learned as sl
+    d = Pz.shape[0]
+    ts_full = diffusion.time_grid(T, tf)
+    k_init, k_steps = jax.random.split(key)
+    z = jnp.sqrt(diffusion.marginal_var(tf, Pz)) * jax.random.normal(
+        k_init, (N, d))
+    acc = jnp.zeros((N, d))
+    clip_events = []
+
+    if name == "dps":
+        def dps_loss(z_flat, t):
+            z0h = x0hat_fn(z_flat, t)
+            return jnp.sum((az * z0h - y) ** 2) / (2.0 * b)
+        dps_grad = jax.jit(jax.grad(dps_loss))
+
+    step_keys = jax.random.split(k_steps, T)
+    ts_j = jnp.asarray(ts_full)
+    for i in range(T):
+        t, t_next = ts_j[i], ts_j[i + 1]
+        dt = t - t_next
+        k_noise, _ = jax.random.split(step_keys[i])
+        A, B, kv = sl._ancestral_coefs(t, t_next)
+        z0h = x0hat_fn(z, t)
+        m = A * z + B * z0h
+        noise = jax.random.normal(k_noise, z.shape)
+
+        if name == "dps":
+            tm = 0.5 * (t + t_next)
+            c0m = diffusion.x0hat_coef(tm, Pz)
+            lam_g = -2.0 * az**2 * c0m**2 / b
+            g1 = (jnp.exp(lam_g * dt) - 1.0) / jnp.where(
+                jnp.abs(lam_g) > 1e-12, lam_g, 1.0)
+            g1 = jnp.where(jnp.abs(lam_g) > 1e-12, g1, dt)
+            disp = g1 * 2.0 * (-dps_grad(z, t))
+            if clip:
+                cap = 3.0 * jnp.sqrt(jnp.maximum(kv, 1e-6) * d)
+                norms = jnp.linalg.norm(disp, axis=-1, keepdims=True)
+                disp = disp * jnp.minimum(1.0, cap / jnp.maximum(norms, 1e-30))
+                clip_events.append(float(jnp.mean(norms[:, 0] > cap)))
+            if float(ts_full[i + 1]) > 0.0:  # stochastic step: RN well-defined
+                acc = acc - (disp**2
+                             + 2.0 * disp * jnp.sqrt(kv) * noise) / (2.0 * kv)
+            # final step (kv=0) is deterministic: guided and reference kernels
+            # are mutually singular; its O(dt) displacement is reported, not
+            # certified (see docstring)
+            z = m + disp + jnp.sqrt(kv) * noise
+        else:  # unguided ancestral reference: disp = 0, RN increment = 0
+            z = m + jnp.sqrt(kv) * noise
+
+    logw_modes = acc + (-(az * z - y) ** 2 / (2.0 * b))
+    logw = jnp.sum(logw_modes, axis=-1)
+    out = {"z": z, "logw_modes": logw_modes, "logw": logw,
+           "step_rn": jnp.sum(acc, axis=-1),
+           "log_z_est": jax.nn.logsumexp(logw) - jnp.log(N)}
+    if clip_events:
+        out["clip_frac"] = float(sum(clip_events) / len(clip_events))
+    return out
+
+
+def chain_law_ancestral(mode, Pz, az, y, b, T, tf):
+    """EXACT law + certificate expectations for the ANALYTIC-x0hat ancestral
+    pathway (per mode linear; the pathway-control ground truth for Stage 2).
+    Clip assumed inactive (verified empirically via clip_frac ~ 0)."""
+    Pz_ = np.asarray(Pz, dtype=np.float64)
+    az_ = np.asarray(az, dtype=np.float64)
+    y_ = np.asarray(y, dtype=np.float64)
+    ts_full = diffusion.time_grid(T, tf)
+    m = np.zeros_like(Pz_)
+    v = np.asarray(diffusion.marginal_var(tf, Pz_), dtype=np.float64)
+    e_logw = 0.0
+    for i in range(T):
+        t, t_next = ts_full[i], ts_full[i + 1]
+        dt = t - t_next
+        s2t = 1.0 - np.exp(-2.0 * t)
+        s2n = 1.0 - np.exp(-2.0 * t_next)
+        e = np.exp(-dt)
+        A = e * s2n / s2t
+        B = np.exp(-t_next) * (1.0 - e**2) / s2t
+        kv = s2n * (1.0 - e**2) / s2t
+        c0 = np.asarray(diffusion.x0hat_coef(t, Pz_))
+        lin = A + B * c0                        # unguided mean coefficient
+        if mode == "dps":
+            tm = 0.5 * (t + t_next)
+            c0m = np.asarray(diffusion.x0hat_coef(tm, Pz_))
+            lam_g = -2.0 * az_**2 * c0m**2 / b
+            g1 = np.where(np.abs(lam_g) > 1e-12,
+                          (np.exp(lam_g * dt) - 1.0) / np.where(
+                              np.abs(lam_g) > 1e-12, lam_g, 1.0), dt)
+            # disp = -2 g1 a c0 (a c0 z - y)/b  (linear in z)
+            c1 = -2.0 * g1 * az_**2 * c0**2 / b
+            c2 = 2.0 * g1 * az_ * c0 * y_ / b
+            mu_d = c1 * m + c2
+            var_d = c1**2 * v
+            if t_next > 0.0:  # the deterministic final step is uncertified
+                e_logw += float(-np.sum((mu_d**2 + var_d) / (2.0 * kv)))
+            m = lin * m + mu_d
+            v = (lin + c1) ** 2 * v + kv
+        else:
+            m = lin * m
+            v = lin**2 * v + kv
+    e_logw += float(-np.sum((az_ * m - y_) ** 2 + az_**2 * v) / (2.0 * b))
+    log_z = float(tilt.log_z_analytic(jnp.asarray(Pz_), jnp.asarray(az_),
+                                      jnp.asarray(y_), b))
+    return {"m_end": m, "v_end": v, "e_logw": e_logw,
+            "log_z_analytic": log_z, "kl_path_exact": log_z - e_logw}
+
+
 def remy_ais(key, Pz, az, y, b, N, T, tf, K=10, eps0=0.1):
     """EXPLORATORY: annealed-importance-sampling certificate for the Remy
     scheme. Mirrors samplers.remy's dynamics (kept in sync by eye; the gated

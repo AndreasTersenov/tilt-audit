@@ -197,3 +197,49 @@
   order: (i) block-wise certificates on a LEARNED score at 64² (does near-exactification
   survive off-diagonal correlations?), (ii) the false-certification table on Gaussian
   mixtures (missed modes), (iii) the wrapper demo on a public pretrained net.
+
+### P-20260704d–f · Stage 2: learned-score block-wise certificates · STAMPED 2026-07-04 (adopted as proposed) · OPEN
+- Full wording in docs/PLAN_CERT_LEARNED.md §4 (frozen there): (d, 60%) per-mode ESS
+  ≥100/256 on the clean net at 1σ + low-|k| band Spearman ≥0.8 vs band truth, widest band
+  degenerates; (e, 70%) analytic-pathway per-mode-summed reading within 20% of exact
+  chain-law path KL in the healthy regime; (f, 60%) clean-net dps readings within 2× of
+  analytic-pathway dps at every shift. Kill/reshape: median per-mode ESS <10 on the
+  learned net ⇒ block-wise arc dies for real nets.
+- Gate-time context (pre-data, logged): G-L1/2 green; final-step determinism, clip
+  quantification, and the per-mode logN-saturation ceiling documented before the grid.
+
+### P-20260704d–f SCORED 2026-07-04 (owner engaged in-session) — all three MISS; reshape criterion FIRED
+- **P-d MISS:** clean-net median per-mode ESS = 3/256 at 1σ (needed ≥100); band0 ordering
+  Spearman 0.275 (needed ≥0.8); band2 degenerate as predicted (the one sub-clause that hit).
+- **P-e MISS:** analytic-pathway per-mode-sum/exact = 0.043–0.161 across the grid — the
+  per-mode log N saturation ceiling binds everywhere at T=256; Part III's near-
+  exactification was specific to small per-mode KLs, not to diagonality.
+- **P-f MISS by 8–125×:** the learned net's guidance (VJP through net error; clip firing
+  0.37–0.72 at the mis nets, present at clean too) dominates the reading. The certificate
+  honestly reports that learned-DPS is far from ITS OWN intended target path-wise — but
+  the meter's value on real nets is net-error-dominated: the net changes the meaning.
+
+### E-20260704b · Stage 2: block-wise certificates on learned scores
+- **Hypothesis/Setup/Expectation:** docs/PLAN_CERT_LEARNED.md (stamped); gates G-L1/2
+  green pre-grid (gate work itself yielded: deterministic-final-step caveat with material
+  displacement at strong guidance; clip = the exact 0.2% law gap; per-mode ceiling
+  ≈ log N nats/mode). 160 rows → results/cert_learned.jsonl.
+- **Result:** the naive per-trajectory certificate — joint AND block-wise — does not
+  transfer to trained scores; the pre-registered reshape criterion fired (per-mode ESS 3).
+  Diagnosis is clean and mechanistic, not mysterious: everything on the Ẑ/exponentiated
+  side of the instrument degenerates; the MEAN side survives untouched — sampled
+  E[log w] matched the exact chain law to <1 s.e. on every configuration including
+  learned pathways (G-L2), and it is unbiased regardless of degeneracy.
+- **Updated belief:** the deployable instrument is the mean-side statistic:
+  (1) RELATIVE certificates — differences of E[log w] between steering schemes on the
+  SAME net/reference cancel the unknown log Z: unbiased, low-variance sampler ranking at
+  any d on real nets (the practitioner's actual question: "which guidance scheme is less
+  wrong on MY model"); NOT valid across different nets (references differ). (2) The
+  per-step rate profile (the E[log w] integrand) as a stability/violence monitor — what
+  clip_frac crudely proxied. Absolute KL certificates remain bench-only methodology.
+  Next disposable version: validate the relative instrument's operating characteristics
+  on the bench (does ΔE[log w] rank schemes consistently with true ΔKL across the grid?
+  — computable from EXISTING cert_killtest + cert_learned rows, zero new GPU) before
+  any new framing. The negative results are the motivation section, not a failure to
+  report: "runtime certificates for guided diffusion are harder than they look; here is
+  what survives, measured against an exact oracle."

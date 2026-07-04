@@ -1386,14 +1386,38 @@ print("per-mode ESS (median over modes), 64²/1σ:",
       "joint ESS for both: 1.0")
 ''')
 
-md(r"""**Where this leaves the program.** The kill test was the cheapest experiment that
-could have ended the flagship, and it didn't — it reshaped it. Next, in order: (1) the
-same certificate computed block-wise on a *trained* score network (does the per-mode
-exactification survive real, non-diagonal correlations?); (2) the false-certification
-table on exactly-solvable multimodal targets (when the sampler misses a mode entirely,
-does the meter confess?); (3) the pip-installable wrapper demoed on a public pretrained
-model. The Gaussian arena keeps its new job throughout: the place where the instrument's
-operating characteristics are measured against truth before anyone trusts it in the wild.
+md(r"""**Stage 2, same day: the trained-network test — three predictions, three misses,
+and the honest reshape.** We immediately ran the next disposable version: the same
+certificate, block-by-block, on *trained* score networks (the pilot night's checkpoints).
+Pre-registered expectations: per-mode health would survive (60%), the exact-law agreement
+would transfer (70%), and the network would change the meter's value but not its meaning
+(60%). **All three missed**, and the pre-registered reshape criterion fired: on a real
+network the per-mode effective sample size collapses to ~3 of 256, and the reading is
+dominated by the *network's* score error — guidance pulled through a learned network's
+gradients is violent (the sampler's safety clip fires on up to 70% of steps), and the
+certificate faithfully reports that violence, drowning the steering signal it was
+designed to isolate.
+
+The diagnosis is mechanistic, and it points somewhere useful. Everything that failed
+lives on the *exponentiated* side of the instrument (the importance weights and their
+normalizing constant). The *mean* side — the average log-weight — remained exact to
+within one standard error on every configuration, including the trained networks: it is
+unbiased no matter how degenerate the weights get. That statistic can't give an absolute
+error without an unknowable constant — but **differences between steering schemes on the
+same network cancel that constant exactly**. Which is precisely the question a
+practitioner actually asks: *"on my model, which guidance scheme is less wrong?"* A
+relative, runtime, any-dimension sampler ranking — that instrument survived everything
+this arena threw at it.
+
+**Where this leaves the program.** Absolute runtime certificates: bench-side methodology
+(tight for good samplers, loud for bad ones, exactly priced — Part III above). Deployable
+instrument: the relative certificate + the per-step violence profile, next to be
+validated for operating characteristics on the bench — from data already on disk, before
+any new framing hardens. Then the missed-mode table on exactly-solvable multimodal
+targets, then the wrapper. Two days of this arena have now killed two beautiful ideas
+cheaply (importance repair; naive per-mode certificates on real nets) and each time
+handed back something sharper — which is the whole argument for keeping an exact oracle
+in the loop.
 
 ---
 
