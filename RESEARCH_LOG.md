@@ -307,3 +307,32 @@
 - **The certificate kill is confirmed against all three identified escape routes.**
   Negative-arc write-up is now paper-grade: verified mechanism, no rescue found at
   (implementation | guidance scale | horizon | comparison class).
+
+### NOTE 2026-07-04 · literature sweep (agent-verified, ~25 searches): novelty + positioning of the certificate arc
+- **Not scooped:** no published use of path-space residual IW as a standalone
+  DIAGNOSTIC for guided diffusion (only as correctors: TDS 2306.17775, RNE 2506.05668);
+  no published path-KL≈100×-endpoint-KL quantification; no published anatomy of weight
+  degeneracy on trained nets (folklore acknowledgments only: 2506.05231, 2601.21951).
+  The negative-result paper is alive.
+- **The motivational niche is partially occupied — and the owner's skepticism about the
+  Stein direction was RIGHT:** score-KSD (2602.04189, Feb 2026) already ships a
+  ground-truth-free posterior-fidelity diagnostic for diffusion inverse solvers via
+  kernel Stein discrepancy on the endpoint score field, incl. the accuracy≠fidelity
+  finding. ⇒ Idea ledger: "build endpoint/Stein instrument" KILLED (superseded — done by
+  others); REBORN as "bench-audit score-KSD": run THE existing working certificate on our
+  archives where truth is exact — power curves, false-certification rate, blind spots
+  (mixture oracle mode-blindness is the natural adversarial case). This is the A2
+  certify-the-certifiers machinery pointed at the field's newest tool, and the natural
+  experimental companion to the negative-result paper.
+- **Paper framing (referee-proofing):** NOT "first ground-truth-free certificate"
+  (rejection via 2602.04189). Instead: "the mechanism-obvious path-space certificate —
+  the first thing an SBI person reaches for — fails on trained nets; anatomy (net-gradient
+  noise; path-KL ~100× looser than endpoint-KL, the single most citable number); why
+  endpoint-space instruments are the route that survives." Companions, not competitors:
+  gold-standard benchmarks 2509.12821 / 2503.03007 (they show samplers are wrong; we show
+  the cheap self-certificate can't detect it).
+- **Validation-practices map confirmed** (8-paper sample, table in agent report): ML
+  papers point-metrics only (DPS/DDRM/ΠGDM: PSNR/SSIM/LPIPS/FID); science papers
+  distributional-but-offline on sims (Remy posterior-predictive on sims; newer astro:
+  TARP/SBC on sims); distributional validation on REAL observations: none found —
+  state as absence-of-evidence with the structural reason.
