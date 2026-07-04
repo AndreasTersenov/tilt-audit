@@ -1,0 +1,608 @@
+<title>Can a sampler tell you when it's lying?</title>
+<style>
+  :root {
+    --paper: #f9f9f6; --panel: #ffffff; --ink: #21251f;
+    --muted: #687069; --line: #d9dcd4; --line-soft: #e8eae3;
+    --accent: #2a78d6; --good: #1baf7a; --good-ink: #0d7a52;
+    --bad: #e34948; --bad-ink: #c03230; --net: #4a3aa7; --net-ink: #4a3aa7;
+    --ref: #9aa19b; --shadow: 0 1px 3px rgba(30, 36, 28, 0.08);
+  }
+  @media (prefers-color-scheme: dark) { :root {
+    --paper: #191a17; --panel: #1f211d; --ink: #edeee6; --muted: #a4aaa0;
+    --line: #383b34; --line-soft: #2b2e28; --accent: #3987e5;
+    --good: #199e70; --good-ink: #4ecf9e; --bad: #e66767; --bad-ink: #ef8f8f;
+    --net: #9085e9; --net-ink: #a89ef0; --ref: #6d746d;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+  } }
+  :root[data-theme="light"] {
+    --paper: #f9f9f6; --panel: #ffffff; --ink: #21251f; --muted: #687069;
+    --line: #d9dcd4; --line-soft: #e8eae3; --accent: #2a78d6;
+    --good: #1baf7a; --good-ink: #0d7a52; --bad: #e34948; --bad-ink: #c03230;
+    --net: #4a3aa7; --net-ink: #4a3aa7; --ref: #9aa19b;
+    --shadow: 0 1px 3px rgba(30, 36, 28, 0.08);
+  }
+  :root[data-theme="dark"] {
+    --paper: #191a17; --panel: #1f211d; --ink: #edeee6; --muted: #a4aaa0;
+    --line: #383b34; --line-soft: #2b2e28; --accent: #3987e5;
+    --good: #199e70; --good-ink: #4ecf9e; --bad: #e66767; --bad-ink: #ef8f8f;
+    --net: #9085e9; --net-ink: #a89ef0; --ref: #6d746d;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink); margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.05rem; line-height: 1.68;
+  }
+  .col { max-width: 44rem; margin: 0 auto; padding: 0 1.2rem; }
+  .wide { max-width: 58rem; margin: 2.2rem auto; padding: 0 1.2rem; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin: 3.2rem 0 0.4rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 5.5vw, 3.1rem); line-height: 1.12; font-weight: 600;
+    text-wrap: balance; margin: 0.5rem 0 1rem; letter-spacing: -0.01em;
+  }
+  h2 { font-size: 1.45rem; margin: 0.2rem 0 0.8rem; text-wrap: balance; }
+  p { margin: 0 0 1.05rem; }
+  .lede { font-size: 1.18rem; color: var(--muted); line-height: 1.55; }
+  em { font-style: italic; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .panel-cap {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 0.5rem 0.9rem; border-bottom: 1px solid var(--line-soft);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .panel-body { padding: 0.9rem; }
+  .controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  button.seg {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.78rem; letter-spacing: 0.04em; padding: 0.38rem 0.8rem;
+    border-radius: 999px; border: 1px solid var(--line); background: transparent;
+    color: var(--ink); cursor: pointer;
+  }
+  button.seg:hover { border-color: var(--muted); }
+  button.seg:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button.seg[aria-pressed="true"].m-good { background: var(--good); border-color: var(--good); color: #fff; }
+  button.seg[aria-pressed="true"].m-bad { background: var(--bad); border-color: var(--bad); color: #fff; }
+  button.seg[aria-pressed="true"].m-net { background: var(--net); border-color: var(--net); color: #fff; }
+  button.seg.replay { color: var(--accent); border-color: var(--accent); }
+  .grid2 { display: grid; grid-template-columns: 1.55fr 1fr; gap: 0.9rem; }
+  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+  canvas { width: 100%; height: auto; display: block; }
+  .readout {
+    display: flex; gap: 1.4rem; flex-wrap: wrap; margin-top: 0.6rem;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.8rem; font-variant-numeric: tabular-nums; color: var(--muted);
+  }
+  .readout b { color: var(--ink); font-weight: 600; }
+  .lamp { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .lamp i {
+    width: 0.62rem; height: 0.62rem; border-radius: 50%; display: inline-block;
+    background: var(--muted);
+  }
+  .note {
+    font-size: 0.88rem; color: var(--muted); border-left: 2px solid var(--line);
+    padding-left: 0.9rem; margin: 1.2rem 0;
+  }
+  figure { margin: 0; }
+  figcaption { font-size: 0.85rem; color: var(--muted); padding: 0.7rem 0.2rem 0; }
+  .klist { list-style: none; padding: 0; margin: 1rem 0; }
+  .klist li { padding: 0.35rem 0; border-bottom: 1px solid var(--line-soft); display: flex; gap: 0.7rem; align-items: baseline; }
+  .klist .mono { font-size: 0.75rem; }
+  .tag-pass { color: var(--good-ink); } .tag-fail { color: var(--bad-ink); }
+  footer { margin: 4rem 0 3rem; color: var(--muted); font-size: 0.85rem; }
+  a { color: var(--accent); }
+  svg text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: var(--muted); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 3rem 0; }
+</style>
+
+<div class="col">
+  <p class="eyebrow">tilt-audit · a one-day research story · 2026-07-04</p>
+  <h1>Can a sampler tell you when it&rsquo;s lying?</h1>
+  <p class="lede">We built a runtime warning light for steered generative models,
+  tested it against exact mathematical truth, and killed it — then attacked our own
+  verdict until we were sure. This page explains what the meter was, how it could
+  read anything at all <em>without</em> knowing the right answer, and precisely why
+  it fails where it was needed most.</p>
+</div>
+
+<div class="col">
+  <p class="eyebrow">scene 1 · the problem</p>
+  <h2>Steering without a speedometer</h2>
+  <p>Modern science increasingly uses generative diffusion models as
+  <em>priors</em>: train one on simulated maps of the universe (or molecules, or
+  MRI images) and it learns what plausible objects look like. To answer a real
+  question you then <em>steer</em> the generator — &ldquo;give me plausible maps,
+  but only ones consistent with my telescope&rsquo;s data.&rdquo; Nearly every
+  steering recipe in use is a mathematical shortcut, and on real data nobody can
+  check the result, because on real data <em>nobody knows the true answer</em>.
+  There is no warning light. That gap is what we set out to fill.</p>
+
+  <p class="eyebrow">scene 2 · the arena</p>
+  <h2>A universe where the answer is known</h2>
+  <p>Our lab is a deliberately simplified universe — a Gaussian random field —
+  where sixty-year-old theory gives the <em>exactly correct</em> answer to every
+  steering problem, in closed form. Methods can be graded there with no wiggle
+  room. Two nights of experiments in this arena had already shown that popular
+  steering shortcuts are badly biased, and had even caught real bugs in the
+  community&rsquo;s own validation tools. The next step was the warning light
+  itself: an instrument that could ride along with <em>any</em> steered sampler,
+  on <em>real</em> data, and report how far it is from the answer it claims to
+  produce.</p>
+
+  <p class="eyebrow">scene 3 · the instrument</p>
+  <h2>Self-accounting: how a meter can read without truth</h2>
+  <p>The trick is that the meter never compares against the true answer. It audits
+  the sampler&rsquo;s <em>own books</em>. Every steering method is a modified
+  version of the plain, unsteered generator, and at each of its ~hundreds of small
+  steps the method knows exactly what modification it applied. So, along each
+  generated trajectory, we accumulate two ledger entries:</p>
+  <p><b>Journey cost</b> — how improbable each step it took would have been under
+  the <em>unmodified</em> generator&rsquo;s rules; and <b>destination fit</b> — how
+  well the final sample actually agrees with the data. Exact mathematics
+  (importance weighting on path space) says: combine the two into one number per
+  sample, and if the sampler truly produces what it claims, all samples end up
+  with <em>equal</em> weights. A distorted sampler produces wildly <em>unequal</em>
+  weights. Flat books&nbsp;=&nbsp;honest. Spiky books&nbsp;=&nbsp;trouble.</p>
+  <p>The panel below runs the real construction (the same equations as the
+  experiment, in one dimension so you can watch it). Try both samplers.</p>
+</div>
+
+<div class="wide">
+  <div class="panel">
+    <div class="panel-cap"><span>instrument 01 · path ledger, exact score</span><span id="cap1" class="mono"></span></div>
+    <div class="panel-body">
+      <div class="controls" style="margin-bottom:0.7rem">
+        <button class="seg m-good" id="p1-good" aria-pressed="true">honest sampler</button>
+        <button class="seg m-bad" id="p1-bad" aria-pressed="false">biased shortcut (DPS)</button>
+        <button class="seg replay" id="p1-replay">replay ▸</button>
+      </div>
+      <div class="grid2">
+        <figure>
+          <canvas id="c1-paths" width="860" height="430" aria-label="Animated sampling trajectories from noise to answer"></canvas>
+          <figcaption>Trajectories run from pure noise (left) toward an answer
+          (right). Grey: the unmodified generator. Colored: the steered sampler,
+          pulled toward the data. Dotted band: the exactly-true posterior.</figcaption>
+        </figure>
+        <figure>
+          <canvas id="c1-side" width="520" height="430" aria-label="Endpoint distribution and per-sample ledger weights"></canvas>
+          <figcaption>Top: where the samples <em>land</em> vs the true answer
+          (curve). Bottom: the ledger — one weight bar per sample.</figcaption>
+        </figure>
+      </div>
+      <div class="readout">
+        <span class="lamp"><i id="p1-lamp"></i><b id="p1-status">—</b></span>
+        <span>effective samples <b id="p1-ess">—</b> / 28</span>
+        <span>meter reading (path error) <b id="p1-kl">—</b> nats</span>
+        <span>true endpoint error <b id="p1-true">—</b> nats <span style="letter-spacing:0">(arena-only; the meter never sees this)</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <p>With the <b style="color:var(--good-ink)">honest sampler</b>, the weights sit
+  level and the meter&rsquo;s reading agrees with the true error it cannot see —
+  on the full-scale experiments it priced a good sampler&rsquo;s error to within
+  5% at every size we tested. With the
+  <b style="color:var(--bad-ink)">biased shortcut</b>, the books go spiky: a few
+  trajectories carry all the weight, the effective sample count collapses, and the
+  reading jumps by orders of magnitude. <em>Tight when green, loud when red</em> —
+  on perfect ingredients, a real instrument.</p>
+
+  <p class="eyebrow">scene 4 · the fine print</p>
+  <h2>Loud — but honest about the wrong thing</h2>
+  <p>One asymmetry showed up immediately in the exact bookkeeping: for a biased
+  sampler the meter <em>over</em>-states the damage — by a factor of nearly 100.
+  The reason matters later. The meter measures the whole <em>journey</em>; the
+  scientist cares about the <em>destination</em>. A biased sampler tends to
+  over-pull early and partially relax back, so its path strays far more than its
+  final answer does. Real numbers from the arena (16×16 problem, one steering
+  strength):</p>
+</div>
+
+<div class="wide">
+  <div class="panel">
+    <div class="panel-cap"><span>measured · exact closed forms, no sampling noise</span></div>
+    <div class="panel-body">
+      <svg viewBox="0 0 860 240" role="img" aria-label="Bar chart: journey error versus destination error for a good and a biased sampler">
+        <text x="20" y="26" font-size="13">error (nats, log scale)</text>
+        <line x1="150" y1="40" x2="150" y2="200" stroke="var(--line)"/>
+        <line x1="150" y1="200" x2="820" y2="200" stroke="var(--line)"/>
+        <!-- log scale 1..10000 maps x: 150 + (log10(v))/4*650 -->
+        <g font-size="12">
+          <text x="150" y="218">1</text><text x="306" y="218">10</text>
+          <text x="465" y="218">100</text><text x="623" y="218">1 000</text>
+          <text x="775" y="218">10 000</text>
+        </g>
+        <!-- good sampler: journey 9.8, end 9.3 -->
+        <text x="20" y="74" font-size="13" fill="var(--good-ink)">honest</text>
+        <rect x="150" y="58" width="161" height="16" rx="3" fill="var(--good)"/>
+        <text x="320" y="71" font-size="12">journey 9.8</text>
+        <rect x="150" y="80" width="157" height="16" rx="3" fill="var(--good)" opacity="0.45"/>
+        <text x="316" y="93" font-size="12">destination 9.3 — ratio 1.05</text>
+        <!-- biased: journey 2701, end 28.5 -->
+        <text x="20" y="146" font-size="13" fill="var(--bad-ink)">biased</text>
+        <rect x="150" y="130" width="558" height="16" rx="3" fill="var(--bad)"/>
+        <text x="712" y="143" font-size="12">journey 2 701</text>
+        <rect x="150" y="152" width="236" height="16" rx="3" fill="var(--bad)" opacity="0.45"/>
+        <text x="394" y="165" font-size="12">destination 28.5 — ratio 95×</text>
+      </svg>
+      <figcaption>The certificate bounds destination error by journey error. For
+      the honest sampler the bound is tight (1.05×). For the biased one it is
+      valid but loose (95×) — loud, not precise. On exact ingredients, that is an
+      acceptable trade: you certify quality precisely and merely <em>flag</em>
+      garbage.</figcaption>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <p class="eyebrow">scene 5 · the failure</p>
+  <h2>Trained networks: the journey stops predicting the arrival</h2>
+  <p>Then we swapped the perfect ingredients for the real thing — a trained neural
+  network score, the pilot night&rsquo;s own checkpoints. The instrument drowned.
+  Steering a real network means pulling on its learned gradients, and those
+  gradients are <em>violent</em>: the sampler thrashes so hard along the way that
+  its built-in safety clamp fired on up to 70% of steps — yet it still <em>lands</em>
+  in a reasonable place, because the thrashing largely averages out. The meter,
+  which reads the journey, screams regardless of the landing. Watch the same
+  instrument with network-like noise injected into the steering force:</p>
+</div>
+
+<div class="wide">
+  <div class="panel">
+    <div class="panel-cap"><span>instrument 02 · path ledger, trained-network regime</span><span id="cap2" class="mono"></span></div>
+    <div class="panel-body">
+      <div class="controls" style="margin-bottom:0.7rem">
+        <button class="seg m-good" id="p2-good" aria-pressed="false">exact score</button>
+        <button class="seg m-net" id="p2-net" aria-pressed="true">trained-network score</button>
+        <button class="seg replay" id="p2-replay">replay ▸</button>
+      </div>
+      <div class="grid2">
+        <figure>
+          <canvas id="c2-paths" width="860" height="430" aria-label="Trajectories under a noisy learned score: violent paths, similar landing"></canvas>
+          <figcaption>Same steering recipe. The network&rsquo;s gradient noise makes
+          every path thrash — while the endpoints stay close to where the smooth
+          paths land.</figcaption>
+        </figure>
+        <figure>
+          <canvas id="c2-side" width="520" height="430" aria-label="Endpoint distribution and ledger weights under the learned score"></canvas>
+          <figcaption>The destination barely changes. The books explode.</figcaption>
+        </figure>
+      </div>
+      <div class="readout">
+        <span class="lamp"><i id="p2-lamp"></i><b id="p2-status">—</b></span>
+        <span>effective samples <b id="p2-ess">—</b> / 28</span>
+        <span>meter reading <b id="p2-kl">—</b> nats</span>
+        <span>true endpoint error <b id="p2-true">—</b> nats</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <p>On the full-scale experiments the numbers were brutal: the trained
+  network&rsquo;s readings came out <b>8–125× larger</b> than the exact-score
+  pathway&rsquo;s at identical steering, per-sample effective counts pinned at
+  1–3 out of 256, and no rescue anywhere — not gentler steering (practitioners&rsquo;
+  regime), not shorter runs (worse), not more samples (65,536 changed nothing).</p>
+
+  <p class="eyebrow">scene 6 · the tombstone</p>
+  <h2>The fairest test it could get — and the verdict</h2>
+  <p>One hope remained. Even a meter that can&rsquo;t give absolute numbers could
+  still be useful if it <em>ranks</em>: &ldquo;on my network, steering recipe A is
+  better than B.&rdquo; So we built a family of variants — the same recipe at four
+  steering strengths — and asked the meter to pick the best, with the arena
+  knowing the true answer. It picked wrong, systematically:</p>
+</div>
+
+<div class="wide">
+  <div class="panel">
+    <div class="panel-cap"><span>measured · trained network, four steering strengths, same problem</span></div>
+    <div class="panel-body">
+      <svg viewBox="0 0 860 330" role="img" aria-label="Two aligned charts: true destination error picks strength 0.5; the meter's preference picks 0.1">
+        <g font-size="12">
+          <text x="20" y="24" font-size="13" fill="var(--ink)">true destination error (lower = better)</text>
+          <line x1="120" y1="110" x2="820" y2="110" stroke="var(--line)"/>
+          <!-- W2 at 1σ: 11.4, 6.8, 3.9, 5.2 ; scale h = v*7 -->
+          <rect x="170" y="30.2" width="70" height="79.8" rx="3" fill="var(--ref)"/>
+          <rect x="340" y="62.4" width="70" height="47.6" rx="3" fill="var(--ref)"/>
+          <rect x="510" y="82.7" width="70" height="27.3" rx="3" fill="var(--good)"/>
+          <rect x="680" y="73.6" width="70" height="36.4" rx="3" fill="var(--ref)"/>
+          <text x="182" y="44">11.4</text><text x="356" y="76">6.8</text>
+          <text x="527" y="97" fill="var(--good-ink)">3.9 ✓</text><text x="696" y="88">5.2</text>
+          <text x="475" y="26" fill="var(--good-ink)">truth&rsquo;s pick: 0.5</text>
+        </g>
+        <g font-size="12">
+          <text x="20" y="168" font-size="13" fill="var(--ink)">meter&rsquo;s preference (it favors the least total journey)</text>
+          <line x1="120" y1="290" x2="820" y2="290" stroke="var(--line)"/>
+          <!-- -mean logw (millions): 1.40, 1.65, 1.88, 2.24 ; meter prefers SMALLEST -->
+          <rect x="170" y="220.0" width="70" height="70" rx="3" fill="var(--bad)"/>
+          <rect x="340" y="207.5" width="70" height="82.5" rx="3" fill="var(--ref)"/>
+          <rect x="510" y="196.0" width="70" height="94" rx="3" fill="var(--ref)"/>
+          <rect x="680" y="178.0" width="70" height="112" rx="3" fill="var(--ref)"/>
+          <text x="176" y="234" fill="var(--bad-ink)">1.40M ✗</text><text x="350" y="221">1.65M</text>
+          <text x="520" y="210">1.88M</text><text x="690" y="192">2.24M</text>
+          <text x="426" y="168" dx="30" fill="var(--bad-ink)">meter&rsquo;s pick: 0.1</text>
+        </g>
+        <g font-size="12">
+          <text x="188" y="312">0.1</text><text x="358" y="312">0.25</text>
+          <text x="528" y="312">0.5</text><text x="698" y="312">1.0</text>
+          <text x="380" y="328">steering strength →</text>
+        </g>
+      </svg>
+      <figcaption>Rank correlation between the meter&rsquo;s preference and the
+      truth: <b>−0.80</b> at mild steering. The meter always prefers whichever
+      sampler <em>moves least</em>; the truth prefers the one that <em>lands
+      best</em>. That is not a bug to fix — it is what a journey-meter is.</figcaption>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <p class="eyebrow">scene 7 · the audit of the audit</p>
+  <h2>Making sure the kill was real</h2>
+  <p>Before writing the obituary we attacked our own conclusion, three ways:</p>
+  <ul class="klist">
+    <li><span class="mono tag-pass">VERIFIED</span><span>The meter&rsquo;s code, run through the exact same pathway a
+      trained network uses, agrees with independent closed-form mathematics to
+      one part in 100,000. Not a bug.</span></li>
+    <li><span class="mono tag-fail">NO RESCUE</span><span>Gentler, practitioner-style steering strengths (0.1–0.5×):
+      the books stay degenerate at every setting; shorter runs are worse.</span></li>
+    <li><span class="mono tag-fail">NO RESCUE</span><span>The fairest use case — ranking similar guided variants against
+      each other — is where it anti-correlates with the truth (scene 6).</span></li>
+  </ul>
+  <p>The obstruction is fundamental to this instrument class, and now it is
+  <em>measured</em>, not suspected: <b>on trained networks, how much a sampler
+  travels does not tell you where it lands.</b></p>
+
+  <p class="eyebrow">epilogue</p>
+  <h2>What survives, and why this was a good day</h2>
+  <p>The meter remains a genuine instrument <em>inside the arena</em>, where exact
+  references exist — a method-developer&rsquo;s tool, tight for good samplers and
+  loud for bad ones. The deployment problem — a warning light for real data —
+  remains open, and the post-mortem points the way: the next instrument class must
+  read the <em>destination</em>, not the journey. Every step of this arc was
+  pre-registered — predictions with confidences written down before each run, then
+  scored, misses included. One day, one plausible flagship idea, built, killed,
+  and verified killed, with the reasons in closed form. That is what the arena
+  is for.</p>
+  <footer>
+    Data, code, prediction ledger, and night logs:
+    <a href="https://github.com/AndreasTersenov/tilt-audit">github.com/AndreasTersenov/tilt-audit</a>
+    · every number on this page traces to a results file in the repository.
+    The two interactive panels simulate the actual construction (same equations,
+    one dimension); the bar charts show measured values from the experiments.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ------------------------------------------------------------------ math
+  // 1-D version of the arena: prior N(0,1); data y = x + noise(var b);
+  // exact posterior N(mu*, v*). Reverse diffusion, T steps over tau in [0,3].
+  const Y = 1.6, B = 0.25, TF = 3.0, NSTEP = 110, NPATH = 28;
+  const MUS = Y / (1 + B), VS = B / (1 + B);
+  function mulberry(seed) { return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function gauss(rng) {
+    const u = Math.max(rng(), 1e-12), v = rng();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+
+  // simulate one ensemble; mode: "good" | "bad" | "net"
+  function simulate(mode, seed) {
+    const rng = mulberry(seed);
+    const ts = []; for (let i = 0; i <= NSTEP; i++) ts.push(TF * (1 - i / NSTEP));
+    const paths = [], logw = [];
+    for (let p = 0; p < NPATH; p++) {
+      let x = gauss(rng);                       // marginal var is 1 at all t (P=1)
+      let acc = 0; const tr = [x];
+      for (let i = 0; i < NSTEP; i++) {
+        const t = ts[i], tn = ts[i + 1], dt = t - tn, tm = t - dt / 2;
+        const e = Math.exp(-dt);
+        const cRef = e, vRef = 1 - e * e;       // exact unsteered kernel (P=1)
+        const c0 = Math.exp(-tm);               // Tweedie coefficient
+        const var0 = 1 - Math.exp(-2 * tm);     // denoiser uncertainty
+        const denom = (mode === "good") ? B + var0 : B;   // the shortcut drops var0
+        let lam = 1 - 2 - 2 * c0 * c0 / denom;  // 1 - 2/V - 2 a^2 c0^2/denom, V=1
+        let u = 2 * c0 * Y / denom;
+        if (mode === "net") {                   // learned-score gradient noise
+          const eta = 1 + 1.1 * gauss(rng);
+          u *= eta; lam *= (1 + 0.25 * gauss(rng));
+        }
+        const phi = Math.exp(lam * dt);
+        const g1 = Math.abs(lam) > 1e-12 ? (phi - 1) / lam : dt;
+        const g2 = Math.abs(lam) > 1e-12 ? (phi * phi - 1) / lam : 2 * dt;
+        const mS = phi * x + g1 * u, vS = Math.max(g2, 1e-12);
+        const n = gauss(rng);
+        const xn = mS + Math.sqrt(vS) * n;
+        // ledger: log N(x'; ref) - log N(x'; sampler)
+        acc += 0.5 * Math.log(vS / vRef)
+             - 0.5 * (xn - cRef * x) * (xn - cRef * x) / vRef
+             + 0.5 * n * n;
+        x = xn; tr.push(x);
+      }
+      acc += -(x - Y) * (x - Y) / (2 * B);      // destination fit r(x0)/b
+      paths.push(tr); logw.push(acc);
+    }
+    // weights, ESS, KL-hat; endpoint moments for "true" error (arena-only)
+    const m = Math.max(...logw);
+    const w = logw.map((l) => Math.exp(l - m));
+    const s = w.reduce((a, b) => a + b, 0);
+    const wn = w.map((v) => v / s);
+    const ess = 1 / wn.reduce((a, v) => a + v * v, 0);
+    const zEst = m + Math.log(s / NPATH);
+    const klHat = zEst - logw.reduce((a, b) => a + b, 0) / NPATH;
+    const xe = paths.map((t) => t[NSTEP]);
+    const me = xe.reduce((a, b) => a + b, 0) / NPATH;
+    const ve = Math.max(xe.reduce((a, b) => a + (b - me) * (b - me), 0) / NPATH, 1e-9);
+    const klTrue = 0.5 * (ve / VS + (me - MUS) * (me - MUS) / VS - 1 + Math.log(VS / ve));
+    return { paths, wn, ess, klHat, klTrue, ts };
+  }
+
+  // ------------------------------------------------------------------ drawing
+  function colFor(mode) {
+    return mode === "good" ? css("--good") : mode === "bad" ? css("--bad") : css("--net"); }
+  function inkFor(mode) {
+    return mode === "good" ? css("--good-ink") : mode === "bad" ? css("--bad-ink") : css("--net-ink"); }
+
+  function panel(idPrefix, modes, defaultMode) {
+    const cv = document.getElementById("c" + idPrefix.slice(1) + "-paths");
+    const sv = document.getElementById("c" + idPrefix.slice(1) + "-side");
+    const ctx = cv.getContext("2d"), sctx = sv.getContext("2d");
+    let mode = defaultMode, frame = 0, raf = null, sim = null, ref = null;
+
+    const X0 = 46, X1 = cv.width - 14, YMID = cv.height / 2, YS = cv.height / 5.2;
+    const xOf = (i) => X0 + (X1 - X0) * (i / NSTEP);
+    const yOf = (v) => YMID - v * YS;
+
+    function drawStatic() {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.strokeStyle = css("--line"); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(X0, yOf(0)); ctx.lineTo(X1, yOf(0)); ctx.stroke();
+      // true posterior band (dotted)
+      ctx.setLineDash([3, 4]);
+      ctx.strokeStyle = css("--muted");
+      [MUS - 2 * Math.sqrt(VS), MUS + 2 * Math.sqrt(VS)].forEach((v) => {
+        ctx.beginPath(); ctx.moveTo(X0, yOf(v)); ctx.lineTo(X1, yOf(v)); ctx.stroke(); });
+      ctx.setLineDash([]);
+      ctx.fillStyle = css("--muted");
+      ctx.font = "12px ui-monospace, Menlo, monospace";
+      ctx.fillText("pure noise", X0, 16);
+      ctx.textAlign = "right";
+      ctx.fillText("answer →", X1, 16);
+      ctx.fillText("true posterior (±2σ)", X1, yOf(MUS + 2 * Math.sqrt(VS)) - 6);
+      ctx.textAlign = "left";
+    }
+    function drawPaths(upTo) {
+      drawStatic();
+      const draw = (sm, color, alpha, lw) => {
+        ctx.globalAlpha = alpha; ctx.strokeStyle = color; ctx.lineWidth = lw;
+        sm.paths.forEach((tr) => {
+          ctx.beginPath(); ctx.moveTo(xOf(0), yOf(tr[0]));
+          for (let i = 1; i <= upTo; i++) ctx.lineTo(xOf(i), yOf(tr[i]));
+          ctx.stroke(); });
+        ctx.globalAlpha = 1; };
+      draw(ref, css("--ref"), 0.35, 1);
+      draw(sim, colFor(mode), 0.55, 1.4);
+    }
+    function drawSide(upTo) {
+      sctx.clearRect(0, 0, sv.width, sv.height);
+      const W = sv.width, hTop = 185;
+      // endpoint histogram vs true posterior curve
+      sctx.strokeStyle = css("--line");
+      sctx.beginPath(); sctx.moveTo(30, hTop); sctx.lineTo(W - 10, hTop); sctx.stroke();
+      const vx = (v) => 30 + (W - 40) * ((v + 1.2) / 3.4);
+      sctx.strokeStyle = css("--muted"); sctx.lineWidth = 1.4; sctx.beginPath();
+      for (let i = 0; i <= 100; i++) {
+        const v = -1.2 + 3.4 * i / 100;
+        const d = Math.exp(-(v - MUS) * (v - MUS) / (2 * VS)) / Math.sqrt(2 * Math.PI * VS);
+        const yy = hTop - d * 150 / 1.9;
+        i ? sctx.lineTo(vx(v), yy) : sctx.moveTo(vx(v), yy); }
+      sctx.stroke();
+      sctx.fillStyle = css("--muted");
+      sctx.font = "11px ui-monospace, Menlo, monospace";
+      sctx.fillText("where samples land", 30, 14);
+      if (upTo >= NSTEP) {
+        sctx.fillStyle = colFor(mode); sctx.globalAlpha = 0.8;
+        sim.paths.forEach((tr) => {
+          sctx.beginPath();
+          sctx.rect(vx(tr[NSTEP]) - 1.5, hTop - 14, 3, 12); sctx.fill(); });
+        sctx.globalAlpha = 1;
+      }
+      // ledger bars
+      sctx.fillStyle = css("--muted");
+      sctx.fillText("the ledger: one weight per sample", 30, hTop + 40);
+      const bw = (W - 50) / NPATH;
+      if (upTo >= NSTEP) {
+        sim.wn.forEach((v, i) => {
+          const h = Math.max(2, v * 170 * (NPATH / 8));
+          sctx.fillStyle = colFor(mode);
+          sctx.globalAlpha = 0.85;
+          sctx.fillRect(32 + i * bw, sv.height - 12 - Math.min(h, 160), bw - 2, Math.min(h, 160));
+          sctx.globalAlpha = 1; });
+        sctx.strokeStyle = css("--line");
+        sctx.setLineDash([3, 3]);
+        const flat = Math.max(2, (1 / NPATH) * 170 * (NPATH / 8));
+        sctx.beginPath(); sctx.moveTo(30, sv.height - 12 - flat);
+        sctx.lineTo(W - 12, sv.height - 12 - flat); sctx.stroke();
+        sctx.setLineDash([]);
+        sctx.fillStyle = css("--muted");
+        sctx.fillText("flat = honest", W - 128, sv.height - 16 - flat);
+      }
+    }
+    function readouts() {
+      const $ = (s) => document.getElementById(idPrefix + s);
+      $("-ess").textContent = sim.ess.toFixed(1);
+      $("-kl").textContent = sim.klHat < 100 ? sim.klHat.toFixed(1) : Math.round(sim.klHat).toLocaleString();
+      $("-true").textContent = sim.klTrue.toFixed(2);
+      const lamp = $("-lamp"), st = $("-status");
+      const flat = sim.ess > NPATH * 0.55;
+      lamp.style.background = flat ? css("--good") : (mode === "net" ? css("--net") : css("--bad"));
+      st.textContent = flat ? "books flat — certified"
+        : (mode === "net" ? "books exploded — but the landing was fine" : "books spiky — sampler flagged");
+      st.style.color = flat ? inkFor("good") : inkFor(mode === "net" ? "net" : "bad");
+    }
+    function run() {
+      cancelAnimationFrame(raf);
+      const seed = 7 + Math.floor(Math.random() * 1000);
+      sim = simulate(mode, seed); ref = simulate("goodref", seed + 999);
+      // reference ensemble = unsteered: simulate with mode good but zero guidance:
+      ref = (function () {
+        const rng = mulberry(seed + 999), paths = [];
+        for (let p = 0; p < NPATH; p++) {
+          let x = gauss(rng); const tr = [x];
+          for (let i = 0; i < NSTEP; i++) {
+            const dt = TF / NSTEP, e = Math.exp(-dt);
+            x = e * x + Math.sqrt(1 - e * e) * gauss(rng); tr.push(x); }
+          paths.push(tr); }
+        return { paths }; })();
+      frame = 0;
+      const step = () => {
+        frame = Math.min(frame + (reduced ? NSTEP : 2), NSTEP);
+        drawPaths(frame); drawSide(frame);
+        if (frame < NSTEP) raf = requestAnimationFrame(step);
+        else readouts();
+      };
+      const $ = (s) => document.getElementById(idPrefix + s);
+      $("-ess").textContent = "—"; $("-kl").textContent = "—"; $("-true").textContent = "—";
+      $("-status").textContent = "sampling…"; $("-status").style.color = css("--muted");
+      $("-lamp").style.background = css("--muted");
+      step();
+    }
+    modes.forEach(([btnId, m]) => {
+      document.getElementById(btnId).addEventListener("click", () => {
+        mode = m;
+        modes.forEach(([b2]) => document.getElementById(b2)
+          .setAttribute("aria-pressed", b2 === btnId ? "true" : "false"));
+        run(); });
+    });
+    document.getElementById(idPrefix + "-replay").addEventListener("click", run);
+    run();
+    return { rerun: run };
+  }
+
+  const p1 = panel("p1", [["p1-good", "good"], ["p1-bad", "bad"]], "good");
+  const p2 = panel("p2", [["p2-good", "bad"], ["p2-net", "net"]], "net");
+  // instrument 02's "exact score" button shows the biased-but-smooth path for
+  // contrast with the trained-network violence (label in the UI says exact score
+  // meaning: same recipe, exact gradients)
+})();
+</script>
