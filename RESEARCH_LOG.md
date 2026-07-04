@@ -58,6 +58,35 @@
 - **Result:** (pending)
 - **Updated belief:** (pending)
 
+### E-20260703b · arms night (A1 multi-y, A2 diagnostic power, A3 amortized, A4 Remy)
+- **Hypothesis:** per-claim splits in P-20260703b–e (frozen below; publicly timestamped
+  at github.com/AndreasTersenov/tilt-audit before the first GPU job).
+- **Setup:** this repo at the arms-night commits; GPUs 0–2 (titan); plan
+  docs/OVERNIGHT_2026-07-03_ARMS_NIGHT.md; gates T-G1..15 + T-N1/N2/N3 green pre-burn;
+  chronology NIGHT_LOG_2026-07-04.md; deliverables HANDOFF_DAWN_2.md.
+- **Expectation:** encoded in P-20260703b–e.
+- **Result (drafted at dawn; scoring pending):** A1: ratio structure y-generic across 24
+  draws (rel IQR ≤8.5%, orderings 24/24) — P-b HIT-shaped. A2: every oracle-made failure
+  including the ε=−0.3 compensation config is detected by PQMass/TARP/MIRA at budgets
+  64–256 (P-c blind-spot clause MISS-shaped); the trap fools exactly the γ* scalar
+  (γ*=1.001 at ε*=−0.28±0.01, W2 basin ~5.8× floor); two community tools (tarp-0.1.0,
+  mira-score-0.1.7) have the same truth-based-normalization bug, d-extensive at q=4096,
+  found by the null gates and repaired by symmetric pooled-sample standardization (MIRA
+  null then hits its analytic value to 4 decimal places). A3: default conditional net
+  lands at 2.56× floor with summaries at the few-% level (px variance −7.5% visible);
+  ladder saturates by ~6–15k steps; failure onset 2k→6k (variance collapse) — P-d
+  geometry clause MISS-shaped, the good-for-amortization direction. A4: W2(K) strictly
+  monotone to 1.0–1.2× floor by K=100 with the exact-inflation anchor at 1.00×; misspec
+  sign-flip confirmed (ε=−0.3 aggravates); small-K state = fat variance + mean overshoot
+  simultaneously (scalar γ* uninformative there) — P-e HIT-shaped with the nuance.
+- **Updated belief:** the audit's three-way separation works as a production tool, not
+  just a demo: it found quantitative bugs in the field's own diagnostics (the certifiers
+  need certifying, literally), located the exact ε where the temperature scalar lies, and
+  priced the field's flagship conservative sampler in NFE against its aggressive default.
+  The program's headline sharpens: sample-based diagnostics are fine (better than
+  predicted) — scalar summaries and unaudited preprocessing are the failure surface;
+  amortization is not the weak link at this difficulty, steering is.
+
 ## Predictions — arms night (2026-07-03 → 04; frozen with owner sign-off before the run; PUBLIC push precedes first GPU job)
 
 ### P-20260703b · multi-y: ratio structure is y-generic · conf 85% · resolve-by 2026-07-06 · OPEN

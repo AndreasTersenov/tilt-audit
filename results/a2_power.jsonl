@@ -1798,3 +1798,1003 @@
 {"test": "pqmass", "config": "twisted_em03_16k", "budget": 16384, "rep": 17, "stat": 0.0, "pvalue": 0.0, "detected": true, "num_refs": 100, "tag": "exploratory"}
 {"test": "pqmass", "config": "twisted_em03_16k", "budget": 16384, "rep": 18, "stat": 0.0, "pvalue": 0.0, "detected": true, "num_refs": 100, "tag": "exploratory"}
 {"test": "pqmass", "config": "twisted_em03_16k", "budget": 16384, "rep": 19, "stat": 0.0, "pvalue": 0.0, "detected": true, "num_refs": 100, "tag": "exploratory"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 20, "stat": 0.6310939788818359, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 21, "stat": 0.6418933868408203, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 22, "stat": 0.6288795471191406, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 23, "stat": 0.6234855651855469, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 24, "stat": 0.6281013488769531, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 25, "stat": 0.6316680908203125, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 26, "stat": 0.6259365081787109, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 27, "stat": 0.6338939666748047, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 28, "stat": 0.6301498413085938, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 29, "stat": 0.6315441131591797, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 30, "stat": 0.6363754272460938, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 31, "stat": 0.6326198577880859, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 32, "stat": 0.6370220184326172, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 33, "stat": 0.6242332458496094, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 34, "stat": 0.6318550109863281, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 35, "stat": 0.6285915374755859, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 36, "stat": 0.6289806365966797, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 37, "stat": 0.6307735443115234, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 38, "stat": 0.6335105895996094, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 39, "stat": 0.6397190093994141, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 40, "stat": 0.6293582916259766, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 41, "stat": 0.6255264282226562, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 42, "stat": 0.6277484893798828, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 43, "stat": 0.6267013549804688, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 44, "stat": 0.6261062622070312, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 45, "stat": 0.6318111419677734, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 46, "stat": 0.6423683166503906, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 47, "stat": 0.6294898986816406, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 48, "stat": 0.6317138671875, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 49, "stat": 0.6250820159912109, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 50, "stat": 0.6265468597412109, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 51, "stat": 0.6353015899658203, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 52, "stat": 0.6368522644042969, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 53, "stat": 0.6221103668212891, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 54, "stat": 0.6288509368896484, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 55, "stat": 0.6331844329833984, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 56, "stat": 0.6301155090332031, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 57, "stat": 0.6350078582763672, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 58, "stat": 0.6278839111328125, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 64, "rep": 59, "stat": 0.6247444152832031, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 0, "stat": 0.673828125, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 1, "stat": 0.671783447265625, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 2, "stat": 0.6708030700683594, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 3, "stat": 0.6743125915527344, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 4, "stat": 0.6723480224609375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 5, "stat": 0.6695442199707031, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 6, "stat": 0.6732444763183594, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 7, "stat": 0.6738262176513672, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 8, "stat": 0.6686801910400391, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 9, "stat": 0.6718311309814453, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 10, "stat": 0.6690177917480469, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 11, "stat": 0.6752986907958984, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 12, "stat": 0.6689643859863281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 13, "stat": 0.6718559265136719, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 14, "stat": 0.6736335754394531, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 15, "stat": 0.6731739044189453, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 16, "stat": 0.6677055358886719, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 17, "stat": 0.67401123046875, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 18, "stat": 0.6693439483642578, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 19, "stat": 0.6739940643310547, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 20, "stat": 0.6702079772949219, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 21, "stat": 0.6735420227050781, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 22, "stat": 0.6675796508789062, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 23, "stat": 0.6707763671875, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 24, "stat": 0.6685237884521484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 25, "stat": 0.6733322143554688, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 26, "stat": 0.6720848083496094, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 27, "stat": 0.6727466583251953, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 28, "stat": 0.6733684539794922, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 29, "stat": 0.6706771850585938, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 30, "stat": 0.6725864410400391, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 31, "stat": 0.6707210540771484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 32, "stat": 0.6726264953613281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 33, "stat": 0.6655750274658203, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 34, "stat": 0.6699199676513672, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 35, "stat": 0.6689662933349609, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 36, "stat": 0.6699924468994141, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 37, "stat": 0.6720676422119141, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 38, "stat": 0.6730766296386719, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 39, "stat": 0.6708202362060547, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 40, "stat": 0.6753787994384766, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 41, "stat": 0.6691551208496094, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 42, "stat": 0.6716995239257812, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 43, "stat": 0.6689491271972656, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 44, "stat": 0.6694774627685547, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 45, "stat": 0.6766510009765625, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 46, "stat": 0.6686515808105469, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 47, "stat": 0.6716785430908203, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 48, "stat": 0.6758289337158203, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 49, "stat": 0.6724987030029297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 50, "stat": 0.6696872711181641, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 51, "stat": 0.6775989532470703, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 52, "stat": 0.6705036163330078, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 53, "stat": 0.6710262298583984, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 54, "stat": 0.6700038909912109, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 55, "stat": 0.6707057952880859, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 56, "stat": 0.6753635406494141, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 57, "stat": 0.6746063232421875, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 58, "stat": 0.6720256805419922, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 64, "rep": 59, "stat": 0.6698551177978516, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 0, "stat": 0.5090694427490234, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 1, "stat": 0.5072612762451172, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 2, "stat": 0.5103912353515625, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 3, "stat": 0.5054073333740234, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 4, "stat": 0.5072402954101562, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 5, "stat": 0.5088405609130859, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 6, "stat": 0.5126800537109375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 7, "stat": 0.5135173797607422, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 8, "stat": 0.512725830078125, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 9, "stat": 0.5100345611572266, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 10, "stat": 0.5042934417724609, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 11, "stat": 0.5037174224853516, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 12, "stat": 0.507293701171875, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 13, "stat": 0.5068778991699219, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 14, "stat": 0.5063648223876953, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 15, "stat": 0.5114364624023438, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 16, "stat": 0.5108909606933594, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 17, "stat": 0.5081596374511719, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 18, "stat": 0.5073013305664062, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 64, "rep": 19, "stat": 0.5099735260009766, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 0, "stat": 0.7142467498779297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 1, "stat": 0.7025661468505859, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 2, "stat": 0.7047977447509766, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 3, "stat": 0.6906929016113281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 4, "stat": 0.6955986022949219, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 5, "stat": 0.6747722625732422, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 6, "stat": 0.6981430053710938, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 7, "stat": 0.6814937591552734, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 8, "stat": 0.6887168884277344, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 9, "stat": 0.6904487609863281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 10, "stat": 0.6853008270263672, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 11, "stat": 0.6943283081054688, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 12, "stat": 0.6801204681396484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 13, "stat": 0.7100276947021484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 14, "stat": 0.7148685455322266, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 15, "stat": 0.6987361907958984, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 16, "stat": 0.6970043182373047, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 17, "stat": 0.6959381103515625, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 18, "stat": 0.7176189422607422, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 64, "rep": 19, "stat": 0.6905040740966797, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 0, "stat": 0.6735305786132812, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 1, "stat": 0.6754951477050781, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 2, "stat": 0.6691818237304688, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 3, "stat": 0.6701488494873047, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 4, "stat": 0.669403076171875, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 5, "stat": 0.6729488372802734, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 6, "stat": 0.6708984375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 7, "stat": 0.6685886383056641, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 8, "stat": 0.6671524047851562, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 9, "stat": 0.6702404022216797, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 10, "stat": 0.66650390625, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 11, "stat": 0.6718044281005859, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 12, "stat": 0.6742763519287109, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 13, "stat": 0.6715602874755859, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 14, "stat": 0.6734085083007812, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 15, "stat": 0.6697006225585938, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 16, "stat": 0.6703548431396484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 17, "stat": 0.6729698181152344, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 18, "stat": 0.6753559112548828, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 64, "rep": 19, "stat": 0.6710376739501953, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 0, "stat": 0.6311092376708984, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 1, "stat": 0.6349773406982422, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 2, "stat": 0.6314105987548828, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 3, "stat": 0.6336803436279297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 4, "stat": 0.6301422119140625, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 5, "stat": 0.6383190155029297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 6, "stat": 0.6312808990478516, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 7, "stat": 0.6301002502441406, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 8, "stat": 0.6393890380859375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 9, "stat": 0.6363658905029297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 10, "stat": 0.6330699920654297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 11, "stat": 0.6327018737792969, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 12, "stat": 0.6323204040527344, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 13, "stat": 0.6346416473388672, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 14, "stat": 0.6335639953613281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 15, "stat": 0.6395168304443359, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 16, "stat": 0.6268177032470703, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 17, "stat": 0.6393985748291016, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 18, "stat": 0.6283149719238281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 64, "rep": 19, "stat": 0.6383247375488281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 0, "stat": 0.5086612701416016, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 1, "stat": 0.5033664703369141, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 2, "stat": 0.5103511810302734, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 3, "stat": 0.5047893524169922, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 4, "stat": 0.5105648040771484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 5, "stat": 0.5038223266601562, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 6, "stat": 0.5086078643798828, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 7, "stat": 0.5100154876708984, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 8, "stat": 0.5119895935058594, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 9, "stat": 0.5128650665283203, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 10, "stat": 0.5092029571533203, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 11, "stat": 0.5037994384765625, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 12, "stat": 0.5066375732421875, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 13, "stat": 0.5051612854003906, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 14, "stat": 0.5115184783935547, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 15, "stat": 0.5080642700195312, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 16, "stat": 0.5050697326660156, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 17, "stat": 0.5083255767822266, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 18, "stat": 0.5105762481689453, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 64, "rep": 19, "stat": 0.5046787261962891, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 20, "stat": 0.6229004859924316, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 21, "stat": 0.6248788833618164, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 22, "stat": 0.6302289962768555, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 23, "stat": 0.6240358352661133, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 24, "stat": 0.6198244094848633, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 25, "stat": 0.626955509185791, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 26, "stat": 0.6328563690185547, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 27, "stat": 0.6270523071289062, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 28, "stat": 0.6300005912780762, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 29, "stat": 0.627983570098877, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 30, "stat": 0.6348671913146973, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 31, "stat": 0.6295328140258789, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 32, "stat": 0.6249203681945801, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 33, "stat": 0.6310248374938965, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 34, "stat": 0.6320810317993164, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 35, "stat": 0.6218171119689941, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 36, "stat": 0.6255803108215332, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 37, "stat": 0.626436710357666, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 38, "stat": 0.6232476234436035, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 39, "stat": 0.6270937919616699, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 40, "stat": 0.6165437698364258, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 41, "stat": 0.6288886070251465, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 42, "stat": 0.6331295967102051, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 43, "stat": 0.6247100830078125, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 44, "stat": 0.6194419860839844, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 45, "stat": 0.6209583282470703, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 46, "stat": 0.625023365020752, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 47, "stat": 0.6210541725158691, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 48, "stat": 0.6200556755065918, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 49, "stat": 0.6207022666931152, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 50, "stat": 0.630073070526123, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 51, "stat": 0.6155242919921875, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 52, "stat": 0.6301312446594238, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 53, "stat": 0.619718074798584, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 54, "stat": 0.6303820610046387, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 55, "stat": 0.6272072792053223, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 56, "stat": 0.6213831901550293, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 57, "stat": 0.6253108978271484, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 58, "stat": 0.6204314231872559, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira", "config": "oracle", "budget": 256, "rep": 59, "stat": 0.6289033889770508, "num_runs": 64, "tag": "nullpad"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 0, "stat": 0.6653399467468262, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 1, "stat": 0.6685085296630859, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 2, "stat": 0.671442985534668, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 3, "stat": 0.665163516998291, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 4, "stat": 0.6683878898620605, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 5, "stat": 0.6695117950439453, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 6, "stat": 0.6696457862854004, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 7, "stat": 0.6665358543395996, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 8, "stat": 0.6639289855957031, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 9, "stat": 0.6705594062805176, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 10, "stat": 0.6625771522521973, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 11, "stat": 0.6716933250427246, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 12, "stat": 0.6680498123168945, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 13, "stat": 0.6664485931396484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 14, "stat": 0.6654558181762695, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 15, "stat": 0.6617541313171387, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 16, "stat": 0.6706948280334473, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 17, "stat": 0.6679263114929199, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 18, "stat": 0.6656155586242676, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 19, "stat": 0.670137882232666, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 20, "stat": 0.6698527336120605, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 21, "stat": 0.6646819114685059, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 22, "stat": 0.6698012351989746, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 23, "stat": 0.6683816909790039, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 24, "stat": 0.6711955070495605, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 25, "stat": 0.6694316864013672, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 26, "stat": 0.6638450622558594, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 27, "stat": 0.6662135124206543, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 28, "stat": 0.6665582656860352, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 29, "stat": 0.6604781150817871, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 30, "stat": 0.6694941520690918, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 31, "stat": 0.668548583984375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 32, "stat": 0.6706709861755371, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 33, "stat": 0.6701793670654297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 34, "stat": 0.6648440361022949, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 35, "stat": 0.6663675308227539, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 36, "stat": 0.6647686958312988, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 37, "stat": 0.6651310920715332, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 38, "stat": 0.6675934791564941, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 39, "stat": 0.6643662452697754, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 40, "stat": 0.6639595031738281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 41, "stat": 0.6720457077026367, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 42, "stat": 0.6673445701599121, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 43, "stat": 0.6729335784912109, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 44, "stat": 0.6681199073791504, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 45, "stat": 0.6677579879760742, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 46, "stat": 0.6644182205200195, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 47, "stat": 0.668459415435791, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 48, "stat": 0.6710538864135742, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 49, "stat": 0.6708536148071289, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 50, "stat": 0.6657137870788574, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 51, "stat": 0.6682910919189453, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 52, "stat": 0.6722531318664551, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 53, "stat": 0.6633415222167969, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 54, "stat": 0.6667389869689941, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 55, "stat": 0.6674256324768066, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 56, "stat": 0.6716132164001465, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 57, "stat": 0.6684203147888184, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 58, "stat": 0.6706886291503906, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "oracle", "budget": 256, "rep": 59, "stat": 0.6706557273864746, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 0, "stat": 0.5067625045776367, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 1, "stat": 0.4968442916870117, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 2, "stat": 0.5007743835449219, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 3, "stat": 0.5118598937988281, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 4, "stat": 0.5056524276733398, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 5, "stat": 0.4990682601928711, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 6, "stat": 0.4991168975830078, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 7, "stat": 0.5044598579406738, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 8, "stat": 0.5057392120361328, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 9, "stat": 0.5008707046508789, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 10, "stat": 0.5036277770996094, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 11, "stat": 0.5005168914794922, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 12, "stat": 0.5017166137695312, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 13, "stat": 0.5094923973083496, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 14, "stat": 0.5019106864929199, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 15, "stat": 0.5053386688232422, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 16, "stat": 0.5001497268676758, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 17, "stat": 0.5005655288696289, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 18, "stat": 0.503662109375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps", "budget": 256, "rep": 19, "stat": 0.5009899139404297, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 0, "stat": 0.7010836601257324, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 1, "stat": 0.6889958381652832, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 2, "stat": 0.6889605522155762, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 3, "stat": 0.6812839508056641, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 4, "stat": 0.6777315139770508, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 5, "stat": 0.6780776977539062, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 6, "stat": 0.7085351943969727, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 7, "stat": 0.6996145248413086, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 8, "stat": 0.6965937614440918, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 9, "stat": 0.692835807800293, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 10, "stat": 0.6962432861328125, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 11, "stat": 0.6800327301025391, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 12, "stat": 0.6799521446228027, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 13, "stat": 0.6901345252990723, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 14, "stat": 0.6783719062805176, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 15, "stat": 0.6993227005004883, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 16, "stat": 0.7016611099243164, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 17, "stat": 0.6818313598632812, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 18, "stat": 0.6972503662109375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "sap", "budget": 256, "rep": 19, "stat": 0.7045607566833496, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 0, "stat": 0.6668696403503418, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 1, "stat": 0.6686100959777832, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 2, "stat": 0.6718850135803223, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 3, "stat": 0.6677875518798828, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 4, "stat": 0.6682004928588867, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 5, "stat": 0.6710367202758789, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 6, "stat": 0.671257495880127, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 7, "stat": 0.6641750335693359, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 8, "stat": 0.664557933807373, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 9, "stat": 0.6684908866882324, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 10, "stat": 0.667931079864502, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 11, "stat": 0.6627616882324219, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 12, "stat": 0.6643037796020508, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 13, "stat": 0.6663923263549805, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 14, "stat": 0.6720705032348633, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 15, "stat": 0.6673569679260254, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 16, "stat": 0.6676840782165527, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 17, "stat": 0.6716675758361816, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 18, "stat": 0.6669120788574219, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "twisted", "budget": 256, "rep": 19, "stat": 0.6713638305664062, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 0, "stat": 0.6269731521606445, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 1, "stat": 0.6292171478271484, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 2, "stat": 0.6258659362792969, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 3, "stat": 0.627561092376709, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 4, "stat": 0.6248645782470703, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 5, "stat": 0.6249427795410156, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 6, "stat": 0.6259603500366211, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 7, "stat": 0.6206393241882324, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 8, "stat": 0.627748966217041, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 9, "stat": 0.6315679550170898, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 10, "stat": 0.6283097267150879, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 11, "stat": 0.626800537109375, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 12, "stat": 0.6345744132995605, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 13, "stat": 0.6276798248291016, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 14, "stat": 0.6298909187316895, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 15, "stat": 0.6254892349243164, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 16, "stat": 0.6302556991577148, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 17, "stat": 0.6267518997192383, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 18, "stat": 0.6268272399902344, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_em03", "budget": 256, "rep": 19, "stat": 0.6257524490356445, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 0, "stat": 0.49973583221435547, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 1, "stat": 0.4984722137451172, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 2, "stat": 0.5014233589172363, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 3, "stat": 0.49996376037597656, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 4, "stat": 0.5054755210876465, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 5, "stat": 0.4992184638977051, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 6, "stat": 0.5057468414306641, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 7, "stat": 0.5011625289916992, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 8, "stat": 0.5035462379455566, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 9, "stat": 0.5021600723266602, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 10, "stat": 0.5046052932739258, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 11, "stat": 0.5061397552490234, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 12, "stat": 0.5072331428527832, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 13, "stat": 0.5019550323486328, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 14, "stat": 0.5032644271850586, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 15, "stat": 0.5001335144042969, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 16, "stat": 0.5012297630310059, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 17, "stat": 0.5009903907775879, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 18, "stat": 0.502530574798584, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_sym", "config": "dps_ep03", "budget": 256, "rep": 19, "stat": 0.5028691291809082, "num_runs": 64, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 0, "stat": 0.509765625, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 1, "stat": 0.5048179626464844, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 2, "stat": 0.5045547485351562, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 3, "stat": 0.5084018707275391, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 4, "stat": 0.5061550140380859, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 5, "stat": 0.503021240234375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 6, "stat": 0.5059623718261719, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 7, "stat": 0.5080833435058594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 8, "stat": 0.5104866027832031, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 9, "stat": 0.509063720703125, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 10, "stat": 0.5086097717285156, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 11, "stat": 0.5028762817382812, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 12, "stat": 0.5065402984619141, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 13, "stat": 0.5083522796630859, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 14, "stat": 0.50714111328125, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 15, "stat": 0.5077972412109375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 16, "stat": 0.5033226013183594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 17, "stat": 0.511260986328125, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 18, "stat": 0.5020580291748047, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 64, "rep": 19, "stat": 0.5050239562988281, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 0, "stat": 0.4609851837158203, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 1, "stat": 0.4798717498779297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 2, "stat": 0.48628997802734375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 3, "stat": 0.477508544921875, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 4, "stat": 0.48680686950683594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 5, "stat": 0.4673728942871094, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 6, "stat": 0.4860515594482422, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 7, "stat": 0.4729747772216797, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 8, "stat": 0.4738731384277344, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 9, "stat": 0.4585247039794922, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 10, "stat": 0.4511985778808594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 11, "stat": 0.4879150390625, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 12, "stat": 0.4945354461669922, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 13, "stat": 0.4465904235839844, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 14, "stat": 0.4575519561767578, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 15, "stat": 0.47011756896972656, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 16, "stat": 0.46869468688964844, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 17, "stat": 0.43553733825683594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 18, "stat": 0.47365760803222656, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 64, "rep": 19, "stat": 0.4546852111816406, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 0, "stat": 0.6203956604003906, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 1, "stat": 0.6376285552978516, "pvalue": 0.9344262295081968, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 2, "stat": 0.6311817169189453, "pvalue": 0.6557377049180327, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 3, "stat": 0.6334514617919922, "pvalue": 0.7868852459016393, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 4, "stat": 0.6331062316894531, "pvalue": 0.7540983606557377, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 5, "stat": 0.6224861145019531, "pvalue": 0.04918032786885246, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 6, "stat": 0.6326236724853516, "pvalue": 0.7540983606557377, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 7, "stat": 0.6343002319335938, "pvalue": 0.8524590163934426, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 8, "stat": 0.6274471282958984, "pvalue": 0.2786885245901639, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 9, "stat": 0.6294460296630859, "pvalue": 0.4918032786885246, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 10, "stat": 0.6338615417480469, "pvalue": 0.819672131147541, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 11, "stat": 0.6195888519287109, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 12, "stat": 0.6319179534912109, "pvalue": 0.7377049180327869, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 13, "stat": 0.6235332489013672, "pvalue": 0.06557377049180328, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 14, "stat": 0.6266498565673828, "pvalue": 0.22950819672131148, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 15, "stat": 0.6286277770996094, "pvalue": 0.36065573770491804, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 16, "stat": 0.6216621398925781, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 17, "stat": 0.6387920379638672, "pvalue": 0.9344262295081968, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 18, "stat": 0.6283588409423828, "pvalue": 0.3442622950819672, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 64, "rep": 19, "stat": 0.6290836334228516, "pvalue": 0.4426229508196721, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 0, "stat": 0.5130615234375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 1, "stat": 0.5146236419677734, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 2, "stat": 0.5092315673828125, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 3, "stat": 0.511627197265625, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 4, "stat": 0.5101566314697266, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 5, "stat": 0.5031051635742188, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 6, "stat": 0.5058002471923828, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 7, "stat": 0.5084915161132812, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 8, "stat": 0.5046844482421875, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 9, "stat": 0.5041885375976562, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 10, "stat": 0.5070629119873047, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 11, "stat": 0.5153789520263672, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 12, "stat": 0.5056133270263672, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 13, "stat": 0.5025196075439453, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 14, "stat": 0.5077629089355469, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 15, "stat": 0.5046405792236328, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 16, "stat": 0.5119228363037109, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 17, "stat": 0.5099735260009766, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 18, "stat": 0.5086021423339844, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 64, "rep": 19, "stat": 0.5040206909179688, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 0, "stat": 0.5150852203369141, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 1, "stat": 0.5085048675537109, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 2, "stat": 0.5054054260253906, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 3, "stat": 0.5089225769042969, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 4, "stat": 0.5100002288818359, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 5, "stat": 0.5062637329101562, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 6, "stat": 0.5026168823242188, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 7, "stat": 0.5080127716064453, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 8, "stat": 0.5101585388183594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 9, "stat": 0.5094985961914062, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 10, "stat": 0.5117874145507812, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 11, "stat": 0.5070018768310547, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 12, "stat": 0.5054893493652344, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 13, "stat": 0.5016899108886719, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 14, "stat": 0.5076103210449219, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 15, "stat": 0.5065116882324219, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 16, "stat": 0.5064563751220703, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 17, "stat": 0.5016403198242188, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 18, "stat": 0.5162925720214844, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 64, "rep": 19, "stat": 0.5001125335693359, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 0, "stat": 0.5061440467834473, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 1, "stat": 0.49706077575683594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 2, "stat": 0.5024876594543457, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 3, "stat": 0.5047941207885742, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 4, "stat": 0.4953474998474121, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 5, "stat": 0.498929500579834, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 6, "stat": 0.5003952980041504, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 7, "stat": 0.5001897811889648, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 8, "stat": 0.4992241859436035, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 9, "stat": 0.4969196319580078, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 10, "stat": 0.4995722770690918, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 11, "stat": 0.5020880699157715, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 12, "stat": 0.5003771781921387, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 13, "stat": 0.49770402908325195, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 14, "stat": 0.5014796257019043, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 15, "stat": 0.4988737106323242, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 16, "stat": 0.5031313896179199, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 17, "stat": 0.5018734931945801, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 18, "stat": 0.49745750427246094, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps", "budget": 256, "rep": 19, "stat": 0.5013608932495117, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 0, "stat": 0.43487977981567383, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 1, "stat": 0.4323110580444336, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 2, "stat": 0.4744734764099121, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 3, "stat": 0.45238828659057617, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 4, "stat": 0.44501638412475586, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 5, "stat": 0.4800286293029785, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 6, "stat": 0.44631004333496094, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 7, "stat": 0.4750204086303711, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 8, "stat": 0.4259452819824219, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 9, "stat": 0.45199108123779297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 10, "stat": 0.4573507308959961, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 11, "stat": 0.45475196838378906, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 12, "stat": 0.46613359451293945, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 13, "stat": 0.43535947799682617, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 14, "stat": 0.43294811248779297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 15, "stat": 0.45840883255004883, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 16, "stat": 0.47195959091186523, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 17, "stat": 0.4332423210144043, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 18, "stat": 0.44501686096191406, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "sap", "budget": 256, "rep": 19, "stat": 0.44339895248413086, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 0, "stat": 0.6280884742736816, "pvalue": 0.6885245901639344, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 1, "stat": 0.6222591400146484, "pvalue": 0.29508196721311475, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 2, "stat": 0.6330370903015137, "pvalue": 0.9344262295081968, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 3, "stat": 0.6275744438171387, "pvalue": 0.6721311475409836, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 4, "stat": 0.6228771209716797, "pvalue": 0.32786885245901637, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 5, "stat": 0.6318378448486328, "pvalue": 0.8524590163934426, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 6, "stat": 0.6357841491699219, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 7, "stat": 0.628819465637207, "pvalue": 0.6885245901639344, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 8, "stat": 0.6323213577270508, "pvalue": 0.9016393442622951, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 9, "stat": 0.6263699531555176, "pvalue": 0.5737704918032787, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 10, "stat": 0.6270675659179688, "pvalue": 0.6229508196721312, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 11, "stat": 0.6290102005004883, "pvalue": 0.7377049180327869, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 12, "stat": 0.6216630935668945, "pvalue": 0.2786885245901639, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 13, "stat": 0.6302428245544434, "pvalue": 0.819672131147541, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 14, "stat": 0.6260566711425781, "pvalue": 0.5409836065573771, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 15, "stat": 0.6313233375549316, "pvalue": 0.8524590163934426, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 16, "stat": 0.6176605224609375, "pvalue": 0.06557377049180328, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 17, "stat": 0.6257367134094238, "pvalue": 0.5245901639344263, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 18, "stat": 0.6271357536315918, "pvalue": 0.639344262295082, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "twisted", "budget": 256, "rep": 19, "stat": 0.6189579963684082, "pvalue": 0.08196721311475409, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 0, "stat": 0.4968142509460449, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 1, "stat": 0.5023117065429688, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 2, "stat": 0.49663352966308594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 3, "stat": 0.5008077621459961, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 4, "stat": 0.49523115158081055, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 5, "stat": 0.5035910606384277, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 6, "stat": 0.4965543746948242, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 7, "stat": 0.49714088439941406, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 8, "stat": 0.5032663345336914, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 9, "stat": 0.5027742385864258, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 10, "stat": 0.5046834945678711, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 11, "stat": 0.5003552436828613, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 12, "stat": 0.5070657730102539, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 13, "stat": 0.505833625793457, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 14, "stat": 0.5041699409484863, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 15, "stat": 0.49674272537231445, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 16, "stat": 0.5024399757385254, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 17, "stat": 0.5033764839172363, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 18, "stat": 0.4994997978210449, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_em03", "budget": 256, "rep": 19, "stat": 0.5027585029602051, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 0, "stat": 0.5015788078308105, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 1, "stat": 0.4995608329772949, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 2, "stat": 0.5015859603881836, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 3, "stat": 0.4966897964477539, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 4, "stat": 0.49866771697998047, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 5, "stat": 0.5070838928222656, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 6, "stat": 0.5029239654541016, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 7, "stat": 0.49939537048339844, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 8, "stat": 0.4995760917663574, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 9, "stat": 0.5041708946228027, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 10, "stat": 0.5000286102294922, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 11, "stat": 0.5054445266723633, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 12, "stat": 0.49659109115600586, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 13, "stat": 0.5019774436950684, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 14, "stat": 0.501309871673584, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 15, "stat": 0.503913402557373, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 16, "stat": 0.49785757064819336, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 17, "stat": 0.5034174919128418, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 18, "stat": 0.5012331008911133, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_cal", "config": "dps_ep03", "budget": 256, "rep": 19, "stat": 0.5073456764221191, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 0, "stat": 0.5090694427490234, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 1, "stat": 0.5072612762451172, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 2, "stat": 0.5103912353515625, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 3, "stat": 0.5054073333740234, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 4, "stat": 0.5072402954101562, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 5, "stat": 0.5088405609130859, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 6, "stat": 0.5126800537109375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 7, "stat": 0.5135173797607422, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 8, "stat": 0.512725830078125, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 9, "stat": 0.5100345611572266, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 10, "stat": 0.5042934417724609, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 11, "stat": 0.5037174224853516, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 12, "stat": 0.507293701171875, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 13, "stat": 0.5068778991699219, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 14, "stat": 0.5063648223876953, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 15, "stat": 0.5114364624023438, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 16, "stat": 0.5108909606933594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 17, "stat": 0.5081596374511719, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 18, "stat": 0.5073013305664062, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 64, "rep": 19, "stat": 0.5099735260009766, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 0, "stat": 0.7142467498779297, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 1, "stat": 0.7025661468505859, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 2, "stat": 0.7047977447509766, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 3, "stat": 0.6906929016113281, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 4, "stat": 0.6955986022949219, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 5, "stat": 0.6747722625732422, "pvalue": 0.9016393442622951, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 6, "stat": 0.6981430053710938, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 7, "stat": 0.6814937591552734, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 8, "stat": 0.6887168884277344, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 9, "stat": 0.6904487609863281, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 10, "stat": 0.6853008270263672, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 11, "stat": 0.6943283081054688, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 12, "stat": 0.6801204681396484, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 13, "stat": 0.7100276947021484, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 14, "stat": 0.7148685455322266, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 15, "stat": 0.6987361907958984, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 16, "stat": 0.6970043182373047, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 17, "stat": 0.6959381103515625, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 18, "stat": 0.7176189422607422, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 64, "rep": 19, "stat": 0.6905040740966797, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 0, "stat": 0.6735305786132812, "pvalue": 0.7704918032786885, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 1, "stat": 0.6754951477050781, "pvalue": 0.9508196721311475, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 2, "stat": 0.6691818237304688, "pvalue": 0.19672131147540983, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 3, "stat": 0.6701488494873047, "pvalue": 0.32786885245901637, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 4, "stat": 0.669403076171875, "pvalue": 0.21311475409836064, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 5, "stat": 0.6729488372802734, "pvalue": 0.6885245901639344, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 6, "stat": 0.6708984375, "pvalue": 0.45901639344262296, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 7, "stat": 0.6685886383056641, "pvalue": 0.08196721311475409, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 8, "stat": 0.6671524047851562, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 9, "stat": 0.6702404022216797, "pvalue": 0.3442622950819672, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 10, "stat": 0.66650390625, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 11, "stat": 0.6718044281005859, "pvalue": 0.5245901639344263, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 12, "stat": 0.6742763519287109, "pvalue": 0.8688524590163934, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 13, "stat": 0.6715602874755859, "pvalue": 0.47540983606557374, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 14, "stat": 0.6734085083007812, "pvalue": 0.7704918032786885, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 15, "stat": 0.6697006225585938, "pvalue": 0.26229508196721313, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 16, "stat": 0.6703548431396484, "pvalue": 0.3442622950819672, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 17, "stat": 0.6729698181152344, "pvalue": 0.6885245901639344, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 18, "stat": 0.6753559112548828, "pvalue": 0.9180327868852459, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 64, "rep": 19, "stat": 0.6710376739501953, "pvalue": 0.47540983606557374, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 0, "stat": 0.6311092376708984, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 1, "stat": 0.6349773406982422, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 2, "stat": 0.6314105987548828, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 3, "stat": 0.6336803436279297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 4, "stat": 0.6301422119140625, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 5, "stat": 0.6383190155029297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 6, "stat": 0.6312808990478516, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 7, "stat": 0.6301002502441406, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 8, "stat": 0.6393890380859375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 9, "stat": 0.6363658905029297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 10, "stat": 0.6330699920654297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 11, "stat": 0.6327018737792969, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 12, "stat": 0.6323204040527344, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 13, "stat": 0.6346416473388672, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 14, "stat": 0.6335639953613281, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 15, "stat": 0.6395168304443359, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 16, "stat": 0.6268177032470703, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 17, "stat": 0.6393985748291016, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 18, "stat": 0.6283149719238281, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 64, "rep": 19, "stat": 0.6383247375488281, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 0, "stat": 0.5086612701416016, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 1, "stat": 0.5033664703369141, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 2, "stat": 0.5103511810302734, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 3, "stat": 0.5047893524169922, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 4, "stat": 0.5105648040771484, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 5, "stat": 0.5038223266601562, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 6, "stat": 0.5086078643798828, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 7, "stat": 0.5100154876708984, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 8, "stat": 0.5119895935058594, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 9, "stat": 0.5128650665283203, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 10, "stat": 0.5092029571533203, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 11, "stat": 0.5037994384765625, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 12, "stat": 0.5066375732421875, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 13, "stat": 0.5051612854003906, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 14, "stat": 0.5115184783935547, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 15, "stat": 0.5080642700195312, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 16, "stat": 0.5050697326660156, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 17, "stat": 0.5083255767822266, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 18, "stat": 0.5105762481689453, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 64, "rep": 19, "stat": 0.5046787261962891, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 0, "stat": 0.5067625045776367, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 1, "stat": 0.4968442916870117, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 2, "stat": 0.5007743835449219, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 3, "stat": 0.5118598937988281, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 4, "stat": 0.5056524276733398, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 5, "stat": 0.4990682601928711, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 6, "stat": 0.4991168975830078, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 7, "stat": 0.5044598579406738, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 8, "stat": 0.5057392120361328, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 9, "stat": 0.5008707046508789, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 10, "stat": 0.5036277770996094, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 11, "stat": 0.5005168914794922, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 12, "stat": 0.5017166137695312, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 13, "stat": 0.5094923973083496, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 14, "stat": 0.5019106864929199, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 15, "stat": 0.5053386688232422, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 16, "stat": 0.5001497268676758, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 17, "stat": 0.5005655288696289, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 18, "stat": 0.503662109375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps", "budget": 256, "rep": 19, "stat": 0.5009899139404297, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 0, "stat": 0.7010836601257324, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 1, "stat": 0.6889958381652832, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 2, "stat": 0.6889605522155762, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 3, "stat": 0.6812839508056641, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 4, "stat": 0.6777315139770508, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 5, "stat": 0.6780776977539062, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 6, "stat": 0.7085351943969727, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 7, "stat": 0.6996145248413086, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 8, "stat": 0.6965937614440918, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 9, "stat": 0.692835807800293, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 10, "stat": 0.6962432861328125, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 11, "stat": 0.6800327301025391, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 12, "stat": 0.6799521446228027, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 13, "stat": 0.6901345252990723, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 14, "stat": 0.6783719062805176, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 15, "stat": 0.6993227005004883, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 16, "stat": 0.7016611099243164, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 17, "stat": 0.6818313598632812, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 18, "stat": 0.6972503662109375, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "sap", "budget": 256, "rep": 19, "stat": 0.7045607566833496, "pvalue": 1.0, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 0, "stat": 0.6668696403503418, "pvalue": 0.4098360655737705, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 1, "stat": 0.6686100959777832, "pvalue": 0.639344262295082, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 2, "stat": 0.6718850135803223, "pvalue": 0.9508196721311475, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 3, "stat": 0.6677875518798828, "pvalue": 0.47540983606557374, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 4, "stat": 0.6682004928588867, "pvalue": 0.5245901639344263, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 5, "stat": 0.6710367202758789, "pvalue": 0.8688524590163934, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 6, "stat": 0.671257495880127, "pvalue": 0.9016393442622951, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 7, "stat": 0.6641750335693359, "pvalue": 0.13114754098360656, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 8, "stat": 0.664557933807373, "pvalue": 0.16393442622950818, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 9, "stat": 0.6684908866882324, "pvalue": 0.6065573770491803, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 10, "stat": 0.667931079864502, "pvalue": 0.4918032786885246, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 11, "stat": 0.6627616882324219, "pvalue": 0.06557377049180328, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 12, "stat": 0.6643037796020508, "pvalue": 0.13114754098360656, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 13, "stat": 0.6663923263549805, "pvalue": 0.3442622950819672, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 14, "stat": 0.6720705032348633, "pvalue": 0.9672131147540983, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 15, "stat": 0.6673569679260254, "pvalue": 0.4262295081967213, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 16, "stat": 0.6676840782165527, "pvalue": 0.45901639344262296, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 17, "stat": 0.6716675758361816, "pvalue": 0.9344262295081968, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 18, "stat": 0.6669120788574219, "pvalue": 0.4098360655737705, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "twisted", "budget": 256, "rep": 19, "stat": 0.6713638305664062, "pvalue": 0.9016393442622951, "detected": false, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 0, "stat": 0.6269731521606445, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 1, "stat": 0.6292171478271484, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 2, "stat": 0.6258659362792969, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 3, "stat": 0.627561092376709, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 4, "stat": 0.6248645782470703, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 5, "stat": 0.6249427795410156, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 6, "stat": 0.6259603500366211, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 7, "stat": 0.6206393241882324, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 8, "stat": 0.627748966217041, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 9, "stat": 0.6315679550170898, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 10, "stat": 0.6283097267150879, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 11, "stat": 0.626800537109375, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 12, "stat": 0.6345744132995605, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 13, "stat": 0.6276798248291016, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 14, "stat": 0.6298909187316895, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 15, "stat": 0.6254892349243164, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 16, "stat": 0.6302556991577148, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 17, "stat": 0.6267518997192383, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 18, "stat": 0.6268272399902344, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_em03", "budget": 256, "rep": 19, "stat": 0.6257524490356445, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 0, "stat": 0.49973583221435547, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 1, "stat": 0.4984722137451172, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 2, "stat": 0.5014233589172363, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 3, "stat": 0.49996376037597656, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 4, "stat": 0.5054755210876465, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 5, "stat": 0.4992184638977051, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 6, "stat": 0.5057468414306641, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 7, "stat": 0.5011625289916992, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 8, "stat": 0.5035462379455566, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 9, "stat": 0.5021600723266602, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 10, "stat": 0.5046052932739258, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 11, "stat": 0.5061397552490234, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 12, "stat": 0.5072331428527832, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 13, "stat": 0.5019550323486328, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 14, "stat": 0.5032644271850586, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 15, "stat": 0.5001335144042969, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 16, "stat": 0.5012297630310059, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 17, "stat": 0.5009903907775879, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 18, "stat": 0.502530574798584, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal", "config": "dps_ep03", "budget": 256, "rep": 19, "stat": 0.5028691291809082, "pvalue": 0.01639344262295082, "detected": true, "n_null": 60, "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 0, "stat": 0.5090694427490234, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 1, "stat": 0.5072612762451172, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 2, "stat": 0.5103912353515625, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 3, "stat": 0.5054073333740234, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 4, "stat": 0.5072402954101562, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 5, "stat": 0.5088405609130859, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 6, "stat": 0.5126800537109375, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 7, "stat": 0.5135173797607422, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 8, "stat": 0.512725830078125, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 9, "stat": 0.5100345611572266, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 10, "stat": 0.5042934417724609, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 11, "stat": 0.5037174224853516, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 12, "stat": 0.507293701171875, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 13, "stat": 0.5068778991699219, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 14, "stat": 0.5063648223876953, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 15, "stat": 0.5114364624023438, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 16, "stat": 0.5108909606933594, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 17, "stat": 0.5081596374511719, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 18, "stat": 0.5073013305664062, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 64, "rep": 19, "stat": 0.5099735260009766, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 0, "stat": 0.7142467498779297, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 1, "stat": 0.7025661468505859, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 2, "stat": 0.7047977447509766, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 3, "stat": 0.6906929016113281, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 4, "stat": 0.6955986022949219, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 5, "stat": 0.6747722625732422, "pvalue": 0.22950819672131148, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 6, "stat": 0.6981430053710938, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 7, "stat": 0.6814937591552734, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 8, "stat": 0.6887168884277344, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 9, "stat": 0.6904487609863281, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 10, "stat": 0.6853008270263672, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 11, "stat": 0.6943283081054688, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 12, "stat": 0.6801204681396484, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 13, "stat": 0.7100276947021484, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 14, "stat": 0.7148685455322266, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 15, "stat": 0.6987361907958984, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 16, "stat": 0.6970043182373047, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 17, "stat": 0.6959381103515625, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 18, "stat": 0.7176189422607422, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 64, "rep": 19, "stat": 0.6905040740966797, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 0, "stat": 0.6735305786132812, "pvalue": 0.4918032786885246, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 1, "stat": 0.6754951477050781, "pvalue": 0.13114754098360656, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 2, "stat": 0.6691818237304688, "pvalue": 0.39344262295081966, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 3, "stat": 0.6701488494873047, "pvalue": 0.6557377049180327, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 4, "stat": 0.669403076171875, "pvalue": 0.4262295081967213, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 5, "stat": 0.6729488372802734, "pvalue": 0.6557377049180327, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 6, "stat": 0.6708984375, "pvalue": 0.9180327868852459, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 7, "stat": 0.6685886383056641, "pvalue": 0.16393442622950818, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 8, "stat": 0.6671524047851562, "pvalue": 0.06557377049180328, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 9, "stat": 0.6702404022216797, "pvalue": 0.6885245901639344, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 10, "stat": 0.66650390625, "pvalue": 0.06557377049180328, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 11, "stat": 0.6718044281005859, "pvalue": 0.9836065573770492, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 12, "stat": 0.6742763519287109, "pvalue": 0.29508196721311475, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 13, "stat": 0.6715602874755859, "pvalue": 0.9508196721311475, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 14, "stat": 0.6734085083007812, "pvalue": 0.4918032786885246, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 15, "stat": 0.6697006225585938, "pvalue": 0.5245901639344263, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 16, "stat": 0.6703548431396484, "pvalue": 0.6885245901639344, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 17, "stat": 0.6729698181152344, "pvalue": 0.6557377049180327, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 18, "stat": 0.6753559112548828, "pvalue": 0.19672131147540983, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 64, "rep": 19, "stat": 0.6710376739501953, "pvalue": 0.9508196721311475, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 0, "stat": 0.6311092376708984, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 1, "stat": 0.6349773406982422, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 2, "stat": 0.6314105987548828, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 3, "stat": 0.6336803436279297, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 4, "stat": 0.6301422119140625, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 5, "stat": 0.6383190155029297, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 6, "stat": 0.6312808990478516, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 7, "stat": 0.6301002502441406, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 8, "stat": 0.6393890380859375, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 9, "stat": 0.6363658905029297, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 10, "stat": 0.6330699920654297, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 11, "stat": 0.6327018737792969, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 12, "stat": 0.6323204040527344, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 13, "stat": 0.6346416473388672, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 14, "stat": 0.6335639953613281, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 15, "stat": 0.6395168304443359, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 16, "stat": 0.6268177032470703, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 17, "stat": 0.6393985748291016, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 18, "stat": 0.6283149719238281, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 64, "rep": 19, "stat": 0.6383247375488281, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 0, "stat": 0.5086612701416016, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 1, "stat": 0.5033664703369141, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 2, "stat": 0.5103511810302734, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 3, "stat": 0.5047893524169922, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 4, "stat": 0.5105648040771484, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 5, "stat": 0.5038223266601562, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 6, "stat": 0.5086078643798828, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 7, "stat": 0.5100154876708984, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 8, "stat": 0.5119895935058594, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 9, "stat": 0.5128650665283203, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 10, "stat": 0.5092029571533203, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 11, "stat": 0.5037994384765625, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 12, "stat": 0.5066375732421875, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 13, "stat": 0.5051612854003906, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 14, "stat": 0.5115184783935547, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 15, "stat": 0.5080642700195312, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 16, "stat": 0.5050697326660156, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 17, "stat": 0.5083255767822266, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 18, "stat": 0.5105762481689453, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 64, "rep": 19, "stat": 0.5046787261962891, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 0, "stat": 0.5067625045776367, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 1, "stat": 0.4968442916870117, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 2, "stat": 0.5007743835449219, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 3, "stat": 0.5118598937988281, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 4, "stat": 0.5056524276733398, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 5, "stat": 0.4990682601928711, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 6, "stat": 0.4991168975830078, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 7, "stat": 0.5044598579406738, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 8, "stat": 0.5057392120361328, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 9, "stat": 0.5008707046508789, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 10, "stat": 0.5036277770996094, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 11, "stat": 0.5005168914794922, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 12, "stat": 0.5017166137695312, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 13, "stat": 0.5094923973083496, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 14, "stat": 0.5019106864929199, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 15, "stat": 0.5053386688232422, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 16, "stat": 0.5001497268676758, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 17, "stat": 0.5005655288696289, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 18, "stat": 0.503662109375, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps", "budget": 256, "rep": 19, "stat": 0.5009899139404297, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 0, "stat": 0.7010836601257324, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 1, "stat": 0.6889958381652832, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 2, "stat": 0.6889605522155762, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 3, "stat": 0.6812839508056641, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 4, "stat": 0.6777315139770508, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 5, "stat": 0.6780776977539062, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 6, "stat": 0.7085351943969727, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 7, "stat": 0.6996145248413086, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 8, "stat": 0.6965937614440918, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 9, "stat": 0.692835807800293, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 10, "stat": 0.6962432861328125, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 11, "stat": 0.6800327301025391, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 12, "stat": 0.6799521446228027, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 13, "stat": 0.6901345252990723, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 14, "stat": 0.6783719062805176, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 15, "stat": 0.6993227005004883, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 16, "stat": 0.7016611099243164, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 17, "stat": 0.6818313598632812, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 18, "stat": 0.6972503662109375, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "sap", "budget": 256, "rep": 19, "stat": 0.7045607566833496, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 0, "stat": 0.6668696403503418, "pvalue": 0.819672131147541, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 1, "stat": 0.6686100959777832, "pvalue": 0.7540983606557377, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 2, "stat": 0.6718850135803223, "pvalue": 0.13114754098360656, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 3, "stat": 0.6677875518798828, "pvalue": 0.9508196721311475, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 4, "stat": 0.6682004928588867, "pvalue": 0.9836065573770492, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 5, "stat": 0.6710367202758789, "pvalue": 0.29508196721311475, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 6, "stat": 0.671257495880127, "pvalue": 0.22950819672131148, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 7, "stat": 0.6641750335693359, "pvalue": 0.26229508196721313, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 8, "stat": 0.664557933807373, "pvalue": 0.32786885245901637, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 9, "stat": 0.6684908866882324, "pvalue": 0.819672131147541, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 10, "stat": 0.667931079864502, "pvalue": 0.9836065573770492, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 11, "stat": 0.6627616882324219, "pvalue": 0.13114754098360656, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 12, "stat": 0.6643037796020508, "pvalue": 0.26229508196721313, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 13, "stat": 0.6663923263549805, "pvalue": 0.6885245901639344, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 14, "stat": 0.6720705032348633, "pvalue": 0.09836065573770492, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 15, "stat": 0.6673569679260254, "pvalue": 0.8524590163934426, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 16, "stat": 0.6676840782165527, "pvalue": 0.9180327868852459, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 17, "stat": 0.6716675758361816, "pvalue": 0.16393442622950818, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 18, "stat": 0.6669120788574219, "pvalue": 0.819672131147541, "detected": false, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "twisted", "budget": 256, "rep": 19, "stat": 0.6713638305664062, "pvalue": 0.22950819672131148, "detected": false, "n_null": 60, "side": "high", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 0, "stat": 0.6269731521606445, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 1, "stat": 0.6292171478271484, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 2, "stat": 0.6258659362792969, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 3, "stat": 0.627561092376709, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 4, "stat": 0.6248645782470703, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 5, "stat": 0.6249427795410156, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 6, "stat": 0.6259603500366211, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 7, "stat": 0.6206393241882324, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 8, "stat": 0.627748966217041, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 9, "stat": 0.6315679550170898, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 10, "stat": 0.6283097267150879, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 11, "stat": 0.626800537109375, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 12, "stat": 0.6345744132995605, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 13, "stat": 0.6276798248291016, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 14, "stat": 0.6298909187316895, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 15, "stat": 0.6254892349243164, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 16, "stat": 0.6302556991577148, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 17, "stat": 0.6267518997192383, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 18, "stat": 0.6268272399902344, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_em03", "budget": 256, "rep": 19, "stat": 0.6257524490356445, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 0, "stat": 0.49973583221435547, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 1, "stat": 0.4984722137451172, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 2, "stat": 0.5014233589172363, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 3, "stat": 0.49996376037597656, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 4, "stat": 0.5054755210876465, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 5, "stat": 0.4992184638977051, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 6, "stat": 0.5057468414306641, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 7, "stat": 0.5011625289916992, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 8, "stat": 0.5035462379455566, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 9, "stat": 0.5021600723266602, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 10, "stat": 0.5046052932739258, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 11, "stat": 0.5061397552490234, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 12, "stat": 0.5072331428527832, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 13, "stat": 0.5019550323486328, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 14, "stat": 0.5032644271850586, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 15, "stat": 0.5001335144042969, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 16, "stat": 0.5012297630310059, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 17, "stat": 0.5009903907775879, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 18, "stat": 0.502530574798584, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
+{"test": "mira_sym_cal2", "config": "dps_ep03", "budget": 256, "rep": 19, "stat": 0.5028691291809082, "pvalue": 0.03278688524590164, "detected": true, "n_null": 60, "side": "low", "tag": "confirmatory"}
