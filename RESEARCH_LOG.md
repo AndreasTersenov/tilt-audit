@@ -336,3 +336,39 @@
   distributional-but-offline on sims (Remy posterior-predictive on sims; newer astro:
   TARP/SBC on sims); distributional validation on REAL observations: none found —
   state as absence-of-evidence with the structural reason.
+
+## Predictions — certifier trial + transfer night (2026-07-04 → 05; FROZEN at owner sign-off; public push precedes first GPU job)
+
+### P-20260704i · score-KSD detects the standard failures · conf 70% · resolve-by 2026-07-07 · OPEN
+- **Claim:** with the TRUE target score, score-KSD passes its null gate and detects dps,
+  sap, AND the ε=−0.3 compensation config on the GRF archives with power ≥0.9 at budgets
+  ≤1024 (empirically calibrated α=0.05).
+- **Resolution criterion:** A-null + A-power grids (docs/OVERNIGHT_2026-07-04_CERTIFIER_TRANSFER_NIGHT.md §2).
+
+### P-20260704j · missed-mode blindness · conf 70% · resolve-by 2026-07-07 · OPEN
+- **Claim:** on the exact 2-component mixture (50/50 weights), a sampler covering only
+  one mode goes UNDETECTED by score-KSD at α=0.05 in ≥50% of reps at budgets ≤1024,
+  while PQMass and TARP flag it at ≥0.9 power on the same sets.
+- **Resolution criterion:** A-mixture grid + T-M1 gate.
+
+### P-20260704k · wrong-reference false-certification · conf 65% · resolve-by 2026-07-07 · OPEN
+- **Claim:** with a contaminated reference score (ε=−0.3, analytic or mis-trained net),
+  score-KSD reads the MATCHED wrong sampler as null-consistent (≤1.5× the null's 95%
+  quantile) while its true damage is ≥3× floor — the deployment-configuration trap.
+- **Resolution criterion:** A-wrongref grid.
+
+### P-20260704l · gold standards are manufacturable at 64² · conf 75% · resolve-by 2026-07-07 · OPEN
+- **Claim:** NUTS on the nonlinear-forward-model posterior passes T-L1 (Gaussian-limit
+  match), T-L2 (R-hat<1.01, ESS>400), T-L3 (seed independence) at 64² within the H4 box.
+- **Resolution criterion:** gate outputs, logged with numbers.
+
+### P-20260704m · DPS overconfidence transfers to the nonlinear substrate · conf 65% · resolve-by 2026-07-07 · OPEN
+- **Claim:** vs MCMC gold standards, DPS shows band-power 68%-coverage ≤0.5 at the strong
+  tilt and the damage ordering dps > dps-inflated ≈ remy@K=100 is preserved at every
+  gold-standard config (MMD and sliced-W2 agree on the ordering).
+- **Resolution criterion:** transfer grid vs gold (§3).
+
+### P-20260704n · Rémy K-convergence transfers · conf 75% · resolve-by 2026-07-07 · OPEN
+- **Claim:** remy MMD-to-gold decreases monotonically in K ∈ {5,30,100} at every
+  gold-standard config.
+- **Resolution criterion:** transfer grid vs gold (§3).
