@@ -1,0 +1,2 @@
+[gold:gold_n64_mid_y0_lam0.0001_s0] wall=73s rhat_max=1.0002 ess_min=29835 ess_med=40865 T-L2=PASS
+[T-L1:n64] frac|z|>4=2.44e-04 med|vr-1|=0.0134 frac|vr-1|>5%=0.0122 max|z|=4.02 => PASS

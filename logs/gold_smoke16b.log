@@ -1,0 +1,2 @@
+[gold:gold_n16_mid_y0_lam0.01_s0] wall=17s rhat_max=1.0005 ess_min=4484 ess_med=6486 T-L2=PASS
+[T-L1:n16] frac|z|>4=4.69e-02 med|vr-1|=0.0347 frac|vr-1|>5%=0.3125 max|z|=12.88 => FAIL

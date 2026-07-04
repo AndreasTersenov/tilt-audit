@@ -1,0 +1,8 @@
+[T-M1] offset modes: [0, 4, 2050, 2081], Mahalanobis separation = 12.0 sigma
+[T-M1] w=0.5: empirical weight 0.4969 (3sig band +-0.0106) PASS
+[T-M1] w=0.5: moments frac|z|>4=0.00e+00 frac|vr-1|>5%=0.0000 max|z|=3.80 PASS
+[T-M1] w=0.5: score at +dmu offset modes max|s|=0.00e+00 PASS
+[T-M1] w=0.8: empirical weight 0.7960 (3sig band +-0.0085) PASS
+[T-M1] w=0.8: moments frac|z|>4=0.00e+00 frac|vr-1|>5%=0.0000 max|z|=3.80 PASS
+[T-M1] w=0.8: score at +dmu offset modes max|s|=0.00e+00 PASS
+gate_mixture: ALL GREEN

@@ -1,0 +1,4 @@
+G-C1 PASS: max|step_rn|=0.00e+00, max|logw - r/b|=3.64e-12 (need <1e-8)
+G-C2 PASS: DPI holds all shifts | eg tightness path/end = 1.054 (need <=1.3) | KLhat/exact median 1.005 at eg/0.25sigma (exact 9.84 nats; need in [0.5, 1.5])
+G-C3 PASS: mean(Zhat/Z) = 0.724 +- 0.117 at eg/0.25sigma (exact path KL 9.84; need within 5 s.e. of 1)
+gate_cert: ALL GREEN
