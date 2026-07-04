@@ -101,6 +101,26 @@
   svg text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: var(--muted); }
   ol.steps { padding-left: 1.3rem; }
   ol.steps li { margin-bottom: 0.7rem; }
+  .eq {
+    margin: 1.5rem 0; padding: 0.95rem 1.1rem 0.8rem; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 6px; position: relative;
+  }
+  .eq .tag {
+    position: absolute; top: 0.55rem; right: 0.8rem;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted);
+  }
+  .eq .formula {
+    font-style: italic; text-align: center; font-size: 1.13rem;
+    margin: 0.3rem 0 0.75rem; overflow-x: auto; padding: 0 1.5rem;
+    line-height: 1.9;
+  }
+  .eq .formula sub, .eq .formula sup { font-size: 0.7em; font-style: normal; }
+  .eq .words {
+    font-size: 0.9rem; color: var(--muted);
+    border-top: 1px dashed var(--line-soft); padding-top: 0.6rem; line-height: 1.55;
+  }
+  .eq .words b { color: var(--ink); font-weight: 600; }
 </style>
 
 <div class="col">
@@ -201,26 +221,54 @@
 </div>
 
 <div class="col">
-  <h3>Idea 2 — Steering modifies each step; the correct target is written down by Bayes&rsquo; rule</h3>
+  <h3>Idea 2 — What the steered sampler is <em>supposed</em> to produce: Bayes&rsquo; rule, lifted to journeys</h3>
   <p>An unsteered model walks back from static to a <em>typical</em> map. To get
   maps consistent with <em>your data</em>, steering methods add a small extra
   pull at every one of those hundreds of steps — a nudge toward agreement with
-  the measurements. The strength and direction of that nudge is where all the
-  approximation lives: the theoretically correct nudge involves a quantity the
-  model doesn&rsquo;t directly know (how uncertain its own denoising currently
-  is), so practical recipes substitute something cheaper. The most popular one
-  simply ignores that uncertainty. On our bench, that shortcut produces answer
-  clouds that are <em>too confident</em>: centered slightly wrong, and far too
-  narrow — precisely the failure mode that corrupts scientific error bars.</p>
-  <p>Meanwhile, what the steered sampler <em>should</em> produce is not
-  mysterious. Bayes&rsquo; rule specifies it exactly, and it has a form worth
-  internalizing because the meter is built on it: <b>the correct output is the
-  unsteered model&rsquo;s own random walks, re-weighted at the end by how well
-  each final map fits the data</b>. In principle you could sample the posterior
-  with no steering at all: generate thousands of typical maps, keep the ones that
-  happen to match your measurements. That is hopeless in practice (essentially no
-  typical map matches), which is <em>why</em> steering exists — but it defines,
-  in checkable form, what &ldquo;the right answer&rdquo; means.</p>
+  the measurements. But before judging any recipe, we need to state what the
+  correct output even is. That is Bayes&rsquo; rule:</p>
+  <div class="eq"><span class="tag">E1</span>
+    <div class="formula">p(map&thinsp;|&thinsp;data) &nbsp;∝&nbsp; p(map) &nbsp;·&nbsp; L(map),
+    &nbsp;&nbsp;&nbsp; L(map) = exp(&thinsp;−&thinsp;mismatch(map)² / 2σ²&thinsp;)</div>
+    <div class="words"><b>In words:</b> the probability that a given map is the
+    real one, after seeing the data, is proportional to two factors — how
+    plausible the map was to begin with (<b>the prior</b>, which our generative
+    model supplies), times how well it explains the measurements (<b>the data
+    fit</b> L: it decays as the mismatch between predicted and observed data
+    grows, with σ the measurement noise). Bayes&rsquo; rule is not an
+    approximation; it is the definition of the correct answer.</div>
+  </div>
+  <p>Now the step that connects this to samplers, and that everything on this
+  page hangs on. The unsteered model produces whole <em>journeys</em> — a few
+  hundred random steps ending in a final map — and by construction the final
+  maps of those journeys follow the prior p(map). So consider the following
+  recipe, which is just E1 rewritten at the level of journeys:</p>
+  <div class="eq"><span class="tag">E2</span>
+    <div class="formula">P<sup>★</sup>(journey) &nbsp;∝&nbsp; P<sub>0</sub>(journey) &nbsp;·&nbsp; L(final map of that journey)</div>
+    <div class="words"><b>In words:</b> take the unsteered model&rsquo;s own
+    journeys (probability P<sub>0</sub>), and re-weight each whole journey by how
+    well its <em>endpoint</em> fits the data. Because the endpoints of
+    P<sub>0</sub>-journeys follow the prior, multiplying by L makes the endpoints
+    of P<sup>★</sup>-journeys follow <b>exactly the posterior of E1</b>. Nothing
+    else changes — P<sup>★</sup> is the unsteered process, viewed through
+    data-tinted glasses.</div>
+  </div>
+  <p>P<sup>★</sup> is the gold standard: the journey distribution whose endpoints
+  are the correct answer. You could even sample it directly — generate millions
+  of typical maps, keep only those matching your data — but essentially none
+  match, so this is hopelessly wasteful. <b>A steering method is precisely an
+  attempt to generate P<sup>★</sup>-journeys directly</b>, by nudging each step,
+  instead of generating P<sub>0</sub>-journeys and discarding almost all of them.
+  And now &ldquo;is my steered sampler correct?&rdquo; has an exact meaning:
+  <em>is the distribution of journeys it actually produces close to
+  P<sup>★</sup>?</em></p>
+  <p>Where the approximation sneaks in: the theoretically correct nudge involves
+  a quantity the model doesn&rsquo;t directly know (how uncertain its own
+  denoising currently is), so practical recipes substitute something cheaper.
+  The most popular one simply drops that uncertainty term. On our bench, the
+  result is answer clouds that are <em>too confident</em> — centered slightly
+  wrong and far too narrow — exactly the failure mode that corrupts scientific
+  error bars.</p>
 
   <h3>Idea 3 — Importance weights: comparing two sets of rules on the same journey</h3>
   <p>One more classical tool. Suppose a walker takes a journey following rules B,
@@ -231,43 +279,75 @@
   call the result an <b>importance weight</b>. It is an exact accounting
   device — no approximation — provided you genuinely know both rules.</p>
   <p>Now the crucial observation: <b>a steered sampler knows both rules about
-  itself.</b> It knows the unsteered model&rsquo;s step rules (that&rsquo;s just
-  its own network without the nudge) and it knows the nudged rules (it applied
-  them). So it can compute these weights <em>about its own journeys, while it
-  runs, on real data, with no ground truth anywhere</em>. That is the loophole
-  the meter exploits.</p>
+  itself.</b> It knows the unsteered step rules (its own network without the
+  nudge — the P<sub>0</sub> of E2), and it knows the nudged rules it actually
+  applied (call their journey distribution P<sub>s</sub>, s for
+  &ldquo;sampler&rdquo;). So it can compute these step-by-step ratios <em>about
+  its own journeys, while it runs, on real data, with no ground truth
+  anywhere</em>. That is the loophole the meter exploits.</p>
 
   <p class="eyebrow">part 3 · the instrument</p>
   <h2>The meter, assembled from those three ideas</h2>
-  <p>Here is the whole construction, honestly, in four steps:</p>
-  <ol class="steps">
-    <li><b>Run your steered sampler normally.</b> It produces, say, 28 final
-    maps, each via a few hundred nudged random steps. Nothing extra happens to
-    the sampler.</li>
-    <li><b>As each journey unfolds, keep a ledger.</b> At every step, record the
-    ratio: probability of the move just taken under the <em>unsteered</em> rules,
-    versus under the <em>nudged</em> rules actually used. Multiply along the
-    journey. This is the importance weight of Idea&nbsp;3 — the &ldquo;journey
-    cost&rdquo; of all the nudging.</li>
-    <li><b>At the end, multiply in the data fit</b> of the final map (how well it
-    agrees with the measurements). By Idea&nbsp;2, journey&nbsp;cost&nbsp;&times;
-    data&nbsp;fit is exactly the weight that converts &ldquo;what the steered
-    sampler did&rdquo; into &ldquo;what Bayes says it should have done.&rdquo;</li>
-    <li><b>Read the ledger.</b> A mathematical identity does the rest: <em>if the
-    sampler is producing exactly what it claims, every journey ends up with the
-    same weight.</em> Any spread in the weights is caused by — and quantifies —
-    the gap between what the sampler did and what it should have done. Flat
-    ledger&nbsp;=&nbsp;certified. Spread-out ledger&nbsp;=&nbsp;error, and the
-    amount of spread is the reading.</li>
-  </ol>
-  <p>Two numbers summarize the ledger. The <b>effective sample count</b>: if one
-  journey carries almost all the weight, your 28 samples are really worth ~1
-  (spread has eaten them). And the <b>meter reading</b>: a single error score
-  computed from the spread, which mathematics guarantees is an <em>upper
-  limit</em> on how wrong the final answer cloud can be. (Its units,
-  &ldquo;nats,&rdquo; are the standard currency of information — all you need
-  here is: 0 means perfect, bigger means worse, and it adds up across independent
-  sources of error.)</p>
+  <p>We now have three objects on the table, and it is worth keeping their names
+  straight. <b>P<sub>0</sub></b>: the unsteered model&rsquo;s journeys.
+  <b>P<sup>★</sup></b>: the gold standard — P<sub>0</sub> re-weighted by data
+  fit, whose endpoints are the exact posterior (E2). <b>P<sub>s</sub></b>: the
+  journeys your steered sampler <em>actually</em> produces, nudges,
+  approximations and all. The sampler&rsquo;s error, at the level of whole
+  journeys, is the gap between P<sub>s</sub> and P<sup>★</sup>. The meter
+  estimates that gap. Here is the ledger, precisely — this is the single
+  formula the whole page is about:</p>
+  <div class="eq"><span class="tag">E3 · the ledger</span>
+    <div class="formula">w(journey) &nbsp;=&nbsp;
+    <span style="font-size:1.35em">∏</span><sub>steps&nbsp;t</sub>
+    &nbsp;[&thinsp;p<sub>0</sub>(step<sub>t</sub>) / p<sub>s</sub>(step<sub>t</sub>)&thinsp;]
+    &nbsp;·&nbsp; L(final map)</div>
+    <div class="words"><b>In words:</b> follow one journey your sampler
+    generated. At every step, both the unsteered rules and the nudged rules
+    assign a probability to the move that was just taken — divide the first by
+    the second. (Each factor asks: <em>was this move more, or less, likely
+    without the nudge?</em> A move the nudge made likelier gets a factor below
+    1.) Multiply the few hundred factors together — that product is the
+    <b>journey cost</b>, the total accounting of everything steering did. Then
+    multiply once by the <b>data fit</b> L of the final map, from E1. Every
+    quantity here is available to the running sampler; the true answer appears
+    nowhere. w is one number per journey — one bar in the panels below.</div>
+  </div>
+  <p>Why is this the right bookkeeping? Compare it to E2: multiplying a
+  P<sub>0</sub>-probability by L gives (up to one overall constant) the
+  P<sup>★</sup>-probability. So the ledger is literally
+  w&nbsp;=&nbsp;P<sup>★</sup>(journey)&thinsp;/&thinsp;P<sub>s</sub>(journey)
+  &times; constant — <em>how much the gold standard likes this journey, relative
+  to how much your sampler likes it</em>. Three consequences follow, and they
+  are the entire instrument:</p>
+  <div class="eq"><span class="tag">E4 · the readings</span>
+    <div class="formula">
+      perfect sampler (P<sub>s</sub> = P<sup>★</sup>) &nbsp;⟺&nbsp; w identical for every journey<br>
+      ESS &nbsp;=&nbsp; (Σ&thinsp;w<sub>i</sub>)²&thinsp;/&thinsp;Σ&thinsp;w<sub>i</sub>²
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      reading &nbsp;=&nbsp; log&thinsp;⟨w⟩ − ⟨log&thinsp;w⟩ &nbsp;≥&nbsp; 0
+    </div>
+    <div class="words"><b>Line 1, the flatness test:</b> if the sampler is
+    exactly right, the ratio P<sup>★</sup>/P<sub>s</sub> is the same constant for
+    every journey — the books balance perfectly. Any spread in the w&rsquo;s
+    means some journeys were over-produced and others under-produced relative to
+    the gold standard; the spread <em>is</em> the error.
+    <b>Line 2, quantifying the spread:</b> the <b>effective sample size</b> —
+    if all 28 weights are equal it returns 28; if one weight dominates it
+    returns ≈1 (&ldquo;you effectively have one sample&rdquo;). And the
+    <b>reading</b>: the gap between the log of the average weight and the
+    average of the log weights. For flat weights the two coincide and the
+    reading is zero; the more uneven the weights, the larger the gap (this is
+    Jensen&rsquo;s inequality doing the measuring). Mathematically this reading
+    estimates the journey-level divergence between P<sub>s</sub> and
+    P<sup>★</sup> — which is always an <b>upper limit</b> on the error of the
+    final answer cloud, since endpoints are part of the journey. Units are
+    &ldquo;nats,&rdquo; the standard currency of information: 0 = perfect,
+    bigger = worse, additive across independent error sources.</div>
+  </div>
+  <p>That is the entire instrument: run the sampler as normal, accumulate E3
+  alongside, report E4. No ground truth, no extra network evaluations, nothing
+  changed about the sampler itself.</p>
   <p>The panel below runs all of this live — the genuine equations from the
   experiment, in one dimension so every journey is visible. The dotted band is
   the true answer, which <em>only the bench knows</em>; watch that the meter
@@ -293,9 +373,15 @@
         </figure>
         <figure>
           <canvas id="c1-side" width="520" height="430" aria-label="Endpoint distribution and per-journey ledger weights"></canvas>
-          <figcaption><b>Top: the destination.</b> Where the samples land, against
-          the true answer curve. <b>Bottom: the ledger.</b> One weight bar per
-          journey. The dashed line marks a perfectly flat ledger.</figcaption>
+          <figcaption><b>Top: the destination.</b> Each tick is one journey&rsquo;s
+          final value; the curve is the true posterior (bench-only).
+          <b>Bottom: the ledger, i.e. E3 evaluated on these 28 journeys.</b>
+          Bar i has height w<sub>i</sub>&thinsp;/&thinsp;Σ&thinsp;w<sub>j</sub> —
+          journey i&rsquo;s share of the total weight; the 28 bars sum to 1. A
+          perfect sampler gives every journey the share 1/28 (dashed line). A
+          bar towering above the rest is a journey the gold standard
+          P<sup>★</sup> considers far more probable than the sampler&rsquo;s own
+          behavior would suggest — direct evidence of mismatch.</figcaption>
         </figure>
       </div>
       <div class="readout">
@@ -413,8 +499,10 @@
         </figure>
         <figure>
           <canvas id="c2-side" width="520" height="430" aria-label="Endpoint distribution and ledger under the learned gradients"></canvas>
-          <figcaption><b>The punchline in one panel:</b> the destination cloud is
-          nearly unchanged; the ledger has exploded.</figcaption>
+          <figcaption><b>The punchline in one panel:</b> the destination cloud
+          (top) is nearly unchanged; the ledger (bottom — same definition as in
+          instrument 01: each bar is one journey&rsquo;s share of total weight)
+          has collapsed onto a single journey.</figcaption>
         </figure>
       </div>
       <div class="readout">
@@ -503,7 +591,50 @@
 </div>
 
 <div class="col">
-  <p class="eyebrow">part 6 · due diligence</p>
+  <p class="eyebrow">part 6 · the field&rsquo;s flagship</p>
+  <h2>Where the community&rsquo;s actual mass-mapping method fits in all this</h2>
+  <p>Readers from weak lensing will be asking: what does any of this mean for the
+  method the field actually ships — the Remy et&nbsp;al. (2023) mass-mapping
+  sampler, which reconstructed dark-matter maps of real survey data with a
+  diffusion prior? It sits inside this story in three distinct ways.</p>
+  <p><b>First, it is one of the steered samplers under audit — the cautious
+  one.</b> Instead of one backward pass with nudges at full data strength, their
+  scheme visits a ladder of noise levels and, at each level, deliberately
+  <em>weakens</em> the data pull: it treats the measurement noise as if it were
+  inflated by the current noise level (variance σ²<sub>data</sub> +
+  σ²<sub>level</sub>), never over-trusting the data while the map is still
+  blurry, and spends K correction steps per level to settle in before cooling.
+  On our bench this design philosophy is measurably vindicated <em>and</em>
+  priced: it is the only method in the family whose error genuinely converges to
+  the exact answer as you give it more compute — but matching the quality of the
+  cheap one-pass shortcut already costs roughly 7&ndash;30&times; the shortcut&rsquo;s
+  compute, and near-exactness costs about 100&times;. Cautious, correct in the
+  limit, expensive: now with exact numbers attached.</p>
+  <p><b>Second, their validation practice is exactly the gap the meter aimed
+  at.</b> How does that team currently argue their maps are right? The
+  state-of-the-art way: run the sampler on <em>simulations</em> where the truth
+  is known, check the recovered uncertainties offline, then trust the pipeline
+  on real data. That is an offline, in-distribution argument — it cannot notice
+  a problem specific to <em>tonight&rsquo;s observation</em>. And the standard
+  online checks from the Monte-Carlo tradition (convergence diagnostics) measure
+  whether the sampler has <em>settled</em>, not whether it settled in the right
+  place: a finite ladder of noise levels can converge beautifully to a biased
+  answer — on our bench, at practitioner-typical K, that residual bias is
+  3&ndash;100&times; the ideal error. A per-observation runtime meter would have
+  been the missing complement. That is why this instrument was worth a serious
+  attempt.</p>
+  <p><b>Third, the verdict covers their scheme too.</b> The ledger idea has a
+  natural version for level-ladder samplers (the weights accumulate across
+  levels instead of steps — the classic &ldquo;annealed importance
+  sampling&rdquo; construction). We built and tested that version as well: at
+  realistic map sizes its books degenerate just like the others&rsquo; — off by
+  a hundred thousand log-units. So nothing on this page says the field&rsquo;s
+  maps are wrong; it says the field&rsquo;s <em>offline</em> validation remains
+  the only game in town, our bench now supplies its error-budget price list, and
+  the runtime warning light everyone would want — for their sampler as much as
+  for the shortcuts — still does not exist.</p>
+
+  <p class="eyebrow">part 7 · due diligence</p>
   <h2>Auditing our own verdict</h2>
   <p>A negative result is worth publishing only if it is airtight, so we attacked
   it before believing it:</p>
@@ -527,7 +658,7 @@
   networks, how much a sampler travels tells you nothing about where it lands —
   and any instrument built on journey-accounting inherits that blindness.</b></p>
 
-  <p class="eyebrow">part 7 · what remains</p>
+  <p class="eyebrow">part 8 · what remains</p>
   <h2>Why this was a good day anyway</h2>
   <p>Three things survive the wreck. First, the meter remains genuinely useful
   <em>on the bench</em>, where its tightness for good samplers is a precision
