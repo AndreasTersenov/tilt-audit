@@ -224,7 +224,7 @@ def main():
                                                    bank=bank.shape[0]))
             run_target_battery(out_path, "mixture", f"mix_w{w}", banks,
                                draw_null, score_fn, az, budgets,
-                               dict(score_mode="true", w=w), args.tag)
+                               dict(score_mode="true"), args.tag)
 
 
 if __name__ == "__main__":
