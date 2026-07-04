@@ -14,10 +14,12 @@ md(r"""# The Overnight GRF Pilot — a guided tour
 
 **What this notebook is.** On the night of 2026-07-02 → 03 we ran a pre-registered
 "kill test" for a research direction: *auditing the correctness of steered diffusion
-samplers on problems where the right answer is known exactly.* This notebook walks
+samplers on problems where the right answer is known exactly.* **Part I** walks
 through what we built, why, and what came out — assuming familiarity with Bayesian
-inference and Wiener filtering, but **not** with diffusion samplers. Every figure is
-regenerated live from the night's result files in `../results/`.
+inference and Wiener filtering, but **not** with diffusion samplers. **Part II**
+covers the follow-up night (2026-07-03 → 04): four confirmatory arms, publicly
+pre-registered, including an audit of the community's own validation tools. Every
+figure is regenerated live from the nights' result files in `../results/`.
 
 **The one-sentence summary of the outcome:** the popular approximate ways of steering
 a diffusion model toward data or a reward are *measurably, substantially* biased at
@@ -977,7 +979,8 @@ sampler — one reliability program.
 (E-20260703a, 100 problems × 3 seeds × 3 methods at 12k budgets) — pre-registered
 gate and expectations already in the ledger.
 
-**Next experiments in the queue (designed, not yet launched):**
+**Next experiments in the queue at Part I's close** *(all of these — plus the
+multi-observation ensemble — ran the following night; results in Part II below)*:
 
 The **amortized-conditional arm** — the other major way the field uses diffusion for
 inference is to skip steering entirely and train a *conditional* score model to be
@@ -1003,6 +1006,287 @@ its $W_2$/coverage against the oracle as a function of $K$, plus its response to
 misspecification knob. One day of compute; the deliverable is the error budget of
 the community's workhorse, with exact numbers — the program's first outward-facing
 result.
+""")
+
+# ═══════════════════════════════════════════════════════════ PART II: arms night
+md(r"""---
+
+# Part II — The four-arms night (2026-07-03 → 04)
+
+The pilot ended with a **GO**: the steering shortcuts are measurably, structurally
+wrong, and the arena can prove it. The second night asked the four natural follow-up
+questions — in plain words:
+
+1. **Was it a fluke of the one test sky?** The pilot measured everything against a
+   single simulated observation. Maybe the numbers depend on which fake sky you draw.
+2. **Would the community's own health checks have caught these failures?** The field
+   validates its samplers with statistical tests on the samples. Do those tests
+   detect the failures we can manufacture at exactly known size — including the
+   sneaky one that fakes the right temperature?
+3. **What if you train the network to handle the data directly?** Instead of steering
+   a prior-only generator at sampling time, you can train the generator from the
+   start to take the observation as an input. Is that class better or worse?
+4. **How good is the recipe astronomers actually use for mass mapping — and what
+   does its accuracy cost in compute?**
+
+Same discipline as the pilot, one step stricter: the four predictions
+(P-20260703b–e in `RESEARCH_LOG.md`) were frozen before the run **and the repository
+went public before the first GPU job** — so the predictions are externally
+timestamped by GitHub before any result existed. Every figure below regenerates
+live from the night's result files.
+""")
+
+md(r"""## II.1 Twenty-four skies instead of one
+
+We reran the pilot's headline comparison against **24 independent simulated
+observations** (each with its own re-calibrated steering strength), instead of one.
+For each sky, each method's error is divided by the "oracle floor" — the error that
+$N$ *perfect* samples would show — so 1.0 means "as good as possible" and 10 means
+"ten times worse than perfect sampling".
+
+**Answer: not a fluke, at all.** Every qualitative statement from the pilot holds
+for every one of the 24 skies (24/24): the correct algorithm sits on the floor, the
+popular shortcut (plug-in guidance) is several times off and gets worse with
+steering strength, the resample-every-step heuristic is worse still, and
+reweight-at-the-end is hopeless. The sky-to-sky spread of these ratios is a few
+percent — tiny compared to the effects themselves. The violins below are *narrow*:
+that narrowness is the referee-proofing result.
+""")
+
+code(r'''# A1: ratio distributions across 24 observation draws (64x64, N=256)
+a1 = load("a1_multiy.jsonl")
+d64 = a1[(a1.dim == 64) & (a1.N == 256)]
+fl = (d64[d64.sampler == "oracle"].groupby(["shift", "y_seed"]).w2.median()
+      .rename("floor").reset_index())
+r = d64[d64.sampler != "oracle"].merge(fl, on=["shift", "y_seed"])
+r["ratio"] = r.w2 / r.floor
+shifts, order = [0.5, 1.0, 2.0, 4.0], ["twisted", "dps", "sap", "terminal_is"]
+colors = dict(twisted="#2ca02c", dps="#d62728", sap="#ff7f0e", terminal_is="#9467bd")
+fig, ax = plt.subplots(figsize=(8.5, 4.2))
+for i, s in enumerate(order):
+    pos = np.arange(len(shifts)) + (i - 1.5) * 0.19
+    data = [r[(r.sampler == s) & (r["shift"] == sh)].groupby("y_seed").ratio
+            .mean().values for sh in shifts]
+    vp = ax.violinplot(data, positions=pos, widths=0.17, showmedians=True)
+    for b in vp["bodies"]: b.set_facecolor(colors[s]); b.set_alpha(0.6)
+    for p in ("cmedians", "cbars", "cmins", "cmaxes"): vp[p].set_color(colors[s])
+    ax.plot([], [], color=colors[s], label=s)
+ax.axhline(1, color="k", ls=":", lw=0.8); ax.axhline(3, color="k", ls="--", lw=0.8, alpha=0.5)
+ax.set(yscale="log", xticks=range(4), xlabel="steering strength (posterior-mean shift)",
+       ylabel="error / oracle floor")
+ax.set_xticklabels([f"{s}σ" for s in shifts]); ax.legend(fontsize=8, loc="upper left")
+ax.set_title(f"One story, {r.y_seed.nunique()} skies: method ranking and gaps are generic")
+plt.tight_layout()
+n_iqr = r[(r.sampler=="dps") & (r["shift"]==1.0)].groupby("y_seed").ratio.mean()
+print(f"e.g. plug-in guidance at 1σ: median {n_iqr.median():.2f}x floor, "
+      f"sky-to-sky spread {(n_iqr.quantile(.75)-n_iqr.quantile(.25))/n_iqr.median():.1%}")
+''')
+
+md(r"""## II.2 Testing the tests ("certify the certifiers")
+
+The community checks its samplers with three kinds of statistical test, all of which
+only need samples (no exact answer required — that's their appeal):
+
+- **PQMass** — "are these two piles of samples drawn from the same distribution?"
+  (compares counts in random regions of map space);
+- **TARP** — "when the method claims 68% confidence, does the truth actually fall
+  inside 68% of the time?" (a coverage check over many observation+truth pairs);
+- **MIRA** — a newer score built on a related region-counting idea, with a known
+  target value when everything is correct.
+
+Because our arena manufactures failures of *exactly known size*, we can measure each
+test's **power curve**: what fraction of the time it raises the alarm, as a function
+of how many samples you give it — including on the trap configuration from the
+pilot, where a score contamination accidentally cancels the sampler's bias and fakes
+the right "temperature".
+
+**Answer 1 — our prediction was wrong, in the good direction.** We bet (70%
+confidence) that no sample-based test would flag the trap configuration. In fact
+**all three flag it reliably once they see a few hundred samples** — geometry-blind
+they are not. The one thing the trap *does* fool is the single-number effective
+temperature: it reads exactly "correct" (1.000) at contamination −0.28 while the
+true error still sits at ~6× the floor. Scalar summaries lie; distribution-level
+tests don't.
+
+**Answer 2 — the scary one: two of the three tools were broken out of the box, and
+only an oracle could see it.** Run on samples from a *mathematically perfect*
+sampler at 64×64 resolution, TARP reported miscalibration of 0.20 (should be ~0.05)
+and MIRA raised false alarms 65–80% of the time. The cause, in both tools, is the
+same innocuous-looking preprocessing choice: they rescale the data using the range
+of the *true answers themselves*. A true answer is always inside a box defined by
+its own range; fresh samples occasionally fall outside it. In 3 dimensions that's
+nothing; in 4096 dimensions those small spills add up into a systematic distortion.
+Rescaling with the *samples'* statistics instead (so the truths never touch the
+transform) fixes both tools exactly — repaired MIRA's null score matches its
+theoretical value to four decimal places. On real data this bug would read as
+"mysterious miscalibration of the model"; in the arena it took one evening to
+isolate, explain, and repair — which is rather the point of the whole program.
+""")
+
+code(r'''# A2: detection power vs sample budget, per test (calibrated, repaired versions)
+p = load("a2_power.jsonl").drop_duplicates(["test", "config", "budget", "rep"], keep="last")
+p = p[p.tag != "nullpad"]
+panels = [("pqmass", "PQMass (two-sample)"), ("tarp_cal", "TARP (coverage, repaired+calibrated)"),
+          ("mira_sym_cal2", "MIRA (repaired+calibrated)")]
+show = ["dps", "sap", "twisted", "dps_em03", "dps_ep03", "oracle_null"]
+lbl = {"dps_em03": "the trap: dps@ε=−0.3", "oracle_null": "perfect sampler (null)"}
+fig, axes = plt.subplots(1, 3, figsize=(12.5, 3.8), sharey=True)
+for ax, (t, title) in zip(axes, panels):
+    sub = p[(p.test == t) & p.detected.notna()]
+    for c in show:
+        g = sub[sub.config == c].groupby("budget").detected.mean()
+        if g.empty: continue
+        emph = c == "dps_em03"
+        ax.plot(g.index, g.values, "o-", lw=2.5 if emph else 1.2,
+                color="#d62728" if emph else None, alpha=1 if emph else .6,
+                label=lbl.get(c, c))
+    ax.axhline(0.05, color="k", ls=":", lw=.8)
+    ax.set(xscale="log", ylim=(-.05, 1.08), xlabel="samples given to the test", title=title)
+axes[0].set_ylabel("fraction of runs flagged")
+axes[-1].legend(fontsize=7, loc="center right")
+plt.suptitle("Every manufactured failure is caught — including the temperature-faking trap", y=1.02)
+plt.tight_layout()
+''')
+
+code(r'''# A2b: the trap, quantified — what the contamination ladder does to the
+# temperature scalar vs the true error (the one is fooled, the other never is)
+es = load("eps_star.jsonl")
+core = load("t1_core.jsonl")
+floor = core[(core.sampler == "oracle") & (core.dim == 64) &
+             (core["shift"] == 1.0) & (core.N == 256)].w2.median()
+dps = es[es.sampler == "dps"].groupby("eps").agg(w2=("w2", "median"),
+                                                 g=("gamma_star", "median"))
+fig, axes = plt.subplots(1, 2, figsize=(10, 3.6))
+axes[0].plot(dps.index, dps.g, "o-", color="#d62728")
+axes[0].axhline(1.0, color="k", ls=":"); axes[0].axvline(-0.28, color="k", lw=.6, alpha=.5)
+axes[0].set(xlabel="score contamination ε", ylabel="effective temperature γ*",
+            title='the scalar is EXACTLY fooled at ε* = −0.28 ("looks perfect")')
+axes[1].plot(dps.index, dps.w2 / floor, "o-", color="#1f77b4")
+axes[1].axhline(1.0, color="k", ls=":")
+axes[1].set(xlabel="score contamination ε", ylabel="true error / oracle floor",
+            title="the true error never drops below ~5.8× floor")
+plt.tight_layout()
+''')
+
+md(r"""## II.3 Train the conditioning in, instead of steering it on
+
+The other way the field uses these generators for inference: skip steering entirely
+and **train the network from the start to take the observation as a second input**,
+so that sampling from it directly produces posterior samples ("amortized" inference —
+pay the cost once in training, then every new observation is nearly free).
+
+We trained five such networks — full size at three training lengths, a half-size
+one, and a deliberately undertrained one — and audited each against the exact
+answer, alongside the *summary* checks a practitioner would run (posterior mean,
+variance, band powers).
+
+**Answer: much better than steering — our prediction missed in the direction that's
+good news for this class.** We bet the geometry error would sit at least 3× above
+the floor while summaries looked clean. Measured: the trained networks land at
+**~2.6× the floor** — compared to 5–28× for the steering shortcuts on the same
+problems — and the quality saturates early (a few thousand training steps in; extra
+capacity buys nothing). The residual error is a mild over-confidence: the posterior
+variance comes out ~7% too narrow, which a careful summary reader *can* see. Push
+training low enough (2000 steps) and it fails catastrophically — variance collapse —
+so the failure mode exists; it just lives at "severely undertrained", not at
+"realistic practice". At this problem difficulty, **steering — not amortization —
+is the weak link.**
+""")
+
+code(r'''# A3: the training ladder — true error and summary checks per checkpoint
+a3 = load("a3_amortized.jsonl").drop_duplicates(["score", "y_seed", "seed", "sampler"], keep="last")
+fl = a3[a3.sampler == "oracle"].groupby("y_seed").w2.median().rename("floor")
+am = a3[a3.sampler == "ancestral"].join(fl, on="y_seed")
+am["ratio"] = am.w2 / am.floor
+order = ["amortized:warmup2k", "amortized:warmup6k", "amortized:quarter15k",
+         "amortized:halfcap", "amortized:default"]
+names = ["2k steps", "6k steps", "15k steps", "60k half-size", "60k full"]
+g = am.groupby("score")
+fig, axes = plt.subplots(1, 2, figsize=(10.5, 3.8))
+ratios = [g.ratio.median().get(k, np.nan) for k in order]
+axes[0].bar(names, ratios, color="#8c564b")
+axes[0].axhline(1, color="k", ls=":"); axes[0].axhline(3, color="k", ls="--", alpha=.5)
+axes[0].set(yscale="log", ylabel="true error / oracle floor",
+            title="geometry: saturates at ~2.6× floor\n(steering shortcuts: 5–28× on the same problems)")
+axes[0].tick_params(axis="x", rotation=20)
+for key, lab, c in [("rel_mean_err", "posterior-mean error", "#1f77b4"),
+                    ("px_var_ratio", "variance ratio − 1", "#d62728")]:
+    v = [abs(g[key].median().get(k, np.nan) - (0 if key == "rel_mean_err" else 1))
+         for k in order]
+    axes[1].plot(names, v, "o-", color=c, label=lab)
+axes[1].axhline(0.05, color="k", ls=":", label="5% band")
+axes[1].set(yscale="log", title="summary checks: clean at the few-% level\n(except the broken 2k-step net)")
+axes[1].tick_params(axis="x", rotation=20); axes[1].legend(fontsize=8)
+plt.tight_layout()
+''')
+
+md(r"""## II.4 The mass-mapping recipe, priced in compute
+
+Finally, the sampler the weak-lensing community actually ships (Remy et al. 2023):
+a deliberately **cautious** scheme. Instead of trusting a point estimate like
+plug-in guidance does, it *inflates* the assumed observation noise by the current
+blur level — never over-trusting the data early — and pays for that caution with
+$K$ correction (Langevin) steps at every noise level. More $K$, more compute, closer
+to the target. (Faithfulness notes: their production code wraps this idea in an
+adaptive Monte-Carlo scheme; what we audit is the pre-registered core mechanism,
+with their exact noise-inflation rule. Details in `scripts/run_a4.py`.)
+
+**Answer: it is the only approximate method in our zoo that actually converges to
+the exact answer as you pay it more — and honesty is expensive.** The error falls
+smoothly and monotonically with $K$ at every steering strength, reaching the oracle
+floor around $K \approx 100$ (~6,400 network passes, vs 64 for one-pass guidance).
+Matching the *quality* of cheap plug-in guidance costs roughly **7–30× its
+compute**; beating it costs more. And its response to score contamination has the
+**opposite sign**: the negative contamination that accidentally *helps* aggressive
+plug-in guidance actively *hurts* the cautious scheme. (Two failure modes at small
+$K$, for the record: the sample spread stays too wide — the "cautious" signature —
+while the small scales simultaneously overshoot; the single-number temperature
+averages these into a meaningless value. Scalar summaries again.)
+""")
+
+code(r'''# A4: error vs compute for the Remy scheme, with one-pass DPS as the dashed bar
+a4 = load("a4_remy.jsonl")
+fl4 = a4[(a4.sampler == "oracle") & (a4.dim == 64)].groupby("shift").w2.median()
+a1_ = load("a1_multiy.jsonl"); d64 = a1_[(a1_.dim == 64) & (a1_.N == 256)]
+ofl = d64[d64.sampler == "oracle"].groupby(["shift", "y_seed"]).w2.median()
+dpsr = (d64[d64.sampler == "dps"].set_index(["shift", "y_seed"]).w2 / ofl).groupby("shift").median()
+rem = a4[(a4.sampler == "remy") & (a4.dim == 64) & (a4.eps == 0) & (a4.eps0 == 0.1)]
+fig, ax = plt.subplots(figsize=(7.5, 4.4))
+cmap = plt.cm.viridis(np.linspace(.1, .85, 4))
+for sh, col in zip([0.5, 1.0, 2.0, 4.0], cmap):
+    g = rem[rem["shift"] == sh].groupby("K").w2.median() / fl4[sh]
+    ax.plot(g.index, g.values, "o-", color=col, label=f"{sh}σ")
+    ax.axhline(dpsr[sh], color=col, ls="--", lw=.9, alpha=.7)
+ax.axhline(1, color="k", ls=":", lw=.8)
+ax.set(xscale="log", yscale="log", xlabel="K = correction steps per noise level  (compute = 64·K network passes)",
+       ylabel="error / oracle floor",
+       title="The cautious scheme really converges — but matching one-pass guidance\n(dashed, 64 passes) already costs ~7–30× its compute")
+ax.legend(title="steering", fontsize=8)
+plt.tight_layout()
+''')
+
+md(r"""## II.5 Scorecard and where the program stands
+
+Proposed verdicts for the frozen predictions (final scoring happens jointly, as
+always — the table is a proposal; details in `HANDOFF_DAWN_2.md`):
+
+| Prediction (frozen 2026-07-03, public before results) | Proposed |
+|---|---|
+| P-b: the pilot's structure is generic across observations, spread ≲10% | **HIT** — 24/24 skies, spreads 1–8% |
+| P-c: the compensation trap fools all sample-based diagnostics | **MISS on the trap clause** — all three catch it; only the temperature scalar is fooled (exactly, at ε*=−0.28). Detection clause HIT. |
+| P-d: amortized nets pass summaries but fail geometry ≥3× floor | **MISS** — they land at ~2.6× floor; steering, not amortization, is the weak link |
+| P-e: the cautious mass-mapping scheme converges with K, misspec sign-flipped | **HIT** — monotone to floor; sign-flip confirmed; "warm at small K" true for the spread, with a simultaneous small-scale overshoot the scalar can't see |
+
+**What the night adds up to.** The arena has graduated from *demonstrating* that
+steering shortcuts are biased (Part I) to doing three jobs no other setup currently
+does: it **priced** the field's flagship sampler in compute-for-accuracy; it
+**cleared** the amortized class at this difficulty (and located its failure onset);
+and it **audited the auditors** — finding, explaining, and repairing two real
+preprocessing bugs in the community's own validation tools, bugs that are invisible
+without an exact reference. Two upstream bug reports, one figure the mass-mapping
+community can argue with, and a sharper headline for the note: *distribution-level
+diagnostics are healthier than we predicted; scalar summaries and unaudited
+preprocessing are the failure surface.*
 
 ---
 
@@ -1031,9 +1315,17 @@ result.
 | AUROC | probability a confidence signal ranks a random correct answer above a random wrong one |
 | none_frac | fraction of an LLM answer-population whose answers failed to parse — the truncation-artifact validity gate |
 | pre-registration | predictions + kill criteria frozen and committed BEFORE the experiment runs; scored jointly after |
+| PQMass | two-sample test: "are these two piles of samples from the same distribution?" (counts in random regions) |
+| TARP | coverage test over many (observation, truth) pairs: claimed confidence vs achieved frequency |
+| MIRA | region-counting score for conditional samplers with a known correct-model target value (2/3) |
+| amortized inference | train the network to take the observation as input, so sampling IS posterior sampling — no steering step |
+| $K$ (Remy scheme) | Langevin correction steps per noise level; the compute knob (network passes = $T\cdot K$) |
+| $\varepsilon^*$ | the contamination at which DPS's bias exactly cancels in temperature (γ*=1) while geometry stays ~6× floor |
 
-*Repo: `~/software/tilt-audit` (local only). Every claim above traces to a JSONL in
-`results/`, a NIGHT_LOG entry, and a git commit made as it happened.*
+*Repo: **[github.com/AndreasTersenov/tilt-audit](https://github.com/AndreasTersenov/tilt-audit)**
+(public since 2026-07-03, before the arms-night results existed). Every claim above
+traces to a JSONL in `results/`, a NIGHT_LOG entry, and a git commit made as it
+happened.*
 """)
 
 nb["cells"] = C
