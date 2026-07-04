@@ -281,3 +281,29 @@
   self-diagnostics calibrated on the bench — overlaps direction B); (3) return to parked
   directions B (adversarial blind-spot minimax) / C (bias→parameter transfer) / D
   (mixture oracle), which the arena supports today. Decision with owner.
+
+### P-20260704h · kill-verification pass (owner-requested adversarial check of the certificate kill) · OPEN
+- (i, 95%) end-to-end code verification vs closed form through the net-callable path
+  (analytic score with controlled contamination as a synthetic wrong net): mean(logw)
+  matches its exact chain law within 2 s.e.
+- (ii, 55%) guidance-scale ladder on the clean net (0.1/0.25/0.5/1.0): at 0.25-0.5 the
+  certificate partially revives — KLhat drops 10-100x, median per-mode ESS > 50.
+- (iii, 50%) THE decisive one: guided-vs-guided relative ranking (ΔE[log w] across the
+  scale ladder, same net) agrees with empirical endpoint-W2 ordering at every shift.
+  HIT un-kills the relative instrument for its actual use case; MISS confirms the kill
+  at the use-case level. Also: T=64 column for accumulation-length sensitivity.
+
+### P-20260704h SCORED 2026-07-04 — kill VERIFIED: (i) HIT, (ii) MISS, (iii) MISS
+- (i) accumulation code verified end-to-end (synthetic wrong-net through the callable
+  path vs closed form: z=-0.65 at 24 seeds; the earlier 2-4 s.e. "offset" was
+  small-sample s.e. noise). No simple mistake.
+- (ii) no practitioner-regime rescue: gscale 0.1-1.0 all keep per-mode ESS 2-8, clip
+  0.24-0.59; T=64 is WORSE (clip 0.95, KLhat 2.7e9).
+- (iii) no use-case rescue: guided-vs-guided ranking by mean(logw) is ANTI-correlated
+  with endpoint W2 at mild tilts (rho=-0.80; cert always picks the weakest guidance,
+  truth picks mid-scale). Path divergence does not track endpoint quality even within
+  a guided family on one net. My own "relative instrument survives" claim from the
+  P-g round is hereby corrected: it survives the exact grid only.
+- **The certificate kill is confirmed against all three identified escape routes.**
+  Negative-arc write-up is now paper-grade: verified mechanism, no rescue found at
+  (implementation | guidance scale | horizon | comparison class).

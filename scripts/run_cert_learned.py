@@ -61,6 +61,7 @@ def main():
     p.add_argument("--N", type=int, default=256)
     p.add_argument("--seeds", default="0,1,2,3,4")
     p.add_argument("--T", type=int, default=256)
+    p.add_argument("--gscale", type=float, default=1.0)
     p.add_argument("--tag", default="confirmatory")
     p.add_argument("--out", required=True)
     args = p.parse_args()
@@ -102,19 +103,20 @@ def main():
         for mode in args.modes.split(","):
             for seed in [int(v) for v in args.seeds.split(",")]:
                 cfg_id = hash((n, shift, mode, args.N, seed, args.label,
-                               "certL")) & 0x7FFFFFFF
+                               args.gscale, "certL")) & 0x7FFFFFFF
                 key = jax.random.fold_in(jax.random.PRNGKey(seed), cfg_id)
                 t0 = time.time()
                 res = certificate.run_learned_cert(
                     mode, key, x0hat_fn, basis, Pz, az, y, b,
-                    N=args.N, T=args.T, tf=TF)
+                    N=args.N, T=args.T, tf=TF, gscale=args.gscale)
                 res = {k: (jax.device_get(v) if hasattr(v, "shape") else v)
                        for k, v in res.items()}
                 wall = time.time() - t0
                 cert = certificate.certify(res)
                 cert.update(certificate.certify_modewise(res))
                 row = dict(dim=n, d=n * n, shift=shift, b=b, N=args.N,
-                           T=args.T, seed=seed, mode=mode, score=args.label,
+                           T=args.T, gscale=args.gscale, seed=seed,
+                           mode=mode, score=args.label,
                            y_seed=Y_KEY, tag=args.tag,
                            clip_frac=res.get("clip_frac", 0.0),
                            wall=round(wall, 3), ts=time.strftime("%H:%M:%S"))

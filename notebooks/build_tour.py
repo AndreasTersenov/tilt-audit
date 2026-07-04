@@ -1405,9 +1405,20 @@ within one standard error on every configuration, including the trained networks
 unbiased no matter how degenerate the weights get. That statistic can't give an absolute
 error without an unknowable constant — but **differences between steering schemes on the
 same network cancel that constant exactly**. Which is precisely the question a
-practitioner actually asks: *"on my model, which guidance scheme is less wrong?"* A
-relative, runtime, any-dimension sampler ranking — that instrument survived everything
-this arena threw at it.
+practitioner actually asks: *"on my model, which guidance scheme is less wrong?"*
+
+**Verification postscript (same day): the kill survived its own audit — and so did
+nothing else.** Before accepting the negative result we attacked it three ways: an
+end-to-end closed-form verification of the certificate code through the network-callable
+path (passed to one part in 10⁵ — no implementation error); a guidance-strength ladder
+covering the gentle regimes practitioners actually run (no revival — the weights stay
+degenerate at every scale, and shorter sampling horizons are worse); and the fairest
+possible use case, ranking guided variants *against each other* on the same network. The
+last one is the tombstone: the relative certificate prefers whichever variant moves
+least, while the actually-best variant sits mid-strength — path divergence fails to
+track endpoint quality even within a guided family. Our own earlier optimism about the
+"relative instrument" is corrected here in place: it works on the exact-score bench and
+dies on trained networks, for the same measured reason as everything else.
 
 **Where this leaves the program.** Absolute runtime certificates: bench-side methodology
 (tight for good samplers, loud for bad ones, exactly priced — Part III above). Deployable

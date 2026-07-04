@@ -210,7 +210,7 @@ def endpoint_errors(law, Pz_true, az, y, b):
 
 
 def run_learned_cert(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
-                     clip=True):
+                     clip=True, gscale=1.0):
     """Certificate-instrumented learned-pathway sampler (Stage 2).
 
     Mirrors samplers_learned.run_learned's 'dps' and ancestral-unguided
@@ -254,7 +254,7 @@ def run_learned_cert(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
             g1 = (jnp.exp(lam_g * dt) - 1.0) / jnp.where(
                 jnp.abs(lam_g) > 1e-12, lam_g, 1.0)
             g1 = jnp.where(jnp.abs(lam_g) > 1e-12, g1, dt)
-            disp = g1 * 2.0 * (-dps_grad(z, t))
+            disp = gscale * g1 * 2.0 * (-dps_grad(z, t))
             if clip:
                 cap = 3.0 * jnp.sqrt(jnp.maximum(kv, 1e-6) * d)
                 norms = jnp.linalg.norm(disp, axis=-1, keepdims=True)
@@ -280,7 +280,7 @@ def run_learned_cert(name, key, x0hat_fn, basis, Pz, az, y, b, N, T, tf,
     return out
 
 
-def chain_law_ancestral(mode, Pz, az, y, b, T, tf):
+def chain_law_ancestral(mode, Pz, az, y, b, T, tf, gscale=1.0):
     """EXACT law + certificate expectations for the ANALYTIC-x0hat ancestral
     pathway (per mode linear; the pathway-control ground truth for Stage 2).
     Clip assumed inactive (verified empirically via clip_frac ~ 0)."""
@@ -310,8 +310,8 @@ def chain_law_ancestral(mode, Pz, az, y, b, T, tf):
                           (np.exp(lam_g * dt) - 1.0) / np.where(
                               np.abs(lam_g) > 1e-12, lam_g, 1.0), dt)
             # disp = -2 g1 a c0 (a c0 z - y)/b  (linear in z)
-            c1 = -2.0 * g1 * az_**2 * c0**2 / b
-            c2 = 2.0 * g1 * az_ * c0 * y_ / b
+            c1 = gscale * (-2.0) * g1 * az_**2 * c0**2 / b
+            c2 = gscale * 2.0 * g1 * az_ * c0 * y_ / b
             mu_d = c1 * m + c2
             var_d = c1**2 * v
             if t_next > 0.0:  # the deterministic final step is uncertified
