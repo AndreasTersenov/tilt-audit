@@ -185,3 +185,49 @@ If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo an
 [transfer:gold_n64_strong_y0_lam0.5_s0] terminal_is s=3: mmd2=1.607e+00 swd2=1.283e+00 bp_cov=(0.00,0.00,0.00) (1s)
 [transfer:gold_n64_strong_y0_lam0.5_s0] terminal_is s=4: mmd2=1.607e+00 swd2=9.764e-01 bp_cov=(0.00,0.00,0.00) (0s)
 LAM STRONG DONE 01:30
+[transfer:gold_n64_mid_y0_lam0.08_s0] 5 floor rows
+E0705 01:43:39.651489 2724798 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 01:43:39.867458 2724148 slow_operation_alarm.cc:140] The operation took 1.216247937s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps s=0: mmd2=7.653e-02 swd2=3.194e-03 bp_cov=(0.74,0.04,0.00) (6s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps s=1: mmd2=7.612e-02 swd2=3.074e-03 bp_cov=(0.78,0.05,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps s=2: mmd2=7.697e-02 swd2=3.125e-03 bp_cov=(0.76,0.05,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps s=3: mmd2=7.679e-02 swd2=3.159e-03 bp_cov=(0.76,0.02,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps s=4: mmd2=7.667e-02 swd2=3.169e-03 bp_cov=(0.74,0.04,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps_inflated s=0: mmd2=2.000e-03 swd2=2.528e-04 bp_cov=(0.59,0.61,0.39) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps_inflated s=1: mmd2=2.112e-03 swd2=2.172e-04 bp_cov=(0.69,0.59,0.43) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps_inflated s=2: mmd2=2.067e-03 swd2=2.141e-04 bp_cov=(0.62,0.68,0.46) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps_inflated s=3: mmd2=1.997e-03 swd2=2.097e-04 bp_cov=(0.55,0.62,0.42) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] dps_inflated s=4: mmd2=2.160e-03 swd2=2.186e-04 bp_cov=(0.64,0.59,0.45) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy5 s=0: mmd2=2.511e-01 swd2=1.175e-02 bp_cov=(0.53,0.05,0.00) (4s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy5 s=1: mmd2=2.519e-01 swd2=1.185e-02 bp_cov=(0.54,0.07,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy5 s=2: mmd2=2.523e-01 swd2=1.211e-02 bp_cov=(0.55,0.09,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy5 s=3: mmd2=2.525e-01 swd2=1.190e-02 bp_cov=(0.55,0.09,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy5 s=4: mmd2=2.517e-01 swd2=1.172e-02 bp_cov=(0.62,0.05,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy30 s=0: mmd2=2.933e-03 swd2=2.096e-04 bp_cov=(0.61,0.68,0.54) (5s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy30 s=1: mmd2=2.919e-03 swd2=2.468e-04 bp_cov=(0.68,0.68,0.52) (5s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy30 s=2: mmd2=2.842e-03 swd2=1.978e-04 bp_cov=(0.66,0.67,0.58) (5s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy30 s=3: mmd2=2.823e-03 swd2=1.863e-04 bp_cov=(0.61,0.65,0.52) (4s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy30 s=4: mmd2=2.854e-03 swd2=2.017e-04 bp_cov=(0.68,0.68,0.51) (5s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy100 s=0: mmd2=-8.479e-06 swd2=1.275e-04 bp_cov=(0.66,0.65,0.68) (8s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy100 s=1: mmd2=-4.271e-05 swd2=1.284e-04 bp_cov=(0.66,0.70,0.64) (7s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy100 s=2: mmd2=3.227e-05 swd2=1.272e-04 bp_cov=(0.66,0.63,0.67) (7s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy100 s=3: mmd2=6.640e-05 swd2=1.411e-04 bp_cov=(0.65,0.64,0.62) (7s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] remy100 s=4: mmd2=6.296e-05 swd2=1.318e-04 bp_cov=(0.68,0.64,0.69) (7s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] terminal_is s=0: mmd2=1.606e+00 swd2=9.690e-01 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] terminal_is s=1: mmd2=1.606e+00 swd2=8.691e-01 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] terminal_is s=2: mmd2=1.606e+00 swd2=7.941e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] terminal_is s=3: mmd2=1.606e+00 swd2=9.052e-01 bp_cov=(0.00,1.00,0.00) (0s)
+[transfer:gold_n64_mid_y0_lam0.08_s0] terminal_is s=4: mmd2=1.606e+00 swd2=9.602e-01 bp_cov=(0.00,1.00,0.00) (0s)

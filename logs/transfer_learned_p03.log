@@ -1,0 +1,58 @@
+[transferL] empirical kappa Pz: pixel var 1.0501 (expect ~1.0510)
+E0705 01:46:47.567277 2737467 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 01:46:47.881734 2737036 slow_operation_alarm.cc:140] The operation took 1.314781634s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.50 = f64[256,4096]{1,0} scatter(%broadcast.311, %constant.57, %broadcast.321), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_43.62, metadata={op_name="jit(dps_loss)/transpose(jvp(jit(x0hat_fn)))/scatter-add" stack_frame_id=553}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 01:46:50.508439 2737395 cuda_timer.cc:88] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+[transferL:gold_n64_mid_y0_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=2.447e-01 swd2=1.835e+00 clip=0.61 (31s)
+[transferL:gold_n64_mid_y0_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=2.377e-01 swd2=5.232e+00 clip=0.63 (22s)
+[transferL:gold_n64_mid_y0_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=2.358e-01 swd2=2.562e+00 clip=0.62 (22s)
+[transferL:gold_n64_mid_y0_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=2.436e-01 swd2=1.575e+00 clip=0.62 (22s)
+[transferL:gold_n64_mid_y0_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=2.387e-01 swd2=1.145e+00 clip=0.62 (22s)
+[transferL:gold_n64_mid_y1_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=2.589e-01 swd2=3.694e+00 clip=0.60 (22s)
+[transferL:gold_n64_mid_y1_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=2.660e-01 swd2=3.367e+00 clip=0.60 (21s)
+[transferL:gold_n64_mid_y1_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=2.585e-01 swd2=3.057e+00 clip=0.60 (22s)
+[transferL:gold_n64_mid_y1_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=2.706e-01 swd2=8.267e-01 clip=0.58 (21s)
+[transferL:gold_n64_mid_y1_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=2.648e-01 swd2=3.867e+00 clip=0.58 (22s)
+[transferL:gold_n64_mid_y2_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=2.365e-01 swd2=2.933e+00 clip=0.61 (21s)
+[transferL:gold_n64_mid_y2_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=2.444e-01 swd2=8.853e-01 clip=0.60 (22s)
+[transferL:gold_n64_mid_y2_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=2.381e-01 swd2=2.497e+00 clip=0.60 (22s)
+[transferL:gold_n64_mid_y2_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=2.387e-01 swd2=3.651e+00 clip=0.61 (22s)
+[transferL:gold_n64_mid_y2_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=2.430e-01 swd2=1.971e+00 clip=0.60 (22s)
+[transferL:gold_n64_mid_y3_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=2.391e-01 swd2=3.498e+00 clip=0.60 (22s)
+[transferL:gold_n64_mid_y3_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=2.330e-01 swd2=5.898e+00 clip=0.61 (21s)
+[transferL:gold_n64_mid_y3_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=2.361e-01 swd2=6.304e+00 clip=0.60 (21s)
+[transferL:gold_n64_mid_y3_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=2.346e-01 swd2=5.970e+00 clip=0.61 (22s)
+[transferL:gold_n64_mid_y3_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=2.368e-01 swd2=3.798e+00 clip=0.60 (21s)
+[transferL:gold_n64_strong_y0_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=7.182e-01 swd2=8.212e+02 clip=0.81 (21s)
+[transferL:gold_n64_strong_y0_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=6.942e-01 swd2=8.990e+02 clip=0.83 (21s)
+[transferL:gold_n64_strong_y0_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=7.134e-01 swd2=6.052e+02 clip=0.82 (21s)
+[transferL:gold_n64_strong_y0_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=7.304e-01 swd2=6.088e+02 clip=0.81 (22s)
+[transferL:gold_n64_strong_y0_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=7.416e-01 swd2=5.781e+02 clip=0.80 (22s)
+[transferL:gold_n64_strong_y1_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=7.044e-01 swd2=1.169e+03 clip=0.79 (21s)
+[transferL:gold_n64_strong_y1_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=7.042e-01 swd2=1.030e+03 clip=0.80 (21s)
+[transferL:gold_n64_strong_y1_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=6.819e-01 swd2=6.375e+02 clip=0.82 (22s)
+[transferL:gold_n64_strong_y1_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=7.131e-01 swd2=8.732e+02 clip=0.79 (21s)
+[transferL:gold_n64_strong_y1_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=7.053e-01 swd2=4.964e+02 clip=0.80 (21s)
+[transferL:gold_n64_strong_y2_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=7.183e-01 swd2=8.434e+02 clip=0.81 (21s)
+[transferL:gold_n64_strong_y2_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=6.849e-01 swd2=8.851e+02 clip=0.84 (22s)
+[transferL:gold_n64_strong_y2_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=7.286e-01 swd2=5.083e+02 clip=0.80 (22s)
+[transferL:gold_n64_strong_y2_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=7.313e-01 swd2=9.304e+02 clip=0.80 (21s)
+[transferL:gold_n64_strong_y2_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=7.236e-01 swd2=5.152e+02 clip=0.80 (22s)
+[transferL:gold_n64_strong_y3_lam0.3143_s0] dps_ln_mis_p03 s=0: mmd2=7.494e-01 swd2=5.185e+02 clip=0.78 (22s)
+[transferL:gold_n64_strong_y3_lam0.3143_s0] dps_ln_mis_p03 s=1: mmd2=7.549e-01 swd2=5.112e+02 clip=0.78 (21s)
+[transferL:gold_n64_strong_y3_lam0.3143_s0] dps_ln_mis_p03 s=2: mmd2=7.408e-01 swd2=5.318e+02 clip=0.79 (21s)
+[transferL:gold_n64_strong_y3_lam0.3143_s0] dps_ln_mis_p03 s=3: mmd2=7.488e-01 swd2=7.799e+02 clip=0.79 (21s)
+[transferL:gold_n64_strong_y3_lam0.3143_s0] dps_ln_mis_p03 s=4: mmd2=7.208e-01 swd2=5.023e+02 clip=0.80 (21s)
+GPU1 FILLERS DONE 02:02

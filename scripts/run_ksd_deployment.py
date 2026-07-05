@@ -32,18 +32,17 @@ from tilt_audit.scorenet import UNet
 
 S_OBS = 0.5
 Y_KEY = 999
-SIGMA_SCORE = 0.3
 M_PERT = 4
-T_STAR = float(-0.5 * np.log(1.0 - SIGMA_SCORE**2))
 
 ARCHIVES = ["oracle_null", "dps", "sap", "dps_em03", "twisted_em03"]
 
 
-def make_deployment_score(ckpt_path, basis, az, y, b):
+def make_deployment_score(ckpt_path, basis, az, y, b, sigma_score=0.3):
     with open(ckpt_path, "rb") as f:
         ck = pickle.load(f)
     model = UNet()
-    alpha = float(np.exp(-T_STAR))
+    t_star = float(-0.5 * np.log(1.0 - sigma_score**2))
+    alpha = float(np.exp(-t_star))
 
     @jax.jit
     def score_fn_j(z, key):
@@ -51,11 +50,11 @@ def make_deployment_score(ckpt_path, basis, az, y, b):
         s_acc = jnp.zeros_like(x)
         for m in range(M_PERT):
             xi = jax.random.normal(jax.random.fold_in(key, m), x.shape)
-            xt = alpha * x + SIGMA_SCORE * xi
+            xt = alpha * x + sigma_score * xi
             eps = model.apply(ck["ema"], xt.astype(jnp.float32),
-                              jnp.full(x.shape[0], T_STAR,
+                              jnp.full(x.shape[0], t_star,
                                        dtype=jnp.float32))
-            s_acc = s_acc + alpha * (-eps.astype(x.dtype) / SIGMA_SCORE)
+            s_acc = s_acc + alpha * (-eps.astype(x.dtype) / sigma_score)
         s_prior_z = pack(s_acc / M_PERT, basis)
         s_lik = az * (y - az * z) / b
         return s_prior_z + s_lik
@@ -76,6 +75,8 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--nets", default="s_clean,s_mis_m03")
     p.add_argument("--budgets", default="256,1024")
+    p.add_argument("--sigma", type=float, default=0.3)
+    p.add_argument("--archives", default=",".join(ARCHIVES))
     p.add_argument("--tag", default="confirmatory")
     p.add_argument("--out", default="results/ksd_trial.jsonl")
     args = p.parse_args()
@@ -107,11 +108,11 @@ def main():
                "imq_c1": ("imq", 1.0, -0.5)}
     for net in args.nets.split(","):
         score_fn = make_deployment_score(f"checkpoints/{net}.pkl", basis,
-                                         az, y, b)
+                                         az, y, b, sigma_score=args.sigma)
         for budget in [int(v) for v in args.budgets.split(",")]:
             for kname, (kern, p1, p2) in kernels.items():
                 nul = ksd_null = None
-                tagk = f"deploy_{net}_{kname}_N{budget}"
+                tagk = f"deploy_{net}_{kname}_N{budget}_sig{args.sigma}"
                 fnul = cache / f"{tagk}.json"
                 if fnul.exists():
                     nul = json.loads(fnul.read_text())
@@ -126,7 +127,7 @@ def main():
                                sd=float(np.std(vals)),
                                q95=float(np.quantile(vals, 0.95)), n=60)
                     fnul.write_text(json.dumps(nul))
-                for cname in ARCHIVES:
+                for cname in args.archives.split(","):
                     bank, meta = load_bank(cname)
                     n_reps = min(8, bank.shape[0] // budget)
                     for rep in range(n_reps):
@@ -137,7 +138,8 @@ def main():
                         st = {k: v for k, v in st.items()
                               if k not in ("kernel", "p1", "p2")}
                         row = dict(arm="deployment", config=cname,
-                                   net=net, budget=budget, rep=rep,
+                                   net=net, sigma=args.sigma,
+                                   budget=budget, rep=rep,
                                    n_reps=n_reps, kernel=kname,
                                    p1=float(p1), score_mode="net",
                                    sampler=meta["sampler"],

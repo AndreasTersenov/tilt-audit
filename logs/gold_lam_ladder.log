@@ -3,3 +3,4 @@
 LAM GOLDS DONE 00:47
 [gold:gold_n64_strong_y0_lam0.16_s0] wall=71s rhat_max=1.0001 ess_min=22056 ess_med=41379 T-L2=PASS
 [gold:gold_n64_strong_y0_lam0.5_s0] wall=73s rhat_max=1.0008 ess_min=11846 ess_med=27866 T-L2=PASS
+[gold:gold_n64_mid_y0_lam0.08_s0] wall=74s rhat_max=1.0002 ess_min=31050 ess_med=40295 T-L2=PASS
