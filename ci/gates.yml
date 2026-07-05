@@ -1,0 +1,17 @@
+name: gates
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  gate-suite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - run: uv venv && uv pip install -e . pytest
+      - name: gate suite (CPU)
+        run: uv run pytest tests/test_gates.py -q
+        env:
+          JAX_PLATFORMS: cpu
