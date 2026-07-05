@@ -93,6 +93,7 @@ fig.text(0.5, 0.015,
          "Every cell is a measured detection rate on the tilt-audit bench, "
          "where the true posterior is known exactly. Data: results/*.jsonl.",
          ha="center", fontsize=8, color="#666666")
-fig.tight_layout()
-fig.savefig(FIG / "fig_envelope.png", dpi=160)
+fig.subplots_adjust(left=0.01, right=0.99, top=0.90, bottom=0.06)
+fig.savefig(FIG / "fig_envelope.png", dpi=160, bbox_inches="tight",
+            pad_inches=0.25)
 print("wrote fig_envelope.png")

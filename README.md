@@ -104,20 +104,18 @@ gates and small grids run on CPU (the full gate suite passes on CPU in about
 
 Every experiment was **pre-registered**. Predictions were frozen with
 confidence levels in [`RESEARCH_LOG.md`](RESEARCH_LOG.md) and pushed publicly
-before each night's first GPU job, then scored afterwards, hits and misses
-alike, with corrections logged in the open when we were the ones who were
-wrong. The as-it-happened record, including every mistake, is in
-[`lab-notebook/`](lab-notebook/).
+before each run began, then scored afterwards, hits and misses alike, with
+corrections logged in the open when we were the ones who were wrong. The git
+history carries the timestamps.
 
 ## Layout
 
 `tilt_audit/` closed forms, samplers, metrics, certificates ·
+`notebooks/` the guided tour of the whole project, results and code together ·
 `scripts/` grid runners, gates, batteries, figures ·
 `tests/` the gate suite · `results/` JSONL data (sample banks and gold draws
 are regenerable, not tracked) · `figures/` all regenerable ·
-`docs/` frozen overnight plans and the writeup ·
-`lab-notebook/` night logs and scored handoffs · `RESEARCH_LOG.md` the
-prediction ledger.
+`docs/` the writeup · `RESEARCH_LOG.md` the prediction ledger.
 
 ## Citing
 

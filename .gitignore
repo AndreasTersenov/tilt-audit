@@ -14,3 +14,5 @@ logs/
 queue/
 checkpoints/
 .claude/
+lab-notebook/
+docs/plans/

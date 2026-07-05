@@ -128,8 +128,8 @@
   <h1>Can a sampler tell you when it&rsquo;s lying?</h1>
   <p class="lede">A patient walk through one research arc: why scientists steer
   generative models, why nobody can currently tell whether the answers are
-  trustworthy, how we built a meter that was supposed to fix that and watched
-  it fail — and then put every other candidate on the same bench: the
+  trustworthy, how we built a meter that was supposed to fix that, watched
+  it fail, and then put every other candidate on the same bench: the
   field&rsquo;s one proposed runtime certificate, the coverage tests everyone
   trusts (two of which turned out to have real bugs), and the oldest
   convergence check in the book. Every claim measured, every prediction
@@ -137,7 +137,7 @@
   <p class="aside" style="font-size:0.85rem">The route, for orientation:
   parts 1&ndash;3 build the ideas and the meter · parts 4&ndash;8 watch it work
   and then die on trained networks · parts 9&ndash;10 put the field&rsquo;s
-  surviving certificate (score-KSD) on trial — strong, blind, gullible ·
+  surviving certificate (score-KSD) on trial: strong, blind, gullible ·
   part 11 prices the &ldquo;expensive&rdquo; gold-standard alternative ·
   part 12 says what a practitioner can honestly do. Code, data, and the
   prediction ledger:
@@ -151,61 +151,61 @@
   <p>Start with the science problem underneath everything. A telescope measures a
   distorted, noisy trace of the universe&rsquo;s matter. From it, cosmologists
   want the matter map itself. But many different maps are compatible with the
-  same noisy data — so the honest answer is not one map. It is a
+  same noisy data, so the honest answer is not one map. It is a
   <em>range of plausible maps, each with its probability</em>. Statisticians call
-  this the <b>posterior distribution</b>; you can think of it as the answer
+  this the <b>posterior distribution</b>. You can think of it as the answer
   <em>with its error bars built in</em>. The same structure appears in medical
   imaging (which tissue images are consistent with this scan?) and in drug design
   (which molecules are consistent with these desired properties?).</p>
 
   <p>To compute a posterior you need two ingredients. First, the data you
-  measured. Second — and this is the subtle one — a notion of what maps are
+  measured. Second (and this is the subtle one), a notion of what maps are
   <em>plausible in the first place</em>, before seeing any data. That second
   ingredient is called the <b>prior</b>, and the modern move is to get it from
   machine learning: train a generative model (the same technology as AI image
   generators) on physics simulations, and it absorbs what realistic matter maps
-  look like. This works remarkably well — these models capture texture and
+  look like. This works remarkably well: these models capture texture and
   structure that older mathematical priors never could.</p>
 
   <p>But a generative model, by itself, only produces <em>typical</em> maps. To
   answer a scientific question you must make it produce maps that are both
-  plausible <em>and consistent with your particular data</em> — you must sample
+  plausible <em>and consistent with your particular data</em>: you must sample
   the posterior, not the prior. The methods that do this are called
   <b>steering</b> (or &ldquo;guidance&rdquo;), and here is the uncomfortable
   truth this whole project lives on:</p>
 
   <p class="aside">Nearly every steering method in actual use is a mathematical
   shortcut with no guarantee. And on real data there is no way to check the
-  output, because checking would require knowing the true posterior — the very
+  output, because checking would require knowing the true posterior, the very
   thing you are trying to compute. Results from these pipelines go into
   scientific papers with error bars nobody has verified.</p>
 
   <p>Our research program attacks this from a specific angle: <b>build a
   simplified world where the true posterior IS known exactly, and use it as a
   test bench</b>. In our world, the &ldquo;universe&rdquo; is a Gaussian random
-  field — a kind of structured random texture — chosen because for this one
+  field (a kind of structured random texture), chosen because for this one
   family, sixty-year-old theory (Wiener filtering) gives the exact posterior in
   closed form. Not approximately: exactly, to machine precision, in any
   dimension. On this bench we can measure precisely how wrong each steering
-  method is, and — the subject of this page — test <em>instruments</em> that
+  method is, and (the subject of this page) test <em>instruments</em> that
   might carry over to real data, where no bench exists.</p>
 
   <p>Two nights of bench experiments preceded this story. They established that
   the popular shortcuts are <em>measurably, substantially wrong</em> at realistic
-  settings — one workhorse method lands 5&ndash;28&times; farther from the truth
+  settings: one workhorse method lands 5&ndash;28&times; farther from the truth
   than an ideal sampler would, its error growing with steering strength and
   problem size. So the danger is real, not hypothetical. The question became: can
   a running sampler be made to <em>report its own error</em> on real data? That
-  instrument — a warning light for steered samplers — was the day&rsquo;s
+  instrument, a warning light for steered samplers, was the day&rsquo;s
   goal.</p>
 
   <p class="eyebrow">part 2 · background</p>
   <h2>The three ideas you need</h2>
 
-  <h3>Idea 1 — A diffusion model generates by undoing noise, in many small steps</h3>
+  <h3>Idea 1. A diffusion model generates by undoing noise, in many small steps</h3>
   <p>Take a real map and add a little random noise. Add a little more, and more,
   until nothing but static remains. That destructive direction is trivial. The
-  clever part: a neural network is trained to run it <em>backwards</em> — given a
+  clever part: a neural network is trained to run it <em>backwards</em>. Given a
   somewhat-noisy map, estimate a slightly-less-noisy one. Generation then works
   by starting from pure static and applying this denoising network a few hundred
   times. Watch the structure of the process:</p>
@@ -218,12 +218,12 @@
       <figure>
         <canvas id="c0" width="860" height="300" aria-label="Trajectories running from structured data to pure noise and the reverse direction"></canvas>
         <figcaption>Each grey line is one sample&rsquo;s value during the noising
-        process (left&nbsp;=&nbsp;organized data, here two clusters;
+        process (left&nbsp;=&nbsp;organized data, here two clusters, and
         right&nbsp;=&nbsp;featureless noise). The generative model runs this
         movie <em>right to left</em>: from any random starting static it walks
         back, step by small step, to something that looks like data. Every step
-        is a small random move whose rules the model itself defines — remember
-        that; it is what makes the meter possible.</figcaption>
+        is a small random move whose rules the model itself defines. Remember
+        that: it is what makes the meter possible.</figcaption>
       </figure>
       <div class="controls" style="margin-top:0.6rem">
         <button class="seg replay" id="c0-replay">replay ▸</button>
@@ -233,26 +233,26 @@
 </div>
 
 <div class="col">
-  <h3>Idea 2 — What the steered sampler is <em>supposed</em> to produce: Bayes&rsquo; rule, lifted to journeys</h3>
+  <h3>Idea 2. What the steered sampler is <em>supposed</em> to produce: Bayes&rsquo; rule, lifted to journeys</h3>
   <p>An unsteered model walks back from static to a <em>typical</em> map. To get
   maps consistent with <em>your data</em>, steering methods add a small extra
-  pull at every one of those hundreds of steps — a nudge toward agreement with
+  pull at every one of those hundreds of steps, a nudge toward agreement with
   the measurements. But before judging any recipe, we need to state what the
   correct output even is. That is Bayes&rsquo; rule:</p>
   <div class="eq"><span class="tag">E1</span>
     <div class="formula">p(map&thinsp;|&thinsp;data) &nbsp;∝&nbsp; p(map) &nbsp;·&nbsp; L(map),
     &nbsp;&nbsp;&nbsp; L(map) = exp(&thinsp;−&thinsp;mismatch(map)² / 2σ²&thinsp;)</div>
     <div class="words"><b>In words:</b> the probability that a given map is the
-    real one, after seeing the data, is proportional to two factors — how
+    real one, after seeing the data, is proportional to two factors: how
     plausible the map was to begin with (<b>the prior</b>, which our generative
     model supplies), times how well it explains the measurements (<b>the data
     fit</b> L: it decays as the mismatch between predicted and observed data
     grows, with σ the measurement noise). Bayes&rsquo; rule is not an
-    approximation; it is the definition of the correct answer.</div>
+    approximation. It is the definition of the correct answer.</div>
   </div>
   <p>Now the step that connects this to samplers, and that everything on this
-  page hangs on. The unsteered model produces whole <em>journeys</em> — a few
-  hundred random steps ending in a final map — and by construction the final
+  page hangs on. The unsteered model produces whole <em>journeys</em> (a few
+  hundred random steps ending in a final map), and by construction the final
   maps of those journeys follow the prior p(map). So consider the following
   recipe, which is just E1 rewritten at the level of journeys:</p>
   <div class="eq"><span class="tag">E2</span>
@@ -262,12 +262,12 @@
     well its <em>endpoint</em> fits the data. Because the endpoints of
     P<sub>0</sub>-journeys follow the prior, multiplying by L makes the endpoints
     of P<sup>★</sup>-journeys follow <b>exactly the posterior of E1</b>. Nothing
-    else changes — P<sup>★</sup> is the unsteered process, viewed through
+    else changes: P<sup>★</sup> is the unsteered process, viewed through
     data-tinted glasses.</div>
   </div>
   <p>P<sup>★</sup> is the gold standard: the journey distribution whose endpoints
-  are the correct answer. You could even sample it directly — generate millions
-  of typical maps, keep only those matching your data — but essentially none
+  are the correct answer. You could even sample it directly (generate millions
+  of typical maps, keep only those matching your data), but essentially none
   match, so this is hopelessly wasteful. <b>A steering method is precisely an
   attempt to generate P<sup>★</sup>-journeys directly</b>, by nudging each step,
   instead of generating P<sub>0</sub>-journeys and discarding almost all of them.
@@ -278,21 +278,21 @@
   a quantity the model doesn&rsquo;t directly know (how uncertain its own
   denoising currently is), so practical recipes substitute something cheaper.
   The most popular one simply drops that uncertainty term. On our bench, the
-  result is answer clouds that are <em>too confident</em> — centered slightly
-  wrong and far too narrow — exactly the failure mode that corrupts scientific
-  error bars.</p>
+  result is answer clouds that are <em>too confident</em>, centered slightly
+  wrong and far too narrow. That is exactly the failure mode that corrupts
+  scientific error bars.</p>
 
-  <h3>Idea 3 — Importance weights: comparing two sets of rules on the same journey</h3>
+  <h3>Idea 3. Importance weights: comparing two sets of rules on the same journey</h3>
   <p>One more classical tool. Suppose a walker takes a journey following rules B,
   and you want to know how probable that same journey would have been under
   rules A. If both rules are known, you can compute, step by step, the ratio
   &ldquo;probability of this move under A&rdquo; over &ldquo;probability of this
   move under B&rdquo;, and multiply the ratios along the journey. Statisticians
   call the result an <b>importance weight</b>. It is an exact accounting
-  device — no approximation — provided you genuinely know both rules.</p>
+  device (no approximation), provided you genuinely know both rules.</p>
   <p>Now the crucial observation: <b>a steered sampler knows both rules about
   itself.</b> It knows the unsteered step rules (its own network without the
-  nudge — the P<sub>0</sub> of E2), and it knows the nudged rules it actually
+  nudge, the P<sub>0</sub> of E2), and it knows the nudged rules it actually
   applied (call their journey distribution P<sub>s</sub>, s for
   &ldquo;sampler&rdquo;). So it can compute these step-by-step ratios <em>about
   its own journeys, while it runs, on real data, with no ground truth
@@ -302,12 +302,12 @@
   <h2>The meter, assembled from those three ideas</h2>
   <p>We now have three objects on the table, and it is worth keeping their names
   straight. <b>P<sub>0</sub></b>: the unsteered model&rsquo;s journeys.
-  <b>P<sup>★</sup></b>: the gold standard — P<sub>0</sub> re-weighted by data
+  <b>P<sup>★</sup></b>: the gold standard, P<sub>0</sub> re-weighted by data
   fit, whose endpoints are the exact posterior (E2). <b>P<sub>s</sub></b>: the
   journeys your steered sampler <em>actually</em> produces, nudges,
   approximations and all. The sampler&rsquo;s error, at the level of whole
   journeys, is the gap between P<sub>s</sub> and P<sup>★</sup>. The meter
-  estimates that gap. Here is the ledger, precisely — this is the single
+  estimates that gap. Here is the ledger, precisely. This is the single
   formula the whole page is about:</p>
   <div class="eq"><span class="tag">E3 · the ledger</span>
     <div class="formula">w(journey) &nbsp;=&nbsp;
@@ -316,20 +316,20 @@
     &nbsp;·&nbsp; L(final map)</div>
     <div class="words"><b>In words:</b> follow one journey your sampler
     generated. At every step, both the unsteered rules and the nudged rules
-    assign a probability to the move that was just taken — divide the first by
+    assign a probability to the move that was just taken: divide the first by
     the second. (Each factor asks: <em>was this move more, or less, likely
     without the nudge?</em> A move the nudge made likelier gets a factor below
-    1.) Multiply the few hundred factors together — that product is the
+    1.) Multiply the few hundred factors together: that product is the
     <b>journey cost</b>, the total accounting of everything steering did. Then
     multiply once by the <b>data fit</b> L of the final map, from E1. Every
-    quantity here is available to the running sampler; the true answer appears
-    nowhere. w is one number per journey — one bar in the panels below.</div>
+    quantity here is available to the running sampler. The true answer appears
+    nowhere. w is one number per journey, one bar in the panels below.</div>
   </div>
   <p>Why is this the right bookkeeping? Compare it to E2: multiplying a
   P<sub>0</sub>-probability by L gives (up to one overall constant) the
   P<sup>★</sup>-probability. So the ledger is literally
   w&nbsp;=&nbsp;P<sup>★</sup>(journey)&thinsp;/&thinsp;P<sub>s</sub>(journey)
-  &times; constant — <em>how much the gold standard likes this journey, relative
+  &times; constant: <em>how much the gold standard likes this journey, relative
   to how much your sampler likes it</em>. Three consequences follow, and they
   are the entire instrument:</p>
   <div class="eq"><span class="tag">E4 · the readings</span>
@@ -341,18 +341,18 @@
     </div>
     <div class="words"><b>Line 1, the flatness test:</b> if the sampler is
     exactly right, the ratio P<sup>★</sup>/P<sub>s</sub> is the same constant for
-    every journey — the books balance perfectly. Any spread in the w&rsquo;s
+    every journey: the books balance perfectly. Any spread in the w&rsquo;s
     means some journeys were over-produced and others under-produced relative to
-    the gold standard; the spread <em>is</em> the error.
-    <b>Line 2, quantifying the spread:</b> the <b>effective sample size</b> —
-    if all 28 weights are equal it returns 28; if one weight dominates it
+    the gold standard. The spread <em>is</em> the error.
+    <b>Line 2, quantifying the spread:</b> the <b>effective sample size</b>.
+    If all 28 weights are equal it returns 28. If one weight dominates it
     returns ≈1 (&ldquo;you effectively have one sample&rdquo;). And the
     <b>reading</b>: the gap between the log of the average weight and the
     average of the log weights. For flat weights the two coincide and the
-    reading is zero; the more uneven the weights, the larger the gap (this is
+    reading is zero. The more uneven the weights, the larger the gap (this is
     Jensen&rsquo;s inequality doing the measuring). Mathematically this reading
     estimates the journey-level divergence between P<sub>s</sub> and
-    P<sup>★</sup> — which is always an <b>upper limit</b> on the error of the
+    P<sup>★</sup>, which is always an <b>upper limit</b> on the error of the
     final answer cloud, since endpoints are part of the journey. Units are
     &ldquo;nats,&rdquo; the standard currency of information: 0 = perfect,
     bigger = worse, additive across independent error sources.</div>
@@ -360,9 +360,9 @@
   <p>That is the entire instrument: run the sampler as normal, accumulate E3
   alongside, report E4. No ground truth, no extra network evaluations, nothing
   changed about the sampler itself.</p>
-  <p>The panel below runs all of this live — the genuine equations from the
+  <p>The panel below runs all of this live: the genuine equations from the
   experiment, in one dimension so every journey is visible. The dotted band is
-  the true answer, which <em>only the bench knows</em>; watch that the meter
+  the true answer, which <em>only the bench knows</em>. Watch that the meter
   never uses it. Toggle the two samplers.</p>
 </div>
 
@@ -381,26 +381,26 @@
           <figcaption><b>The journeys.</b> Grey: the unsteered model (ends up
           &ldquo;typical&rdquo;, ignores the data). Colored: the steered sampler,
           nudged at every step toward the data. Dotted band: the true posterior
-          — bench-only knowledge, invisible to the meter.</figcaption>
+          (bench-only knowledge, invisible to the meter).</figcaption>
         </figure>
         <figure>
           <canvas id="c1-side" width="520" height="430" aria-label="Endpoint distribution and per-journey ledger weights"></canvas>
           <figcaption><b>Top: the destination.</b> Each tick is one journey&rsquo;s
-          final value; the curve is the true posterior (bench-only).
+          final value. The curve is the true posterior (bench-only).
           <b>Bottom: the ledger, i.e. E3 evaluated on these 28 journeys.</b>
-          Bar i has height w<sub>i</sub>&thinsp;/&thinsp;Σ&thinsp;w<sub>j</sub> —
-          journey i&rsquo;s share of the total weight; the 28 bars sum to 1. A
+          Bar i has height w<sub>i</sub>&thinsp;/&thinsp;Σ&thinsp;w<sub>j</sub>:
+          journey i&rsquo;s share of the total weight. The 28 bars sum to 1. A
           perfect sampler gives every journey the share 1/28 (dashed line). A
           bar towering above the rest is a journey the gold standard
           P<sup>★</sup> considers far more probable than the sampler&rsquo;s own
-          behavior would suggest — direct evidence of mismatch.</figcaption>
+          behavior would suggest: direct evidence of mismatch.</figcaption>
         </figure>
       </div>
       <div class="readout">
         <span class="lamp"><i id="p1-lamp"></i><b id="p1-status">—</b></span>
         <span>effective samples <b id="p1-ess">—</b> / 28</span>
         <span>meter reading <b id="p1-kl">—</b></span>
-        <span>true error <b id="p1-true">—</b> <span style="letter-spacing:0">(bench-only — the meter never sees this)</span></span>
+        <span>true error <b id="p1-true">—</b> <span style="letter-spacing:0">(bench-only, the meter never sees this)</span></span>
       </div>
     </div>
   </div>
@@ -409,24 +409,24 @@
 <div class="col">
   <p>Run it a few times. With <b style="color:var(--good-ink)">honest
   steering</b> the ledger sits at the dashed line, the effective count stays near
-  28, and the meter reads near zero — correctly, as the bench-only
+  28, and the meter reads near zero. Correctly so, as the bench-only
   &ldquo;true error&rdquo; readout confirms. With the
   <b style="color:var(--bad-ink)">shortcut</b>, the endpoint cloud visibly
   overshoots and narrows (that&rsquo;s the overconfidence), a handful of
   journeys grab all the weight, and the reading jumps. On the full-size bench
   experiments this instrument priced a good sampler&rsquo;s error to within
-  <b>5%</b> — at every problem size we tried, up to maps of 16,384
+  <b>5%</b>, at every problem size we tried, up to maps of 16,384
   components. So far, a real instrument.</p>
 
   <p class="eyebrow">part 4 · first crack</p>
   <h2>The meter measures the journey. Science cares about the destination.</h2>
   <p>Look once more at step 2 of the construction: the ledger accrues a cost for
   <em>every nudge at every step</em>. Now imagine a sampler that pulls too hard
-  early on, drifts off course, and then partly recovers — landing not far from
+  early on, drifts off course, and then partly recovers, landing not far from
   the right place. Its <em>destination</em> error is modest. But its ledger
   remembers the whole detour: the <em>journey</em> error is enormous. The
-  mathematical guarantee still holds — journey error is always an upper limit on
-  destination error — but the limit can be absurdly loose. On the bench, with
+  mathematical guarantee still holds (journey error is always an upper limit on
+  destination error), but the limit can be absurdly loose. On the bench, with
   everything exact, we measured precisely this anatomy:</p>
 </div>
 
@@ -435,7 +435,7 @@
     <div class="panel-cap"><span>measured on the bench · exact closed forms, zero sampling noise</span></div>
     <div class="panel-body">
       <svg viewBox="0 0 860 250" role="img" aria-label="Bar chart comparing journey error and destination error for an honest and a shortcut sampler">
-        <text x="20" y="26" font-size="13">error score (log scale — each gridline is 10× worse)</text>
+        <text x="20" y="26" font-size="13">error score (log scale, each gridline is 10× worse)</text>
         <line x1="150" y1="40" x2="150" y2="205" stroke="var(--line)"/>
         <line x1="150" y1="205" x2="820" y2="205" stroke="var(--line)"/>
         <g font-size="12">
@@ -451,17 +451,17 @@
         <rect x="150" y="60" width="161" height="16" rx="3" fill="var(--good)"/>
         <text x="320" y="73" font-size="12">journey 9.8</text>
         <rect x="150" y="82" width="157" height="16" rx="3" fill="var(--good)" opacity="0.45"/>
-        <text x="316" y="95" font-size="12">destination 9.3 — the meter is tight: only 5% above the truth</text>
+        <text x="316" y="95" font-size="12">destination 9.3 (the meter is tight: only 5% above the truth)</text>
         <text x="20" y="151" font-size="13" fill="var(--bad-ink)">shortcut</text>
         <rect x="150" y="135" width="558" height="16" rx="3" fill="var(--bad)"/>
         <text x="712" y="148" font-size="12">journey 2,701</text>
         <rect x="150" y="157" width="236" height="16" rx="3" fill="var(--bad)" opacity="0.45"/>
-        <text x="394" y="170" font-size="12">destination 28.5 — the meter overstates 95×</text>
+        <text x="394" y="170" font-size="12">destination 28.5 (the meter overstates 95×)</text>
       </svg>
       <figcaption>Same problem, same steering strength, everything exactly
       computable. For the honest sampler the journey barely exceeds the
       destination: the meter&rsquo;s upper limit is essentially the answer. The
-      shortcut sampler over-pulls early and partially recovers — so its journey
+      shortcut sampler over-pulls early and partially recovers, so its journey
       error is 95&times; its destination error. The meter is still <em>valid</em>
       (2,701 is indeed above 28.5) but as a measurement it is shouting rather
       than speaking. On perfect ingredients we judged this acceptable: precise
@@ -473,22 +473,22 @@
 <div class="col">
   <p class="eyebrow">part 5 · the failure</p>
   <h2>Trained networks turn every journey into a detour</h2>
-  <p>Everything above used mathematically perfect ingredients — the bench&rsquo;s
+  <p>Everything above used mathematically perfect ingredients: the bench&rsquo;s
   exact formulas standing in for the neural network. The whole point, though, is
   to deploy on <em>trained</em> networks. So we swapped in real ones (trained on
   our bench universe, so the truth stays checkable), and the instrument
   drowned. Here is the mechanism, which the previous paragraph already set
   up.</p>
   <p>The steering nudge is computed <em>through the network&rsquo;s own
-  gradients</em> — roughly, &ldquo;in which direction should this noisy map
+  gradients</em>: roughly, &ldquo;in which direction should this noisy map
   change to fit the data better, according to the network?&rdquo; A trained
   network answers that question <em>jaggedly</em>: its gradient carries
   substantial rapidly-fluctuating error on top of the true signal. The
-  fluctuations largely cancel over hundreds of steps — the sampler still
-  <em>lands</em> in a reasonable place — but every one of those fluctuations was
+  fluctuations largely cancel over hundreds of steps (the sampler still
+  <em>lands</em> in a reasonable place), but every one of those fluctuations was
   a nudge the ledger dutifully billed. The journeys become permanent detours. In
   our runs the sampler&rsquo;s own emergency brake (a standard clamp that limits
-  any single step&rsquo;s nudge) was firing on <b>up to 70% of all steps</b> —
+  any single step&rsquo;s nudge) was firing on <b>up to 70% of all steps</b>:
   a direct, independent witness of how violent the ride is. The panel below
   injects that kind of gradient noise into the same instrument:</p>
 </div>
@@ -505,15 +505,15 @@
       <div class="grid2">
         <figure>
           <canvas id="c2-paths" width="860" height="430" aria-label="Journeys under a jagged learned gradient: violent paths, similar landing"></canvas>
-          <figcaption><b>The journeys.</b> Same steering recipe; the only change
-          is gradient noise like a trained network&rsquo;s. The paths thrash —
+          <figcaption><b>The journeys.</b> Same steering recipe. The only change
+          is gradient noise like a trained network&rsquo;s. The paths thrash,
           yet look where they end.</figcaption>
         </figure>
         <figure>
           <canvas id="c2-side" width="520" height="430" aria-label="Endpoint distribution and ledger under the learned gradients"></canvas>
           <figcaption><b>The punchline in one panel:</b> the destination cloud
-          (top) is nearly unchanged; the ledger (bottom — same definition as in
-          instrument 01: each bar is one journey&rsquo;s share of total weight)
+          (top) is nearly unchanged, while the ledger (bottom, same definition as
+          in instrument 01: each bar is one journey&rsquo;s share of total weight)
           has collapsed onto a single journey.</figcaption>
         </figure>
       </div>
@@ -530,29 +530,29 @@
 <div class="col">
   <p>On the real trained networks the measurements were: meter readings
   <b>8&ndash;125&times; larger</b> than with exact gradients at identical
-  steering; effective sample counts pinned at 1&ndash;3 out of 256; and the
+  steering, effective sample counts pinned at 1&ndash;3 out of 256, and the
   reading dominated by the network&rsquo;s gradient noise rather than by the
   steering error it was designed to isolate. The meter had become a
   <em>gradient-roughness detector</em>. That is a perfectly honest thing to
-  measure — it is just not the thing anyone needs.</p>
+  measure. It is just not the thing anyone needs.</p>
 
-  <h3>The rescue attempts — each tried, each measured</h3>
+  <h3>The rescue attempts: each tried, each measured</h3>
   <p><b>Component-wise ledgers.</b> Our bench universe separates cleanly into
-  thousands of independent components, and a ledger can be kept per component
-  — smaller books, less compounding. On perfect ingredients this worked
+  thousands of independent components, and a ledger can be kept per component:
+  smaller books, less compounding. On perfect ingredients this worked
   spectacularly (component ledgers reproduced the exact answer to four digits).
   On trained networks: effective count ~3 of 256 per component. The gradient
-  noise contaminates every component at every step; the books are ruined locally,
+  noise contaminates every component at every step. The books are ruined locally,
   not just globally.</p>
   <p><b>Gentler steering.</b> Practitioners rarely run the nudge at full
-  theoretical strength; maybe the meter works in the regime people actually use?
-  We ran the ladder — quarter strength, half, full: the ledger stays degenerate
-  at every setting. <b>Fewer steps</b> — a shorter journey to bill? Worse (each
-  step&rsquo;s nudge gets bigger). <b>More samples</b> — average the noise away?
-  We went to 65,536 journeys; no change, because the spread grows much faster
+  theoretical strength. Maybe the meter works in the regime people actually use?
+  We ran the ladder (quarter strength, half, full): the ledger stays degenerate
+  at every setting. <b>Fewer steps</b>, a shorter journey to bill? Worse (each
+  step&rsquo;s nudge gets bigger). <b>More samples</b>, to average the noise away?
+  We went to 65,536 journeys. No change, because the spread grows much faster
   than averaging can repair.</p>
   <p><b>The fairest question: rankings.</b> Even a biased meter is useful if it
-  can compare — &ldquo;on my network, is recipe A better than recipe B?&rdquo;
+  can compare: &ldquo;on my network, is recipe A better than recipe B?&rdquo;
   Comparisons even cancel the one quantity the meter can&rsquo;t know (a
   normalization constant), making them its statistically cleanest output. So we
   built four variants of the same recipe at different steering strengths, asked
@@ -566,7 +566,7 @@
     <div class="panel-body">
       <svg viewBox="0 0 860 340" role="img" aria-label="Two aligned charts: true destination error is best at strength 0.5; the meter prefers 0.1">
         <g font-size="12">
-          <text x="20" y="24" font-size="13" fill="var(--ink)">true destination error — lower is better (bench-only knowledge)</text>
+          <text x="20" y="24" font-size="13" fill="var(--ink)">true destination error, lower is better (bench-only knowledge)</text>
           <line x1="120" y1="115" x2="820" y2="115" stroke="var(--line)"/>
           <rect x="170" y="35.2" width="70" height="79.8" rx="3" fill="var(--ref)"/>
           <rect x="340" y="67.4" width="70" height="47.6" rx="3" fill="var(--ref)"/>
@@ -576,7 +576,7 @@
           <text x="524" y="102" fill="var(--good-ink)">3.9 ✓ best</text><text x="696" y="93">5.2</text>
         </g>
         <g font-size="12">
-          <text x="20" y="173" font-size="13" fill="var(--ink)">the meter&rsquo;s verdict — it prefers whichever traveled least</text>
+          <text x="20" y="173" font-size="13" fill="var(--ink)">the meter&rsquo;s verdict: it prefers whichever traveled least</text>
           <line x1="120" y1="295" x2="820" y2="295" stroke="var(--line)"/>
           <rect x="170" y="225.0" width="70" height="70" rx="3" fill="var(--bad)"/>
           <rect x="340" y="212.5" width="70" height="82.5" rx="3" fill="var(--ref)"/>
@@ -592,8 +592,8 @@
         </g>
       </svg>
       <figcaption>The truth says: half-strength steering lands best (too little
-      strength = data ignored; too much = overconfident distortion; the best
-      sits in between). The meter says: the weakest steering wins — because the
+      strength = data ignored, too much = overconfident distortion, and the best
+      sits in between). The meter says: the weakest steering wins, because the
       weakest steering <em>moves</em> least, and the meter bills movement. Rank
       correlation with the truth at mild settings: <b>−0.80</b>. Anti-correlated:
       systematically worse than guessing. This was the instrument&rsquo;s fairest
@@ -606,11 +606,11 @@
   <p class="eyebrow">part 6 · the field&rsquo;s flagship</p>
   <h2>Where the community&rsquo;s actual mass-mapping method fits in all this</h2>
   <p>Readers from weak lensing will be asking: what does any of this mean for
-  the approach the field actually ships — annealed-Langevin mass mapping
+  the approach the field actually ships, annealed-Langevin mass mapping
   (arXiv:2201.05561), which has reconstructed dark-matter maps of real survey
   data with a diffusion prior? It sits inside this story in three distinct
   ways.</p>
-  <p><b>First, it is one of the steered samplers under audit — the cautious
+  <p><b>First, it is one of the steered samplers under audit: the cautious
   one.</b> Instead of one backward pass with nudges at full data strength, the
   scheme visits a ladder of noise levels and, at each level, deliberately
   <em>weakens</em> the data pull: it treats the measurement noise as if it were
@@ -619,7 +619,7 @@
   blurry, and spends K correction steps per level to settle in before cooling.
   On our bench this design philosophy is measurably vindicated <em>and</em>
   priced: it is the only method in the family whose error genuinely converges to
-  the exact answer as you give it more compute — but matching the quality of the
+  the exact answer as you give it more compute. But matching the quality of the
   cheap one-pass shortcut already costs roughly 7&ndash;30&times; the shortcut&rsquo;s
   compute, and near-exactness costs about 100&times;. Cautious, correct in the
   limit, expensive: now with exact numbers attached.</p>
@@ -627,31 +627,31 @@
   aimed at.</b> How do its users currently argue the maps are right? The
   state-of-the-art way: run the sampler on <em>simulations</em> where the truth
   is known, check the recovered uncertainties offline, then trust the pipeline
-  on real data. That is an offline, in-distribution argument — it cannot notice
+  on real data. That is an offline, in-distribution argument: it cannot notice
   a problem specific to <em>tonight&rsquo;s observation</em>. And the standard
   online checks from the Monte-Carlo tradition (convergence diagnostics) measure
   whether the sampler has <em>settled</em>, not whether it settled in the right
   place: a finite ladder of noise levels can converge beautifully to a biased
-  answer — on our bench, at practitioner-typical K, that residual bias is
+  answer. On our bench, at practitioner-typical K, that residual bias is
   3&ndash;100&times; the ideal error. A per-observation runtime meter would have
   been the missing complement. That is why this instrument was worth a serious
   attempt.</p>
   <p><b>Third, the verdict covers this scheme too.</b> The ledger idea has a
   natural version for level-ladder samplers (the weights accumulate across
-  levels instead of steps — the classic &ldquo;annealed importance
+  levels instead of steps, the classic &ldquo;annealed importance
   sampling&rdquo; construction). We built and tested that version as well: at
-  realistic map sizes its books degenerate just like the others&rsquo; — off by
+  realistic map sizes its books degenerate just like the others&rsquo;: off by
   a hundred thousand log-units. So nothing on this page says the field&rsquo;s
-  maps are wrong; it says the field&rsquo;s <em>offline</em> validation remains
+  maps are wrong. It says the field&rsquo;s <em>offline</em> validation remains
   the only game in town, our bench now supplies its error-budget price list, and
-  the runtime warning light everyone would want — for this sampler as much as
-  for the shortcuts — still does not exist.</p>
+  the runtime warning light everyone would want (for this sampler as much as
+  for the shortcuts) still does not exist.</p>
   <p class="aside"><b>Update (July 2026):</b> as this page was being finished,
   a successor to that line of work appeared
-  (arXiv:2606.31988) — a different construction entirely, generating map and
+  (arXiv:2606.31988): a different construction entirely, generating map and
   cosmological parameters jointly with a flow-matching model. Two things carry
   over unchanged. Its test bench is a warped-Gaussian field validated against
-  slow-but-sure MCMC gold standards — the same construction as part 11, which
+  slow-but-sure MCMC gold standards, the same construction as part 11, which
   is reassuring about our bench and theirs. And its validation is, again,
   entirely offline and simulation-based, with a fixed step count and no runtime
   check of any kind: three years and one method-generation later, the warning
@@ -663,11 +663,11 @@
   it before believing it:</p>
   <ul class="klist">
     <li><span class="mono tag-pass">NO BUG</span><span>We rebuilt the entire computation in independent closed-form
-      mathematics and compared against the running code — through the exact same
+      mathematics and compared against the running code, through the exact same
       code path a trained network uses, with a deliberately corrupted model so
       any bookkeeping error would surface. Agreement: one part in 100,000.</span></li>
-    <li><span class="mono tag-pass">MECHANISM CONFIRMED</span><span>The failure follows quantitatively from one measured fact —
-      trained-network gradients are jagged — and disappears exactly when smooth
+    <li><span class="mono tag-pass">MECHANISM CONFIRMED</span><span>The failure follows quantitatively from one measured fact
+      (trained-network gradients are jagged) and disappears exactly when smooth
       gradients are substituted, at every steering strength.</span></li>
     <li><span class="mono tag-fail">NO ESCAPE FOUND</span><span>Component-wise books, gentler steering, shorter runs, more
       samples, rankings instead of absolute readings: each tested, each
@@ -675,29 +675,29 @@
   </ul>
   <p>Every stage of this arc was <b>pre-registered</b>: before each experiment we
   wrote down what we expected, with a confidence percentage, and afterwards
-  scored ourselves publicly — including the misses, of which this day produced
+  scored ourselves publicly, including the misses, of which this day produced
   several. The one-line conclusion, now measured rather than suspected:</p>
   <p class="aside" style="font-size:1.05rem; color:var(--ink)"><b>On trained
-  networks, how much a sampler travels tells you nothing about where it lands —
-  and any instrument built on journey-accounting inherits that blindness.</b></p>
+  networks, how much a sampler travels tells you nothing about where it lands.
+  And any instrument built on journey-accounting inherits that blindness.</b></p>
 
   <p class="eyebrow">part 8 · what remains</p>
   <h2>Why this was a good day anyway</h2>
   <p>Three things survive the wreck. First, the meter remains genuinely useful
   <em>on the bench</em>, where its tightness for good samplers is a precision
   tool for method developers. Second, the post-mortem is a map: it says the next
-  instrument class must examine the <em>destination</em> — the final samples
-  themselves — rather than the journey; that is a concrete, different
+  instrument class must examine the <em>destination</em> (the final samples
+  themselves) rather than the journey. That is a concrete, different
   mathematical starting point, with its own literature to check before anyone
   gets excited. Third, and maybe most transferable: one exact test bench plus
   pre-registered predictions killed a plausible, seductive research program in a
-  single day, for the cost of a few GPU-hours — before months went into building
+  single day, for the cost of a few GPU-hours, before months went into building
   it. Most fields cannot do that. Ours, for this one question, now can.</p>
 
   <p class="eyebrow">part 9 · the sequel</p>
   <h2>The field&rsquo;s last certificate, put on trial</h2>
   <p>Part 8 ended with a promise: the next instrument class must examine the
-  <em>destination</em> — the final samples — and there was &ldquo;a literature to
+  <em>destination</em> (the final samples), and there was &ldquo;a literature to
   check before anyone gets excited.&rdquo; We checked it. The field has exactly
   one serious destination-instrument on offer: a February 2026 paper proposes
   the <b>score-KSD</b> as a runtime quality check for diffusion samplers solving
@@ -706,7 +706,7 @@
   <div class="eq"><span class="tag">E5 · the score</span>
     <div class="formula">s(x) &nbsp;=&nbsp; ∇ log&thinsp;p<sup>★</sup>(x)</div>
     <div class="words"><b>In words:</b> at any candidate map x, the target
-    distribution assigns a probability; the score s(x) is the direction and
+    distribution assigns a probability. The score s(x) is the direction and
     steepness of &ldquo;uphill&rdquo; in that probability, at exactly the point
     x. It is a local arrow: it says which small change to x would make it more
     plausible, and how strongly. Diffusion models are literally trained to
@@ -719,7 +719,7 @@
     <div class="words"><b>In words:</b> for every pair of your samples, the
     quantity u<sub>p</sub> compares the arrows the target <em>says</em> should
     hold at those two points against the way your samples are actually arranged
-    around them; a mathematical identity (due to Stein) guarantees that if the
+    around them. A mathematical identity (due to Stein) guarantees that if the
     samples truly come from the target, all these comparisons cancel on average
     to zero. Sum the pairwise comparisons, normalize by the number of samples N
     and the dimension d, take a square root: one number, zero-ish for a perfect
@@ -727,18 +727,18 @@
     consumes: your samples, and the target&rsquo;s slope <em>at those samples
     only</em>. Hold that thought.</div>
   </div>
-  <p>No reference code exists — no repository, no package — so we implemented
+  <p>No reference code exists (no repository, no package), so we implemented
   the paper&rsquo;s recipe exactly and verified our algebra against an
   independent automatic-differentiation computation to one part in
   10<sup>13</sup>. And we handed the meter something its own authors never gave
   it: a <b>calibrated threshold</b>. The paper publishes no way to decide when
-  the number is &ldquo;too big&rdquo;; we built one by computing the meter on
+  the number is &ldquo;too big.&rdquo; We built one by computing the meter on
   sixty perfect sample sets and drawing the line at the value only 5% of
   perfect sets exceed. Everything below is measured against that line, on the
   bench where the true answer is exactly known.</p>
 
   <p class="eyebrow">part 10 · three verdicts</p>
-  <h2>Powerful, blind, and gullible — all three, measured</h2>
+  <h2>Powerful, blind, and gullible: all three, measured</h2>
   <p><b>Verdict one: with the true arrows, the slope meter is genuinely
   strong.</b> Every biased sampler in our archive is flagged with certainty
   from just 64 samples. That includes the score-contaminated configurations,
@@ -751,16 +751,16 @@
   score, score-KSD is a precision instrument against <em>dynamics</em> errors,
   and our results confirm the paper&rsquo;s central claim on that ground.</p>
   <p><b>Verdict two: it cannot see an absence.</b> We built a target that is
-  two well-separated islands of probability — both exactly known — and a
+  two well-separated islands of probability (both exactly known) and a
   sampler that only ever visits one island. Half the answer is missing. The
   slope meter&rsquo;s reading: indistinguishable from perfect. Not
-  &ldquo;slightly elevated&rdquo; — the ratio of its reading on the broken
+  &ldquo;slightly elevated&rdquo;: the ratio of its reading on the broken
   sampler to its reading on a flawless one was 1.0001, and stayed there up to
   16,384 samples. The mechanism is the thought we held from E6: the meter only
   ever checks arrows <em>at the places samples sit</em>. Samples on the
-  occupied island sit exactly where that island&rsquo;s arrows say they should;
-  no sample ever stands on the empty island to notice it. More samples cannot
-  cure this — they all land on the same island.</p>
+  occupied island sit exactly where that island&rsquo;s arrows say they should.
+  No sample ever stands on the empty island to notice it. More samples cannot
+  cure this: they all land on the same island.</p>
 </div>
 
 <div class="wide">
@@ -774,24 +774,24 @@
         <line x1="259" y1="40" x2="259" y2="200" stroke="var(--line-soft)" stroke-dasharray="4 4"/>
         <text x="20" y="76" font-size="13" fill="var(--good-ink)">PQMass</text>
         <rect x="230" y="60" width="576" height="18" rx="3" fill="var(--good)"/>
-        <text x="700" y="74" font-size="12" fill="#fff">1.00 — every time</text>
+        <text x="700" y="74" font-size="12" fill="#fff">1.00, every time</text>
         <text x="20" y="126" font-size="13">TARP</text>
         <rect x="230" y="110" width="518" height="18" rx="3" fill="var(--good)" opacity="0.55"/>
         <text x="655" y="124" font-size="12">0.90</text>
         <text x="20" y="176" font-size="13" fill="var(--bad-ink)">score-KSD</text>
         <rect x="230" y="160" width="29" height="18" rx="3" fill="var(--bad)"/>
-        <text x="268" y="174" font-size="12">0.05 — exactly its false-alarm rate: it sees nothing, at any sample count we tried (64 → 16,384)</text>
+        <text x="268" y="174" font-size="12">0.05, exactly its false-alarm rate: it sees nothing at any sample count we tried (64 to 16,384)</text>
       </svg>
       <figcaption>Every bar: the fraction of repeated trials (10&ndash;20 per
       test per setting, at 256 and 1,024 samples) in which the test flagged a
       sample set that covers only one of two equally-likely islands. PQMass and
       TARP compare <em>samples to samples</em>, so the missing island is visible
-      to them; the slope meter compares <em>samples to local arrows</em>, and
+      to them. The slope meter compares <em>samples to local arrows</em>, and
       no arrow at an occupied point betrays an empty region. The dashed line is
       0.05: a reading on that line means the test fires no more often than it
       does on perfect samples. We also turned the knob toward rarer islands:
       the sample-based tests keep catching it until the missing island holds
-      only ~1% of the probability; the slope meter stays on the dashed line
+      only ~1% of the probability. The slope meter stays on the dashed line
       throughout.</figcaption>
     </div>
   </div>
@@ -799,16 +799,16 @@
 
 <div class="col">
   <p><b>Verdict three: with the arrows you actually have, it is gullible in
-  both directions.</b> In deployment nobody has the true score — you have your
+  both directions.</b> In deployment nobody has the true score: you have your
   <em>network&rsquo;s</em> score, the very object whose jaggedness wrecked our
   journey-meter in part 5. Plugging in the network&rsquo;s arrows (following
   the paper&rsquo;s own recipe for doing so), two things happen. The
-  meter&rsquo;s baseline reading on <em>perfect</em> samples doubles — the
+  meter&rsquo;s baseline reading on <em>perfect</em> samples doubles: the
   network&rsquo;s arrow errors dominate the sum. And against that inflated
-  baseline, DPS — the most popular biased sampler, the textbook case the
+  baseline, DPS (the most popular biased sampler, the textbook case the
   certificate exists to catch, sitting at thirty times the unavoidable error
-  floor — reads as <em>clean</em>. We checked this with two independently
-  trained networks; same verdict. We scanned the recipe&rsquo;s tuning knob:
+  floor) reads as <em>clean</em>. We checked this with two independently
+  trained networks. Same verdict. We scanned the recipe&rsquo;s tuning knob:
   one setting partially recovers the detection, but nothing tells a
   practitioner in advance which setting that is. And the reverse failure is
   just as real: give the meter arrows that are wrong by only 5% (a mild
@@ -820,48 +820,48 @@
     <li><span class="mono tag-pass">STRONG</span><span>True arrows: every dynamics-biased sampler caught from 64
       samples, including the compensating-errors trap that beat all
       sample-based tests.</span></li>
-    <li><span class="mono tag-fail">BLIND</span><span>A missing half of the posterior is invisible at any budget —
-      structurally: the meter never looks where samples aren&rsquo;t.</span></li>
+    <li><span class="mono tag-fail">BLIND</span><span>A missing half of the posterior is invisible at any budget,
+      and structurally so: the meter never looks where samples aren&rsquo;t.</span></li>
     <li><span class="mono tag-fail">GULLIBLE</span><span>Network arrows: baseline doubles, DPS false-certified (both
-      networks, the paper&rsquo;s own settings); 5%-wrong arrows false-alarm on
+      networks, the paper&rsquo;s own settings). 5%-wrong arrows false-alarm on
       perfect samples at 100%.</span></li>
   </ul>
 
   <p class="eyebrow">part 11 · the harder bench</p>
   <h2>Meanwhile: the &ldquo;expensive&rdquo; alternative costs a minute</h2>
   <p>The trial needed a second act because our bench, until now, was linear and
-  Gaussian — exactly solvable, but suspiciously polite. Real inference problems
+  Gaussian: exactly solvable, but suspiciously polite. Real inference problems
   are not: in weak lensing, the observation depends <em>nonlinearly</em> on the
   field. So we built the harder version. The prior stays our familiar Gaussian
-  random field g; the nonlinearity enters through the observation:</p>
+  random field g, and the nonlinearity enters through the observation:</p>
   <div class="eq"><span class="tag">E7 · the nonlinear bench</span>
     <div class="formula">y &nbsp;=&nbsp; A&thinsp;κ(g) + noise,
     &nbsp;&nbsp;&nbsp; κ(g) &nbsp;=&nbsp; (&thinsp;e<sup>λg − λ²/2</sup> − 1&thinsp;)&thinsp;/&thinsp;λ</div>
     <div class="words"><b>In words:</b> instead of observing a smoothed version
     of the field itself, we observe a smoothed version of a <em>warped</em>
-    field κ(g) — an exponential warp of exactly the kind lensing physics
+    field κ(g), an exponential warp of exactly the kind lensing physics
     produces (a &ldquo;lognormal&rdquo; field). The dial λ sets how strong the
     warp is: at λ&nbsp;=&nbsp;0 the warp vanishes and the problem collapses
-    back to our exactly-solvable bench — that limit is the built-in correctness
+    back to our exactly-solvable bench. That limit is the built-in correctness
     test for everything that follows. At our default λ the warped field&rsquo;s
     histogram is visibly lopsided (skewness 1), the way real matter maps
     are.</div>
   </div>
-  <p>On this bench no formula gives the answer — which is precisely the
+  <p>On this bench no formula gives the answer, which is precisely the
   situation practitioners face, and where the standard lament says proper
   validation is &ldquo;too expensive.&rdquo; We measured the lament.
-  Manufacturing a <b>gold standard</b> — a slow, classical, guaranteed-correct
-  MCMC computation of the posterior — took <b>74 seconds per configuration</b>
+  Manufacturing a <b>gold standard</b> (a slow, classical, guaranteed-correct
+  MCMC computation of the posterior) took <b>74 seconds per configuration</b>
   on one GPU, and passed every audit we could design: the λ&nbsp;→&nbsp;0 dial
-  reproduces the exact formula; an entirely independent closed-form computation
-  agrees with the MCMC answer to within its (tiny) statistical error; two
-  independent runs agree with each other; and the whole apparatus repeats at
+  reproduces the exact formula, an entirely independent closed-form computation
+  agrees with the MCMC answer to within its (tiny) statistical error, two
+  independent runs agree with each other, and the whole apparatus repeats at
   four times the dimension. Cheap, checkable, boring. Against these gold
   standards we re-ran the sampler zoo, and the transfer report reads: DPS is
-  still overconfident, now with structure — its error bars on the fine scales
-  cover the truth <em>zero percent</em> of the time; annealed-Langevin
+  still overconfident, now with structure (its error bars on the fine scales
+  cover the truth <em>zero percent</em> of the time). Annealed-Langevin
   sampling still buys accuracy smoothly with compute, all the way down to the
-  gold standard itself; and one Gaussian-bench result <b>failed to
+  gold standard itself. And one Gaussian-bench result <b>failed to
   transfer</b>, informatively.</p>
 </div>
 
@@ -881,16 +881,16 @@
         <text x="450" y="124" font-size="12">2.8×</text>
         <text x="20" y="176" font-size="13" fill="var(--bad-ink)">strong warp (skewness 2)</text>
         <rect x="330" y="160" width="44" height="18" rx="3" fill="var(--bad)"/>
-        <text x="382" y="174" font-size="12">1.1× — indistinguishable from not bothering</text>
+        <text x="382" y="174" font-size="12">1.1×, indistinguishable from not bothering</text>
       </svg>
       <figcaption>Each bar: the ratio of plain DPS&rsquo;s error (distance of
       its samples to the gold standard, median over seeds and observations) to
       the error of DPS with the standard &ldquo;inflate the noise term by the
       predicted uncertainty&rdquo; correction, at three settings of the warp
       dial λ. On the linear bench this correction is mathematically
-      <em>exact</em> — infinitely valuable. Its value decays to nothing by
-      skewness 2. The correction&rsquo;s exactness was a Gaussian accident;
-      meanwhile the annealed-sampling route stays within ~15× of the
+      <em>exact</em>, infinitely valuable. Its value decays to nothing by
+      skewness 2. The correction&rsquo;s exactness was a Gaussian accident.
+      Meanwhile the annealed-sampling route stays within ~15× of the
       unavoidable floor at every λ. If you must choose where to spend, buy
       Langevin steps, not covariance formulas.</figcaption>
     </div>
@@ -901,43 +901,43 @@
   <p class="eyebrow">part 12 · what should a practitioner actually do</p>
   <h2>The honest protocol, and the one certificate you can keep</h2>
   <p>Assembling everything this arc measured, the defensible advice has two
-  layers. <b>Offline:</b> build a matched synthetic bench for your problem —
-  same prior family, same nonlinearity, dialed to your regime — manufacture
+  layers. <b>Offline:</b> build a matched synthetic bench for your problem
+  (same prior family, same nonlinearity, dialed to your regime), manufacture
   MCMC gold standards on it (minutes, not weeks, as measured above), and run
   your actual sampler against them with sample-space tests. If your conclusions
   matter, measure how they decay as the bench&rsquo;s realism dial turns, the
-  way we measured the covariance fix decaying — a validation whose robustness
+  way we measured the covariance fix decaying: a validation whose robustness
   you have quantified, rather than assumed. <b>At runtime:</b> the last
   candidate standing is the oldest idea in the book, transplanted: run your
   sampler at compute budget K and again at 2K with fresh seeds, and compare the
   two outputs with a calibrated sample-space test. We ran that through the
-  bench too — pre-registered, like everything else — and one of our two
+  bench too (pre-registered, like everything else), and one of our two
   predictions about it <b>missed</b>, in the most useful way. Where the
   annealed sampler&rsquo;s quality improves quickly per doubling (our strong-tilt
   setting), the check is textbook: it flagged every unconverged budget with
   certainty and passed the converged one, matching the gold standard in every
   cell. But where convergence is <em>slow</em> (our mild-tilt setting), K and
-  2K agree with each other while both are far from the truth — the doubling
+  2K agree with each other while both are far from the truth. The doubling
   test measures the <em>rate of change</em> of your answer, not its distance
   from the target, the same trap that has always haunted step-halving error
   estimates in numerical analysis. And as predicted: DPS at budget T agrees
   with DPS at 2T essentially always, thousands of floor-multiples away from the
   answer, and two runs stuck on the same island co-sign each other. So the
   honest scope of the one surviving runtime check is <b>one-directional</b>:
-  its alarm is trustworthy — disagreement proves non-convergence, cheaply and
-  with no ground truth — but its silence certifies nothing, for three measured
+  its alarm is trustworthy (disagreement proves non-convergence, cheaply and
+  with no ground truth), but its silence certifies nothing, for three measured
   reasons (slow convergence, biased samplers, shared blind spots). And for the
-  newest sampler generation — amortized models that generate by integrating a
-  deterministic ODE — we measured the degenerate extreme: doubling the step
+  newest sampler generation (amortized models that generate by integrating a
+  deterministic ODE), we measured the degenerate extreme: doubling the step
   count produces samples the test cannot tell apart at <em>any</em> budget we
   tried, even where the discretization error is still twice its converged
   value, while the sampler sits ~50&times; above the gold floor on training
   error that no step-count knob can ever reveal. There, the alarm never rings
   at all.</p>
   <p>And the certificate question itself? Closed, from both ends, with the same
-  bench: journey-accounting dies of jagged network gradients (parts 5&ndash;7);
-  slope-checking is blind to absences and gullible about its own reference
-  (parts 9&ndash;10); and even the venerable doubling check can only ever
+  bench: journey-accounting dies of jagged network gradients (parts 5&ndash;7).
+  Slope-checking is blind to absences and gullible about its own reference
+  (parts 9&ndash;10). And even the venerable doubling check can only ever
   convict, never acquit (part 12). Anyone proposing the next runtime
   certificate now has a concrete gauntlet waiting: the compensating-errors
   trap, the missing island, the wrong-reference band, and the
@@ -947,12 +947,12 @@
     Data, code, prediction ledger, night logs, and every number on this page:
     <a href="https://github.com/AndreasTersenov/tilt-audit">github.com/AndreasTersenov/tilt-audit</a>.
     The two interactive instruments simulate the actual mathematical construction
-    (the experiment&rsquo;s own equations, in one dimension); every bar chart on
+    (the experiment&rsquo;s own equations, in one dimension). Every bar chart on
     this page reports measured values from the full-scale runs, and every number
     traces to an append-only results file in the repository. Instrument readings
-    are in nats; the toy&rsquo;s magnitudes are smaller than the full-scale
+    are in nats. The toy&rsquo;s magnitudes are smaller than the full-scale
     experiment&rsquo;s but the phenomena are the same. Predictions for each
-    experiment were frozen and publicly pushed before the runs; the scored
+    experiment were frozen and publicly pushed before the runs. The scored
     ledger, including the misses and one public self-correction, is
     RESEARCH_LOG.md in the same repository.
   </footer>
@@ -1167,8 +1167,8 @@
       const lamp = $("-lamp"), st = $("-status");
       const flat = sim.ess > NPATH * 0.55;
       lamp.style.background = flat ? css("--good") : (mode === "net" ? css("--net") : css("--bad"));
-      st.textContent = flat ? "ledger flat — certified"
-        : (mode === "net" ? "ledger exploded — but look at the landing" : "ledger spiky — sampler flagged");
+      st.textContent = flat ? "ledger flat: certified"
+        : (mode === "net" ? "ledger exploded, but look at the landing" : "ledger spiky, sampler flagged");
       st.style.color = flat ? inkFor("good") : inkFor(mode === "net" ? "net" : "bad");
     }
     function run() {
