@@ -23,3 +23,19 @@ If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo an
 [k2k:remy] mid K=10 done
 [k2k:remy] mid K=15 done
 [k2k:remy] mid K=25 done
+[k2k:remy] mid K=50 done
+[k2k:remy] mid K=100 done
+[k2k:dps] mid T=64 done
+[k2k:dps] mid T=128 done
+[k2k:dps] mid T=256 done
+[k2k:dps] mid T=512 done
+[k2k:remy] strong K=10 done
+[k2k:remy] strong K=15 done
+[k2k:remy] strong K=25 done
+[k2k:remy] strong K=50 done
+[k2k:remy] strong K=100 done
+[k2k:dps] strong T=64 done
+[k2k:dps] strong T=128 done
+[k2k:dps] strong T=256 done
+[k2k:dps] strong T=512 done
+[k2k:stuck] demo done

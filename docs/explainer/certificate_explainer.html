@@ -880,23 +880,34 @@
   your actual sampler against them with sample-space tests. If your conclusions
   matter, measure how they decay as the bench&rsquo;s realism dial turns, the
   way we measured the covariance fix decaying — a validation whose robustness
-  you have quantified, rather than assumed. <b>At runtime:</b> the only
-  self-check that survived our audit is the oldest idea in the book, transplanted:
-  run your sampler at compute budget K and again at 2K with fresh seeds, and
-  compare the two outputs with a calibrated sample-space test. Agreement
-  certifies <em>convergence</em> — honestly scoped: it is valid only for
-  samplers that converge to the right answer in the first place
-  (R&eacute;my&rsquo;s class does; DPS converges confidently to the wrong one,
-  and the doubling test will co-sign that lie), and two runs stuck on the same
-  island will agree — the same blindness as everything else, inherited from
-  R-hat, its forty-year-old ancestor.
-  <!-- K2K-RESULT-SLOT: numbers from results/k2k.jsonl go here after the one-day run --></p>
+  you have quantified, rather than assumed. <b>At runtime:</b> the last
+  candidate standing is the oldest idea in the book, transplanted: run your
+  sampler at compute budget K and again at 2K with fresh seeds, and compare the
+  two outputs with a calibrated sample-space test. We ran that through the
+  bench too — pre-registered, like everything else — and one of our two
+  predictions about it <b>missed</b>, in the most useful way. Where the
+  annealed sampler&rsquo;s quality improves quickly per doubling (our strong-tilt
+  setting), the check is textbook: it flagged every unconverged budget with
+  certainty and passed the converged one, matching the gold standard in every
+  cell. But where convergence is <em>slow</em> (our mild-tilt setting), K and
+  2K agree with each other while both are far from the truth — the doubling
+  test measures the <em>rate of change</em> of your answer, not its distance
+  from the target, the same trap that has always haunted step-halving error
+  estimates in numerical analysis. And as predicted: DPS at budget T agrees
+  with DPS at 2T essentially always, thousands of floor-multiples away from the
+  answer, and two runs stuck on the same island co-sign each other. So the
+  honest scope of the one surviving runtime check is <b>one-directional</b>:
+  its alarm is trustworthy — disagreement proves non-convergence, cheaply and
+  with no ground truth — but its silence certifies nothing, for three measured
+  reasons (slow convergence, biased samplers, shared blind spots).</p>
   <p>And the certificate question itself? Closed, from both ends, with the same
   bench: journey-accounting dies of jagged network gradients (parts 5&ndash;7);
   slope-checking is blind to absences and gullible about its own reference
-  (parts 9&ndash;10). Anyone proposing the next runtime certificate now has a
-  concrete gauntlet waiting: the compensating-errors trap, the missing island,
-  and the wrong-reference band. We would genuinely like to see one pass.</p>
+  (parts 9&ndash;10); and even the venerable doubling check can only ever
+  convict, never acquit (part 12). Anyone proposing the next runtime
+  certificate now has a concrete gauntlet waiting: the compensating-errors
+  trap, the missing island, the wrong-reference band, and the
+  slow-convergence trap. We would genuinely like to see one pass.</p>
 
   <footer>
     Data, code, prediction ledger, night logs, and every number on this page:

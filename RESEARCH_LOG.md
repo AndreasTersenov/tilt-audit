@@ -536,3 +536,20 @@
   byte-identical in current main; cross-references their PR #12 and sbi #1832/#1837)
   and mira-score#1 (SammyS15/mira-score — same class + docstring contradiction;
   their tracker was empty). Drafts archived in docs/upstream/. Both offer a PR.
+
+- **P-20260705b SCORED 2026-07-05 (proposed; owner ratification pending): MISS,
+  instructive.** Strong tilt: textbook (flags K<=50 at power 1.00, all truly
+  unconverged; passes K=100, truly converged — 5/5 cells match truth). Mid tilt:
+  detect rate at K in {10,15} only 0.2-0.5 vs the frozen >=0.9 — K and 2K agree
+  with each other while both far from gold. Lesson (the real finding): budget-
+  doubling is a DERIVATIVE test, not a distance test — slow convergence silently
+  passes; the certificate is one-directional (alarm trustworthy, silence not).
+  Caveat: measured at the deployment comparison budget N=256; power at larger N
+  unmeasured (finite-N caveat, unlike the structural mode blindness).
+- **P-20260705c SCORED 2026-07-05 (proposed): HIT.** dps@T vs dps@2T agrees at
+  1.00 across T at mid tilt (and T>=256 at strong) while MMD-to-gold sits ~7e-2,
+  orders of magnitude above floor — the false-certification boundary of doubling
+  tests, measured. Stuck-mode demo: two half-posterior samplers agree at 1.00.
+  NOTE: k2k.jsonl ratio_floor column is invalid (floor median straddled zero,
+  1e-12 clamp inflated ratios) — use raw mmd2_to_gold against transfer.jsonl
+  floor stats at analysis; rows otherwise sound.
