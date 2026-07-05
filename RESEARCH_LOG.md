@@ -553,3 +553,20 @@
   NOTE: k2k.jsonl ratio_floor column is invalid (floor median straddled zero,
   1e-12 clamp inflated ratios) — use raw mmd2_to_gold against transfer.jsonl
   floor stats at analysis; rows otherwise sound.
+
+- **NOTE 2026-07-05 · arXiv:2606.31988 (JADE — Remy, Chang, Willett) digested vs
+  exposure points.** No scoop. (a) SAFE: successor paper still has NO runtime
+  diagnostic (256 fixed ODE steps, no NFE ablation) — the gap claim gains fresh
+  evidence; caution: their sampler is a deterministic ODE, so the relevant missing
+  check is discretization/NFE, not MCMC-style mixing. (b) SAFE: they consume
+  TARP+MIRA uncritically. (c) cite as the 2026 validation-practice exhibit (NUTS
+  golds + TARP + MIRA + posterior predictive; all ground-truth-dependent). (d)
+  wording: annealed Langevin is no longer the line's current method (succeeded by
+  amortized flow matching) — our measurements remain correct for the 2023 scheme.
+  (e) their shifted-lognormal + NUTS-gold bench validates our Track B substrate as
+  field-standard. OPEN & DELICATE: their headline "MIRA 0.635±0.017 = good
+  calibration" sits on our filed bug's exact signature (exact posterior reads ~0.63
+  under norm=True vs analytic null 0.667) AND is ~2-3 SE below the null even taken
+  at face value. VERIFY (implementation, N, norm flag; check for released code)
+  before any contact/mention; if bug-affected, this is the live case study — and a
+  natural, substantive reason for Andreas to write to Benjamin Remy. Owner's call.
