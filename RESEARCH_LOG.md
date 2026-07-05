@@ -628,3 +628,15 @@
   Lesson, permanent: a filed issue is an experiment — its repro RUNS before it
   ships; and any measured effect gets attributed across (package | protocol |
   bench) BEFORE the magnitude goes public.
+
+- **P-20260705d SCORED 2026-07-05 (proposed): HIT by the letter, with the honest
+  note that the result is STARKER than predicted.** Agreement 0.95-1.00 at EVERY
+  NFE incl. 8 (the "by NFE=64" clause is satisfied vacuously — the check never
+  fails anywhere); mmd2-to-gold plateaus at ~5.0e-3 ≈ 52x floor_scale (the
+  amortization wall; >=10x clause HIT). Mechanism: deterministic flows at nearby
+  step counts differ by smooth deformations, not distributional gaps — the
+  doubling alarm has near-zero power on the discretization axis at N=256, and the
+  dominant (training) error is invisible to any budget knob by construction. For
+  the JADE-class ODE family, budget-doubling certifies essentially nothing:
+  the one-directional certificate degrades to no-directional. Blog Part 12
+  wording updated accordingly.
