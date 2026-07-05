@@ -756,8 +756,19 @@ MUST descend in its home regime or it's a bug). -->
   basins vs separation vs budget); alarm = any excursion crosses. HIT below 12 sigma
   un-blinds the ecologically-relevant regime (joint-inference mixtures over nearby
   cosmologies are moderate-separation), which is the constructive win regardless of 12 sigma.
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** PROPOSED HIT (16^2 pilot, 2026-07-05 ~22:10Z; field-scale grid queued).
+  Frontier Delta* ~ 8 sigma: excursions discover the missing mode reliably at sep 2/4/6
+  (discovered mass 0.15-0.50), marginally at sep 8 (tau=1 fails 0.004; tau=4 rescues
+  0.07-0.24), and fail at sep 12 (0.000-0.023) — the barrier, as predicted. Temperature
+  tau=4 (targeting pi^(1/tau)) extends the reach from ~6 to ~8 sigma. FP control
+  (both-mode sampler) shows discovered ~ 0 everywhere (-0.05..+0.012), so near-zero false
+  alarms. This is the constructive counter to P-20260704j (score-KSD's TOTAL missed-mode
+  blindness): a ground-truth-free detector that closes the gap up to Delta*~8 sigma,
+  covering the ecologically-relevant moderate separations; only the 12-sigma disjoint
+  archetype defeats it. Next: field-scale (n=64) confirmation (barrier is ~1-D along the
+  4-mode offset, so Delta* should be dimension-independent — the bench claim) + a
+  learned-net-reference arm (does a realistic score keep the frontier?).
+- **Lesson:** (pending joint scoring)
 
 ### P-20260705h · the likelihood posterior-predictive residual is a clean necessary-not-sufficient gate · conf 75% · resolve-by 2026-07-06 · OPEN
 - **Claim:** the chi-squared / whiteness check on ||A x0hat - y||^2 / s^2 (ground-truth-free;
@@ -789,8 +800,22 @@ MUST descend in its home regime or it's a bug). -->
 - **Made:** 2026-07-05 · **Context:** constructive-diagnostics night, mechanism C (cheap-and-done)
 - **Resolution criterion:** wrongref-style grid with an added independent-reference column;
   power(same-ref) vs power(indep-ref) vs the reference's own error budget.
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** PROPOSED PARTIAL / lean-MISS on the strong claim (16^2 pilot, ~22:35Z).
+  MECHANISM CONFIRMED: the confounded reference (eps_r=eps_s=-0.3) sits at the null
+  (ksd/q95=1.03, reproducing the P-20260704k false-certification), and de-confounding
+  raises the ratio MONOTONICALLY as the reference approaches truth
+  (1.03 -> 1.11 -> 1.18 -> 1.28 at eps_r=0, and 1.52 at eps_r=+0.1, opposite sign).
+  BUT the strong claim (power>=0.9 recovery) is NOT met at n=16/N=1024: even the true
+  score gives only ~1.3x null (low-signal config). Two fixes applied for the field-scale
+  grid: (1) detection is now a POWER over disjoint blocks, not a single ratio (the pilot
+  conflated them); (2) grid moved to n=64 where the d-extensive eps=-0.3 damage makes the
+  true-score signal loud, so "does the imperfect independent reference recover that power"
+  is well-posed. Field-scale grid (n64, mid+strong, N ladder) queued; morning resolves
+  the strong claim. Also confirmed the argparse gotcha (comma-list leading '-' -> flag;
+  '=' form required, generator note added).
+- **Lesson:** (pending joint scoring; provisional: de-confounding is directionally real
+  but its power is budget/damage-gated exactly as P-i's caveat predicted — a reference
+  no better than the sampler's own error buys nothing.)
 
 ## Brainstorm exit — 2026-07-05 (3rd session) · expand: constructive diagnostics + GPU-windfall plan
 
