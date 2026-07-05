@@ -372,3 +372,54 @@
 - **Claim:** remy MMD-to-gold decreases monotonically in K ∈ {5,30,100} at every
   gold-standard config.
 - **Resolution criterion:** transfer grid vs gold (§3).
+
+### E-20260705a · certifier trial + transfer night (Results + Updated beliefs DRAFT; Outcomes/Lessons reserved for joint scoring)
+- **Hypothesis/setup:** the six frozen predictions P-20260704i–n; plan
+  docs/OVERNIGHT_2026-07-04_CERTIFIER_TRANSFER_NIGHT.md; all gates green before burn
+  (T-K1, T-M1, T-L1 ×3 legs, T-L2 26/26, T-L3). No reference code exists for
+  arXiv:2602.04189 — implemented their exact recipe in JAX (V-statistic,
+  (1/N)√(ΣH/d), IMQ β=−1/2, c=1/(median(singvals A)+1)), autodiff-verified to 1e-13;
+  our 60-null empirical α=0.05 calibration is strictly more than the paper does
+  (it has none).
+- **Results (headline numbers):**
+  (i) TRUE-score KSD: dps/sap/dps_em03 detected at power 1.00 at ALL budgets
+  (ratios 2.8–19× null) — including the ε-compensation config every sample-based
+  test missed. twisted@1σ "missed" correctly (its true damage IS the floor).
+  (ii) MODE-BLINDNESS: one mode of a 50/50, 12σ-separated mixture missing →
+  KSD reads 1.00× null at every budget through N=16,384 (paired 16k control:
+  plus/both = 1.0001–1.0007). PQMass flags at 1.00 (dies only at 99/1 weights);
+  TARP 0.90 at 50/50 (FP-elevated cell noted). Weight-swap equally invisible to KSD.
+  (iii) WRONG-REFERENCE: false-certification is a BAND (twisted_em03, true damage
+  17.2× floor, reads ≤1.0× null for ε_ref ∈ {−0.3, −0.2}); false-alarm cliff:
+  ε_ref=−0.05 flags perfect samples at 1.00. DPS's scheme bias shows through any
+  analytic reference (3.8×).
+  (iv) DEPLOYMENT (net score, the paper's own construction): null inflates 1.9×;
+  dps (30× floor damage) reads 0.97× → detect 0.00 with BOTH nets — the deployment
+  configuration false-certifies the diagnostic's textbook target; only sap (159×
+  floor) clears the net-noise. ε=±0.3 net contamination is a rounding error next to
+  generic net score error. On the lognormal substrate the within-task RANKING
+  (the paper's claimed use) inverts: dps at 1.07 vs remy30 at 1.76 against a 14×
+  true-damage gap the other way.
+  (v) GOLD STANDARDS: 26+ NUTS configs at 64²/32² (74 s / 43 s per config,
+  R-hat ≤ 1.0006, ESS_min > 10k), T-L1 via λ=1e-4 limit + closed-form-IS cross-check
+  (max|z|=3.29, sd(z)=0.97) + λ-scaling law (offsets ∝ λ across two decades);
+  T-L3 seed-independence clean. 128² stretch ran as filler.
+  (vi) TRANSFER: dps overconfidence transfers band-structured (high-k coverage
+  0.00 even at mid tilt; ≤0.08 everywhere at strong). remy K∈{5,30,100} monotone
+  → floor at every config. THE BREAK: dps_inflated ≈ remy100 fails off-Gaussian —
+  the linearized inflation's advantage decays 11.6× → 2.8× → 1.1× at skewness
+  0.5 → 1 → 2 (the exact_guidance-was-exact property is a Gaussian accident).
+  Learned-net DPS on the κ-substrate: clip 0.66–0.99, coverage collapse at strong
+  tilt — the practitioner pathway degrades as on the Gaussian bench.
+- **Updated beliefs (draft):** the "runtime certificate" niche is now empirically
+  mapped from both directions: path-space certificates die of weight degeneracy
+  (E-20260704c), and the surviving endpoint certificate (score-KSD) is (a) blind to
+  the failure mode MCMC-free samplers are most suspected of (missed modes), (b) in
+  deployment dominated by reference-score error in both directions (false certs +
+  false alarms), and (c) unable to rank the practically relevant samplers. What
+  actually works, measured: manufactured MCMC gold standards on a nonlinearized
+  bench (cheap: ~1 GPU-min/config) + sample-space two-sample tests (PQMass) against
+  them — and the Rémy-style Langevin route is the sampler whose quality is robust
+  to non-Gaussianity while plug-in corrections are not. Paper structure: three acts
+  (true-score power / structural blindness / deployment fragility) + the transfer
+  chapter with the decay law.
