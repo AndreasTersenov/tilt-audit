@@ -31,6 +31,8 @@ from tilt_audit.fields import grid_to_z, make_basis, make_pk, smoothing_operator
 S_OBS = 0.5
 Y_KEY = 999
 SHIFTS = {"mid": 1.0, "strong": 2.0}
+# "bayes": b = S_OBS^2 exactly (beta=1) — the target an amortized net trained
+# on (kappa, y) pairs actually samples; no calibration involved.
 
 
 def main():
@@ -38,7 +40,7 @@ def main():
     p.add_argument("--n", type=int, required=True)
     p.add_argument("--lam", type=float, default=None,
                    help="default: skewness(kappa)=1 calibration")
-    p.add_argument("--tilt", choices=list(SHIFTS), required=True)
+    p.add_argument("--tilt", choices=list(SHIFTS) + ["bayes"], required=True)
     p.add_argument("--yseed", type=int, default=0)
     p.add_argument("--chains", type=int, default=4)
     p.add_argument("--warmup", type=int, default=1000)
@@ -61,8 +63,11 @@ def main():
     ykey = jax.random.fold_in(jax.random.PRNGKey(Y_KEY), args.yseed)
     y, g_truth = lognormal.make_lognormal_observation(ykey, Pz, az, basis,
                                                       lam, S_OBS)
-    b = float(lognormal.calibrate_b_linearized(Pz, az, y, lam,
-                                               SHIFTS[args.tilt]))
+    if args.tilt == "bayes":
+        b = S_OBS**2
+    else:
+        b = float(lognormal.calibrate_b_linearized(Pz, az, y, lam,
+                                                   SHIFTS[args.tilt]))
 
     pot = lognormal.make_potential_u(Pz, az, basis, lam, y, b)
     d = int(Pz.shape[0])
@@ -87,7 +92,8 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
                             capture_output=True, text=True).stdout.strip()
-    meta = dict(n=n, d=d, lam=lam, tilt=args.tilt, shift=SHIFTS[args.tilt],
+    meta = dict(n=n, d=d, lam=lam, tilt=args.tilt,
+                shift=SHIFTS.get(args.tilt, 0.0),
                 b=b, s_obs=S_OBS, yseed=args.yseed, y_key=Y_KEY,
                 chains=args.chains, warmup=args.warmup, draws=args.draws,
                 seed=args.seed, tag=args.tag, wall=round(wall, 1),

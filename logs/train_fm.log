@@ -1,0 +1,12 @@
+UNetCond params: 1.44M, lam=0.3143 (flow matching)
+/mnt/home/tersenov/software/tilt-audit/tilt_audit/fields.py:89: UserWarning: Explicitly requested dtype complex128 requested in zeros is not available, and will be truncated to dtype complex64. To enable more dtypes, set the jax_enable_x64 configuration option or the JAX_ENABLE_X64 shell environment variable. See https://github.com/jax-ml/jax#current-gotchas for more.
+  Xf = jnp.zeros((*z.shape[:-1], n * n), dtype=jnp.complex128)
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax/_src/numpy/array_methods.py:125: UserWarning: Explicitly requested dtype complex128 requested in astype is not available, and will be truncated to dtype complex64. To enable more dtypes, set the jax_enable_x64 configuration option or the JAX_ENABLE_X64 shell environment variable. See https://github.com/jax-ml/jax#current-gotchas for more.
+  return lax_numpy.astype(self, dtype, copy=copy, device=device)
+E0705 10:21:50.609413  183673 cuda_timer.cc:88] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+step 0 loss 7.21865 (16s)
+step 500 loss 0.33144 (29s)
+step 1000 loss 0.22457 (41s)
+step 1500 loss 0.22732 (54s)
+step 2000 loss 0.21946 (66s)
+step 2500 loss 0.21071 (79s)
