@@ -590,3 +590,15 @@
   in place of scheme bias).
 - **Resolution criterion:** scripts/run_nfe2.py table (agreement rate + mmd2-to-gold
   per NFE in {8,16,32,64,128,256}).
+
+- **NOTE 2026-07-05 · JADE MIRA number verified as far as possible from outside:
+  AMBIGUOUS, leaning bug-consistent.** Joint 0.635±0.017 is 0.3 sigma from our
+  measured bug signature (0.630) and 1.9-3.1 sigma below the analytic null
+  1003/1503 = 0.6673 (N=500; they compare to asymptotic 2/3 only). Dimensional
+  fingerprint matches the bug mechanism exactly: joint (81,926 dims) deflated,
+  marginal (6 dims) clean at 0.659. Attribution blocked: code link github.com/b-remy/jade
+  is 404; paper silent on normalization (though the mixed-scale joint space REQUIRES
+  one); package's buggy path is opt-in; their stack is JAX vs the torch package.
+  If bug-affected, their model is BETTER calibrated than reported — the contact is
+  helpful in every branch. Note drafted for Andreas (docs/upstream/remy_note.md);
+  sending is his call.

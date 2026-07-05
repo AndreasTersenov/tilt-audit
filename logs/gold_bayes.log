@@ -1,0 +1,2 @@
+[gold:gold_n64_bayes_y0_lam0.3143_s0] wall=65s rhat_max=1.0001 ess_min=29135 ess_med=41853 T-L2=PASS
+[gold:gold_n64_bayes_y1_lam0.3143_s0] wall=64s rhat_max=1.0002 ess_min=27163 ess_med=41593 T-L2=PASS
