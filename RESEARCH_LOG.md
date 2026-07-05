@@ -769,8 +769,14 @@ MUST descend in its home regime or it's a bug). -->
 - **Made:** 2026-07-05 · **Context:** constructive-diagnostics night, mechanism B (cheap-and-done)
 - **Resolution criterion:** Gaussian-bench table: PPC statistic + calibrated FP vs oracle,
   dps (guidance ladder), and a constructed null-space-collapse sampler.
-- **Outcome:** (pending)
-- **Lesson:** (pending)
+- **Outcome:** PROPOSED HIT (16^2 pilot, 2026-07-05 ~22:00Z; field-scale grid queued).
+  Oracle not detected (z=+1.1/+0.1, null gate passes). dps guidance ladder ALL detected,
+  with the predicted over/under-fit signature: mean(R)/d crosses the oracle value as
+  guidance sweeps (g=0.5 over-fit z=-195/-406; g=1 z=-62/-119; g=2 under-fit z=+78/+174,
+  mid/strong). Null-space collapse BLIND exactly as predicted (z=-0.4/-0.7, whiteness_var
+  matches oracle). The necessary-not-sufficient gate is real: catches guidance-strength
+  bias loudly, structurally blind in null(A).
+- **Lesson:** (pending joint scoring)
 
 ### P-20260705i · de-confounding the reference recovers detection power same-net KSD loses · conf 55% · resolve-by 2026-07-06 · OPEN
 - **Claim:** score-KSD run against a DELIBERATELY INDEPENDENT reference (a cheap analytic
