@@ -570,3 +570,23 @@
   at face value. VERIFY (implementation, N, norm flag; check for released code)
   before any contact/mention; if bug-affected, this is the live case study — and a
   natural, substantive reason for Andreas to write to Benjamin Remy. Owner's call.
+
+- **IDEA 2026-07-05 (born, alive, NOT yet pursued — needs its own brainstorm before
+  any commitment): the joint-inference arena.** Upgrade the bench with a
+  theta-dependent prior and NUTS golds over the joint (theta, field) space
+  (JADE/sbi_lens proves differentiable feasibility): joint inference makes the field
+  posterior a mixture over cosmologies — NATURAL multimodality, so the missed-mode
+  blindness result (P-20260704j) can be demonstrated in its ecologically valid form
+  instead of a constructed two-island target. Smells like the right UVa-era
+  extension (GECO-adjacent). Cost: a real chapter, not a ride-along.
+
+### P-20260705d · NFE-doubling on the amortized-ODE family is one-directional with an amortization floor · conf 75% · resolve-by 2026-07-08 · OPEN
+- **Claim:** for a conditional flow-matching sampler on the kappa substrate (JADE-class:
+  amortized, observation-conditioned, deterministic ODE), NFE-vs-2NFE PQMass agreement
+  is reached by NFE=64 while MMD-to-gold (beta=1 NUTS gold) plateaus at a positive
+  amortization floor >=10x the gold-subsample floor — i.e. the doubling check
+  certifies discretization convergence while training error keeps the sampler
+  measurably off-target (the DPS false-certification mechanism, with training error
+  in place of scheme bias).
+- **Resolution criterion:** scripts/run_nfe2.py table (agreement rate + mmd2-to-gold
+  per NFE in {8,16,32,64,128,256}).
