@@ -602,3 +602,29 @@
   If bug-affected, their model is BETTER calibrated than reported — the contact is
   helpful in every branch. Note drafted for Andreas (docs/upstream/remy_note.md);
   sending is his call.
+
+- **NOTE 2026-07-05 · Owner-demanded re-verification of the bug claims (he was
+  right).** Confession first: both issues were filed with repro sketches that had
+  never been EXECUTED (verify-don't-vibe violation on the week's most public
+  artifact). Now run, three independent legs, all outside our harness:
+  (1) tarp#14 REPRODUCES FULLY as filed: 0.215 on exact posterior at d=4096 iid,
+  d-scaling 0.065/0.084/0.210, fix -> 0.046; independent 25-line DRP
+  reimplementation shows the same split (truth-box 0.172 vs symmetric 0.072);
+  out-of-box fraction matches combinatorics. Claim solid.
+  (2) mira#1: mechanism CONFIRMED (deficit 0.0108 +- 0.0009 at q=4096, 6 seeds,
+  q-monotone, fix restores toward null; docstring/code contradiction stands) but
+  our filed MAGNITUDE (0.63, FP 65-80%) does NOT reproduce on plain usage — it was
+  ~60% OUR battery's truth-bootstrap-with-replacement (duplicated truths shrink the
+  effective box: 0.6611 -> 0.6443, deficit x2.6) + bench-construction residue.
+  Per-dim min-max is exactly scale-invariant, so the heteroscedasticity hypothesis
+  is dead (identical deficits to 4 decimals). Correction comment drafted
+  (docs/upstream/mira_issue_correction.md) — posting awaits owner authorization.
+  (3) JADE note: HELD/DEAD in current form — the fingerprint argument was
+  calibrated against our contaminated 0.630; settling their case needs their code
+  (404) or a q-law study at (T=500,S=500,q=82k). Arms-night raw-mira FP numbers
+  carry this asterisk everywhere; CALIBRATED-variant conclusions (empirical nulls)
+  self-correct and stand. tarp_cell also bootstraps truths — tarp bench numbers
+  match the no-bootstrap iid repro anyway; no public correction needed there.
+  Lesson, permanent: a filed issue is an experiment — its repro RUNS before it
+  ships; and any measured effect gets attributed across (package | protocol |
+  bench) BEFORE the magnitude goes public.

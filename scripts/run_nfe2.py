@@ -51,7 +51,9 @@ def main():
     Pz = jnp.asarray(grid_to_z(make_pk(basis), basis))
     az = jnp.asarray(smoothing_operator(basis))
 
-    @jax.jit
+    import functools
+
+    @functools.partial(jax.jit, static_argnames=("nfe",))
     def ode_sample(key, y_map, nfe):
         x = jax.random.normal(key, (N, n, n), dtype=jnp.float32)
         dt = 1.0 / nfe
@@ -61,7 +63,7 @@ def main():
             t = 1.0 - i * dt
             v = model.apply(ck["ema"], x, ym,
                             jnp.full(N, t, dtype=jnp.float32))
-            return x - dt * v, None
+            return (x - dt * v).astype(jnp.float32), None
         x, _ = jax.lax.scan(step, x, jnp.arange(nfe))
         return x
 

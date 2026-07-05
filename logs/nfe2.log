@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/mnt/home/tersenov/software/tilt-audit/scripts/run_nfe2.py", line 117, in <module>
+    main()
+  File "/mnt/home/tersenov/software/tilt-audit/scripts/run_nfe2.py", line 98, in main
+    xa = ode_sample(ka, y_map, nfe)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/tersenov/software/tilt-audit/scripts/run_nfe2.py", line 65, in ode_sample
+    x, _ = jax.lax.scan(step, x, jnp.arange(nfe))
+                                 ^^^^^^^^^^^^^^^
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax/_src/numpy/lax_numpy.py", line 5913, in arange
+    return _arange(start, stop=stop, step=step, dtype=dtype,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/jax/_src/numpy/lax_numpy.py", line 5930, in _arange
+    start = core.concrete_or_error(None, start, f"It arose in the jnp.arange argument '{start_name}'")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jax.errors.ConcretizationTypeError: Abstract tracer value encountered where concrete value is expected: traced array with shape int64[]
+It arose in the jnp.arange argument 'stop'
+The error occurred while tracing the function ode_sample at /mnt/home/tersenov/software/tilt-audit/scripts/run_nfe2.py:54 for jit. This concrete value was not available in Python because it depends on the value of the argument nfe.
+
+See https://docs.jax.dev/en/latest/errors.html#jax.errors.ConcretizationTypeError
+--------------------
+For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+NFE2 DONE 10:47
