@@ -70,7 +70,8 @@ def fig_ksd_power():
             xs, ys = [], []
             for b in BUDGETS:
                 sel = [r for r in rr if r.get(ckey) == cfg
-                       and r.get("budget") == b]
+                       and r.get("budget") == b
+                       and r.get(dkey) is not None]
                 if sel:
                     xs.append(b)
                     ys.append(np.mean([r[dkey] for r in sel]))
@@ -113,10 +114,11 @@ def fig_mixture():
             sel += [r for r in con if r.get("test") == "ksd_imq_paper"
                     and r.get("w") == 0.5 and r["config"] == cfg
                     and r["budget"] == b]
-            if sel:
+            vals = [r.get("detect", r.get("detected")) for r in sel]
+            vals = [v for v in vals if v is not None]
+            if vals:
                 xs.append(b)
-                ys.append(np.mean([r.get("detect", r.get("detected"))
-                                   for r in sel]))
+                ys.append(np.mean(vals))
         ax.plot(xs, ys, "o-", color=color, label=f"KSD: {cfg}")
     for test, marker in (("pqmass", "s"), ("tarp", "^")):
         xs, ys = [], []
@@ -178,7 +180,7 @@ def fig_wrongref():
         return print("skip fig_wrongref")
     configs = ["oracle_null", "dps", "dps_em03", "twisted_em03"]
     cols = [("true score\n(analytic)", power, {}),
-            ("wrong ref\n(analytic eps=-0.3)", wref, {}),
+            ("wrong ref\n(analytic eps=-0.3)", wref, {"eps_ref": -0.3}),
             ("net s_clean\n(deployment)", dep, {"net": "s_clean"}),
             ("net s_mis_m03\n(deployment)", dep, {"net": "s_mis_m03"})]
     cols = [(t, rr, m) for t, rr, m in cols if rr]

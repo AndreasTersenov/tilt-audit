@@ -14,3 +14,11 @@
 [mixc] tarp w=0.95 N=256 (null q95=0.1174) done
 [mixc] ksd w=0.95 N=256 done
 [mixc] pqmass w=0.95 N=1024 done
+[mixc] tarp w=0.95 N=1024 (null q95=0.1040) done
+[mixc] ksd w=0.95 N=1024 done
+[mixc] pqmass w=0.99 N=256 done
+[mixc] tarp w=0.99 N=256 (null q95=0.0943) done
+[mixc] ksd w=0.99 N=256 done
+[mixc] pqmass w=0.99 N=1024 done
+[mixc] tarp w=0.99 N=1024 (null q95=0.1023) done
+[mixc] ksd w=0.99 N=1024 done

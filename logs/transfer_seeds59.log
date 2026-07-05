@@ -1,0 +1,38 @@
+[transfer:gold_n64_mid_y0_lam0.3143_s0] 5 floor rows
+E0705 01:38:05.723128 2703399 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 01:38:05.952635 2702908 slow_operation_alarm.cc:140] The operation took 1.229781234s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps s=5: mmd2=6.917e-02 swd2=2.946e-03 bp_cov=(0.65,0.00,0.00) (6s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps s=6: mmd2=6.930e-02 swd2=2.755e-03 bp_cov=(0.71,0.02,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps s=7: mmd2=6.867e-02 swd2=2.782e-03 bp_cov=(0.66,0.01,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps s=8: mmd2=6.856e-02 swd2=2.932e-03 bp_cov=(0.65,0.02,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps s=9: mmd2=6.892e-02 swd2=2.811e-03 bp_cov=(0.65,0.01,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps_inflated s=5: mmd2=2.507e-02 swd2=1.132e-03 bp_cov=(0.22,0.09,0.66) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps_inflated s=6: mmd2=2.478e-02 swd2=1.206e-03 bp_cov=(0.16,0.14,0.69) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps_inflated s=7: mmd2=2.495e-02 swd2=1.155e-03 bp_cov=(0.18,0.11,0.65) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps_inflated s=8: mmd2=2.548e-02 swd2=1.153e-03 bp_cov=(0.18,0.11,0.66) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] dps_inflated s=9: mmd2=2.570e-02 swd2=1.212e-03 bp_cov=(0.21,0.07,0.71) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy5 s=5: mmd2=2.557e-01 swd2=1.245e-02 bp_cov=(0.16,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy5 s=6: mmd2=2.556e-01 swd2=1.245e-02 bp_cov=(0.12,0.01,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy5 s=7: mmd2=2.564e-01 swd2=1.280e-02 bp_cov=(0.14,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy5 s=8: mmd2=2.566e-01 swd2=1.249e-02 bp_cov=(0.14,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy5 s=9: mmd2=2.559e-01 swd2=1.252e-02 bp_cov=(0.11,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy30 s=5: mmd2=3.256e-03 swd2=2.496e-04 bp_cov=(0.64,0.58,0.55) (5s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy30 s=6: mmd2=3.403e-03 swd2=2.656e-04 bp_cov=(0.64,0.60,0.63) (4s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy30 s=7: mmd2=3.388e-03 swd2=2.581e-04 bp_cov=(0.60,0.58,0.51) (4s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy30 s=8: mmd2=3.495e-03 swd2=2.422e-04 bp_cov=(0.62,0.61,0.57) (4s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy30 s=9: mmd2=3.433e-03 swd2=2.261e-04 bp_cov=(0.61,0.57,0.59) (4s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy100 s=5: mmd2=6.771e-05 swd2=1.228e-04 bp_cov=(0.66,0.65,0.66) (8s)
+[transfer:gold_n64_mid_y0_lam0.3143_s0] remy100 s=6: mmd2=1.213e-04 swd2=1.275e-04 bp_cov=(0.65,0.68,0.64) (7s)

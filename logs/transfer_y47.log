@@ -1,0 +1,369 @@
+[transfer:gold_n64_mid_y4_lam0.3143_s0] 5 floor rows
+E0705 00:40:41.780692 2476957 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:40:41.983248 2476164 slow_operation_alarm.cc:140] The operation took 1.202807908s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps s=0: mmd2=7.599e-02 swd2=3.292e-03 bp_cov=(0.64,0.00,0.00) (6s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps s=1: mmd2=7.637e-02 swd2=3.279e-03 bp_cov=(0.61,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps s=2: mmd2=7.733e-02 swd2=3.171e-03 bp_cov=(0.70,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps s=3: mmd2=7.620e-02 swd2=3.239e-03 bp_cov=(0.65,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps s=4: mmd2=7.742e-02 swd2=3.280e-03 bp_cov=(0.62,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps_inflated s=0: mmd2=5.401e-02 swd2=2.045e-03 bp_cov=(0.09,0.02,0.11) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps_inflated s=1: mmd2=5.601e-02 swd2=2.172e-03 bp_cov=(0.09,0.00,0.11) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps_inflated s=2: mmd2=5.593e-02 swd2=2.139e-03 bp_cov=(0.07,0.01,0.10) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps_inflated s=3: mmd2=5.554e-02 swd2=2.124e-03 bp_cov=(0.07,0.02,0.08) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] dps_inflated s=4: mmd2=5.390e-02 swd2=2.338e-03 bp_cov=(0.10,0.01,0.05) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy5 s=0: mmd2=2.446e-01 swd2=1.575e-02 bp_cov=(0.02,0.00,0.00) (4s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy5 s=1: mmd2=2.454e-01 swd2=1.624e-02 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy5 s=2: mmd2=2.439e-01 swd2=1.604e-02 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy5 s=3: mmd2=2.439e-01 swd2=1.603e-02 bp_cov=(0.02,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy5 s=4: mmd2=2.434e-01 swd2=1.630e-02 bp_cov=(0.04,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy30 s=0: mmd2=4.069e-03 swd2=3.072e-04 bp_cov=(0.57,0.50,0.62) (5s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy30 s=1: mmd2=3.715e-03 swd2=3.458e-04 bp_cov=(0.50,0.52,0.64) (4s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy30 s=2: mmd2=3.935e-03 swd2=3.359e-04 bp_cov=(0.49,0.50,0.63) (4s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy30 s=3: mmd2=4.048e-03 swd2=3.288e-04 bp_cov=(0.52,0.44,0.65) (5s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy30 s=4: mmd2=3.951e-03 swd2=3.401e-04 bp_cov=(0.53,0.49,0.72) (4s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy100 s=0: mmd2=2.456e-05 swd2=1.353e-04 bp_cov=(0.73,0.72,0.64) (8s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy100 s=1: mmd2=6.966e-05 swd2=1.148e-04 bp_cov=(0.72,0.70,0.65) (7s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy100 s=2: mmd2=-1.262e-05 swd2=1.321e-04 bp_cov=(0.66,0.69,0.68) (7s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy100 s=3: mmd2=-1.287e-05 swd2=1.427e-04 bp_cov=(0.66,0.66,0.67) (8s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] remy100 s=4: mmd2=1.095e-05 swd2=1.469e-04 bp_cov=(0.66,0.65,0.70) (7s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=9.511e-01 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=1.015e+00 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=8.848e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=8.644e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y4_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=7.795e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] 5 floor rows
+E0705 00:43:52.064359 2489704 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:43:52.268060 2489177 slow_operation_alarm.cc:140] The operation took 1.203874785s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps s=0: mmd2=7.476e-02 swd2=3.898e-03 bp_cov=(0.65,0.00,0.00) (7s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps s=1: mmd2=7.531e-02 swd2=3.800e-03 bp_cov=(0.65,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps s=2: mmd2=7.535e-02 swd2=3.749e-03 bp_cov=(0.66,0.01,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps s=3: mmd2=7.517e-02 swd2=3.601e-03 bp_cov=(0.70,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps s=4: mmd2=7.457e-02 swd2=3.694e-03 bp_cov=(0.71,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps_inflated s=0: mmd2=5.108e-02 swd2=2.658e-03 bp_cov=(0.07,0.02,0.01) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps_inflated s=1: mmd2=5.197e-02 swd2=2.858e-03 bp_cov=(0.07,0.03,0.01) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps_inflated s=2: mmd2=5.008e-02 swd2=2.611e-03 bp_cov=(0.11,0.03,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps_inflated s=3: mmd2=5.044e-02 swd2=2.606e-03 bp_cov=(0.12,0.03,0.01) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] dps_inflated s=4: mmd2=5.146e-02 swd2=2.770e-03 bp_cov=(0.07,0.02,0.02) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy5 s=0: mmd2=2.379e-01 swd2=1.471e-02 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy5 s=1: mmd2=2.396e-01 swd2=1.459e-02 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy5 s=2: mmd2=2.387e-01 swd2=1.502e-02 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy5 s=3: mmd2=2.386e-01 swd2=1.469e-02 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy5 s=4: mmd2=2.396e-01 swd2=1.462e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy30 s=0: mmd2=3.489e-03 swd2=2.894e-04 bp_cov=(0.55,0.55,0.67) (5s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy30 s=1: mmd2=4.020e-03 swd2=2.752e-04 bp_cov=(0.54,0.50,0.70) (4s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy30 s=2: mmd2=3.708e-03 swd2=2.660e-04 bp_cov=(0.45,0.52,0.70) (4s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy30 s=3: mmd2=3.766e-03 swd2=2.872e-04 bp_cov=(0.55,0.51,0.65) (4s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy30 s=4: mmd2=3.833e-03 swd2=2.769e-04 bp_cov=(0.54,0.56,0.68) (4s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy100 s=0: mmd2=1.327e-05 swd2=1.500e-04 bp_cov=(0.68,0.68,0.67) (8s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy100 s=1: mmd2=-2.282e-05 swd2=1.341e-04 bp_cov=(0.64,0.64,0.68) (7s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy100 s=2: mmd2=1.001e-04 swd2=1.604e-04 bp_cov=(0.66,0.69,0.64) (7s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy100 s=3: mmd2=-2.142e-05 swd2=1.358e-04 bp_cov=(0.69,0.69,0.64) (8s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] remy100 s=4: mmd2=7.665e-05 swd2=1.413e-04 bp_cov=(0.71,0.73,0.71) (7s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=8.155e-01 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=8.439e-01 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=9.366e-01 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=1.333e+00 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y5_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=1.019e+00 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] 5 floor rows
+E0705 00:47:03.539384 2503041 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:47:03.741937 2502606 slow_operation_alarm.cc:140] The operation took 1.202722407s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps s=0: mmd2=8.767e-02 swd2=3.528e-03 bp_cov=(0.66,0.00,0.00) (6s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps s=1: mmd2=8.747e-02 swd2=3.507e-03 bp_cov=(0.64,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps s=2: mmd2=8.760e-02 swd2=3.543e-03 bp_cov=(0.72,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps s=3: mmd2=8.778e-02 swd2=3.635e-03 bp_cov=(0.71,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps s=4: mmd2=8.795e-02 swd2=3.712e-03 bp_cov=(0.70,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps_inflated s=0: mmd2=2.405e-02 swd2=8.961e-04 bp_cov=(0.20,0.04,0.66) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps_inflated s=1: mmd2=2.440e-02 swd2=9.509e-04 bp_cov=(0.20,0.03,0.61) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps_inflated s=2: mmd2=2.483e-02 swd2=9.486e-04 bp_cov=(0.15,0.03,0.57) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps_inflated s=3: mmd2=2.415e-02 swd2=9.906e-04 bp_cov=(0.21,0.05,0.64) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] dps_inflated s=4: mmd2=2.407e-02 swd2=9.420e-04 bp_cov=(0.18,0.05,0.66) (4s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy5 s=0: mmd2=2.467e-01 swd2=1.458e-02 bp_cov=(0.17,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy5 s=1: mmd2=2.467e-01 swd2=1.432e-02 bp_cov=(0.20,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy5 s=2: mmd2=2.463e-01 swd2=1.451e-02 bp_cov=(0.14,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy5 s=3: mmd2=2.463e-01 swd2=1.461e-02 bp_cov=(0.20,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy5 s=4: mmd2=2.475e-01 swd2=1.462e-02 bp_cov=(0.18,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy30 s=0: mmd2=2.959e-03 swd2=2.418e-04 bp_cov=(0.64,0.57,0.58) (5s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy30 s=1: mmd2=3.023e-03 swd2=2.186e-04 bp_cov=(0.65,0.49,0.63) (4s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy30 s=2: mmd2=3.071e-03 swd2=2.289e-04 bp_cov=(0.62,0.54,0.59) (4s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy30 s=3: mmd2=3.121e-03 swd2=2.687e-04 bp_cov=(0.69,0.53,0.62) (5s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy30 s=4: mmd2=3.078e-03 swd2=2.558e-04 bp_cov=(0.61,0.57,0.68) (4s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy100 s=0: mmd2=4.977e-05 swd2=1.373e-04 bp_cov=(0.68,0.67,0.72) (7s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy100 s=1: mmd2=8.720e-06 swd2=1.310e-04 bp_cov=(0.59,0.69,0.66) (7s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy100 s=2: mmd2=6.338e-05 swd2=1.354e-04 bp_cov=(0.71,0.67,0.66) (7s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy100 s=3: mmd2=1.404e-05 swd2=1.494e-04 bp_cov=(0.64,0.65,0.67) (7s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] remy100 s=4: mmd2=-5.855e-06 swd2=1.272e-04 bp_cov=(0.64,0.64,0.61) (7s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=6.329e-01 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=6.487e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=5.191e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=7.002e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y6_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=8.602e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] 5 floor rows
+E0705 00:50:13.477022 2515959 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:50:13.680375 2515391 slow_operation_alarm.cc:140] The operation took 1.203556229s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps s=0: mmd2=5.040e-02 swd2=1.799e-03 bp_cov=(0.00,0.13,0.00) (6s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps s=1: mmd2=5.031e-02 swd2=1.687e-03 bp_cov=(0.00,0.13,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps s=2: mmd2=5.255e-02 swd2=1.781e-03 bp_cov=(0.00,0.13,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps s=3: mmd2=5.130e-02 swd2=1.568e-03 bp_cov=(0.00,0.09,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps s=4: mmd2=5.261e-02 swd2=1.666e-03 bp_cov=(0.00,0.11,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps_inflated s=0: mmd2=3.788e-02 swd2=1.662e-03 bp_cov=(0.18,0.04,0.51) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps_inflated s=1: mmd2=3.807e-02 swd2=1.716e-03 bp_cov=(0.17,0.04,0.54) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps_inflated s=2: mmd2=3.862e-02 swd2=1.666e-03 bp_cov=(0.20,0.03,0.50) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps_inflated s=3: mmd2=3.671e-02 swd2=1.700e-03 bp_cov=(0.20,0.05,0.49) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] dps_inflated s=4: mmd2=3.750e-02 swd2=1.635e-03 bp_cov=(0.16,0.05,0.49) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy5 s=0: mmd2=2.486e-01 swd2=1.172e-02 bp_cov=(0.08,0.00,0.00) (4s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy5 s=1: mmd2=2.494e-01 swd2=1.159e-02 bp_cov=(0.07,0.00,0.00) (4s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy5 s=2: mmd2=2.489e-01 swd2=1.193e-02 bp_cov=(0.05,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy5 s=3: mmd2=2.494e-01 swd2=1.172e-02 bp_cov=(0.07,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy5 s=4: mmd2=2.488e-01 swd2=1.213e-02 bp_cov=(0.06,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy30 s=0: mmd2=3.558e-03 swd2=2.698e-04 bp_cov=(0.61,0.56,0.69) (5s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy30 s=1: mmd2=3.597e-03 swd2=2.663e-04 bp_cov=(0.54,0.54,0.67) (4s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy30 s=2: mmd2=3.867e-03 swd2=2.520e-04 bp_cov=(0.57,0.57,0.66) (4s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy30 s=3: mmd2=3.868e-03 swd2=2.418e-04 bp_cov=(0.55,0.51,0.67) (4s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy30 s=4: mmd2=3.764e-03 swd2=2.423e-04 bp_cov=(0.60,0.54,0.68) (4s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy100 s=0: mmd2=1.125e-04 swd2=1.295e-04 bp_cov=(0.67,0.62,0.70) (8s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy100 s=1: mmd2=1.492e-04 swd2=1.478e-04 bp_cov=(0.67,0.68,0.68) (7s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy100 s=2: mmd2=2.112e-05 swd2=1.227e-04 bp_cov=(0.64,0.70,0.65) (7s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy100 s=3: mmd2=2.634e-06 swd2=1.309e-04 bp_cov=(0.71,0.68,0.66) (7s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] remy100 s=4: mmd2=5.185e-05 swd2=1.200e-04 bp_cov=(0.68,0.63,0.66) (7s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=7.688e-01 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=8.859e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=8.202e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=1.175e+00 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_mid_y7_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=7.228e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] 5 floor rows
+E0705 00:53:24.239897 2528548 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:53:24.450245 2528115 slow_operation_alarm.cc:140] The operation took 1.210565038s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps s=0: mmd2=1.987e-01 swd2=7.545e-03 bp_cov=(0.00,0.13,0.00) (6s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps s=1: mmd2=2.026e-01 swd2=8.058e-03 bp_cov=(0.00,0.15,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps s=2: mmd2=2.014e-01 swd2=7.854e-03 bp_cov=(0.02,0.14,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps s=3: mmd2=1.974e-01 swd2=7.609e-03 bp_cov=(0.00,0.10,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps s=4: mmd2=1.963e-01 swd2=7.505e-03 bp_cov=(0.01,0.15,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps_inflated s=0: mmd2=2.030e-01 swd2=4.530e-03 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps_inflated s=1: mmd2=1.997e-01 swd2=4.665e-03 bp_cov=(0.01,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps_inflated s=2: mmd2=2.010e-01 swd2=4.629e-03 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps_inflated s=3: mmd2=2.028e-01 swd2=4.861e-03 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] dps_inflated s=4: mmd2=2.012e-01 swd2=4.662e-03 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy5 s=0: mmd2=7.348e-01 swd2=5.335e-02 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy5 s=1: mmd2=7.349e-01 swd2=5.290e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy5 s=2: mmd2=7.345e-01 swd2=5.248e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy5 s=3: mmd2=7.342e-01 swd2=5.236e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy5 s=4: mmd2=7.355e-01 swd2=5.336e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy30 s=0: mmd2=5.729e-02 swd2=1.332e-03 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy30 s=1: mmd2=5.730e-02 swd2=1.364e-03 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy30 s=2: mmd2=5.727e-02 swd2=1.311e-03 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy30 s=3: mmd2=5.725e-02 swd2=1.339e-03 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy30 s=4: mmd2=5.741e-02 swd2=1.309e-03 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy100 s=0: mmd2=1.392e-03 swd2=1.075e-04 bp_cov=(0.34,0.50,0.55) (7s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy100 s=1: mmd2=1.310e-03 swd2=9.782e-05 bp_cov=(0.32,0.54,0.50) (7s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy100 s=2: mmd2=1.276e-03 swd2=9.857e-05 bp_cov=(0.38,0.55,0.45) (7s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy100 s=3: mmd2=1.432e-03 swd2=1.154e-04 bp_cov=(0.39,0.54,0.52) (7s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] remy100 s=4: mmd2=1.433e-03 swd2=9.296e-05 bp_cov=(0.39,0.52,0.49) (7s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=1.045e+00 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=8.947e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=1.280e+00 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=1.456e+00 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y4_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=1.280e+00 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] 5 floor rows
+E0705 00:56:37.747079 2545007 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:56:37.937642 2544497 slow_operation_alarm.cc:140] The operation took 1.190705609s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps s=0: mmd2=2.185e-01 swd2=6.640e-03 bp_cov=(0.04,0.11,0.00) (6s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps s=1: mmd2=2.241e-01 swd2=6.912e-03 bp_cov=(0.04,0.13,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps s=2: mmd2=2.265e-01 swd2=6.904e-03 bp_cov=(0.05,0.13,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps s=3: mmd2=2.167e-01 swd2=6.734e-03 bp_cov=(0.04,0.15,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps s=4: mmd2=2.211e-01 swd2=6.758e-03 bp_cov=(0.02,0.17,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps_inflated s=0: mmd2=1.879e-01 swd2=5.402e-03 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps_inflated s=1: mmd2=1.880e-01 swd2=5.376e-03 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps_inflated s=2: mmd2=1.873e-01 swd2=5.300e-03 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps_inflated s=3: mmd2=1.859e-01 swd2=5.212e-03 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] dps_inflated s=4: mmd2=1.888e-01 swd2=5.328e-03 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy5 s=0: mmd2=7.268e-01 swd2=4.562e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy5 s=1: mmd2=7.266e-01 swd2=4.553e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy5 s=2: mmd2=7.263e-01 swd2=4.561e-02 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy5 s=3: mmd2=7.275e-01 swd2=4.567e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy5 s=4: mmd2=7.277e-01 swd2=4.496e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy30 s=0: mmd2=5.403e-02 swd2=1.067e-03 bp_cov=(0.00,0.00,0.01) (5s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy30 s=1: mmd2=5.343e-02 swd2=1.043e-03 bp_cov=(0.00,0.01,0.01) (4s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy30 s=2: mmd2=5.409e-02 swd2=1.073e-03 bp_cov=(0.00,0.00,0.00) (5s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy30 s=3: mmd2=5.401e-02 swd2=1.020e-03 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy30 s=4: mmd2=5.431e-02 swd2=1.058e-03 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy100 s=0: mmd2=1.282e-03 swd2=1.087e-04 bp_cov=(0.38,0.57,0.58) (8s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy100 s=1: mmd2=1.410e-03 swd2=1.032e-04 bp_cov=(0.32,0.57,0.51) (7s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy100 s=2: mmd2=1.307e-03 swd2=1.052e-04 bp_cov=(0.36,0.55,0.51) (7s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy100 s=3: mmd2=1.324e-03 swd2=1.029e-04 bp_cov=(0.36,0.54,0.50) (7s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] remy100 s=4: mmd2=1.301e-03 swd2=1.070e-04 bp_cov=(0.31,0.55,0.56) (7s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=1.132e+00 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=1.107e+00 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=9.532e-01 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=9.542e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y5_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=1.089e+00 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] 5 floor rows
+E0705 00:59:58.397061 2556600 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:59:58.583142 2556002 slow_operation_alarm.cc:140] The operation took 1.186204141s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps s=0: mmd2=1.990e-01 swd2=5.742e-03 bp_cov=(0.04,0.15,0.00) (6s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps s=1: mmd2=1.977e-01 swd2=5.799e-03 bp_cov=(0.07,0.14,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps s=2: mmd2=2.039e-01 swd2=6.099e-03 bp_cov=(0.04,0.13,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps s=3: mmd2=2.023e-01 swd2=6.123e-03 bp_cov=(0.04,0.15,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps s=4: mmd2=1.979e-01 swd2=5.786e-03 bp_cov=(0.04,0.16,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps_inflated s=0: mmd2=1.007e-01 swd2=2.084e-03 bp_cov=(0.00,0.00,0.06) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps_inflated s=1: mmd2=1.010e-01 swd2=1.937e-03 bp_cov=(0.00,0.00,0.06) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps_inflated s=2: mmd2=1.012e-01 swd2=2.001e-03 bp_cov=(0.00,0.00,0.05) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps_inflated s=3: mmd2=1.015e-01 swd2=1.999e-03 bp_cov=(0.00,0.00,0.05) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] dps_inflated s=4: mmd2=1.006e-01 swd2=1.927e-03 bp_cov=(0.00,0.00,0.08) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy5 s=0: mmd2=7.574e-01 swd2=6.287e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy5 s=1: mmd2=7.576e-01 swd2=6.284e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy5 s=2: mmd2=7.590e-01 swd2=6.329e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy5 s=3: mmd2=7.581e-01 swd2=6.249e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy5 s=4: mmd2=7.579e-01 swd2=6.277e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy30 s=0: mmd2=4.197e-02 swd2=9.733e-04 bp_cov=(0.00,0.01,0.50) (4s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy30 s=1: mmd2=4.221e-02 swd2=1.003e-03 bp_cov=(0.02,0.00,0.45) (4s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy30 s=2: mmd2=4.259e-02 swd2=9.216e-04 bp_cov=(0.03,0.01,0.42) (4s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy30 s=3: mmd2=4.169e-02 swd2=1.022e-03 bp_cov=(0.01,0.02,0.51) (4s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy30 s=4: mmd2=4.201e-02 swd2=1.003e-03 bp_cov=(0.01,0.01,0.48) (4s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy100 s=0: mmd2=3.333e-04 swd2=6.609e-05 bp_cov=(0.65,0.59,0.61) (8s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy100 s=1: mmd2=2.208e-04 swd2=6.950e-05 bp_cov=(0.62,0.60,0.64) (7s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy100 s=2: mmd2=3.256e-04 swd2=7.954e-05 bp_cov=(0.61,0.61,0.63) (7s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy100 s=3: mmd2=2.851e-04 swd2=6.766e-05 bp_cov=(0.58,0.59,0.68) (7s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] remy100 s=4: mmd2=3.732e-04 swd2=7.440e-05 bp_cov=(0.62,0.58,0.67) (7s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=8.409e-01 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=6.718e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=7.917e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=9.253e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y6_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=9.015e-01 bp_cov=(0.00,0.00,0.00) (1s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] 5 floor rows
+E0705 01:03:02.491663 2567959 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 01:03:02.686794 2567495 slow_operation_alarm.cc:140] The operation took 1.195283719s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.26, %constant.43, %broadcast.52), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.15, metadata={op_name="jit(guid_grad)/transpose(jvp())/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps s=0: mmd2=3.569e-01 swd2=1.098e-02 bp_cov=(0.00,0.30,0.00) (6s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps s=1: mmd2=3.604e-01 swd2=1.091e-02 bp_cov=(0.00,0.27,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps s=2: mmd2=3.354e-01 swd2=1.044e-02 bp_cov=(0.00,0.27,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps s=3: mmd2=3.405e-01 swd2=1.043e-02 bp_cov=(0.00,0.32,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps s=4: mmd2=3.525e-01 swd2=1.086e-02 bp_cov=(0.00,0.30,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps_inflated s=0: mmd2=1.464e-01 swd2=4.012e-03 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps_inflated s=1: mmd2=1.458e-01 swd2=4.021e-03 bp_cov=(0.01,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps_inflated s=2: mmd2=1.454e-01 swd2=3.841e-03 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps_inflated s=3: mmd2=1.455e-01 swd2=4.032e-03 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] dps_inflated s=4: mmd2=1.468e-01 swd2=3.949e-03 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy5 s=0: mmd2=7.496e-01 swd2=4.542e-02 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy5 s=1: mmd2=7.488e-01 swd2=4.461e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy5 s=2: mmd2=7.491e-01 swd2=4.490e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy5 s=3: mmd2=7.487e-01 swd2=4.572e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy5 s=4: mmd2=7.487e-01 swd2=4.517e-02 bp_cov=(0.00,0.00,0.00) (3s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy30 s=0: mmd2=5.096e-02 swd2=9.625e-04 bp_cov=(0.00,0.00,0.07) (4s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy30 s=1: mmd2=5.143e-02 swd2=9.959e-04 bp_cov=(0.00,0.01,0.09) (4s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy30 s=2: mmd2=5.073e-02 swd2=9.926e-04 bp_cov=(0.00,0.00,0.07) (4s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy30 s=3: mmd2=5.161e-02 swd2=9.907e-04 bp_cov=(0.00,0.00,0.06) (5s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy30 s=4: mmd2=5.117e-02 swd2=9.609e-04 bp_cov=(0.00,0.01,0.07) (4s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy100 s=0: mmd2=7.332e-04 swd2=8.106e-05 bp_cov=(0.52,0.54,0.62) (7s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy100 s=1: mmd2=8.002e-04 swd2=9.517e-05 bp_cov=(0.48,0.56,0.62) (7s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy100 s=2: mmd2=7.605e-04 swd2=7.553e-05 bp_cov=(0.52,0.55,0.60) (7s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy100 s=3: mmd2=7.350e-04 swd2=7.401e-05 bp_cov=(0.47,0.60,0.59) (7s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] remy100 s=4: mmd2=8.486e-04 swd2=8.015e-05 bp_cov=(0.48,0.57,0.61) (7s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=8.678e-01 bp_cov=(0.00,0.00,0.00) (4s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] terminal_is s=1: mmd2=1.607e+00 swd2=1.112e+00 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] terminal_is s=2: mmd2=1.607e+00 swd2=1.028e+00 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] terminal_is s=3: mmd2=1.607e+00 swd2=1.051e+00 bp_cov=(0.00,0.00,0.00) (0s)
+[transfer:gold_n64_strong_y7_lam0.3143_s0] terminal_is s=4: mmd2=1.607e+00 swd2=1.302e+00 bp_cov=(0.00,0.00,0.00) (0s)
+RUNG1 DONE 01:05

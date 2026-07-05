@@ -14,3 +14,59 @@ This isn't necessarily a bug; constant-folding is inherently a trade-off between
 
 If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
 [ksd:ln] gold_n64_mid_y0_lam0.3143_s0: nulls done (imq_paper q95=1.7613)
+[ksd:ln] gold_n64_mid_y0_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_mid_y0_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_mid_y0_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_mid_y0_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_mid_y0_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_mid_y0_lam0.3143_s0 terminal_is: done
+[ksd:ln] gold_n64_mid_y1_lam0.3143_s0: nulls done (imq_paper q95=1.7555)
+[ksd:ln] gold_n64_mid_y1_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_mid_y1_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_mid_y1_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_mid_y1_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_mid_y1_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_mid_y1_lam0.3143_s0 terminal_is: done
+[ksd:ln] gold_n64_mid_y2_lam0.3143_s0: nulls done (imq_paper q95=1.7605)
+[ksd:ln] gold_n64_mid_y2_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_mid_y2_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_mid_y2_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_mid_y2_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_mid_y2_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_mid_y2_lam0.3143_s0 terminal_is: done
+[ksd:ln] gold_n64_mid_y3_lam0.3143_s0: nulls done (imq_paper q95=1.7593)
+[ksd:ln] gold_n64_mid_y3_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_mid_y3_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_mid_y3_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_mid_y3_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_mid_y3_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_mid_y3_lam0.3143_s0 terminal_is: done
+[ksd:ln] gold_n64_strong_y0_lam0.3143_s0: nulls done (imq_paper q95=1.8137)
+[ksd:ln] gold_n64_strong_y0_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_strong_y0_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_strong_y0_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_strong_y0_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_strong_y0_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_strong_y0_lam0.3143_s0 terminal_is: done
+[ksd:ln] gold_n64_strong_y1_lam0.3143_s0: nulls done (imq_paper q95=1.7963)
+[ksd:ln] gold_n64_strong_y1_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_strong_y1_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_strong_y1_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_strong_y1_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_strong_y1_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_strong_y1_lam0.3143_s0 terminal_is: done
+[ksd:ln] gold_n64_strong_y2_lam0.3143_s0: nulls done (imq_paper q95=1.8162)
+[ksd:ln] gold_n64_strong_y2_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_strong_y2_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_strong_y2_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_strong_y2_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_strong_y2_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_strong_y2_lam0.3143_s0 terminal_is: done
+[ksd:ln] gold_n64_strong_y3_lam0.3143_s0: nulls done (imq_paper q95=1.8064)
+[ksd:ln] gold_n64_strong_y3_lam0.3143_s0 dps: done
+[ksd:ln] gold_n64_strong_y3_lam0.3143_s0 dps_inflated: done
+[ksd:ln] gold_n64_strong_y3_lam0.3143_s0 remy5: done
+[ksd:ln] gold_n64_strong_y3_lam0.3143_s0 remy30: done
+[ksd:ln] gold_n64_strong_y3_lam0.3143_s0 remy100: done
+[ksd:ln] gold_n64_strong_y3_lam0.3143_s0 terminal_is: done
+A-LOGNORMAL DONE 00:43
