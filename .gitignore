@@ -10,3 +10,6 @@ results/archives/
 results/archives16k/
 results/gold/
 results/ksd_nulls/
+logs/
+queue/
+checkpoints/

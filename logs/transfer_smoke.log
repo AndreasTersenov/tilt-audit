@@ -1,4 +1,0 @@
-[transfer:gold_n64_mid_y0_lam0.3143_s0] 1 floor rows
-[transfer:gold_n64_mid_y0_lam0.3143_s0] dps s=0: mmd2=3.494e-01 swd2=1.394e-01 bp_cov=(0.02,0.00,0.00) (3s)
-[transfer:gold_n64_mid_y0_lam0.3143_s0] remy5 s=0: mmd2=6.048e-01 swd2=1.069e-01 bp_cov=(0.00,0.00,0.00) (1s)
-[transfer:gold_n64_mid_y0_lam0.3143_s0] terminal_is s=0: mmd2=1.607e+00 swd2=5.538e-01 bp_cov=(0.00,0.00,0.00) (3s)

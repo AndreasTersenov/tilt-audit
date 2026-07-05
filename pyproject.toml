@@ -1,0 +1,28 @@
+[project]
+name = "tilt-audit"
+version = "0.1.0"
+description = "An anatomy lab for steered diffusion inference: oracle-verified audits of samplers and of the diagnostics that claim to certify them"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [{ name = "Andreas Tersenov" }]
+dependencies = [
+    "jax>=0.4.30",
+    "flax>=0.8",
+    "optax>=0.2",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "matplotlib>=3.8",
+    "arviz<1",
+]
+
+[project.optional-dependencies]
+gold = ["numpyro>=0.15"]
+diagnostics = ["pqm", "tarp"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tilt_audit"]

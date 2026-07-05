@@ -1,8 +1,0 @@
-[gold:gold_n64_mid_y4_lam0.3143_s0] wall=74s rhat_max=1.0003 ess_min=24682 ess_med=40870 T-L2=PASS
-[gold:gold_n64_mid_y5_lam0.3143_s0] wall=76s rhat_max=1.0004 ess_min=17234 ess_med=28281 T-L2=PASS
-[gold:gold_n64_mid_y6_lam0.3143_s0] wall=74s rhat_max=1.0003 ess_min=28818 ess_med=40928 T-L2=PASS
-[gold:gold_n64_mid_y7_lam0.3143_s0] wall=74s rhat_max=1.0002 ess_min=23407 ess_med=39799 T-L2=PASS
-[gold:gold_n64_strong_y4_lam0.3143_s0] wall=74s rhat_max=1.0003 ess_min=22448 ess_med=39031 T-L2=PASS
-[gold:gold_n64_strong_y5_lam0.3143_s0] wall=74s rhat_max=1.0003 ess_min=23100 ess_med=40130 T-L2=PASS
-[gold:gold_n64_strong_y6_lam0.3143_s0] wall=73s rhat_max=1.0001 ess_min=23316 ess_med=40585 T-L2=PASS
-[gold:gold_n64_strong_y7_lam0.3143_s0] wall=74s rhat_max=1.0002 ess_min=23274 ess_med=39026 T-L2=PASS

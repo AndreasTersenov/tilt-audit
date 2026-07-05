@@ -1,5 +1,0 @@
-norm=True  max|ecp-alpha| = 0.21484375000000006
-fix        max|ecp-alpha| = 0.0458984375
-d=64: norm=True max|ecp-alpha| = 0.0651
-d=512: norm=True max|ecp-alpha| = 0.0843
-d=2048: norm=True max|ecp-alpha| = 0.2100

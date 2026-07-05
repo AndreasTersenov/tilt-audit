@@ -1,5 +1,0 @@
-[gold:gold_n64_bayes_y0_lam0.3143_s0] wall=65s rhat_max=1.0001 ess_min=29135 ess_med=41853 T-L2=PASS
-[gold:gold_n64_bayes_y1_lam0.3143_s0] wall=64s rhat_max=1.0002 ess_min=27163 ess_med=41593 T-L2=PASS
-[gold:gold_n64_bayes_y2_lam0.3143_s0] wall=225s rhat_max=1.0003 ess_min=19023 ess_med=29849 T-L2=PASS
-[gold:gold_n64_bayes_y3_lam0.3143_s0] wall=63s rhat_max=1.0001 ess_min=27462 ess_med=40454 T-L2=PASS
-BAYES GOLDS DONE 10:30

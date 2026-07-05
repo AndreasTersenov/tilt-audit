@@ -124,12 +124,24 @@
 </style>
 
 <div class="col">
-  <p class="eyebrow">tilt-audit · a research story told slowly · 2026-07-04</p>
+  <p class="eyebrow">tilt-audit · a research story told slowly · andreas tersenov · july 2026</p>
   <h1>Can a sampler tell you when it&rsquo;s lying?</h1>
   <p class="lede">A patient walk through one research arc: why scientists steer
   generative models, why nobody can currently tell whether the answers are
-  trustworthy, how we built a meter that was supposed to fix that, and exactly
-  how — and why — it failed. Nothing under the carpet.</p>
+  trustworthy, how we built a meter that was supposed to fix that and watched
+  it fail — and then put every other candidate on the same bench: the
+  field&rsquo;s one proposed runtime certificate, the coverage tests everyone
+  trusts (two of which turned out to have real bugs), and the oldest
+  convergence check in the book. Every claim measured, every prediction
+  registered before the data, every mistake kept. Nothing under the carpet.</p>
+  <p class="aside" style="font-size:0.85rem">The route, for orientation:
+  parts 1&ndash;3 build the ideas and the meter · parts 4&ndash;8 watch it work
+  and then die on trained networks · parts 9&ndash;10 put the field&rsquo;s
+  surviving certificate (score-KSD) on trial — strong, blind, gullible ·
+  part 11 prices the &ldquo;expensive&rdquo; gold-standard alternative ·
+  part 12 says what a practitioner can honestly do. Code, data, and the
+  prediction ledger:
+  <a href="https://github.com/AndreasTersenov/tilt-audit">github.com/AndreasTersenov/tilt-audit</a>.</p>
 </div>
 
 <div class="col">

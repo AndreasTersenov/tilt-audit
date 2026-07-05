@@ -1,4 +1,0 @@
-(a) my impl, raw + box-matched refs : 0.08750000000000002
-(b) my impl, TRUTH-range norm       : 0.17187500000000006
-(c) my impl, symmetric norm         : 0.07187499999999997
-mechanism: frac coords outside truth box = 0.01457  (2/(L+1) = 0.01550)

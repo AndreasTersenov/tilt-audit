@@ -1,1 +1,0 @@
-[T-L3] mean z: frac|z|>4=2.44e-04 max|z|=4.04; var: frac|vr-1|>10%=0.0002; MMD cross=-2.552e-06 vs split-null q95=1.192e-05 => PASS

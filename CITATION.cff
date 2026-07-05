@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this bench, the audit results, or the corrected diagnostic wrappers, please cite the repository."
+title: "tilt-audit: an anatomy lab for steered diffusion inference"
+authors:
+  - family-names: Tersenov
+    given-names: Andreas
+    orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: Andreas's real ORCID
+type: software
+repository-code: "https://github.com/AndreasTersenov/tilt-audit"
+license: Apache-2.0
+date-released: 2026-07-05
+abstract: >
+  Oracle-verified audits of inference-time-steered diffusion sampling and of
+  the diagnostics that claim to certify it: exact field-scale posteriors where
+  sampler bias, score misspecification, and diagnostic blind spots are
+  measured separately and in interaction, with pre-registered predictions and
+  a public lab notebook.
+keywords:
+  - diffusion models
+  - posterior sampling
+  - calibration diagnostics
+  - simulation-based inference
+  - weak lensing

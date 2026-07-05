@@ -1,4 +1,0 @@
-[T-L1b:IS] M=200000 IS-ESS=53951 (26.98% of M)
-[T-L1b:IS] NUTS-vs-IS mean z: max|z|=3.29 frac|z|>4=0.00e+00 sd(z)=0.97
-[T-L1b:IS] offset pattern corr(IS, NUTS) = 0.9856; rms offset = 5.527e-03 (physics, not sampler error, if corr~1)
-[T-L1b:IS] PASS
