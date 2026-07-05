@@ -1,0 +1,16 @@
+E0705 00:28:05.629476 2425926 slow_operation_alarm.cc:73] Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.11, %constant.41, %broadcast.39), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.17, metadata={op_name="jit(<lambda>)/vmap(transpose(jvp()))/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+E0705 00:28:05.821143 2425227 slow_operation_alarm.cc:140] The operation took 1.191827511s
+Constant folding an instruction is taking > 1s:
+
+  %scatter-add.137 = f64[256,4096]{1,0} scatter(%broadcast.11, %constant.41, %broadcast.39), update_window_dims={1,2}, inserted_window_dims={}, scatter_dims_to_operand_dims={1}, index_vector_dim=1, to_apply=%region_12.17, metadata={op_name="jit(<lambda>)/vmap(transpose(jvp()))/scatter-add" stack_frame_id=13}
+
+This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
+
+If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+[ksd:ln] gold_n64_mid_y0_lam0.3143_s0: nulls done (imq_paper q95=1.7613)

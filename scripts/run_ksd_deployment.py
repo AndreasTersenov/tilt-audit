@@ -60,9 +60,15 @@ def make_deployment_score(ckpt_path, basis, az, y, b):
         s_lik = az * (y - az * z) / b
         return s_prior_z + s_lik
 
-    def score_fn(X, seed=0):
-        return np.asarray(score_fn_j(jnp.asarray(X),
-                                     jax.random.PRNGKey(seed)))
+    def score_fn(X, seed=0, chunk=256):
+        # chunked: M=4 unrolled net calls at full batch OOM at N=1024
+        # when the GPU is shared (paid 00:25); activations cap at chunk size
+        outs = []
+        for i in range(0, X.shape[0], chunk):
+            outs.append(np.asarray(score_fn_j(
+                jnp.asarray(X[i:i + chunk]),
+                jax.random.fold_in(jax.random.PRNGKey(seed), i))))
+        return np.concatenate(outs, axis=0)
     return score_fn
 
 

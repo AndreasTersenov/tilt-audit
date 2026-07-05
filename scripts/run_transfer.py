@@ -31,6 +31,8 @@ def main():
     p.add_argument("--n", type=int, required=True)
     p.add_argument("--tilt", required=True)
     p.add_argument("--yseed", type=int, required=True)
+    p.add_argument("--lam", type=float, default=None,
+                   help="override the default (skewness-1) lambda")
     p.add_argument("--samplers",
                    default="dps,dps_inflated,remy5,remy30,remy100,terminal_is")
     p.add_argument("--N", type=int, default=256)
@@ -41,7 +43,7 @@ def main():
     p.add_argument("--out", default="results/transfer.jsonl")
     args = p.parse_args()
 
-    lam = lognormal.default_lambda()
+    lam = lognormal.default_lambda() if args.lam is None else args.lam
     stem = f"gold_n{args.n}_{args.tilt}_y{args.yseed}_lam{lam:.4g}_s0"
     meta = json.loads((Path(args.gold_dir) / f"{stem}.json").read_text())
     dat = np.load(Path(args.gold_dir) / f"{stem}.npz")
