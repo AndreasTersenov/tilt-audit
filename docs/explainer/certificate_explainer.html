@@ -884,15 +884,19 @@
         <text x="382" y="174" font-size="12">1.1×, indistinguishable from not bothering</text>
       </svg>
       <figcaption>Each bar: the ratio of plain DPS&rsquo;s error (distance of
-      its samples to the gold standard, median over seeds and observations) to
-      the error of DPS with the standard &ldquo;inflate the noise term by the
-      predicted uncertainty&rdquo; correction, at three settings of the warp
-      dial λ. On the linear bench this correction is mathematically
-      <em>exact</em>, infinitely valuable. Its value decays to nothing by
-      skewness 2. The correction&rsquo;s exactness was a Gaussian accident.
-      Meanwhile the annealed-sampling route stays within ~15× of the
-      unavoidable floor at every λ. If you must choose where to spend, buy
-      Langevin steps, not covariance formulas.</figcaption>
+      its samples to the gold standard, median over seeds, one matched
+      observation across the three warp settings) to the error of DPS with
+      the standard &ldquo;inflate the noise term by the predicted
+      uncertainty&rdquo; correction. On the linear bench this correction is
+      mathematically <em>exact</em>, infinitely valuable, and at a still
+      milder warp (skewness 0.25) it buys 37×. Its value decays to nothing
+      by skewness 2. Worse for its reliability: at skewness 1 the advantage
+      depends strongly on which observation you happen to have (across eight
+      observations the median is 1.4× and the range runs from 3.6× helpful
+      to actively harmful). The correction&rsquo;s exactness was a Gaussian
+      accident. Meanwhile the annealed-sampling route stays within ~15× of
+      the unavoidable floor at every λ. If you must choose where to spend,
+      buy Langevin steps, not covariance formulas.</figcaption>
     </div>
   </div>
 </div>

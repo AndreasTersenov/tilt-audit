@@ -1,8 +1,9 @@
-# Upstream bug reports (drafted 2026-07-05, verified against current main)
+# Upstream bug reports (filed 2026-07-05)
 
 Two sibling normalization bugs found by the arms-night null gates (an exact
-posterior must pass its own test), verified present in current upstream code by
-agent inspection with permalinks. Full drafts below are ready to file.
+posterior must pass its own test), verified present in current upstream code, with permalinks. Both were filed
+upstream (tarp#14, mira-score#1); these are the archived texts, with the
+mira magnitudes updated after our own re-verification.
 
 - tarp_issue.md — Ciela-Institute/tarp: norm=True normalizes by the TRUTHS'
   range; d-extensive null miscalibration (exact posterior: max|ecp-a|=0.20 at

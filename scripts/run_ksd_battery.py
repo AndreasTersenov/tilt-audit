@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Track A batteries: score-KSD trial grids -> results/ksd_trial.jsonl.
 
-Arms (plan §2; all detections at empirically calibrated one-sided alpha=0.05,
+Arms (run-plan section 2; all detections at empirically calibrated one-sided alpha=0.05,
 rank vs 60 oracle nulls; nulls cached in results/ksd_nulls/):
 
   null     — write the T-K1 100-rep null curves as rows (bookkeeping).

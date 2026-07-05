@@ -3,7 +3,7 @@
 # Sequential: trainings finish together (~02:05), then the three grids run
 # back-to-back. Confirmatory tier T2.
 set -uo pipefail
-TA=/home/tersenov/software/tilt-audit
+TA=.
 cd "$TA"
 log() { echo "- $(date -u +%H:%M) $1" >> NIGHT_LOG.md; }
 export CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_PREALLOCATE=false

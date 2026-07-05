@@ -4,7 +4,6 @@ title: "tilt-audit: an anatomy lab for steered diffusion inference"
 authors:
   - family-names: Tersenov
     given-names: Andreas
-    orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: Andreas's real ORCID
 type: software
 repository-code: "https://github.com/AndreasTersenov/tilt-audit"
 license: Apache-2.0

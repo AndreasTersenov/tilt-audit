@@ -90,8 +90,8 @@ ax.axis("off")
 ax.set_title("What each diagnostic actually catches, measured on ground truth",
              fontsize=13, pad=26, x=0.43)
 fig.text(0.5, 0.015,
-         "Every cell is a measured detection rate on the tilt-audit bench, "
-         "where the true posterior is known exactly. Data: results/*.jsonl.",
+         "Cell values transcribed from the measured detection tables in "
+         "results/*.jsonl (bench: true posterior known exactly).",
          ha="center", fontsize=8, color="#666666")
 fig.subplots_adjust(left=0.01, right=0.99, top=0.90, bottom=0.06)
 fig.savefig(FIG / "fig_envelope.png", dpi=160, bbox_inches="tight",

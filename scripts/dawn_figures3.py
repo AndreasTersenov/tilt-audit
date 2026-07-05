@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Certifier-night dawn figures (plan §8). CPU only; regenerates from JSONLs;
+"""Certifier-night dawn figures (run-plan spec). CPU only; regenerates from JSONLs;
 skips gracefully if an input is missing.
 
   fig_ksd_power      (i)   KSD detection vs budget per archive, compensation

@@ -1,7 +1,7 @@
 """Gates T-G1..4: all must be green before any large GPU job (plan section 3).
 
 Run on CPU at 16^2 / d=1. The T-G2 reference numbers come verbatim from
-docs/OVERNIGHT_2026-07-02_GRF_PILOT.md (moment-ODE oracle, deep-read
+the run plan (moment-ODE oracle, deep-read
 2502.07849 verification log).
 """
 import jax

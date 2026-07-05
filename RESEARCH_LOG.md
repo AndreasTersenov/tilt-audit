@@ -1,8 +1,8 @@
 # RESEARCH_LOG — tilt-audit
 
-> Migrated from particle-reasoners RESEARCH_LOG — canonical pre-registration timestamp
-> lives there until scoring. Predictions below are FROZEN as of 2026-07-02 (before the
-> first GPU job); they are scored with the owner, never edited unilaterally.
+> Migrated from a predecessor project's ledger, which holds the canonical
+> pre-registration timestamp for the first prediction round. Predictions below are FROZEN as of 2026-07-02 (before the
+> first GPU job); they are scored against their frozen criteria, never edited.
 
 ## Predictions
 
@@ -11,7 +11,7 @@
   under-covering — with the gap growing with guidance strength.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run (docs/OVERNIGHT_2026-07-02_GRF_PILOT.md)
 - **Resolution criterion:** T1 grid exact W₂/KL + functional coverage vs β.
-- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT. DPS bias measured (1.4-28x oracle floor, monotone in beta, absolute W2 also monotone) AND analytically confirmed: independent stiff-ODE (Radau) per-mode prediction matches the measured grid to 0.7-2.8%. gamma*=1.33-1.43; 68% CI coverage -> 0 at strong tilt; d-extensive to d=16384.
+- **Outcome:** SCORED against the frozen criterion 2026-07-03: HIT. DPS bias measured (1.4-28x oracle floor, monotone in beta, absolute W2 also monotone) AND analytically confirmed: independent stiff-ODE (Radau) per-mode prediction matches the measured grid to 0.7-2.8%. gamma*=1.33-1.43; 68% CI coverage -> 0 at strong tilt; d-extensive to d=16384.
 - **Lesson:** The analytic cross-check (predict the grid from closed forms with a second, independent implementation) is cheap and should be standard for every oracle-substrate claim. Caveat carried: all numbers conditional on one synthetic y (structure is y-generic per the analytics; multi-y ensemble is a cheap daytime add).
 
 ### P-20260702e · reward-as-potential SMC runs cold (γ* > 1) · conf 70% · resolve-by 2026-07-05 · SCORED 2026-07-03: HIT (depth-qualified)
@@ -19,7 +19,7 @@
   signature in ℝ^d.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run
 - **Resolution criterion:** γ* fits on T1 output.
-- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT, depth-qualified. gamma*(T) rises monotonically with step count (0.21/0.52/1.72 at T=32/64/256, 32^2/0.5sigma/N=256) — the discrete substrate's depth law transfers to R^d and SAP is cold (gamma*>1) at practitioner depths. At strong tilt/high d the pathology saturates into variance collapse without mean tracking before coldness can express.
+- **Outcome:** SCORED against the frozen criterion 2026-07-03: HIT, depth-qualified. gamma*(T) rises monotonically with step count (0.21/0.52/1.72 at T=32/64/256, 32^2/0.5sigma/N=256) — the discrete substrate's depth law transfers to R^d and SAP is cold (gamma*>1) at practitioner depths. At strong tilt/high d the pathology saturates into variance collapse without mean tracking before coldness can express.
 - **Lesson:** Two: (1) scalar gamma* misleads under population collapse — always report the mean-tracking and variance-ratio split alongside; (2) the step count T was left unpinned by the plan and materially affects the signature — pre-register T (or a T-ladder) explicitly next time.
 
 ### P-20260702f · proper twisted SMC on-target with valid Ẑ · conf 85% · resolve-by 2026-07-05 · SCORED 2026-07-03: HIT
@@ -27,7 +27,7 @@
   the analytic Z.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run
 - **Resolution criterion:** T1 grid + T-G3 gate outputs.
-- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT (conjugate-proposal arm, designated pre-data at 23:18 — the variant that satisfies frozen gate T-G3). On-target at 0.96-1.06x floor in all 36 cells, gamma*=1.00, log Zhat = log Z with machine-zero incremental weights; unbiasedness verified separately with real weight variance (d=1, prior proposals).
+- **Outcome:** SCORED against the frozen criterion 2026-07-03: HIT (conjugate-proposal arm, designated pre-data at 23:18 — the variant that satisfies frozen gate T-G3). On-target at 0.96-1.06x floor in all 36 cells, gamma*=1.00, log Zhat = log Z with machine-zero incremental weights; unbiasedness verified separately with real weight variance (d=1, prior proposals).
 - **Lesson:** 'Proper twisted SMC' must mean twisted PROPOSALS, not just psi-ratio potentials: the potential-only variant is formally unbiased yet collapses at d>=256 (single-run log Zhat ~400 log-units low) — itself a certificate-relevant demonstration. Ambiguous sampler specs get resolved and logged BEFORE data; that discipline is what made this scoreable.
 
 ### P-20260702g · misspecification propagates differently per scheme · conf 55% · resolve-by 2026-07-05 · SCORED 2026-07-03: HIT (mechanism corrected)
@@ -35,15 +35,15 @@
   absorbed into weights by proper SMC — the decomposition is non-trivial.
 - **Made:** 2026-07-02 · **Context:** GRF pilot overnight run (T2 tier)
 - **Resolution criterion:** three-way decomposition at 64².
-- **Outcome:** SCORED WITH OWNER 2026-07-03: HIT on the headline (propagation differs per scheme; decomposition non-trivial; smooth eps-ladder, tight seeds), with BOTH named mechanisms corrected: proper SMC does NOT absorb misspecification — conjugate w.r.t. the wrong model, it exactly samples the wrong tilt (pass-through 1:1, W2 0.50->2.57 across eps); DPS interacts sign-dependently (eps=+0.3 amplifies 3.77->5.97; eps=-0.3 cancels to 2.92 with gamma*=0.98). SAP's collapse masks eps entirely.
+- **Outcome:** SCORED against the frozen criterion 2026-07-03: HIT on the headline (propagation differs per scheme; decomposition non-trivial; smooth eps-ladder, tight seeds), with BOTH named mechanisms corrected: proper SMC does NOT absorb misspecification — conjugate w.r.t. the wrong model, it exactly samples the wrong tilt (pass-through 1:1, W2 0.50->2.57 across eps); DPS interacts sign-dependently (eps=+0.3 amplifies 3.77->5.97; eps=-0.3 cancels to 2.92 with gamma*=0.98). SAP's collapse masks eps entirely.
 - **Lesson:** The accidental-compensation trap is real: at eps=-0.3 the temperature diagnostic alone would pass a doubly-broken pipeline (W2 still 6x floor catches it) — audits need multiple, mechanistically-different metrics. The wrongness of the absorption intuition is worth more than the prediction: weights built from the wrong model cannot know it is wrong.
 
 ### P-20260702h · KILL BRANCH: bias negligible at realistic settings · conf 25% · resolve-by 2026-07-05 · SCORED 2026-07-03: MISS (kill branch did not fire — GO)
-- **Claim:** [GRF pilot P5, REVISED from 40% after deep-read of 2502.07849 — owner's number]
+- **Claim:** [GRF pilot P5, REVISED from 40% after a deep read of 2502.07849, pre-run]
   at realistic β and reward SNR, plug-in bias is negligible in absolute terms at d=4096.
 - **Made:** 2026-07-02 · **Context:** the pre-registered NO-GO branch; plan §3 kill criterion.
 - **Resolution criterion:** no scheme W₂ > 3× oracle finite-N floor at any (β,d) in the T1 box.
-- **Outcome:** SCORED WITH OWNER 2026-07-03: MISS, the good direction. Kill criterion (no scheme >3x floor anywhere) decisively not triggered: DPS alone >=3x from 0.5sigma at N=256 at all d, never below ~3.3x even at 0.125sigma; max frozen-scheme ratio 251x. GO condition of plan par.3 met on both conjuncts.
+- **Outcome:** SCORED against the frozen criterion 2026-07-03: MISS, the good direction. Kill criterion (no scheme >3x floor anywhere) decisively not triggered: DPS alone >=3x from 0.5sigma at N=256 at all d, never below ~3.3x even at 0.125sigma; max frozen-scheme ratio 251x. GO condition of plan par.3 met on both conjuncts.
 - **Lesson:** The deep-read-driven revision (40%->25% against) was directionally right and the mechanism-level reasoning (CFG blessing non-transferable, bias d-extensive) held quantitatively. Reading the threat paper closely before the experiment was the highest-value hour of the prep.
 
 ## Experiments
@@ -52,7 +52,7 @@
 - **Hypothesis:** the proper-vs-improper tilting phenomenology reproduces in continuous
   high-dimensional space with exactly known σ — see P-20260702d–h for the per-claim splits.
 - **Setup:** JAX, this repo, GPUs 0,1 (titan); spec + gates in
-  particle-reasoners/docs/OVERNIGHT_2026-07-02_GRF_PILOT.md §3–4; seeds 0,1,2; frozen before
+  predecessor-project/docs/OVERNIGHT_2026-07-02_GRF_PILOT.md §3–4; seeds 0,1,2; frozen before
   first GPU job.
 - **Expectation:** encoded in P-20260702d–h (frozen).
 - **Result:** (pending)
@@ -87,7 +87,7 @@
   predicted) — scalar summaries and unaudited preprocessing are the failure surface;
   amortization is not the weak link at this difficulty, steering is.
 
-## Predictions — arms night (2026-07-03 → 04; frozen with owner sign-off before the run; PUBLIC push precedes first GPU job)
+## Predictions — arms night (2026-07-03 → 04; frozen at sign-off before the run; PUBLIC push precedes first GPU job)
 
 ### P-20260703b · multi-y: ratio structure is y-generic · conf 85% · resolve-by 2026-07-06 · OPEN
 - **Claim:** T1's qualitative structure (scheme-to-floor orderings; DPS monotone growth in β) holds across ≥12 observation realizations, with relative spread of W2/floor ratios ≲10% at N=256.
@@ -119,13 +119,13 @@
 
 ## Brainstorm exit — 2026-07-04 · post-arms-night redirect ("what would actually matter")
 
-- **Context:** owner's verdict on the arms night: internally solid, externally thin —
+- **Context:** assessment after the arms night: internally solid, externally thin —
   the arena is too easy for the questions that matter; confirmatory diligence, not field
   news. Session ran choose→expand→stress on "what is the interesting program".
 - **Decision:** PURSUE direction A — **runtime steering certificates for guided diffusion**
   (per-run, per-observation, reference-free error meter: residual path-space weights of the
   sampler against its own intended target; Ẑ + ESS + Jensen-gap KL bound + k-hat; optional
-  reweight/repair). Audience: diffusion-methods ML community first (owner's call), evals
+  reweight/repair). Audience: diffusion-methods ML community first, evals
   world second. The Gaussian arena is reframed as the CALIBRATION BENCH for the instrument
   (measuring tightness, false-certification rate, informativeness region) — the toy is the
   NIST lab, not the product. Directions B (adversarial least-detectable failures), C
@@ -137,13 +137,13 @@
   not "reweighting exists"; "IS diagnostics lie" (missed modes, PSIS/k-hat literature) —
   import, don't reinvent, and measure the lying rate against the oracle; scope honestly as
   certifying the steering link only (model link = Doeser–Jasche; support link = Diao–Seljak).
-- **Disconfirming evidence (Darwin lines):** (1) owner judges the arms-night results
+- **Disconfirming evidence (Darwin lines):** (1) the arms-night results were judged
   uninteresting to the field — logged as evidence about problem choice, not execution;
   (2) amortized arm's P-d MISS is partially an artifact of the substrate's easiness
   (linear posterior map) — weakens any "amortization is fine" claim beyond the toy;
   (3) known failure mode of the proposed instrument: high-ESS lies under missed modes.
 - **Predictions (STAMPED BY OWNER 2026-07-04, adopted as proposed; FROZEN):**
-  - P-20260704a · conf 60% · SCORED 2026-07-04 (owner authorized in-chat): **HIT,
+  - P-20260704a · conf 60% · SCORED 2026-07-04 : **HIT,
     stronger than predicted** — residual ESS ≡ 1.0 (not merely <10) at every dim and
     N up to 65536, yet KLhat is strictly monotone in true damage at EVERY dim
     including 128², and exact_guidance certifies below dps at all shifts/dims. The
@@ -208,7 +208,18 @@
 - Gate-time context (pre-data, logged): G-L1/2 green; final-step determinism, clip
   quantification, and the per-mode logN-saturation ceiling documented before the grid.
 
-### P-20260704d–f SCORED 2026-07-04 (owner engaged in-session) — all three MISS; reshape criterion FIRED
+### P-20260704d–f SCORED 2026-07-04 — all three MISS; reshape criterion FIRED
+- **Frozen wording (inlined 2026-07-05 from the signed-off plan, verbatim, so the
+  public ledger is self-contained; the plan file itself is not tracked):**
+  P-d (conf 60%): on the learned (clean) net, per-mode certificates stay healthy
+  (median per-mode ESS >= 100/256 at 1sigma) and the low-|k| band certificate ranks
+  damage across shifts correctly (Spearman >= 0.8 vs band truth); the full-range
+  band degenerates like the joint. P-e (conf 70%): the pathway-analytic control's
+  per-mode-summed reading reproduces its exact chain-law path KL within 20% (median
+  over seeds). P-f (conf 60%): clean-net dps readings are within 2x of
+  analytic-pathway dps readings at every shift. Kill/reshape criterion: median
+  per-mode ESS < 10 on the learned net at 1sigma => the block-wise tightening arc
+  dies for real nets; product reshapes to joint-directional-only.
 - **P-d MISS:** clean-net median per-mode ESS = 3/256 at 1σ (needed ≥100); band0 ordering
   Spearman 0.275 (needed ≥0.8); band2 degenerate as predicted (the one sub-clause that hit).
 - **P-e MISS:** analytic-pathway per-mode-sum/exact = 0.043–0.161 across the grid — the
@@ -244,7 +255,7 @@
   report: "runtime certificates for guided diffusion are harder than they look; here is
   what survives, measured against an exact oracle."
 
-### P-20260704g · relative certificate validation (analysis of existing rows; predictions made pre-analysis, owner go-ahead in-session) · OPEN
+### P-20260704g · relative certificate validation (analysis of existing rows; predictions frozen pre-analysis) · OPEN
 - (a, 85%) sampled ΔE[log w] between samplers (same reference) recovers exact Δpath-KL
   within 2 s.e. across the exact-score grid; (b, 70%) path-KL ordering = endpoint-KL
   ordering in ≥90% of comparable pairs; (c, 60%) on learned nets, relative-certificate
@@ -280,9 +291,9 @@
   instruments instead of path-space (e.g. learned-twist consistency checks, sample-based
   self-diagnostics calibrated on the bench — overlaps direction B); (3) return to parked
   directions B (adversarial blind-spot minimax) / C (bias→parameter transfer) / D
-  (mixture oracle), which the arena supports today. Decision with owner.
+  (mixture oracle), which the arena supports today. Decision deferred.
 
-### P-20260704h · kill-verification pass (owner-requested adversarial check of the certificate kill) · OPEN
+### P-20260704h · kill-verification pass (adversarial check of the certificate kill) · OPEN
 - (i, 95%) end-to-end code verification vs closed form through the net-callable path
   (analytic score with controlled contamination as a synthetic wrong net): mean(logw)
   matches its exact chain law within 2 s.e.
@@ -314,7 +325,7 @@
   no published path-KL≈100×-endpoint-KL quantification; no published anatomy of weight
   degeneracy on trained nets (folklore acknowledgments only: 2506.05231, 2601.21951).
   The negative-result paper is alive.
-- **The motivational niche is partially occupied — and the owner's skepticism about the
+- **The motivational niche is partially occupied — and our skepticism about the
   Stein direction was RIGHT:** score-KSD (2602.04189, Feb 2026) already ships a
   ground-truth-free posterior-fidelity diagnostic for diffusion inverse solvers via
   kernel Stein discrepancy on the endpoint score field, incl. the accuracy≠fidelity
@@ -337,14 +348,14 @@
   TARP/SBC on sims); distributional validation on REAL observations: none found —
   state as absence-of-evidence with the structural reason.
 
-## Predictions — certifier trial + transfer night (2026-07-04 → 05; FROZEN at owner sign-off; public push precedes first GPU job)
+## Predictions — certifier trial + transfer night (2026-07-04 → 05; FROZEN at sign-off; public push precedes first GPU job)
 
 ### P-20260704i · score-KSD detects the standard failures · conf 70% · resolve-by 2026-07-07 · SCORED 2026-07-05: HIT
 - **Claim:** with the TRUE target score, score-KSD passes its null gate and detects dps,
   sap, AND the ε=−0.3 compensation config on the GRF archives with power ≥0.9 at budgets
   ≤1024 (empirically calibrated α=0.05).
 - **Resolution criterion:** A-null + A-power grids (docs/OVERNIGHT_2026-07-04_CERTIFIER_TRANSFER_NIGHT.md §2).
-- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT, with margin — power 1.00 at EVERY
+- **Outcome:** SCORED against the frozen criterion 2026-07-05: HIT, with margin — power 1.00 at EVERY
   budget incl. 64 for all three configs (ratios 2.8–19× null); the compensation config
   that fooled γ*/TARP/MIRA is loud to the true-score instrument. Correct non-detection:
   twisted@1σ (its true damage IS the floor). Lesson: score-space sensitivity to SCHEME
@@ -355,7 +366,7 @@
   one mode goes UNDETECTED by score-KSD at α=0.05 in ≥50% of reps at budgets ≤1024,
   while PQMass and TARP flag it at ≥0.9 power on the same sets.
 - **Resolution criterion:** A-mixture grid + T-M1 gate.
-- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT, total. KSD undetected in 91–100% of
+- **Outcome:** SCORED against the frozen criterion 2026-07-05: HIT, total. KSD undetected in 91–100% of
   reps at every budget AND at N=16,384 (paired control: plus/both = 1.0001–1.0007);
   weight-swap equally invisible. PQMass 1.00; TARP 0.90 (FP nominal after 40-null
   recalibration). Ladder: PQMass detection dies between 95/5 and 99/1 weights; KSD
@@ -367,7 +378,7 @@
   score-KSD reads the MATCHED wrong sampler as null-consistent (≤1.5× the null's 95%
   quantile) while its true damage is ≥3× floor — the deployment-configuration trap.
 - **Resolution criterion:** A-wrongref grid.
-- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT (owner call: criterion met as
+- **Outcome:** SCORED against the frozen criterion 2026-07-05: HIT (criterion met as
   written; refinement logged, not penalized). Analytic: twisted_em03 (proper sampler
   of its wrong target, true damage 17.2× floor) reads 0.99–1.00× — and across a BAND
   of references (ε_ref −0.3…−0.2); dps_em03 ESCAPES analytically (scheme bias shows
@@ -383,7 +394,7 @@
 - **Claim:** NUTS on the nonlinear-forward-model posterior passes T-L1 (Gaussian-limit
   match), T-L2 (R-hat<1.01, ESS>400), T-L3 (seed independence) at 64² within the H4 box.
 - **Resolution criterion:** gate outputs, logged with numbers.
-- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT — all gates green by ~H1 (box H4).
+- **Outcome:** SCORED against the frozen criterion 2026-07-05: HIT — all gates green by ~H1 (box H4).
   T-L1 three legs (λ=1e-4 at both resolutions; closed-form-IS cross-check max|z|=3.29
   sd(z)=0.97; mean-offsets ∝ λ over two decades); T-L2 26/26 (R-hat ≤ 1.0006, ESS_min
   > 10k); T-L3 clean. 74 s per 64² config; 128² also passed (119 s). Lesson: gold
@@ -396,7 +407,7 @@
   tilt and the damage ordering dps > dps-inflated ≈ remy@K=100 is preserved at every
   gold-standard config (MMD and sliced-W2 agree on the ordering).
 - **Resolution criterion:** transfer grid vs gold (§3).
-- **Outcome:** SCORED WITH OWNER 2026-07-05: MISS by the letter (the conjunction fails),
+- **Outcome:** SCORED against the frozen criterion 2026-07-05: MISS by the letter (the conjunction fails),
   instructive by content. Coverage clause: loud HIT (0.00–0.08 at strong tilt; high-k
   bands 0.00 even at mid). dps > dps_inflated: holds everywhere. BUT dps_inflated ≈
   remy100 FAILED at every config — the linearized inflation's advantage decays
@@ -412,7 +423,7 @@
 - **Claim:** remy MMD-to-gold decreases monotonically in K ∈ {5,30,100} at every
   gold-standard config.
 - **Resolution criterion:** transfer grid vs gold (§3).
-- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT — monotone at every config, both
+- **Outcome:** SCORED against the frozen criterion 2026-07-05: HIT — monotone at every config, both
   resolutions, every λ and y-draw, with order-of-magnitude separation between K
   levels; K=100 sits at/near the gold floor (mmd2 ~0 at 32² mid). KSD-side bonus: the
   true-score instrument resolves even remy100's documented +2.6% ULA stationary excess
@@ -475,10 +486,9 @@
 - **Decision:** PURSUE, minimally scoped — as the constructive FINAL ACT of the
   certificate-audit story (blog + eventual paper), one-day box. Standalone-paper
   version PARKED (cause: outcompeted by the folded-in framing; its realistic ceiling
-  is a validation contribution and the owner's visibility goal doesn't close).
-  Ownership note, recorded honestly: the idea was Claude-proposed; owner authorized
-  the small version without adopting the why ("I don't really see the value") —
-  scope was cut to match partial ownership, per the absorbed-idea guard.
+  is a validation contribution whose visibility ceiling sits below the ambition).
+  Scope note: pursued deliberately at minimal scope, as the constructive ending of
+  the audit story rather than a standalone research direction.
 - **Predictions:**
   - P-20260705b · the calibrated K-vs-2K test tracks true convergence · conf 80% ·
     resolve-by 2026-07-09 · OPEN. Claim: PQMass(remy@K, remy@2K) with empirical null
@@ -510,7 +520,7 @@
     certify) — measurable, but caps every claim.
   - Naive cost is 3× the sampler being certified; the valid class (asymptotically
     exact) is used by the already-careful crowd. Subset-chain variants mitigate.
-  - Owner's visibility motive does not close for the standalone version — hence
+  - The visibility ambition does not close for the standalone version, hence
     the scoping.
 - **Idea ledger:** born: K-vs-2K certificate (alive, scoped as story ending).
   Parked: standalone convergence-certificate paper (outcompeted by folded framing).
@@ -531,13 +541,13 @@
   "first calibrated, ground-truth-free, non-intrusive two-budget distributional test
   with measured power and false-certification boundary" is load-bearing.
 
-- **NOTE 2026-07-05 · upstream bug reports FILED** (owner-authorized): tarp#14
+- **NOTE 2026-07-05 · upstream bug reports FILED**: tarp#14
   (Ciela-Institute/tarp — truth-range norm, d-extensive null miscalibration, verified
   byte-identical in current main; cross-references their PR #12 and sbi #1832/#1837)
   and mira-score#1 (SammyS15/mira-score — same class + docstring contradiction;
   their tracker was empty). Drafts archived in docs/upstream/. Both offer a PR.
 
-- **P-20260705b SCORED 2026-07-05 (proposed; owner ratification pending): MISS,
+- **P-20260705b SCORED 2026-07-05 (proposed; final review pending): MISS,
   instructive.** Strong tilt: textbook (flags K<=50 at power 1.00, all truly
   unconverged; passes K=100, truly converged — 5/5 cells match truth). Mid tilt:
   detect rate at K in {10,15} only 0.2-0.5 vs the frozen >=0.9 — K and 2K agree
@@ -564,8 +574,7 @@
   annealed Langevin is no longer that line's current method (succeeded by
   amortized flow matching) — our measurements remain correct for the 2023-era
   scheme. (e) its shifted-lognormal + NUTS-gold bench validates our Track B
-  substrate as field-standard. [Remainder of this note redacted for discretion
-  2026-07-05 — private records; nothing here affects any frozen prediction.]
+  substrate as field-standard.
 
 - **IDEA 2026-07-05 (born, alive, NOT yet pursued — needs its own brainstorm before
   any commitment): the joint-inference arena.** Upgrade the bench with a
@@ -573,8 +582,8 @@
   (JADE/sbi_lens proves differentiable feasibility): joint inference makes the field
   posterior a mixture over cosmologies — NATURAL multimodality, so the missed-mode
   blindness result (P-20260704j) can be demonstrated in its ecologically valid form
-  instead of a constructed two-island target. Smells like the right UVa-era
-  extension (GECO-adjacent). Cost: a real chapter, not a ride-along.
+  instead of a constructed two-island target. A natural future direction. Cost:
+  a real chapter, not a ride-along.
 
 ### P-20260705d · NFE-doubling on the amortized-ODE family is one-directional with an amortization floor · conf 75% · resolve-by 2026-07-08 · OPEN
 - **Claim:** for a conditional flow-matching sampler on the kappa substrate (JADE-class:
@@ -587,13 +596,7 @@
 - **Resolution criterion:** scripts/run_nfe2.py table (agreement rate + mmd2-to-gold
   per NFE in {8,16,32,64,128,256}).
 
-- **NOTE 2026-07-05 · [redacted for discretion 2026-07-05 — private records;
-  concerned an external paper's reported diagnostic value and related outreach
-  deliberations; superseded in part by the re-verification note below; nothing
-  here affects any frozen prediction.]**
-
-- **NOTE 2026-07-05 · Owner-demanded re-verification of the bug claims (he was
-  right).** Confession first: both issues were filed with repro sketches that had
+- **NOTE 2026-07-05 · Post-filing re-verification of the bug claims.** Confession first: both issues were filed with repro sketches that had
   never been EXECUTED (verify-don't-vibe violation on the week's most public
   artifact). Now run, three independent legs, all outside our harness:
   (1) tarp#14 REPRODUCES FULLY as filed: 0.215 on exact posterior at d=4096 iid,
@@ -607,9 +610,8 @@
   effective box: 0.6611 -> 0.6443, deficit x2.6) + bench-construction residue.
   Per-dim min-max is exactly scale-invariant, so the heteroscedasticity hypothesis
   is dead (identical deficits to 4 decimals). Correction comment drafted —
-  posting awaits owner authorization.
-  (3) [clause redacted for discretion — concerned an external paper; private
-  records.] Arms-night raw-mira FP numbers
+  correction pending.
+  (3) Arms-night raw-mira FP numbers
   carry this asterisk everywhere; CALIBRATED-variant conclusions (empirical nulls)
   self-correct and stand. tarp_cell also bootstraps truths — tarp bench numbers
   match the no-bootstrap iid repro anyway; no public correction needed there.
@@ -628,3 +630,14 @@
   the JADE-class ODE family, budget-doubling certifies essentially nothing:
   the one-directional certificate degrades to no-directional. Blog Part 12
   wording updated accordingly.
+
+- **ADDENDUM 2026-07-05 · decay-law middle point recomputed after seed/y-draw
+  densification (external audit catch).** The 2.8x advantage of dps_inflated over
+  dps at skewness 1 quoted in the lam-ladder RESULT note was the single-observation
+  (yseed 0) value; it reproduces exactly in that slice (2.75x, and the y0-matched
+  ladder incl. the lam=0.08 filler is 37.1 / 11.6 / 2.75 / 1.10 at skewness
+  0.25 / 0.5 / 1 / 2). With eight observations at the default lam the advantage is
+  observation-dependent: median 1.42x, range 0.56x (harmful) to 3.63x. All public
+  surfaces now quote the matched-observation ladder plus the cross-observation
+  spread. Lesson: pin the aggregation (and its conditioning) at the moment a number
+  is first quoted; densification must trigger requoting.

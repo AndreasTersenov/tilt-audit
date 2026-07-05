@@ -1,4 +1,4 @@
-# Title: `norm=True` min–max normalizes by the truths' range (docstring says pooled Z-score) — biases the score below the analytic null; an exact posterior is flagged as miscalibrated 65–80% of the time in high dimensions
+# Title: `norm=True` min–max normalizes by the truths' range (docstring says pooled Z-score), biasing the score below the analytic null in high dimensions
 
 Thanks for releasing mira-score — we adopted MIRA as one of three diagnostics
 in a calibration-audit study precisely because its analytic finite-N null,

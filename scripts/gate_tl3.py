@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """T-L3: two independently-seeded gold runs of one 64^2 config must agree
-(plan §3): per-mode z-tests between the two chains' means (using both ESS
+(run-plan spec): per-mode z-tests between the two chains' means (using both ESS
 values) + MMD between the two draw sets below the split-null threshold."""
 import json
 import sys

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""KSD deployment columns: the score a practitioner actually has (plan §2).
+"""KSD deployment columns: the score a practitioner actually has (run-plan spec).
 
 Reference score per arXiv:2602.04189 Appendix A.2, mapped to our VP
 convention: prior score from the trained net averaged over M=4 Gaussian

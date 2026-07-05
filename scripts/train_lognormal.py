@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Train a VP score net on 64^2 KAPPA fields (the lognormal-substrate prior).
 
-train_score.py with one changed line (plan §3): each batch draws g from the
+train_score.py with one changed line (run-plan spec): each batch draws g from the
 GRF prior (clean, or eps-contaminated for ln_mis) and maps it through
 lognormal.kappa before noising — these are the nets a practitioner on the
 nonlinear substrate would own. Run with TILT_AUDIT_X64=0 (fp32).

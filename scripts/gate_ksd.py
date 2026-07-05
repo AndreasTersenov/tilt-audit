@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""T-K1: admission gate for the score-KSD implementation (plan §4.2).
+"""T-K1: admission gate for the score-KSD implementation (run-plan spec).
 
 1. Algebra: closed-form Stein H matches the autodiff Stein kernel to <1e-8
    (both kernels, random small case).

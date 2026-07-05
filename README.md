@@ -12,7 +12,7 @@ tested themselves.
 
 **What this repository is.** A test bench where the true posterior is known
 exactly, in closed form, at field scale (4,096 to 16,384 dimensions). On it we
-ran two audits, with pre-registered predictions and a public lab notebook.
+ran two audits, with pre-registered predictions and a public prediction ledger.
 
 1. **Anatomy of the samplers.** Every steering scheme in practical use is
    measured against exact targets: plug-in guidance, potential-based and
@@ -54,6 +54,10 @@ exact. This bench is a small, fully worked instance of that discipline:
 null-gate the instrument, construct the failure, measure the blind spot,
 pre-register the predictions, publish the misses.
 
+**Start with the guided tour**: [`notebooks/01_the_bench.ipynb`](notebooks/01_the_bench.ipynb)
+walks the whole project with code and results together, in four short
+notebooks.
+
 **Read the story.** The full plain-language writeup, with every number
 measured and every plot element defined, is at
 [andreastersenov.github.io/tilt-audit](https://andreastersenov.github.io/tilt-audit/)
@@ -66,9 +70,9 @@ measured and every plot element defined, is at
 | Plug-in guidance bias: 1.4&ndash;28× the oracle floor, monotone in steering strength, growing with dimension, confirmed analytically to 1&ndash;3% by an independent stiff-ODE prediction | `results/t1_core.jsonl` |
 | The compensation trap: at score contamination ε\*≈−0.28 the temperature diagnostic reads exactly clean (γ\*=1.00) while the true error is about 6× the floor. Sample-based tests need 4× more budget on the contaminated configurations than the score-based certificate does | `results/eps_star.jsonl`, `results/a2_power.jsonl` |
 | Path-space certificates (importance-weight ledgers) die of weight degeneracy on trained networks, with ESS pinned at 1.0 at every scale tested, while their exact-score version is tight | `results/cert_*.jsonl` |
-| Score-based certification (reimplemented from arXiv:2602.04189 and given the calibration its authors omit): power 1.00 on dynamics bias, yet statistically indistinguishable from perfect with half the posterior missing, at any budget up to 16,384 samples. With a learned score it certifies the most-used biased sampler as clean at the paper's own settings | `results/ksd_trial.jsonl`, `figures/fig_ksd_power.png`, `fig_mixture.png`, `fig_wrongref.png` |
+| Score-based certification (reimplemented from arXiv:2602.04189, with a calibrated detection threshold added, which the paper does not specify): power 1.00 on dynamics bias, yet statistically indistinguishable from perfect with half the posterior missing, at any budget up to 16,384 samples. With a learned score it certifies the most-used biased sampler as clean at the paper's own settings | `results/ksd_trial.jsonl`, `figures/fig_ksd_power.png`, `fig_mixture.png`, `fig_wrongref.png` |
 | MCMC gold standards on a nonlinear (lognormal-observation) substrate cost about 74 s per 64² configuration with all correctness gates green, and scale to 128². Offline validation is far cheaper than its reputation | `scripts/run_gold.py`, gates T-L1/2/3 |
-| Transfer decay law: the covariance correction that is exact on the Gaussian bench buys 11.6× / 2.8× / 1.1× at skewness 0.5 / 1 / 2, a Gaussian accident, while annealed-Langevin refinement stays within 15× of the floor at every nonlinearity | `results/transfer.jsonl`, `figures/fig_transfer.png`, `fig_remyK.png` |
+| Transfer decay law: the covariance correction that is exact on the Gaussian bench buys 37× / 11.6× / 2.8× / 1.1× at skewness 0.25 / 0.5 / 1 / 2 (matched observation), and at skewness 1 its value swings from 3.6× helpful to actively harmful across observations (median across 8 observations: 1.4×), while annealed-Langevin refinement stays within 15× of the floor at every nonlinearity | `results/transfer.jsonl`, `figures/fig_transfer.png`, `fig_remyK.png` |
 | Budget-doubling convergence checks are one-directional. The alarm is trustworthy, the silence certifies nothing: slow convergence, biased samplers, and stuck modes all pass, and for deterministic-ODE samplers the alarm never fires at all | `results/k2k.jsonl`, `results/nfe2.jsonl` |
 
 ## The bench
@@ -89,14 +93,15 @@ columns.
 
 ```bash
 git clone https://github.com/AndreasTersenov/tilt-audit && cd tilt-audit
-uv venv && uv pip install -e . "jax[cuda12]" numpyro "arviz<1" pqm tarp
+uv venv && uv pip install -e . "jax[cuda12]" numpyro pqm tarp pytest
 uv run pytest tests/test_gates.py        # the gate suite
 uv run python scripts/gate_ksd.py        # null-gates the certificate instrument
 uv run python scripts/run_gold.py --n 32 --tilt mid --yseed 0 --linear-check
 ```
 
-Every results row is append-only JSONL with config and provenance. Every
-figure regenerates from the JSONLs. GPU runs were on single A100s, and the
+Every results row is append-only JSONL with config and provenance. The data
+figures regenerate from the JSONLs (the summary matrix above transcribes
+their detection tables, sources quoted in its footer). GPU runs were on single A100s, and the
 gates and small grids run on CPU (the full gate suite passes on CPU in about
 2.5 minutes, CI config in `ci/`).
 

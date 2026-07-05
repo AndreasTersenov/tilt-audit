@@ -255,8 +255,8 @@ samples against the target's score (the local uphill direction of its
 probability) using a Stein discrepancy. Zero-ish for a perfect sampler. This
 is the certificate proposed for diffusion inverse solvers in the recent
 literature (arXiv:2602.04189). No reference implementation exists, so this
-repository contains one, verified against automatic differentiation, and
-gives it the null-calibration its authors omit."""),
+repository contains one, verified against automatic differentiation, and adds
+a calibrated detection threshold, which the paper does not specify."""),
 code(PREAMBLE + '''
 kt = rows("cert_killtest.jsonl")
 cl = rows("cert_learned.jsonl")
@@ -418,15 +418,28 @@ code('''lam_rows = [r for r in rows("transfer.jsonl") if r.get("n") == 64
 byl = defaultdict(lambda: defaultdict(list))
 for r in lam_rows:
     byl[round(r["lam"], 3)][r["sampler"]].append(r["mmd2"])
-print("advantage of the inflated-covariance fix over plain plug-in guidance:")
+print("advantage of the inflated-covariance fix over plain plug-in guidance")
+print("(matched observation, yseed 0):")
 print()
 print("  warp (lam)   skewness   advantage")
-for lam, skew in ((0.16, 0.5), (0.314, 1.0), (0.5, 2.0)):
+for lam, skew in ((0.08, 0.25), (0.16, 0.5), (0.314, 1.0), (0.5, 2.0)):
     d = byl.get(lam, {})
     if "dps" in d and "dps_inflated" in d:
         adv = np.median(d["dps"]) / np.median(d["dps_inflated"])
         print(f"  {lam:8.3f}   {skew:8.1f}   {adv:6.1f}x")
 print()
+allr = [r for r in rows("transfer.jsonl") if r.get("n") == 64
+        and r.get("tilt") == "mid" and r.get("space") != "kappa_z"
+        and abs(r.get("lam", 0) - 0.3143) < 1e-3]
+byy = defaultdict(lambda: defaultdict(list))
+for r in allr:
+    byy[r["yseed"]][r["sampler"]].append(r["mmd2"])
+advs = sorted(np.median(d["dps"]) / np.median(d["dps_inflated"])
+              for d in byy.values() if "dps" in d and "dps_inflated" in d)
+print(f"and at skewness 1 the advantage is observation-dependent: across "
+      f"{len(advs)} observations \\nthe median is "
+      f"{np.median(advs):.2f}x with range {advs[0]:.2f}x to {advs[-1]:.2f}x "
+      f"(below 1x = the fix hurt).")
 print("the correction's exactness was a Gaussian accident.")'''),
 md("""## The last certificate standing, and its honest scope
 

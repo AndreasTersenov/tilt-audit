@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""45-min digest: compact state of tonight's JSONLs (plan §7 cadence)."""
+"""45-min digest: compact state of tonight's JSONLs (run-plan section 7 cadence)."""
 import json
 import sys
 from collections import defaultdict

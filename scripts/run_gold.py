@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""NUTS gold standards on the lognormal-observation posterior (plan §3).
+"""NUTS gold standards on the lognormal-observation posterior (run-plan spec).
 
 One invocation = one config (crash-safe at config granularity). Samples in the
 whitened u-space (prior = N(0,I)); draws stored in the z-basis as float32 npz

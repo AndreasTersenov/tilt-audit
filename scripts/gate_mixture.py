@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""T-M1: mixture-oracle exactness (plan §4.3).
+"""T-M1: mixture-oracle exactness (run-plan spec).
 
 At 20k draws per weight: (1) empirical component weight within the 3-sigma
 binomial band of w; (2) per-mode means/variances match the closed-form

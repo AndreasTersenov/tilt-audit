@@ -30,7 +30,7 @@ from pathlib import Path
 import datasets
 from openai import AsyncOpenAI
 
-sys.path.insert(0, "/home/tersenov/software/particle-reasoners/src")
+sys.path.insert(0, "<predecessor-project>/src")
 from particle_reasoners.reproduction.grading import extract_boxed, grade
 from particle_reasoners.verification.calibration import population_confidence
 
@@ -68,7 +68,7 @@ async def main():
 
     # night rows, seed 0: pick 16 high-conf-wrong + 4 right iid problems
     night = [json.loads(l) for l in open(
-        "/home/tersenov/software/particle-reasoners/results/tables/"
+        "<predecessor-project>/results/tables/"
         "reliability_r1_twin_s0.jsonl") if l.strip()]
     iid = {r["problem_id"]: r for r in night if r["method"] == "iid-majority"}
     wrong = [p for p, r in iid.items()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Learned-score transfer columns: ln_clean / ln_mis nets driving DPS on the
-lognormal substrate (plan §3, after trainings land).
+lognormal substrate (run-plan section 3, after trainings land).
 
 Construction: the nets model the KAPPA-field prior, so the sampler state is
 the packed kappa field z_k and the observation is LINEAR there

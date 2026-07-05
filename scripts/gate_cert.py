@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Gates G-C1..3 for the certificate kill test (docs/PLAN_CERT_KILLTEST.md §2.3).
+"""Gates G-C1..3 for the certificate kill test (the run run-plan section 2.3).
 
 G-C1  plumbing at machine zero: unguided mode's step-RN identically 0 and
       logw identically r(z0)/beta (the terminal_is identity).
@@ -52,7 +52,7 @@ def gc1():
 
 
 def gc2():
-    """Respecced per plan §7: DPI everywhere + tightness anchor on the good
+    """Respecced per run-plan section 7: DPI everywhere + tightness anchor on the good
     sampler + estimator fidelity in a healthy-weights regime (the only regime
     where any estimator can have it)."""
     # (a) data-processing inequality, closed form both sides, all shifts

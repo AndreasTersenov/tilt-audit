@@ -5,8 +5,8 @@
 #   B2 seed 1 against the R1 server on :8000 (GPU 2) until dawn.
 # Sequential, rc-checked, no cross-GPU orchestration to race.
 set -uo pipefail
-PR=/home/tersenov/software/particle-reasoners
-TA=/home/tersenov/software/tilt-audit
+PR=<predecessor-project>
+TA=.
 NIGHT_LOG=$TA/NIGHT_LOG.md
 PY=$PR/.venv/bin/python
 WRAP=$TA/scripts/b1_alpha_wrapper.py

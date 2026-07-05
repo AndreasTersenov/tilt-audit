@@ -2,7 +2,7 @@
 # Direct T2 chain (launcher's pgrep gate deadlocked on its own parent cmdline).
 # Trainings verified complete; run the three grids back-to-back on GPU 0.
 set -uo pipefail
-cd /home/tersenov/software/tilt-audit
+cd .
 export CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_PREALLOCATE=false
 log() { echo "- $(date -u +%H:%M) $1" >> NIGHT_LOG.md; }
 for cfg in "s_clean learned:clean" "s_mis_p03 learned:mis+0.3" "s_mis_m03 learned:mis-0.3"; do

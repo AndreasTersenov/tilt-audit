@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Checkpoint-#1 zoom (pre-registered in plan §7, P-j HIT branch): the
+"""Checkpoint-#1 zoom (pre-registered in run-plan section 7, P-j HIT branch): the
 PQMass/TARP contrast on the mixture pathologies + the weight-knob ladder.
 
 - pqmass: two-sample vs an independent oracle-mixture reference bank

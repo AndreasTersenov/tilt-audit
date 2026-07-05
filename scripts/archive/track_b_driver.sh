@@ -4,8 +4,8 @@
 # failing must not kill the chain (per-run JSONL is incremental, partial night scoreable).
 set -uo pipefail
 
-PR=/home/tersenov/software/particle-reasoners
-TA=/home/tersenov/software/tilt-audit
+PR=<predecessor-project>
+TA=.
 NIGHT_LOG=$TA/NIGHT_LOG.md
 PY=$PR/.venv/bin/python
 WRAP=$TA/scripts/b1_alpha_wrapper.py

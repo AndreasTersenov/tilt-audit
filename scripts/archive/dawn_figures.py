@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-PR = Path("/home/tersenov/software/particle-reasoners")
+PR = Path("<predecessor-project>")
 FIG = ROOT / "figures"
 FIG.mkdir(exist_ok=True)
 

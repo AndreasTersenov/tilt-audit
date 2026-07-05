@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """A-lognormal: score-KSD (true score) on the nonlinear-substrate sampler
-outputs, calibrated against gold-subsample nulls (plan §2, last Track A arm).
+outputs, calibrated against gold-subsample nulls (run-plan section 2, last Track A arm).
 
 Sampler outputs are REGENERATED with run_transfer's exact cfg-hash seeds (no
 stored samples needed). The true score is lognormal.score_g (autodiff through
