@@ -671,6 +671,233 @@
   single day, for the cost of a few GPU-hours — before months went into building
   it. Most fields cannot do that. Ours, for this one question, now can.</p>
 
+  <p class="eyebrow">part 9 · the sequel</p>
+  <h2>The field&rsquo;s last certificate, put on trial</h2>
+  <p>Part 8 ended with a promise: the next instrument class must examine the
+  <em>destination</em> — the final samples — and there was &ldquo;a literature to
+  check before anyone gets excited.&rdquo; We checked it. The field has exactly
+  one serious destination-instrument on offer: a February 2026 paper proposes
+  the <b>score-KSD</b> as a runtime quality check for diffusion samplers solving
+  inverse problems. The night after the wreck of our journey-meter, we put it
+  on the same bench. One new named object is needed first:</p>
+  <div class="eq"><span class="tag">E5 · the score</span>
+    <div class="formula">s(x) &nbsp;=&nbsp; ∇ log&thinsp;p<sup>★</sup>(x)</div>
+    <div class="words"><b>In words:</b> at any candidate map x, the target
+    distribution assigns a probability; the score s(x) is the direction and
+    steepness of &ldquo;uphill&rdquo; in that probability, at exactly the point
+    x. It is a local arrow: it says which small change to x would make it more
+    plausible, and how strongly. Diffusion models are literally trained to
+    estimate this arrow, which is why a score-based check feels so natural
+    here.</div>
+  </div>
+  <div class="eq"><span class="tag">E6 · the slope meter</span>
+    <div class="formula">score-KSD(samples) &nbsp;=&nbsp; (1/N)&thinsp;
+    √(&thinsp;Σ<sub>i,j</sub> u<sub>p</sub>(x<sub>i</sub>, x<sub>j</sub>)&thinsp;/&thinsp;d&thinsp;)</div>
+    <div class="words"><b>In words:</b> for every pair of your samples, the
+    quantity u<sub>p</sub> compares the arrows the target <em>says</em> should
+    hold at those two points against the way your samples are actually arranged
+    around them; a mathematical identity (due to Stein) guarantees that if the
+    samples truly come from the target, all these comparisons cancel on average
+    to zero. Sum the pairwise comparisons, normalize by the number of samples N
+    and the dimension d, take a square root: one number, zero-ish for a perfect
+    sampler, growing as the arrangement disagrees with the arrows. Note what it
+    consumes: your samples, and the target&rsquo;s slope <em>at those samples
+    only</em>. Hold that thought.</div>
+  </div>
+  <p>No reference code exists — no repository, no package — so we implemented
+  the paper&rsquo;s recipe exactly and verified our algebra against an
+  independent automatic-differentiation computation to one part in
+  10<sup>13</sup>. And we handed the meter something its own authors never gave
+  it: a <b>calibrated threshold</b>. The paper publishes no way to decide when
+  the number is &ldquo;too big&rdquo;; we built one by computing the meter on
+  sixty perfect sample sets and drawing the line at the value only 5% of
+  perfect sets exceed. Everything below is measured against that line, on the
+  bench where the true answer is exactly known.</p>
+
+  <p class="eyebrow">part 10 · three verdicts</p>
+  <h2>Powerful, blind, and gullible — all three, measured</h2>
+  <p><b>Verdict one: with the true arrows, the slope meter is genuinely
+  strong.</b> Every biased sampler in our archive — including the
+  compensating-errors trap that fooled every sample-comparison test two nights
+  earlier — is flagged with certainty, even from just 64 samples. Where our
+  journey-meter shouted, this one speaks clearly. If you possess the exact
+  score, score-KSD is a precision instrument against <em>dynamics</em> errors,
+  and our results confirm the paper&rsquo;s central claim on that ground.</p>
+  <p><b>Verdict two: it cannot see an absence.</b> We built a target that is
+  two well-separated islands of probability — both exactly known — and a
+  sampler that only ever visits one island. Half the answer is missing. The
+  slope meter&rsquo;s reading: indistinguishable from perfect. Not
+  &ldquo;slightly elevated&rdquo; — the ratio of its reading on the broken
+  sampler to its reading on a flawless one was 1.0001, and stayed there up to
+  16,384 samples. The mechanism is the thought we held from E6: the meter only
+  ever checks arrows <em>at the places samples sit</em>. Samples on the
+  occupied island sit exactly where that island&rsquo;s arrows say they should;
+  no sample ever stands on the empty island to notice it. More samples cannot
+  cure this — they all land on the same island.</p>
+</div>
+
+<div class="wide">
+  <div class="panel">
+    <div class="panel-cap"><span>measured · the missed-island test, 50/50 target, islands 12σ apart</span></div>
+    <div class="panel-body">
+      <svg viewBox="0 0 860 240" role="img" aria-label="Bar chart: detection rate of a missing island for three tests">
+        <text x="20" y="26" font-size="13">how often each test catches the missing island (out of 1.0; dashed line = the 0.05 false-alarm rate a calibrated test shows on perfect samples)</text>
+        <line x1="230" y1="40" x2="230" y2="200" stroke="var(--line)"/>
+        <line x1="230" y1="200" x2="820" y2="200" stroke="var(--line)"/>
+        <line x1="259" y1="40" x2="259" y2="200" stroke="var(--line-soft)" stroke-dasharray="4 4"/>
+        <text x="20" y="76" font-size="13" fill="var(--good-ink)">PQMass</text>
+        <rect x="230" y="60" width="576" height="18" rx="3" fill="var(--good)"/>
+        <text x="700" y="74" font-size="12" fill="#fff">1.00 — every time</text>
+        <text x="20" y="126" font-size="13">TARP</text>
+        <rect x="230" y="110" width="518" height="18" rx="3" fill="var(--good)" opacity="0.55"/>
+        <text x="655" y="124" font-size="12">0.90</text>
+        <text x="20" y="176" font-size="13" fill="var(--bad-ink)">score-KSD</text>
+        <rect x="230" y="160" width="29" height="18" rx="3" fill="var(--bad)"/>
+        <text x="268" y="174" font-size="12">0.05 — exactly its false-alarm rate: it sees nothing, at any sample count we tried (64 → 16,384)</text>
+      </svg>
+      <figcaption>Every bar: the fraction of repeated trials (10&ndash;20 per
+      test per setting, at 256 and 1,024 samples) in which the test flagged a
+      sample set that covers only one of two equally-likely islands. PQMass and
+      TARP compare <em>samples to samples</em>, so the missing island is visible
+      to them; the slope meter compares <em>samples to local arrows</em>, and
+      no arrow at an occupied point betrays an empty region. The dashed line is
+      0.05: a reading on that line means the test fires no more often than it
+      does on perfect samples. We also turned the knob toward rarer islands:
+      the sample-based tests keep catching it until the missing island holds
+      only ~1% of the probability; the slope meter stays on the dashed line
+      throughout.</figcaption>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <p><b>Verdict three: with the arrows you actually have, it is gullible in
+  both directions.</b> In deployment nobody has the true score — you have your
+  <em>network&rsquo;s</em> score, the very object whose jaggedness wrecked our
+  journey-meter in part 5. Plugging in the network&rsquo;s arrows (following
+  the paper&rsquo;s own recipe for doing so), two things happen. The
+  meter&rsquo;s baseline reading on <em>perfect</em> samples doubles — the
+  network&rsquo;s arrow errors dominate the sum. And against that inflated
+  baseline, DPS — the most popular biased sampler, the textbook case the
+  certificate exists to catch, sitting at thirty times the unavoidable error
+  floor — reads as <em>clean</em>. We checked this with two independently
+  trained networks; same verdict. We scanned the recipe&rsquo;s tuning knob:
+  one setting partially recovers the detection, but nothing tells a
+  practitioner in advance which setting that is. And the reverse failure is
+  just as real: give the meter arrows that are wrong by only 5% (a mild
+  mis-modelling of the prior&rsquo;s spectral slope) and it flags <em>perfect
+  samples</em> as broken, every single time. A certificate that can say
+  &ldquo;fine&rdquo; to a broken sampler and &ldquo;broken&rdquo; to a fine one,
+  depending on an input you cannot validate, is not a certificate.</p>
+  <ul class="klist">
+    <li><span class="mono tag-pass">STRONG</span><span>True arrows: every dynamics-biased sampler caught from 64
+      samples, including the compensating-errors trap that beat all
+      sample-based tests.</span></li>
+    <li><span class="mono tag-fail">BLIND</span><span>A missing half of the posterior is invisible at any budget —
+      structurally: the meter never looks where samples aren&rsquo;t.</span></li>
+    <li><span class="mono tag-fail">GULLIBLE</span><span>Network arrows: baseline doubles, DPS false-certified (both
+      networks, the paper&rsquo;s own settings); 5%-wrong arrows false-alarm on
+      perfect samples at 100%.</span></li>
+  </ul>
+
+  <p class="eyebrow">part 11 · the harder bench</p>
+  <h2>Meanwhile: the &ldquo;expensive&rdquo; alternative costs a minute</h2>
+  <p>The trial needed a second act because our bench, until now, was linear and
+  Gaussian — exactly solvable, but suspiciously polite. Real inference problems
+  are not: in weak lensing, the observation depends <em>nonlinearly</em> on the
+  field. So we built the harder version. The prior stays our familiar Gaussian
+  random field g; the nonlinearity enters through the observation:</p>
+  <div class="eq"><span class="tag">E7 · the nonlinear bench</span>
+    <div class="formula">y &nbsp;=&nbsp; A&thinsp;κ(g) + noise,
+    &nbsp;&nbsp;&nbsp; κ(g) &nbsp;=&nbsp; (&thinsp;e<sup>λg − λ²/2</sup> − 1&thinsp;)&thinsp;/&thinsp;λ</div>
+    <div class="words"><b>In words:</b> instead of observing a smoothed version
+    of the field itself, we observe a smoothed version of a <em>warped</em>
+    field κ(g) — an exponential warp of exactly the kind lensing physics
+    produces (a &ldquo;lognormal&rdquo; field). The dial λ sets how strong the
+    warp is: at λ&nbsp;=&nbsp;0 the warp vanishes and the problem collapses
+    back to our exactly-solvable bench — that limit is the built-in correctness
+    test for everything that follows. At our default λ the warped field&rsquo;s
+    histogram is visibly lopsided (skewness 1), the way real matter maps
+    are.</div>
+  </div>
+  <p>On this bench no formula gives the answer — which is precisely the
+  situation practitioners face, and where the standard lament says proper
+  validation is &ldquo;too expensive.&rdquo; We measured the lament.
+  Manufacturing a <b>gold standard</b> — a slow, classical, guaranteed-correct
+  MCMC computation of the posterior — took <b>74 seconds per configuration</b>
+  on one GPU, and passed every audit we could design: the λ&nbsp;→&nbsp;0 dial
+  reproduces the exact formula; an entirely independent closed-form computation
+  agrees with the MCMC answer to within its (tiny) statistical error; two
+  independent runs agree with each other; and the whole apparatus repeats at
+  four times the dimension. Cheap, checkable, boring. Against these gold
+  standards we re-ran the sampler zoo, and the transfer report reads: DPS is
+  still overconfident, now with structure — its error bars on the fine scales
+  cover the truth <em>zero percent</em> of the time; R&eacute;my-style annealed
+  sampling still buys accuracy smoothly with compute, all the way down to the
+  gold standard itself; and one Gaussian-bench result <b>failed to
+  transfer</b>, informatively.</p>
+</div>
+
+<div class="wide">
+  <div class="panel">
+    <div class="panel-cap"><span>measured · how much the cheap covariance fix buys, as the warp strengthens</span></div>
+    <div class="panel-body">
+      <svg viewBox="0 0 860 240" role="img" aria-label="Bar chart: advantage of the inflated-covariance DPS fix at three warp strengths">
+        <text x="20" y="26" font-size="13">factor by which the &ldquo;inflated error bar&rdquo; fix improves DPS&rsquo;s destination error (1× = buys nothing)</text>
+        <line x1="330" y1="40" x2="330" y2="200" stroke="var(--line)"/>
+        <line x1="330" y1="200" x2="820" y2="200" stroke="var(--line)"/>
+        <text x="20" y="76" font-size="13">mild warp (skewness 0.5)</text>
+        <rect x="330" y="60" width="464" height="18" rx="3" fill="var(--good)"/>
+        <text x="690" y="74" font-size="12" fill="#fff">11.6×</text>
+        <text x="20" y="126" font-size="13">our default (skewness 1)</text>
+        <rect x="330" y="110" width="112" height="18" rx="3" fill="var(--good)" opacity="0.6"/>
+        <text x="450" y="124" font-size="12">2.8×</text>
+        <text x="20" y="176" font-size="13" fill="var(--bad-ink)">strong warp (skewness 2)</text>
+        <rect x="330" y="160" width="44" height="18" rx="3" fill="var(--bad)"/>
+        <text x="382" y="174" font-size="12">1.1× — indistinguishable from not bothering</text>
+      </svg>
+      <figcaption>Each bar: the ratio of plain DPS&rsquo;s error (distance of
+      its samples to the gold standard, median over seeds and observations) to
+      the error of DPS with the standard &ldquo;inflate the noise term by the
+      predicted uncertainty&rdquo; correction, at three settings of the warp
+      dial λ. On the linear bench this correction is mathematically
+      <em>exact</em> — infinitely valuable. Its value decays to nothing by
+      skewness 2. The correction&rsquo;s exactness was a Gaussian accident;
+      meanwhile the annealed-sampling route stays within ~15× of the
+      unavoidable floor at every λ. If you must choose where to spend, buy
+      Langevin steps, not covariance formulas.</figcaption>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <p class="eyebrow">part 12 · what should a practitioner actually do</p>
+  <h2>The honest protocol, and the one certificate you can keep</h2>
+  <p>Assembling everything this arc measured, the defensible advice has two
+  layers. <b>Offline:</b> build a matched synthetic bench for your problem —
+  same prior family, same nonlinearity, dialed to your regime — manufacture
+  MCMC gold standards on it (minutes, not weeks, as measured above), and run
+  your actual sampler against them with sample-space tests. If your conclusions
+  matter, measure how they decay as the bench&rsquo;s realism dial turns, the
+  way we measured the covariance fix decaying — a validation whose robustness
+  you have quantified, rather than assumed. <b>At runtime:</b> the only
+  self-check that survived our audit is the oldest idea in the book, transplanted:
+  run your sampler at compute budget K and again at 2K with fresh seeds, and
+  compare the two outputs with a calibrated sample-space test. Agreement
+  certifies <em>convergence</em> — honestly scoped: it is valid only for
+  samplers that converge to the right answer in the first place
+  (R&eacute;my&rsquo;s class does; DPS converges confidently to the wrong one,
+  and the doubling test will co-sign that lie), and two runs stuck on the same
+  island will agree — the same blindness as everything else, inherited from
+  R-hat, its forty-year-old ancestor.
+  <!-- K2K-RESULT-SLOT: numbers from results/k2k.jsonl go here after the one-day run --></p>
+  <p>And the certificate question itself? Closed, from both ends, with the same
+  bench: journey-accounting dies of jagged network gradients (parts 5&ndash;7);
+  slope-checking is blind to absences and gullible about its own reference
+  (parts 9&ndash;10). Anyone proposing the next runtime certificate now has a
+  concrete gauntlet waiting: the compensating-errors trap, the missing island,
+  and the wrong-reference band. We would genuinely like to see one pass.</p>
+
   <footer>
     Data, code, prediction ledger, night logs, and every number on this page:
     <a href="https://github.com/AndreasTersenov/tilt-audit">github.com/AndreasTersenov/tilt-audit</a>.

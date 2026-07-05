@@ -514,3 +514,19 @@
     the scoping.
 - **Idea ledger:** born: K-vs-2K certificate (alive, scoped as story ending).
   Parked: standalone convergence-certificate paper (outcompeted by folded framing).
+
+- **NOTE 2026-07-05 · K-vs-2K literature gate: BUILD.** Agent-verified: no published
+  calibrated, ground-truth-free, two-budget distributional convergence test for
+  annealed/diffusion samplers; kill criterion (b) of the 2026-07-05 brainstorm exit
+  does NOT fire. Nearest neighbors, in order of danger for the novelty claim: AIDE
+  (1705.07224 — budget-vs-gold KL, algorithm-intrusive, no calibration), R* (Lambert
+  & Vehtari 2022 — classifier two-sample MCMC diagnostic, same-budget stationary
+  chains, soft calibration), bidirectional MC/BREAD (1606.02275 — simulated-data
+  divergence bounds for annealed samplers), L-lag couplings (1905.09971), wild-
+  bootstrap MMD for dependent samples (1408.5404 — the calibration ingredient),
+  adaptive-solver step-doubling (the intra-sampler ancestor), Richardson-Romberg
+  (the old-literature ancestor, scalar expectations only). Rémy et al. 2023 confirmed
+  to use NO formal convergence diagnostic (schedule chosen empirically). The measured
+  false-certification boundary exists in NONE of the neighbors. Every qualifier in
+  "first calibrated, ground-truth-free, non-intrusive two-budget distributional test
+  with measured power and false-certification boundary" is load-bearing.
