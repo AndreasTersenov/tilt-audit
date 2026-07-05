@@ -641,3 +641,187 @@
   surfaces now quote the matched-observation ladder plus the cross-observation
   spread. Lesson: pin the aggregation (and its conditioning) at the moment a number
   is first quoted; densification must trigger requoting.
+
+### P-20260705e · SURE-guided sampling's KL-descent guarantee is a clean-model artifact · conf 65% · resolve-by 2026-07-26 · OPEN
+- **Claim:** SURE-guided posterior sampling (arXiv:2512.23232) claims each SURE
+  gradient step reduces KL to the true posterior. On the bench with the EXACT
+  score the per-step KL to sigma is monotone-decreasing on the clean Gaussian
+  target, but under score misspecification (eps in {+-0.3}) and/or on the exact
+  2-component mixture the guarantee breaks: KL is non-monotone OR plateaus >=3x
+  the oracle floor. I.e. SURE inherits the same class of blind spot that killed
+  path-space repair — the correction is only as good as the (unknown, possibly
+  wrong) score it is built from.
+- **Made:** 2026-07-05 · **Context:** direction 2 (audit new self-correctors), post-brainstorm
+- **Resolution criterion:** implement SURE-guidance in tilt_audit; per-step KL-to-sigma
+  curve at 16^2/1sigma exact-score (must descend) vs eps=+-0.3 and vs mixture (the
+  prediction is a break in >=1 of those). Disposable version is the single 16^2 config.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+### P-20260705f · a small diagnostic ensemble closes every failure class except misspecification · conf 70% · resolve-by 2026-07-13 · OPEN
+- **Claim:** from the existing envelope rows, there is an ensemble of <=4 instruments
+  (score-KSD + PQMass + K-vs-2K + band coverage) whose union catches every failure
+  CLASS the bench manufactures EXCEPT the wrong-reference / score-misspecification
+  class — which no sample-space or score-space instrument on the bench closes,
+  because they all condition on the same contaminated reference. "When is silence
+  safe" has a positive answer everywhere but the misspec column.
+- **Made:** 2026-07-05 · **Context:** direction 5 (constructive complement / ensemble)
+- **Resolution criterion:** analysis of existing results/*.jsonl (zero new compute):
+  per-(instrument, failure-class) detection table -> column-union coverage; the
+  claim resolves on whether exactly the misspec/wrong-ref class survives the union.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+## Brainstorm exit — 2026-07-05 (2nd session) · expand: ambitious next steps + bibliography pass
+
+- **Decision:** PURSUE two clusters, both leverage-shaped, no new expensive research
+  front. (1+4) SHIP: package tilt-audit as a public benchmark that audits DIAGNOSTICS
+  (not just samplers — the unoccupied niche) + write the explicit cosmology->AI-eval
+  translation for the eval audience. (2+5) CHEAP ADDITIONS that fold into the paper:
+  audit the new ground-truth-free self-correctors (SURE-guided 2512.23232 first) and
+  find the minimal diagnostic ensemble with no common blind spot. PARKED: (3) minimax
+  blind-spot certification — the ceiling-raiser, deliberately deferred (owner chose
+  shipping leverage over a new-science front pre-defense; revisit post-defense as the
+  innovation move). (6) joint-inference arena stays ALIVE-not-pursued (flagged postdoc
+  chapter; the 2026-07-05 IDEA note stands).
+- **Owner rationale (Claude-inferred from the selection, pending one-line confirm):**
+  the science is done; near-term value is in shipping it maximally-visibly before the
+  defense and defensively auditing the newest methods, not in raising the ceiling.
+  Selection declined both the new-science move (3) and the chapter (6), consistent
+  with the expected-information gate at a two-month horizon.
+- **Predictions logged:** P-20260705e (SURE KL-descent is a clean-model artifact, 65%),
+  P-20260705f (ensemble closes all but misspec, 70%).
+- **Kill criteria:** (benchmark) drop the packaging if it exceeds ~3 focused days
+  before a stranger can `pip install` and reproduce the envelope figure — fall back to
+  a tagged reproducible release of the current repo. (SURE audit) drop if the KL-descent
+  guarantee holds even under eps=+-0.3 AND on the mixture at 16^2 — then SURE is a real
+  runtime corrector, the negative-result framing needs softening, and this becomes a
+  "one method survives" note rather than an audit. (translation) drop the paper-shaped
+  version if the outline can't anchor every claim to a measured bench number — keep it
+  as a blog only.
+- **Cheapest next experiment (zero compute, existing rows):** the ensemble coverage
+  table for P-20260705f — build the per-(instrument, failure-class) detection matrix
+  from results/*.jsonl (ksd_trial, mixture_contrast, cert_*, k2k, transfer) and take
+  column-unions. First step: one script reading the existing JSONLs, no GPU. Parallel
+  cheap experiment: SURE-guidance at the single 16^2/1sigma config (P-20260705e
+  disposable version).
+- **Disconfirming evidence surfaced (Darwin lines; directions pursued WITH these):**
+  (1) the sampler-benchmark genre is already occupied (arXiv:2509.12821) — the
+  benchmark only differentiates as a DIAGNOSTIC audit, and adoption is never
+  guaranteed; packaging competes with defense attention. (2) KSD mode-blindness is
+  FOLKLORE in the KSD community (KSD-thinning NeurIPS 2023, sliced-KSD, Nystrom-KSD) —
+  P-20260704j's novelty is narrower than it reads: it is the field-scale measurement
+  of the SPECIFIC deployed diagnostic (2602.04189), not "KSD is mode-blind"; frame it
+  that way or a referee will. (3) SURE-guided sampling (2512.23232) is a new
+  ground-truth-free corrector with a KL-descent guarantee — if it holds, it partially
+  undercuts the "no runtime correction survives" story, so the audit is defensive as
+  well as offensive. (4) the AI-eval door is open (Bayesian eval of LLM behavior
+  2511.10661, ABC-for-LLM-UQ 2509.19375) but a cosmology blog is not guaranteed a
+  citation there — the translation must be substantive, not vision-only.
+- **New neighbors found this session (not previously in the log):** 2512.23232
+  (SURE-guided, audit target), 2510.27663 (misspec testing from measurements only),
+  2606.10023 (Learning-the-Universe field-level posterior reliability — the ecological
+  target + a bridge contact), 2606.12255 / 2606.23346 (practical field-level WL
+  inference leaning on TARP coverage — the real pipelines the bench speaks to),
+  2512.08022 (provable DPS for Bayesian inversion, theory companion), 2601.06514
+  (Doob's-matching inference-time alignment).
+- **Ledger moves:** BORN (all ALIVE): diagnostics-benchmark artifact; cosmology->AI-eval
+  translation write-up; audit-new-self-correctors (SURE-first); minimal-ensemble /
+  when-is-silence-safe. PARKED: minimax blind-spot certification (cause: not chosen —
+  deprioritized vs shipping leverage; revisit post-defense). UNCHANGED: joint-inference
+  arena stays ALIVE-not-pursued.
+
+## Predictions — constructive-diagnostics night (2026-07-05 GPU windfall; FROZEN pre-run)
+
+<!-- Context: 8-10h window with GPUs 0/1/2 free. Reframe from "audit diagnostics" to
+"can we BUILD better ones that escape a named barrier?" Barriers established by this
+project: (1) locality/missed-mode blindness (score tests are local); (2) path != endpoint
+(path certificates measure the wrong quantity); (3) reference confounding (diagnostic
+shares the sampler's wrong score). Each prediction below attacks one barrier. Night
+structure: SURE-guarantee audit (P-20260705e) = de-risked compute anchor; mode-prober
+(P-g) = wildcard that earns a grid only if its 16^2 pilot escapes; PPC (P-h) +
+independent-ref (P-i) = cheap-and-done on CPU. Pilot-first gate on all (esp. SURE: it
+MUST descend in its home regime or it's a bug). -->
+
+### P-20260705g · score-driven Langevin excursions detect missed modes up to a measured separation frontier · conf 45% · resolve-by 2026-07-06 · OPEN
+- **Claim:** short Langevin/HMC excursions launched from a single-mode sampler's draws
+  and driven by the REFERENCE score (exact-score arm first) discover the missing mode
+  of the exact 2-component mixture with alarm power >=0.9 for component separations up
+  to some Delta* > 4 sigma, at an excursion budget <= the sampler's own step count
+  (i.e. runtime-cheap); at 12 sigma they fail (barrier uncrossable). The deliverable is
+  Delta* measured on the separation ladder {2,4,6,8,12} sigma, exact + learned-net arms.
+  This attacks barrier 1 (locality) — the failure mode score-KSD is TOTALLY blind to.
+- **Made:** 2026-07-05 · **Context:** constructive-diagnostics night, mechanism A (wildcard)
+- **Resolution criterion:** mixture-arena pilot table (fraction of excursions crossing
+  basins vs separation vs budget); alarm = any excursion crosses. HIT below 12 sigma
+  un-blinds the ecologically-relevant regime (joint-inference mixtures over nearby
+  cosmologies are moderate-separation), which is the constructive win regardless of 12 sigma.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+### P-20260705h · the likelihood posterior-predictive residual is a clean necessary-not-sufficient gate · conf 75% · resolve-by 2026-07-06 · OPEN
+- **Claim:** the chi-squared / whiteness check on ||A x0hat - y||^2 / s^2 (ground-truth-free;
+  uses only the KNOWN forward model, no score, no gold) detects guidance-STRENGTH bias
+  (DPS over/under-fit of y) at power >=0.9 for budgets <=256, but is statistically blind
+  (power ~ FP rate) to missed-mode and A-null-space collapse — because those fit y
+  equally well. The measured split (catches data-misfit, blind in null(A)) IS the result.
+  Attacks barrier 3 by using the one runtime ground truth (the data), not the score.
+- **Made:** 2026-07-05 · **Context:** constructive-diagnostics night, mechanism B (cheap-and-done)
+- **Resolution criterion:** Gaussian-bench table: PPC statistic + calibrated FP vs oracle,
+  dps (guidance ladder), and a constructed null-space-collapse sampler.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+### P-20260705i · de-confounding the reference recovers detection power same-net KSD loses · conf 55% · resolve-by 2026-07-06 · OPEN
+- **Claim:** score-KSD run against a DELIBERATELY INDEPENDENT reference (a cheap analytic
+  Gaussian-approx score) detects a matched-wrong sampler that same-reference KSD
+  false-certifies (P-20260704k) — power rises from ~FP to >=0.9 — PROVIDED the
+  independent reference's own error is smaller than the sampler's true damage; when it
+  is not, de-confounding buys nothing. Attacks barrier 3 (reference confounding: stop
+  checking a model against itself). Exact + learned-net arms isolate idea-soundness
+  from net-quality.
+- **Made:** 2026-07-05 · **Context:** constructive-diagnostics night, mechanism C (cheap-and-done)
+- **Resolution criterion:** wrongref-style grid with an added independent-reference column;
+  power(same-ref) vs power(indep-ref) vs the reference's own error budget.
+- **Outcome:** (pending)
+- **Lesson:** (pending)
+
+## Brainstorm exit — 2026-07-05 (3rd session) · expand: constructive diagnostics + GPU-windfall plan
+
+- **Decision:** PURSUE the constructive turn — from "audit the diagnostics" to "build ones
+  that escape a NAMED barrier, with the residual characterized on exact truth." Owner
+  chose to pilot all of A (mode-prober), B (likelihood-PPC), C (independent-ref) tonight
+  with the SURE-guarantee audit (P-20260705e) as the de-risked compute anchor. Claude
+  imposed the discipline: one anchor + one wildcard (A, earns a grid only on pilot escape)
+  + two cheap-and-done (B, C on CPU). Conformal-calibrated wrapper (E) named as the
+  second-paper spine, NOT tonight. minimax (3) and joint-arena (6) remain parked.
+- **Owner rationale (Claude-inferred, pending one-line confirm):** compute is the windfall
+  and attention is scarce tomorrow, so spend the rare 3-GPU window broadly on cheap exact-
+  scored pilots of the constructive ideas while a de-risked anchor guarantees yield; the
+  constructive direction is the more ambitious project spine and worth the exploration cost.
+- **Predictions logged:** P-20260705g (mode-prober frontier, 45%), P-20260705h (PPC
+  necessary-not-sufficient, 75%), P-20260705i (independent-ref recovery, 55%). Anchor:
+  P-20260705e (SURE guarantee is a clean-model artifact, frozen prior session).
+- **Kill criteria:** kill mode-prober tonight if the 16^2 pilot can't cross even a <=4 sigma
+  barrier within an excursion budget <= the sampler's step count (not runtime-cheap) ->
+  fall to SURE anchor on all 3 GPUs. Kill SURE line if it descends everywhere incl.
+  mixture + lognormal (guarantee is NOT an artifact -> reshape to "one method survives").
+  Kill PPC line if it ALSO catches null-space failures (barrier model wrong -> follow it).
+- **Cheapest next experiment:** the first-hour pilot gate — SURE-home (16^2/1sigma/exact
+  denoiser, must descend) + mode-prober (mixture 16^2, separation ladder) + PPC (Gaussian
+  16^2) + independent-ref (Gaussian 16^2). All reuse the existing harness; ~1 hour total
+  across GPUs 0/1/2 + CPU. Promotion rule decides the bulk-grid allocation.
+- **Disconfirming evidence surfaced (Darwin lines; pursued WITH these):** (1) the project
+  PROVED runtime ground-truth-free certification has hard structural limits, so no A-D is a
+  silver bullet — the win is "closes barrier X up to a measured frontier," never "solves it."
+  (2) mode-prober's 12 sigma failure is expected — the inter-mode barrier is WHY the blind
+  spot exists; the value is the frontier Delta*, not a universal detector. (3) A and C both
+  inherit reference-score error on a weak net, hence the exact-vs-net arm in both.
+  (4) SURE's Langevin core is close to the Remy scheme already found robust off-Gaussian —
+  design an SGPS-vs-Remy@matched-K arm to isolate what the SURE step adds/costs.
+- **Ledger moves:** BORN (ALIVE): mode-prober diagnostic (A); likelihood-PPC gate (B);
+  independent-reference de-confounding (C); conformal-calibrated diagnostic wrapper (E,
+  flagged as second-paper spine); SURE-as-diagnostic (free rider on the SURE-corrector code).
+  Self-consistency/re-noising (D) noted, not piloted tonight. Barrier taxonomy (locality /
+  path!=endpoint / reference-confounding) adopted as the organizing frame for the
+  constructive act.
