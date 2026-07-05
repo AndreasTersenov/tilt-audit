@@ -800,22 +800,23 @@ MUST descend in its home regime or it's a bug). -->
 - **Made:** 2026-07-05 · **Context:** constructive-diagnostics night, mechanism C (cheap-and-done)
 - **Resolution criterion:** wrongref-style grid with an added independent-reference column;
   power(same-ref) vs power(indep-ref) vs the reference's own error budget.
-- **Outcome:** PROPOSED PARTIAL / lean-MISS on the strong claim (16^2 pilot, ~22:35Z).
-  MECHANISM CONFIRMED: the confounded reference (eps_r=eps_s=-0.3) sits at the null
-  (ksd/q95=1.03, reproducing the P-20260704k false-certification), and de-confounding
-  raises the ratio MONOTONICALLY as the reference approaches truth
-  (1.03 -> 1.11 -> 1.18 -> 1.28 at eps_r=0, and 1.52 at eps_r=+0.1, opposite sign).
-  BUT the strong claim (power>=0.9 recovery) is NOT met at n=16/N=1024: even the true
-  score gives only ~1.3x null (low-signal config). Two fixes applied for the field-scale
-  grid: (1) detection is now a POWER over disjoint blocks, not a single ratio (the pilot
-  conflated them); (2) grid moved to n=64 where the d-extensive eps=-0.3 damage makes the
-  true-score signal loud, so "does the imperfect independent reference recover that power"
-  is well-posed. Field-scale grid (n64, mid+strong, N ladder) queued; morning resolves
-  the strong claim. Also confirmed the argparse gotcha (comma-list leading '-' -> flag;
-  '=' form required, generator note added).
-- **Lesson:** (pending joint scoring; provisional: de-confounding is directionally real
-  but its power is budget/damage-gated exactly as P-i's caveat predicted — a reference
-  no better than the sampler's own error buys nothing.)
+- **Outcome:** PROPOSED HIT with a bonus mechanism (16^2 pilot, power-based, ~22:40Z;
+  field-scale confirmation queued). The single-ratio pilot was a bad estimator; the
+  proper POWER-over-disjoint-blocks test gives a clean recovery curve at n=16/N=512:
+  confounded ref (eps_r=eps_s=-0.3) power=0.12 (false-certifies, reproducing P-20260704k);
+  power rises 0.31 -> 0.88 -> 1.00 as the reference error falls (ref_err 0.16 -> 0.08 -> 0),
+  crossing 0.9 at ref_err ~ 0.08 << the sampler's true damage 0.458. So the strong claim
+  HOLDS: an independent reference recovers detection power provided its own error is
+  below the sampler damage. BONUS (unpredicted) mechanism: an OPPOSITE-SIGN reference
+  error (eps_r=+0.1, ref_err 0.16) fully de-confounds (power 1.00) while a SAME-DIRECTION
+  error of equal magnitude (eps_r=-0.1) barely helps (0.31) — it is the INDEPENDENCE /
+  anti-correlation of the reference's error from the sampler's, not merely its magnitude,
+  that breaks the confounding. Actionable: de-confound with a structurally DIFFERENT
+  reference model, not just a more accurate same-family one. Field-scale n64 grid (loud
+  regime, mid/strong, N ladder) queued to confirm.
+- **Lesson:** (pending joint scoring; provisional: "check a model against an independent
+  model, not against itself" is the operational fix for reference confounding, and
+  error-direction independence matters as much as error magnitude.)
 
 ## Brainstorm exit — 2026-07-05 (3rd session) · expand: constructive diagnostics + GPU-windfall plan
 
