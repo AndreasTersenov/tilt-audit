@@ -909,7 +909,14 @@
   honest scope of the one surviving runtime check is <b>one-directional</b>:
   its alarm is trustworthy — disagreement proves non-convergence, cheaply and
   with no ground truth — but its silence certifies nothing, for three measured
-  reasons (slow convergence, biased samplers, shared blind spots).</p>
+  reasons (slow convergence, biased samplers, shared blind spots). And for the
+  newest sampler generation — amortized models that generate by integrating a
+  deterministic ODE — we measured the degenerate extreme: doubling the step
+  count produces samples the test cannot tell apart at <em>any</em> budget we
+  tried, even where the discretization error is still twice its converged
+  value, while the sampler sits ~50&times; above the gold floor on training
+  error that no step-count knob can ever reveal. There, the alarm never rings
+  at all.</p>
   <p>And the certificate question itself? Closed, from both ends, with the same
   bench: journey-accounting dies of jagged network gradients (parts 5&ndash;7);
   slope-checking is blind to absences and gullible about its own reference
