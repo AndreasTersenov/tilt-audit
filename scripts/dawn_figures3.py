@@ -228,6 +228,8 @@ def fig_transfer():
                 xs.append(i)
                 ys.append(np.median(sel) / floor)
                 labels.append(s)
+        display = {"remy5": "langevin K=5", "remy30": "langevin K=30",
+                   "remy100": "langevin K=100"}
         ax.bar(range(len(ys)), ys,
                color=["#7f7f7f" if l == "gold_floor" else "#1f77b4"
                       if l.startswith("remy") else "#d62728"
@@ -235,7 +237,8 @@ def fig_transfer():
         ax.set_yscale("log")
         ax.axhline(1.0, color="k", lw=0.7)
         ax.set_xticks(range(len(labels)))
-        ax.set_xticklabels(labels, rotation=40, ha="right", fontsize=8)
+        ax.set_xticklabels([display.get(l, l) for l in labels],
+                           rotation=40, ha="right", fontsize=8)
         ax.set_title(f"tilt: {tiltname}")
     axes[0].set_ylabel("median MMD$^2$ / gold-floor MMD$^2$")
     fig.suptitle("Sampler damage vs MCMC gold on the lognormal substrate "
@@ -273,7 +276,7 @@ def fig_remyK():
     ax.set_yscale("log")
     ax.set_xlabel("Langevin steps per level K")
     ax.set_ylabel("MMD$^2$ to gold")
-    ax.set_title("Remy K-convergence on the nonlinear substrate")
+    ax.set_title("Annealed-Langevin K-convergence on the nonlinear substrate")
     ax.legend()
     fig.tight_layout()
     fig.savefig(FIG / "fig_remyK.png", dpi=150)

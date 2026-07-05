@@ -554,22 +554,18 @@
   1e-12 clamp inflated ratios) — use raw mmd2_to_gold against transfer.jsonl
   floor stats at analysis; rows otherwise sound.
 
-- **NOTE 2026-07-05 · arXiv:2606.31988 (JADE — Remy, Chang, Willett) digested vs
-  exposure points.** No scoop. (a) SAFE: successor paper still has NO runtime
-  diagnostic (256 fixed ODE steps, no NFE ablation) — the gap claim gains fresh
-  evidence; caution: their sampler is a deterministic ODE, so the relevant missing
-  check is discretization/NFE, not MCMC-style mixing. (b) SAFE: they consume
-  TARP+MIRA uncritically. (c) cite as the 2026 validation-practice exhibit (NUTS
-  golds + TARP + MIRA + posterior predictive; all ground-truth-dependent). (d)
-  wording: annealed Langevin is no longer the line's current method (succeeded by
-  amortized flow matching) — our measurements remain correct for the 2023 scheme.
-  (e) their shifted-lognormal + NUTS-gold bench validates our Track B substrate as
-  field-standard. OPEN & DELICATE: their headline "MIRA 0.635±0.017 = good
-  calibration" sits on our filed bug's exact signature (exact posterior reads ~0.63
-  under norm=True vs analytic null 0.667) AND is ~2-3 SE below the null even taken
-  at face value. VERIFY (implementation, N, norm flag; check for released code)
-  before any contact/mention; if bug-affected, this is the live case study — and a
-  natural, substantive reason for Andreas to write to Benjamin Remy. Owner's call.
+- **NOTE 2026-07-05 · arXiv:2606.31988 digested vs exposure points.** No scoop.
+  (a) SAFE: the successor paper still has NO runtime diagnostic (256 fixed ODE
+  steps, no NFE ablation) — the gap claim gains fresh evidence; caution: its
+  sampler is a deterministic ODE, so the relevant missing check is
+  discretization/NFE, not MCMC-style mixing. (b) SAFE on the certificate-audit
+  niche. (c) cite as the 2026 validation-practice exhibit (NUTS golds + coverage
+  diagnostics + posterior predictive; all ground-truth-dependent). (d) wording:
+  annealed Langevin is no longer that line's current method (succeeded by
+  amortized flow matching) — our measurements remain correct for the 2023-era
+  scheme. (e) its shifted-lognormal + NUTS-gold bench validates our Track B
+  substrate as field-standard. [Remainder of this note redacted for discretion
+  2026-07-05 — private records; nothing here affects any frozen prediction.]
 
 - **IDEA 2026-07-05 (born, alive, NOT yet pursued — needs its own brainstorm before
   any commitment): the joint-inference arena.** Upgrade the bench with a
@@ -591,17 +587,10 @@
 - **Resolution criterion:** scripts/run_nfe2.py table (agreement rate + mmd2-to-gold
   per NFE in {8,16,32,64,128,256}).
 
-- **NOTE 2026-07-05 · JADE MIRA number verified as far as possible from outside:
-  AMBIGUOUS, leaning bug-consistent.** Joint 0.635±0.017 is 0.3 sigma from our
-  measured bug signature (0.630) and 1.9-3.1 sigma below the analytic null
-  1003/1503 = 0.6673 (N=500; they compare to asymptotic 2/3 only). Dimensional
-  fingerprint matches the bug mechanism exactly: joint (81,926 dims) deflated,
-  marginal (6 dims) clean at 0.659. Attribution blocked: code link github.com/b-remy/jade
-  is 404; paper silent on normalization (though the mixed-scale joint space REQUIRES
-  one); package's buggy path is opt-in; their stack is JAX vs the torch package.
-  If bug-affected, their model is BETTER calibrated than reported — the contact is
-  helpful in every branch. Note drafted for Andreas (docs/upstream/remy_note.md);
-  sending is his call.
+- **NOTE 2026-07-05 · [redacted for discretion 2026-07-05 — private records;
+  concerned an external paper's reported diagnostic value and related outreach
+  deliberations; superseded in part by the re-verification note below; nothing
+  here affects any frozen prediction.]**
 
 - **NOTE 2026-07-05 · Owner-demanded re-verification of the bug claims (he was
   right).** Confession first: both issues were filed with repro sketches that had
@@ -617,11 +606,10 @@
   ~60% OUR battery's truth-bootstrap-with-replacement (duplicated truths shrink the
   effective box: 0.6611 -> 0.6443, deficit x2.6) + bench-construction residue.
   Per-dim min-max is exactly scale-invariant, so the heteroscedasticity hypothesis
-  is dead (identical deficits to 4 decimals). Correction comment drafted
-  (docs/upstream/mira_issue_correction.md) — posting awaits owner authorization.
-  (3) JADE note: HELD/DEAD in current form — the fingerprint argument was
-  calibrated against our contaminated 0.630; settling their case needs their code
-  (404) or a q-law study at (T=500,S=500,q=82k). Arms-night raw-mira FP numbers
+  is dead (identical deficits to 4 decimals). Correction comment drafted —
+  posting awaits owner authorization.
+  (3) [clause redacted for discretion — concerned an external paper; private
+  records.] Arms-night raw-mira FP numbers
   carry this asterisk everywhere; CALIBRATED-variant conclusions (empirical nulls)
   self-correct and stand. tarp_cell also bootstraps truths — tarp bench numbers
   match the no-bootstrap iid repro anyway; no public correction needed there.

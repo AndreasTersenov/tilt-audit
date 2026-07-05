@@ -605,12 +605,13 @@
 <div class="col">
   <p class="eyebrow">part 6 · the field&rsquo;s flagship</p>
   <h2>Where the community&rsquo;s actual mass-mapping method fits in all this</h2>
-  <p>Readers from weak lensing will be asking: what does any of this mean for the
-  method the field actually ships — the Remy et&nbsp;al. (2023) mass-mapping
-  sampler, which reconstructed dark-matter maps of real survey data with a
-  diffusion prior? It sits inside this story in three distinct ways.</p>
+  <p>Readers from weak lensing will be asking: what does any of this mean for
+  the approach the field actually ships — annealed-Langevin mass mapping
+  (arXiv:2201.05561), which has reconstructed dark-matter maps of real survey
+  data with a diffusion prior? It sits inside this story in three distinct
+  ways.</p>
   <p><b>First, it is one of the steered samplers under audit — the cautious
-  one.</b> Instead of one backward pass with nudges at full data strength, their
+  one.</b> Instead of one backward pass with nudges at full data strength, the
   scheme visits a ladder of noise levels and, at each level, deliberately
   <em>weakens</em> the data pull: it treats the measurement noise as if it were
   inflated by the current noise level (variance σ²<sub>data</sub> +
@@ -622,8 +623,8 @@
   cheap one-pass shortcut already costs roughly 7&ndash;30&times; the shortcut&rsquo;s
   compute, and near-exactness costs about 100&times;. Cautious, correct in the
   limit, expensive: now with exact numbers attached.</p>
-  <p><b>Second, their validation practice is exactly the gap the meter aimed
-  at.</b> How does that team currently argue their maps are right? The
+  <p><b>Second, the validation practice around it is exactly the gap the meter
+  aimed at.</b> How do its users currently argue the maps are right? The
   state-of-the-art way: run the sampler on <em>simulations</em> where the truth
   is known, check the recovered uncertainties offline, then trust the pipeline
   on real data. That is an offline, in-distribution argument — it cannot notice
@@ -635,7 +636,7 @@
   3&ndash;100&times; the ideal error. A per-observation runtime meter would have
   been the missing complement. That is why this instrument was worth a serious
   attempt.</p>
-  <p><b>Third, the verdict covers their scheme too.</b> The ledger idea has a
+  <p><b>Third, the verdict covers this scheme too.</b> The ledger idea has a
   natural version for level-ladder samplers (the weights accumulate across
   levels instead of steps — the classic &ldquo;annealed importance
   sampling&rdquo; construction). We built and tested that version as well: at
@@ -643,10 +644,10 @@
   a hundred thousand log-units. So nothing on this page says the field&rsquo;s
   maps are wrong; it says the field&rsquo;s <em>offline</em> validation remains
   the only game in town, our bench now supplies its error-budget price list, and
-  the runtime warning light everyone would want — for their sampler as much as
+  the runtime warning light everyone would want — for this sampler as much as
   for the shortcuts — still does not exist.</p>
   <p class="aside"><b>Update (July 2026):</b> as this page was being finished,
-  the same first author&rsquo;s successor method appeared
+  a successor to that line of work appeared
   (arXiv:2606.31988) — a different construction entirely, generating map and
   cosmological parameters jointly with a flow-matching model. Two things carry
   over unchanged. Its test bench is a warped-Gaussian field validated against
@@ -854,7 +855,7 @@
   four times the dimension. Cheap, checkable, boring. Against these gold
   standards we re-ran the sampler zoo, and the transfer report reads: DPS is
   still overconfident, now with structure — its error bars on the fine scales
-  cover the truth <em>zero percent</em> of the time; R&eacute;my-style annealed
+  cover the truth <em>zero percent</em> of the time; annealed-Langevin
   sampling still buys accuracy smoothly with compute, all the way down to the
   gold standard itself; and one Gaussian-bench result <b>failed to
   transfer</b>, informatively.</p>
