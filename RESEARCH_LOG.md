@@ -469,3 +469,48 @@
   to non-Gaussianity while plug-in corrections are not. Paper structure: three acts
   (true-score power / structural blindness / deployment fragility) + the transfer
   chapter with the decay law.
+
+## Brainstorm exit — 2026-07-05 · stress: K-vs-2K convergence certificate
+
+- **Decision:** PURSUE, minimally scoped — as the constructive FINAL ACT of the
+  certificate-audit story (blog + eventual paper), one-day box. Standalone-paper
+  version PARKED (cause: outcompeted by the folded-in framing; its realistic ceiling
+  is a validation contribution and the owner's visibility goal doesn't close).
+  Ownership note, recorded honestly: the idea was Claude-proposed; owner authorized
+  the small version without adopting the why ("I don't really see the value") —
+  scope was cut to match partial ownership, per the absorbed-idea guard.
+- **Predictions:**
+  - P-20260705b · the calibrated K-vs-2K test tracks true convergence · conf 80% ·
+    resolve-by 2026-07-09 · OPEN. Claim: PQMass(remy@K, remy@2K) with empirical null
+    calibration reads null at K≥50 AND detects at K≤15 with power ≥0.9 on ≥2 gold
+    configs (64² mid+strong) — i.e., the truth-free certificate agrees with the
+    gold-referenced convergence measured tonight. Criterion: the one-day script's
+    table.
+  - P-20260705c · the false-certification boundary is demonstrable · conf 75% ·
+    resolve-by 2026-07-09 · OPEN. Claim: there exists T* ≤ 512 where dps@T* vs
+    dps@2T* passes the agreement test while dps MMD-to-gold stays >50× floor —
+    the measured "R-hat lies outside the asymptotically-exact class" exhibit.
+    Criterion: same script; plus the mixture stuck-mode agreement demo (construction,
+    not prediction).
+- **Kill criteria:** drop if (a) the test cannot achieve nominal FP at converged K
+  AND ≥0.9 power at K/4 within the one-day box (blind or noisy in the regime that
+  matters), or (b) the 30-min literature check finds this exact validated
+  construction already published for annealed/diffusion samplers (then cite,
+  don't build — cheaper win, same ending).
+- **Cheapest next experiment:** one script (~150 lines, reuses run_transfer +
+  pqm): remy K ∈ {10,15,25,50,100,200} paired-seed runs at 2 gold configs +
+  dps T-ladder {64..512} + mixture stuck-mode demo; PQMass null via split-halves.
+  ~1 GPU-hour total. Precondition: the 30-min literature check (SMC/annealed
+  convergence diagnostics, R-hat lineage, diffusion-NFE plateau practices).
+- **Disconfirming evidence surfaced (Darwin lines, idea survives WITH these):**
+  - The trick is folklore-adjacent (Gelman–Rubin lineage; "increase NFE until
+    plateau" is common practice) — the delta is the calibrated test + measured
+    false-certification boundary, i.e., validation, not invention.
+  - Inherits the stuck-run blind spot (agreement ≠ correctness; missed modes
+    certify) — measurable, but caps every claim.
+  - Naive cost is 3× the sampler being certified; the valid class (asymptotically
+    exact) is used by the already-careful crowd. Subset-chain variants mitigate.
+  - Owner's visibility motive does not close for the standalone version — hence
+    the scoping.
+- **Idea ledger:** born: K-vs-2K certificate (alive, scoped as story ending).
+  Parked: standalone convergence-certificate paper (outcompeted by folded framing).
