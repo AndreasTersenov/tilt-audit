@@ -530,3 +530,9 @@
   false-certification boundary exists in NONE of the neighbors. Every qualifier in
   "first calibrated, ground-truth-free, non-intrusive two-budget distributional test
   with measured power and false-certification boundary" is load-bearing.
+
+- **NOTE 2026-07-05 · upstream bug reports FILED** (owner-authorized): tarp#14
+  (Ciela-Institute/tarp — truth-range norm, d-extensive null miscalibration, verified
+  byte-identical in current main; cross-references their PR #12 and sbi #1832/#1837)
+  and mira-score#1 (SammyS15/mira-score — same class + docstring contradiction;
+  their tracker was empty). Drafts archived in docs/upstream/. Both offer a PR.

@@ -13,3 +13,13 @@ Constant folding an instruction is taking > 1s:
 This isn't necessarily a bug; constant-folding is inherently a trade-off between compilation time and speed at runtime. XLA has some guards that attempt to keep constant folding from taking too long, but fundamentally you'll always be able to come up with an input program that takes a long time.
 
 If you'd like to file a bug, run with envvar XLA_FLAGS=--xla_dump_to=/tmp/foo and attach the results.
+/mnt/home/tersenov/software/tilt-audit/.venv/lib/python3.12/site-packages/pqm/pqm.py:173: UserWarning: 
+            Less than half of the Voronoi cells have any samples in them.
+            Possibly due to a small number of samples or a pathological
+            distribution. Result may be unreliable. If possible, increase the
+            number of x_samples and y_samples.
+            
+  warnings.warn(
+[k2k:remy] mid K=10 done
+[k2k:remy] mid K=15 done
+[k2k:remy] mid K=25 done
