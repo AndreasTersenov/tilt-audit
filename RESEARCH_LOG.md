@@ -339,39 +339,85 @@
 
 ## Predictions — certifier trial + transfer night (2026-07-04 → 05; FROZEN at owner sign-off; public push precedes first GPU job)
 
-### P-20260704i · score-KSD detects the standard failures · conf 70% · resolve-by 2026-07-07 · OPEN
+### P-20260704i · score-KSD detects the standard failures · conf 70% · resolve-by 2026-07-07 · SCORED 2026-07-05: HIT
 - **Claim:** with the TRUE target score, score-KSD passes its null gate and detects dps,
   sap, AND the ε=−0.3 compensation config on the GRF archives with power ≥0.9 at budgets
   ≤1024 (empirically calibrated α=0.05).
 - **Resolution criterion:** A-null + A-power grids (docs/OVERNIGHT_2026-07-04_CERTIFIER_TRANSFER_NIGHT.md §2).
+- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT, with margin — power 1.00 at EVERY
+  budget incl. 64 for all three configs (ratios 2.8–19× null); the compensation config
+  that fooled γ*/TARP/MIRA is loud to the true-score instrument. Correct non-detection:
+  twisted@1σ (its true damage IS the floor). Lesson: score-space sensitivity to SCHEME
+  bias exceeds sample-space tests by an order of magnitude in budget.
 
-### P-20260704j · missed-mode blindness · conf 70% · resolve-by 2026-07-07 · OPEN
+### P-20260704j · missed-mode blindness · conf 70% · resolve-by 2026-07-07 · SCORED 2026-07-05: HIT
 - **Claim:** on the exact 2-component mixture (50/50 weights), a sampler covering only
   one mode goes UNDETECTED by score-KSD at α=0.05 in ≥50% of reps at budgets ≤1024,
   while PQMass and TARP flag it at ≥0.9 power on the same sets.
 - **Resolution criterion:** A-mixture grid + T-M1 gate.
+- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT, total. KSD undetected in 91–100% of
+  reps at every budget AND at N=16,384 (paired control: plus/both = 1.0001–1.0007);
+  weight-swap equally invisible. PQMass 1.00; TARP 0.90 (FP nominal after 40-null
+  recalibration). Ladder: PQMass detection dies between 95/5 and 99/1 weights; KSD
+  flat at FP across the whole ladder. Lesson: Stein-type mode-blindness is TOTAL on a
+  4096-dim field posterior — "more samples" does not exist as a cure.
 
-### P-20260704k · wrong-reference false-certification · conf 65% · resolve-by 2026-07-07 · OPEN
+### P-20260704k · wrong-reference false-certification · conf 65% · resolve-by 2026-07-07 · SCORED 2026-07-05: HIT
 - **Claim:** with a contaminated reference score (ε=−0.3, analytic or mis-trained net),
   score-KSD reads the MATCHED wrong sampler as null-consistent (≤1.5× the null's 95%
   quantile) while its true damage is ≥3× floor — the deployment-configuration trap.
 - **Resolution criterion:** A-wrongref grid.
+- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT (owner call: criterion met as
+  written; refinement logged, not penalized). Analytic: twisted_em03 (proper sampler
+  of its wrong target, true damage 17.2× floor) reads 0.99–1.00× — and across a BAND
+  of references (ε_ref −0.3…−0.2); dps_em03 ESCAPES analytically (scheme bias shows
+  through, 3.8×). Net reference: BOTH matched samplers ≤1.2× — and beyond the claim,
+  even the CLEAN net false-certifies plain dps (0.97×, null inflated 1.9×; σ-ladder:
+  the paper's own σ=0.3 misses dps, σ=0.1 would catch it at 3×-degraded effect size).
+  Plus the false-alarm side: ε_ref=−0.05 flags perfect samples at 1.00. Lesson: in
+  deployment the reading is REFERENCE-error-dominated in both directions; the trap's
+  precise home is proper-sampler + matched-wrong-score, and net-quality scores put
+  everything in that regime.
 
-### P-20260704l · gold standards are manufacturable at 64² · conf 75% · resolve-by 2026-07-07 · OPEN
+### P-20260704l · gold standards are manufacturable at 64² · conf 75% · resolve-by 2026-07-07 · SCORED 2026-07-05: HIT
 - **Claim:** NUTS on the nonlinear-forward-model posterior passes T-L1 (Gaussian-limit
   match), T-L2 (R-hat<1.01, ESS>400), T-L3 (seed independence) at 64² within the H4 box.
 - **Resolution criterion:** gate outputs, logged with numbers.
+- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT — all gates green by ~H1 (box H4).
+  T-L1 three legs (λ=1e-4 at both resolutions; closed-form-IS cross-check max|z|=3.29
+  sd(z)=0.97; mean-offsets ∝ λ over two decades); T-L2 26/26 (R-hat ≤ 1.0006, ESS_min
+  > 10k); T-L3 clean. 74 s per 64² config; 128² also passed (119 s). Lesson: gold
+  standards on this class of nonlinear posterior are ~1 GPU-minute each — "too
+  expensive to validate" is empirically false at bench scale; the whitened z-basis
+  parameterization is what makes NUTS this efficient.
 
-### P-20260704m · DPS overconfidence transfers to the nonlinear substrate · conf 65% · resolve-by 2026-07-07 · OPEN
+### P-20260704m · DPS overconfidence transfers to the nonlinear substrate · conf 65% · resolve-by 2026-07-07 · SCORED 2026-07-05: MISS (instructive)
 - **Claim:** vs MCMC gold standards, DPS shows band-power 68%-coverage ≤0.5 at the strong
   tilt and the damage ordering dps > dps-inflated ≈ remy@K=100 is preserved at every
   gold-standard config (MMD and sliced-W2 agree on the ordering).
 - **Resolution criterion:** transfer grid vs gold (§3).
+- **Outcome:** SCORED WITH OWNER 2026-07-05: MISS by the letter (the conjunction fails),
+  instructive by content. Coverage clause: loud HIT (0.00–0.08 at strong tilt; high-k
+  bands 0.00 even at mid). dps > dps_inflated: holds everywhere. BUT dps_inflated ≈
+  remy100 FAILED at every config — the linearized inflation's advantage decays
+  11.6× → 2.8× → 1.1× at skewness 0.5 → 1 → 2 (λ decay law; same shape at strong
+  tilt) while remy100 stays ≤15× floor throughout. Metric agreement: everywhere except
+  one 10%-level wobble (dps vs dps_inflated, n64 mid). Lesson: exact_guidance's
+  exactness was a GAUSSIAN ACCIDENT — I predicted the correction would stay
+  remy-grade off-Gaussian and it does not; plug-in covariance corrections die with
+  non-Gaussianity, Langevin refinement does not. The miss produced the transfer
+  chapter's best figure.
 
-### P-20260704n · Rémy K-convergence transfers · conf 75% · resolve-by 2026-07-07 · OPEN
+### P-20260704n · Rémy K-convergence transfers · conf 75% · resolve-by 2026-07-07 · SCORED 2026-07-05: HIT
 - **Claim:** remy MMD-to-gold decreases monotonically in K ∈ {5,30,100} at every
   gold-standard config.
 - **Resolution criterion:** transfer grid vs gold (§3).
+- **Outcome:** SCORED WITH OWNER 2026-07-05: HIT — monotone at every config, both
+  resolutions, every λ and y-draw, with order-of-magnitude separation between K
+  levels; K=100 sits at/near the gold floor (mmd2 ~0 at 32² mid). KSD-side bonus: the
+  true-score instrument resolves even remy100's documented +2.6% ULA stationary excess
+  (reads 1.008–1.015). Lesson: "pay more compute, get closer" is the property that
+  transfers; it is the robust axis a practitioner should buy quality on.
 
 ### E-20260705a · certifier trial + transfer night (Results + Updated beliefs DRAFT; Outcomes/Lessons reserved for joint scoring)
 - **Hypothesis/setup:** the six frozen predictions P-20260704i–n; plan
