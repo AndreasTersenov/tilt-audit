@@ -104,6 +104,19 @@ def gold_job(n, tilt, y, lam=None, seed=0):
                     f"--yseed {y}{lam_flag}{seed_flag}")}
 
 
+DENSIFY_CONFIGS = [(64, "mid"), (64, "strong"), (128, "mid"), (128, "strong")]
+
+
+def next_densify(state):
+    """Unbounded but DIVERSE gold densify: cycle configs so the deep library
+    spreads across observations of several configs, not endless n64_mid."""
+    c = state["densify_y"]
+    n, tilt = DENSIFY_CONFIGS[c % len(DENSIFY_CONFIGS)]
+    y = 8 + c // len(DENSIFY_CONFIGS)
+    state["densify_y"] = c + 1
+    return gold_job(n, tilt, y)
+
+
 def gold_candidates(state):
     """Ordered gold library, highest value first, then unbounded densify."""
     out = []
@@ -127,11 +140,9 @@ def gold_candidates(state):
         for y in (0, 1, 2, 3):
             if not gold_exists(128, tilt, y):
                 out.append(gold_job(128, tilt, y))
-    # UNBOUNDED fallback: never lets the generator return empty
+    # UNBOUNDED fallback: never lets the generator return empty; diversified.
     if not out:
-        y = state["densify_y"]
-        out.append(gold_job(64, "mid", y))
-        state["densify_y"] = y + 1
+        out.append(next_densify(state))
     return out
 
 
@@ -245,9 +256,7 @@ def main():
     # guarantee progress even if everything above was already queued:
     # emit one unbounded densify gold so the generator is never a no-op.
     if not appended:
-        y = state["densify_y"]
-        job = gold_job(64, "mid", y)
-        state["densify_y"] = y + 1
+        job = next_densify(state)
         with (QUEUE / "jobs.jsonl").open("a") as f:
             f.write(json.dumps(job) + "\n")
         appended.append(job["id"])
